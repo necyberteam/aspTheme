@@ -1,0 +1,140 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.header: Items for the header region.
+ * - page.primary_menu: Items for the primary menu region.
+ * - page.secondary_menu: Items for the secondary menu region.
+ * - page.highlighted: Items for the highlighted content region.
+ * - page.help: Dynamic help text, mostly for admin pages.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.footer: Items for the footer region.
+ * - page.breadcrumb: Items for the breadcrumb region.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+<div class="layout-container">
+
+  <header role="banner" data-elastic-exclude="true">
+		<div class="bg-dark-teal">
+      <div class="container px-0">
+				{{ page.header }}
+        <nav class="flex flex-col">
+					<div class="w-100 h-12 py-1 md--py-0 px-0 flex justify-between uppercase text-white text-menu font-black">
+						{{ page.nav_main }}
+						{{ page.nav_additional }}
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="container px-2 p-md-0">
+      <div class="flex justify-between items-center py-2 md:py-0">
+				<div class="flex items-center">
+					<div class="navbar-brand flex items-center">
+						<a href="/" title="Home" rel="home" class="site-logo block">
+							<img src="/sites/default/files/ACCS050322_ACCESS_Brand_Support-RGB.png" alt="Home">
+						</a>
+					</div>
+				</div>
+				{{ drupal_block('create_ticket_button') }}
+			</div>
+		</div>
+			<div class="border-0 border-solid border-t-[3px] border-b-[1px] border-t-dark-teal border-b-gray no-underline font-black">
+			<nav class="container flex flex-col">
+				<div class="flex justify-end w-100">
+					{{ page.sub_nav }}
+				</div>
+			</nav>
+		</div>
+		{{ page.breadcrumbs }}
+  </header>
+	{{ page.cta }}
+	<div class="container prose">
+		{{ page.highlighted }}
+		{{ page.help }}
+		{{ page.title_banner }}
+	</div>
+
+	<main role="main">
+		<a id="main-content" tabindex="-1"></a>
+		{# link is in html.html.twig #}
+
+		<div class="layout-content container prose">
+			{{ page.content }}
+		</div>{# /.layout-content #}
+
+		{% if page.sidebar_first %}
+			<aside class="layout-sidebar-first prose" role="complementary">
+				{{ page.sidebar_first }}
+			</aside>
+		{% endif %}
+
+		{% if page.sidebar_second %}
+			<aside class="layout-sidebar-second prose" role="complementary">
+				{{ page.sidebar_second }}
+			</aside>
+		{% endif %}
+
+	</main>
+
+	{% if page.footer %}
+		<footer role="contentinfo">
+			{{ page.footer }}
+		</footer>
+	{% endif %}
+</div>{# /.layout-container #}
+{# placeholder for tailwindcss classes #}
+<div class="hidden relative bg-cover justify-center h-[390px] bg-dark-teal/80 bg-light-teal open:bg-white duration-300 ms-4 me-4 mb-10 p-4 p-5 px-5 py-4 py-3 text-lg cursor-pointer font-extrabold font-semibold leading-5 border-0 text-dark-teal">
+<div class="grid grid-cols-1 md--grid-cols-4 p-2 md--grid-cols-2 gap-2 -mx-50% px-50% bg-md-teal p-3 sticky top-0 md--grid-cols-3">
+
+
+	<div class="col-1 col-span-3 row-span-2 p-2 text-2xl leading-9 w-6">hello</div>
+<div class="col-2 ps-5 pe-10 w-full md-w-1/3 border-4 border-dark-teal hover--border-md-teal">the</div>
+
+<div class="aspect-square shrink-0 m-2 first-of-type--ms-0 last-of-type:me-0 col-2 me-3 mt-[3px] hover--text-light-teal group group-hover--text-md-teal hover--underline md--w-1/3 p-10">world</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

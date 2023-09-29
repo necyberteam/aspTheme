@@ -1,0 +1,63 @@
+/* ./src/main.css */
+
+@tailwind base;
+
+/* Put default SCSS here. Don't wrap with @layer base {} here, because some elements may not be in templates alone. */
+
+@tailwind components;
+
+/* Put component SCSS here - again, skip @layer component {}. */
+
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --dark-teal: #1A5B6E;
+    --md-teal: #138597;
+    --teal: #48C0B9;
+    --yellow: #ffc42d;
+    --btn-primary: var(--yellow);
+    --btn-secondary: var(--md-teal);
+    --black: #232323;
+    --light: #ecf9f8;
+  }
+  html {
+    font-family: 'Archivo', system-ui, sans-serif;
+  }
+}
+.container {
+  max-width: calc(100% - 60px);
+}
+@media screen(md) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media screen(ml) {
+  .container {
+    max-width: 712px;
+  }
+}
+
+@media screen(lg) {
+  .container {
+    max-width: 840px;
+  }
+}
+
+@media screen(xl) {
+  .container {
+    max-width: 1180px;
+  }
+}
+
+@media screen(2xl) {
+  .container {
+    max-width: 1180px;
+  }
+}
+
+img {
+  max-width: 100%;
+}

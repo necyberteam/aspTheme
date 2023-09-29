@@ -1,0 +1,39 @@
+name: ACCESS Support Theme
+type: theme
+'base theme': stable9
+starterkit: true
+version: 1.0
+# ckeditor5-stylesheets:
+#   - build/ckeditor5.css
+libraries:
+  - aspTheme/base
+  - aspTheme/messages
+  - core/normalize
+  - aspTheme/global-scripts
+# libraries-extend:
+  # user/drupal.user:
+  #   - asp-theme/user
+  # core/drupal.dropbutton:
+  #   - asp-theme/dropbutton
+  # core/drupal.dialog:
+  #   - asp-theme/dialog
+  # file/drupal.file:
+  #   - asp-theme/file
+  # core/drupal.progress:
+  #   - asp-theme/progress
+regions:
+  header: Header
+  nav_branding: 'Navigation branding region'
+  nav_main: 'Main navigation region'
+  nav_additional: 'Additional navigation region (eg search form, social icons, etc)'
+  sub_nav: 'Secondary navigation region'
+  breadcrumbs: 'Breadcrumbs'
+  cta: 'Call-to-Action'
+  title_banner: 'Page Title Banner'
+  content: 'Main content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer
+core_version_requirement: ^10
+generator: 'starterkit_theme:10.0.10'
+
