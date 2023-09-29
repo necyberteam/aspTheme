@@ -1,0 +1,17 @@
+{
+    "name": "necyberteam/asp-theme",
+    "description": "A custom theme for the ACCESS Support Portal.",
+    "type": "drupal-theme",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Pasquale",
+            "email": "andrew@elytra.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/necyberteam/aspTheme/issues",
+        "source": "https://github.com/necyberteam/aspTheme"
+    },
+    "minimum-stability": "dev"
+}
