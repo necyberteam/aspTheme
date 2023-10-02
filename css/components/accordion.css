@@ -5,7 +5,7 @@ summary::-webkit-details-marker {
   display: none
 }
 summary::after {
-  content: url('/themes/custom/aspTheme/images/icons/accordion-arrow.gif');
+  content: url('/themes/contrib/asp-theme/images/icons/accordion-arrow.gif');
   position: absolute;
   right: 1rem;
   transition: 300ms;
