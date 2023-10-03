@@ -103,9 +103,10 @@ module.exports = {
     'gap-5',
     'grid', 'grid-cols-1',
     'group', 'group-hover--block', 'group-hover--hidden', 'group-hover--text-md-teal', 'group-hover--text-white',
-    'h-16', 'h-390', 'h-[390px]',
+    'h-16', 'h-390', 'h-[390px]', 'h-fit',
     'hidden',
     'hover--bg-md-teal', 'hover--bg-dark-teal', 'hover--border-md-teal', 'hover--border-dark-teal', 'hover--text-light-teal', 'hover--underline',
+    'items-center',
     'justify-center',
     'last-of-type--me-0',
     'leading-5', 'leading-9',
@@ -119,7 +120,7 @@ module.exports = {
     'sticky',
     'text-lg', 'text-2xl', 'text-dark-teal', 'text-white',
     'top-0',
-    'w-6', 'w-full',
+    'w-6', 'w-24', 'w-full',
     '-mx-50%'
   ],
   // Drupal filters out special characters

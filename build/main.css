@@ -790,6 +790,15 @@ html {
     height: 42px;
 }
 
+.h-fit {
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+.w-24 {
+    width: 6rem;
+}
+
 .w-6 {
     width: 1.5rem;
 }
