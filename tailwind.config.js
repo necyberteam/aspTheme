@@ -107,7 +107,7 @@ module.exports = {
     'hidden',
     'hover--bg-md-teal', 'hover--bg-dark-teal', 'hover--border-md-teal', 'hover--border-dark-teal', 'hover--text-light-teal', 'hover--underline',
     'justify-center',
-    'last-of-type:me-0',
+    'last-of-type--me-0',
     'leading-5', 'leading-9',
     'm-2', 'mb-10', 'me-3', 'me-4', 'ms-4', 'mt-[3px]',
     'md--w-1/3', 'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4',
