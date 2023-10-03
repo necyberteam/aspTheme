@@ -1042,31 +1042,31 @@ html {
 .container {
   max-width: calc(100% - 60px);
 }
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .container {
     max-width: 540px;
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .container {
     max-width: 712px;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .container {
     max-width: 840px;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .container {
-    max-width: 1180px;
+    max-width: 940px;
   }
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1280px) {
   .container {
     max-width: 1180px;
   }
@@ -1078,6 +1078,10 @@ img {
 
 .first-of-type--ms-0:first-of-type {
     margin-inline-start: 0px;
+}
+
+.last-of-type--me-0:last-of-type {
+    margin-inline-end: 0px;
 }
 
 .hover--border-dark-teal:hover {

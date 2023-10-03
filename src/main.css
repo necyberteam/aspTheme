@@ -28,31 +28,31 @@
 .container {
   max-width: calc(100% - 60px);
 }
-@media screen(md) {
+@media screen(sm) {
   .container {
     max-width: 540px;
   }
 }
 
-@media screen(ml) {
+@media screen(md) {
   .container {
     max-width: 712px;
   }
 }
 
-@media screen(lg) {
+@media screen(ml) {
   .container {
     max-width: 840px;
   }
 }
 
-@media screen(xl) {
+@media screen(lg) {
   .container {
-    max-width: 1180px;
+    max-width: 940px;
   }
 }
 
-@media screen(2xl) {
+@media screen(xl) {
   .container {
     max-width: 1180px;
   }
