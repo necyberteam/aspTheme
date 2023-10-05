@@ -30,7 +30,7 @@
 }
 @media screen(sm) {
   .container {
-    max-width: 540px;
+    max-width: calc(100% - 60px);
   }
 }
 

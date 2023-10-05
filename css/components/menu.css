@@ -34,7 +34,7 @@ ul.sf-menu li:has(ul li a:hover) span.nolink,
 #block-accesssecondarymenu ul.menu li span.nolink:hover,
 #block-accesssecondarymenu ul.menu li a:hover,
 #block-accesssecondarymenu ul.sf-menu.menu li ul a,
-ul.menu a.is-active {
+#block-accesssecondarymenu a.is-active {
   background-color: var(--md-teal);
   color: #ffffff !important;
 }
