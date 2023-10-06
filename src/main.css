@@ -61,3 +61,7 @@
 img {
   max-width: 100%;
 }
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
