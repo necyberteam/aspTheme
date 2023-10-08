@@ -701,6 +701,10 @@ html {
     position: sticky;
 }
 
+.right-8 {
+    right: 2rem;
+}
+
 .top-0 {
     top: 0px;
 }
@@ -711,6 +715,10 @@ html {
 
 .row-span-2 {
     grid-row: span 2 / span 2;
+}
+
+.m-0 {
+    margin: 0px;
 }
 
 .m-2 {
@@ -726,6 +734,18 @@ html {
     margin-bottom: 2.5rem;
 }
 
+.mb-3 {
+    margin-bottom: 0.75rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
 .me-3 {
     margin-inline-end: 0.75rem;
 }
@@ -734,8 +754,24 @@ html {
     margin-inline-end: 1rem;
 }
 
+.me-6 {
+    margin-inline-end: 1.5rem;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
 .ms-4 {
     margin-inline-start: 1rem;
+}
+
+.mt-0 {
+    margin-top: 0px;
+}
+
+.mt-4 {
+    margin-top: 1rem;
 }
 
 .mt-\[3px\] {
@@ -790,6 +826,10 @@ html {
     height: 42px;
 }
 
+.h-auto {
+    height: auto;
+}
+
 .h-fit {
     height: -moz-fit-content;
     height: fit-content;
@@ -803,12 +843,23 @@ html {
     width: 1.5rem;
 }
 
+.w-fit {
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
 .w-full {
     width: 100%;
 }
 
 .shrink-0 {
     flex-shrink: 0;
+}
+
+.border-spacing-0 {
+    --tw-border-spacing-x: 0px;
+    --tw-border-spacing-y: 0px;
+    border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
 }
 
 .cursor-pointer {
@@ -847,12 +898,29 @@ html {
     border-width: 0px;
 }
 
+.border-2 {
+    border-width: 2px;
+}
+
 .border-4 {
     border-width: 4px;
 }
 
+.border-x-0 {
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+
+.border-b-2 {
+    border-bottom-width: 2px;
+}
+
 .border-b-\[1px\] {
     border-bottom-width: 1px;
+}
+
+.border-t-0 {
+    border-top-width: 0px;
 }
 
 .border-t-\[3px\] {
@@ -861,6 +929,11 @@ html {
 
 .border-solid {
     border-style: solid;
+}
+
+.border-black {
+    --tw-border-opacity: 1;
+    border-color: rgb(35 35 35 / var(--tw-border-opacity));
 }
 
 .border-dark-teal {
@@ -906,6 +979,11 @@ html {
     background-size: cover;
 }
 
+.object-contain {
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
 .p-10 {
     padding: 2.5rem;
 }
@@ -934,6 +1012,11 @@ html {
 .px-2 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .px-5 {
@@ -976,12 +1059,20 @@ html {
     padding-bottom: 1rem;
 }
 
+.pb-4 {
+    padding-bottom: 1rem;
+}
+
 .pe-10 {
     padding-inline-end: 2.5rem;
 }
 
 .ps-5 {
     padding-inline-start: 1.25rem;
+}
+
+.pt-4 {
+    padding-top: 1rem;
 }
 
 .text-2xl {
@@ -1000,6 +1091,10 @@ html {
 
 .font-black {
     font-weight: 900;
+}
+
+.font-bold {
+    font-weight: 700;
 }
 
 .font-extrabold {
