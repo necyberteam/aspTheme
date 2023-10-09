@@ -108,7 +108,7 @@ module.exports = {
     'group', 'group-hover--block', 'group-hover--hidden', 'group-hover--text-md-teal', 'group-hover--text-white',
     'h-16', 'h-390', 'h-[390px]', 'h-fit',
     'hidden',
-    'hover--bg-md-teal', 'hover--bg-dark-teal', 'hover--border-md-teal', 'hover--border-dark-teal', 'hover--text-light-teal', 'hover--underline',
+    'hover--bg-md-teal', 'hover--bg-dark-teal', 'hover--border-md-teal', 'hover--border-dark-teal', 'hover--text-light-teal', 'hover--underline', 'bg-orange-500',
     'items-center',
     'justify-center',
     'last-of-type--me-0',
