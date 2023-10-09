@@ -94,9 +94,10 @@ module.exports = {
   ],
   safelist: [
     'aspect-square',
-    'bg-cover','bg-dark-teal/80', 'bg-light-teal', 'bg-md-teal',
+    'bg-cover', 'bg-right', 'bg-no-repeat', 'bg-dark-teal/80', 'bg-light-teal', 'bg-md-teal',
+    "bg-[url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg')]",
     'border-0', 'border-4', 'border-dark-teal',
-    'col-1', 'col-2', 'col-span-3',
+    'col-1', 'col-2', 'col-span-2', 'col-span-3',
     'cursor-pointer',
     'duration-300',
     'first-of-type--ms-0',
@@ -113,7 +114,7 @@ module.exports = {
     'leading-4', 'leading-5', 'leading-9',
     'lg--grid-cols-6',
     'list-none',
-    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'ms-4', 'mt-[3px]', 'mx-5',
+    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'ms-0', 'ms-4', 'mt-[3px]', 'mx-5', 'my-5',
     'max-w-[240px]',
     'md--w-1/3', 'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4',
     'no-underline',
@@ -128,7 +129,7 @@ module.exports = {
     'top-0',
     'w-6', 'w-9', 'w-24', 'w-[90%]', 'w-full',
     '-mx-50%',
-    '[&>*]--border', '[&>*]--border-solid', '[&>*]--border-black',  '[&>*]--px-1.5', '[&>*]--py-0.5', '[&>*]--no-underline', 'hover--[&>*]--border-dark-teal'
+    '[&>*]--border', '[&>*]--border-solid', '[&>*]--border-black',  '[&>*]--px-1.5', '[&>*]--py-0.5', '[&>*]--no-underline', 'hover--[&>*]--underline', 'hover--[&>*]--border-dark-teal', '[&>*]--text-white'
   ],
   // Drupal filters out special characters
   separator: '--',

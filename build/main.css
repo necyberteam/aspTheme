@@ -717,6 +717,10 @@ html {
     top: 0px;
 }
 
+.col-span-2 {
+    grid-column: span 2 / span 2;
+}
+
 .col-span-3 {
     grid-column: span 3 / span 3;
 }
@@ -746,6 +750,11 @@ html {
 .my-0 {
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+.my-5 {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .mb-10 {
@@ -1019,8 +1028,20 @@ html {
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[url\(\'\/themes\/contrib\/asp-theme\/images\/cta\/getting-started-bg\.svg\'\)\] {
+    background-image: url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg');
+}
+
 .bg-cover {
     background-size: cover;
+}
+
+.bg-right {
+    background-position: right;
+}
+
+.bg-no-repeat {
+    background-repeat: no-repeat;
 }
 
 .fill-\[\#13294b\] {
@@ -1427,6 +1448,11 @@ img {
     padding-bottom: 0.125rem;
 }
 
+.\[\&\>\*\]--text-white>* {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .\[\&\>\*\]--no-underline>* {
     text-decoration-line: none;
 }
@@ -1434,5 +1460,9 @@ img {
 .hover--\[\&\>\*\]--border-dark-teal>*:hover {
     --tw-border-opacity: 1;
     border-color: rgb(26 91 110 / var(--tw-border-opacity));
+}
+
+.hover--\[\&\>\*\]--underline>*:hover {
+    text-decoration-line: underline;
 }
 
