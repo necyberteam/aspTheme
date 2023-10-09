@@ -26,12 +26,18 @@
  * @see template_preprocess_block()
  */
 #}
+{% if plugin_id == 'inline_block:basic' %}
+{% set margin = '' %}
+{% else %}
+{% set margin = 'mb-6' %}
+{% endif %}
+
 {%
   set classes = [
     'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
-    'mb-6',
+    margin,
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
