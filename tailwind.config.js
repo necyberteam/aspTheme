@@ -102,7 +102,7 @@ module.exports = {
     'first-of-type--ms-0',
     'font-extrabold', 'font-semibold', 'font-normal',
     'gap-5',
-    'grid', 'grid-cols-1', 'grid-cols-6',
+    'grid', 'grid-cols-1', 'grid-cols-2', 'grid-cols-6',
     'group', 'group-hover--block', 'group-hover--hidden', 'group-hover--text-md-teal', 'group-hover--text-white',
     'h-16', 'h-390', 'h-[390px]', 'h-fit',
     'hidden',
@@ -113,7 +113,7 @@ module.exports = {
     'leading-4', 'leading-5', 'leading-9',
     'lg--grid-cols-6',
     'list-none',
-    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-3', 'me-4', 'ms-4', 'mt-[3px]', 'mx-5',
+    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'ms-4', 'mt-[3px]', 'mx-5',
     'max-w-[240px]',
     'md--w-1/3', 'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4',
     'no-underline',
@@ -124,10 +124,11 @@ module.exports = {
     'shrink-0',
     'sm--grid-cols-2',
     'sticky',
-    'text-lg', 'text-2xl', 'text-center', 'text-dark-teal', 'text-white',
+    'text-lg', 'text-2xl', 'text-[32px]', 'text-center', 'text-dark-teal', 'text-white',
     'top-0',
-    'w-6', 'w-24', 'w-[90%]', 'w-full',
-    '-mx-50%'
+    'w-6', 'w-9', 'w-24', 'w-[90%]', 'w-full',
+    '-mx-50%',
+    '[&>*]--border', '[&>*]--border-solid', '[&>*]--border-black',  '[&>*]--px-1.5', '[&>*]--py-0.5', '[&>*]--no-underline', 'hover--[&>*]--border-dark-teal'
   ],
   // Drupal filters out special characters
   separator: '--',
