@@ -22,7 +22,8 @@ module.exports = {
         'light-gray': '#f2f2f2',
         'gray': '#d2d2d2',
         'black': '#232323',
-        'white': '#ffffff'
+        'white': '#ffffff',
+        'white-er': '#ffffff',
       },
       fontSize: {
         'menu': '14px'
@@ -128,6 +129,7 @@ module.exports = {
     'h-auto',
     'btn-md-teal',
     'object-contain',
+    '[&_a]--font-bold',
     'no-underline'
   ],
   // Drupal filters out special characters

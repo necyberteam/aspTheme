@@ -1137,6 +1137,11 @@ html {
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-white-er {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .no-underline {
     text-decoration-line: none;
 }
@@ -1262,5 +1267,9 @@ img {
         padding-top: 0px;
         padding-bottom: 0px;
     }
+}
+
+.\[\&_a\]--font-bold a {
+    font-weight: 700;
 }
 
