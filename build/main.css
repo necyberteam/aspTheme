@@ -357,11 +357,13 @@ html {
 }
 
 .prose :where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
-    color: var(--tw-prose-headings);
-    font-weight: 600;
+    color: #232323;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.5;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
 }
 
 .prose :where(h4 strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
@@ -1436,44 +1438,35 @@ h2.colored-square::before {
         grid-template-columns: repeat(6, minmax(0, 1fr));
     }
 }
-
 .\[\&\>\*\]--border>* {
     border-width: 1px;
 }
-
 .\[\&\>\*\]--border-solid>* {
     border-style: solid;
 }
-
 .\[\&\>\*\]--border-black>* {
     --tw-border-opacity: 1;
     border-color: rgb(35 35 35 / var(--tw-border-opacity));
 }
-
 .\[\&\>\*\]--px-1\.5>* {
     padding-left: 0.375rem;
     padding-right: 0.375rem;
 }
-
 .\[\&\>\*\]--py-0\.5>* {
     padding-top: 0.125rem;
     padding-bottom: 0.125rem;
 }
-
 .\[\&\>\*\]--text-white>* {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
-
 .\[\&\>\*\]--no-underline>* {
     text-decoration-line: none;
 }
-
 .hover--\[\&\>\*\]--border-dark-teal>*:hover {
     --tw-border-opacity: 1;
     border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
-
 .hover--\[\&\>\*\]--underline>*:hover {
     text-decoration-line: underline;
 }

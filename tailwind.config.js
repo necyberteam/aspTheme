@@ -66,6 +66,12 @@ module.exports = {
               color: theme('colors.dark-teal'),
               'line-height': '24px'
             },
+            h4: {
+              fontSize: '18px',
+              'font-weight': '700',
+              color: theme('colors.black'),
+              'line-height': '20px'
+            },
             p: {
               fontSize: '18px',
               'line-height': '30px',
