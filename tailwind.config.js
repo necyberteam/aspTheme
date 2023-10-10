@@ -41,6 +41,7 @@ module.exports = {
             color: theme('colors.black'),
             a: {
               color: theme('colors.black'),
+              'font-weight': '800',
               textDecoration: 'underline',
               '&:hover': {
                 color: theme('colors.dark-teal'),
