@@ -65,3 +65,24 @@ img {
 .overflow-wrap-anywhere {
   overflow-wrap: anywhere;
 }
+
+/* helpers for colored squares before headings */
+.colored-square {
+  position:relative;
+}
+h2.colored-square {
+  padding-left: 24px;
+}
+.colored-square::before {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+h2.colored-square::before {
+  height: 16px;
+  width: 16px;
+  top: calc(50% - 8px);
+}
+.colored-square-orange::before {
+  background: var(--orange);
+}
