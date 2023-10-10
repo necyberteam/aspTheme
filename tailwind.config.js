@@ -122,7 +122,7 @@ module.exports = {
     'row-span-2',
     'shrink-0',
     'sticky',
-    'text-lg', 'text-2xl', 'text-dark-teal', 'text-white',
+    'text-lg', 'text-2xl', 'text-dark-teal', 'text-white', 'text-white-er',
     'top-0',
     'w-6', 'w-24', 'w-full', 'w-fit',
     '-mx-50%',
