@@ -793,6 +793,10 @@ html {
     margin-inline-start: 1rem;
 }
 
+.ms-auto {
+    margin-inline-start: auto;
+}
+
 .mt-5 {
     margin-top: 1.25rem;
 }
@@ -864,6 +868,10 @@ html {
 
 .w-24 {
     width: 6rem;
+}
+
+.w-40 {
+    width: 10rem;
 }
 
 .w-6 {
@@ -1295,74 +1303,80 @@ img {
   overflow-wrap: anywhere;
 }
 
+/* helpers for colored squares before headings */
+.colored-square {
+  position:relative;
+}
+h2.colored-square {
+  padding-left: 24px;
+}
+.colored-square::before {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+h2.colored-square::before {
+  height: 16px;
+  width: 16px;
+  top: calc(50% - 8px);
+}
+.colored-square-orange::before {
+  background: var(--orange);
+}
 .first-of-type--ms-0:first-of-type {
     margin-inline-start: 0px;
 }
-
 .last-of-type--me-0:last-of-type {
     margin-inline-end: 0px;
 }
-
 .hover--scale-100:hover {
     --tw-scale-x: 1;
     --tw-scale-y: 1;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
 .hover--border-dark-teal:hover {
     --tw-border-opacity: 1;
     border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
-
 .hover--border-md-teal:hover {
     --tw-border-opacity: 1;
     border-color: rgb(16 113 128 / var(--tw-border-opacity));
 }
-
 .hover--bg-dark-teal:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(26 91 110 / var(--tw-bg-opacity));
 }
-
 .hover--bg-md-teal:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(16 113 128 / var(--tw-bg-opacity));
 }
-
 .hover--text-light-teal:hover {
     --tw-text-opacity: 1;
     color: rgb(236 249 248 / var(--tw-text-opacity));
 }
-
 .hover--underline:hover {
     text-decoration-line: underline;
 }
-
 .group:hover .group-hover--block {
     display: block;
 }
-
 .group:hover .group-hover--hidden {
     display: none;
 }
-
 .group:hover .group-hover--text-md-teal {
     --tw-text-opacity: 1;
     color: rgb(16 113 128 / var(--tw-text-opacity));
 }
-
 .group:hover .group-hover--text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
-
 @media (min-width: 600px) {
 
     .sm--grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
-
 @media (min-width: 768px) {
 
     .md--col-span-7 {
@@ -1406,7 +1420,6 @@ img {
         padding-inline-start: 1rem;
     }
 }
-
 @media (min-width: 900px) {
 
     .ml--mt-0 {
@@ -1417,7 +1430,6 @@ img {
         display: flex;
     }
 }
-
 @media (min-width: 1024px) {
 
     .lg--grid-cols-6 {

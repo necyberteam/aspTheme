@@ -114,7 +114,7 @@ module.exports = {
     'leading-4', 'leading-5', 'leading-9',
     'lg--grid-cols-6',
     'list-none',
-    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'ms-0', 'ms-4', 'mt-[3px]', 'mx-5', 'my-5',
+    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'ms-0', 'ms-4', 'ms-auto', 'mt-[3px]', 'mx-5', 'my-5',
     'max-w-[240px]',
     'md--w-1/3', 'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4',
     'no-underline',
@@ -127,9 +127,9 @@ module.exports = {
     'sticky',
     'text-lg', 'text-2xl', 'text-[32px]', 'text-center', 'text-dark-teal', 'text-white',
     'top-0',
-    'w-6', 'w-9', 'w-24', 'w-[90%]', 'w-full',
-    '-mx-50%',
-    '[&>*]--border', '[&>*]--border-solid', '[&>*]--border-black',  '[&>*]--px-1.5', '[&>*]--py-0.5', '[&>*]--no-underline', 'hover--[&>*]--underline', 'hover--[&>*]--border-dark-teal', '[&>*]--text-white'
+    'w-6', 'w-9', 'w-24', 'w-40', 'w-[90%]', 'w-full',
+    '[&>*]--border', '[&>*]--border-solid', '[&>*]--border-black',  '[&>*]--px-1.5', '[&>*]--py-0.5', '[&>*]--no-underline', 'hover--[&>*]--underline', 'hover--[&>*]--border-dark-teal', '[&>*]--text-white',
+    '-mx-50%'
   ],
   // Drupal filters out special characters
   separator: '--',
