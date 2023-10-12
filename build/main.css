@@ -878,6 +878,10 @@ html {
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid-cols-\[70\%_1fr\] {
+    grid-template-columns: 70% 1fr;
+}
+
 .flex-col {
     flex-direction: column;
 }
@@ -904,6 +908,10 @@ html {
 
 .gap-5 {
     gap: 1.25rem;
+}
+
+.gap-8 {
+    gap: 2rem;
 }
 
 .border {

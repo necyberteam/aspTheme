@@ -137,7 +137,8 @@ module.exports = {
     '[&_img]--object-contain', '[&_img]--h-auto', '[&_img]--m-0',
     '[&_a]--no-underline',
     '[&_a]--whitespace-nowrap',
-    'no-underline'
+    'no-underline',
+    'grid', 'grid-cols-[70%_1fr]', 'gap-8',
   ],
   // Drupal filters out special characters
   separator: '--',
