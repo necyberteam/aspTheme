@@ -3,7 +3,7 @@ const { colors } = require('laravel-mix/src/Log');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   corePlugins: {
-    preflight: false,
+    // preflight: false,
   },
   content: [
     './templates/**/*.html.twig',
@@ -79,6 +79,9 @@ module.exports = {
               'font-weight': '400',
               'margin-top': '0px',
               'margin-bottom': '20px',
+            },
+            img: {
+              margin: '0px',
             }
           },
         },
@@ -97,17 +100,20 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
   ],
   safelist: [
+    'align-top',
     'aspect-square',
     'bg-cover', 'bg-right', 'bg-no-repeat', 'bg-dark-teal/80', 'bg-light-teal', 'bg-md-teal',
     "bg-[url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg')]",
-    'border-0', 'border-4', 'border-dark-teal',
+    'border', 'border-0', 'border-4', 'border-dark-teal', 'border-b',
     'col-1', 'col-2', 'col-span-2', 'col-span-3',
     'cursor-pointer',
     'duration-300',
     'first-of-type--ms-0',
+    'float-left',
     'font-extrabold', 'font-semibold', 'font-normal',
     'gap-5',
     'grid', 'grid-cols-1', 'grid-cols-2', 'grid-cols-6',
@@ -121,12 +127,12 @@ module.exports = {
     'leading-4', 'leading-5', 'leading-9',
     'lg--grid-cols-6',
     'list-none',
-    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'ms-0', 'ms-4', 'ms-auto', 'mt-[3px]', 'mx-5', 'my-5',
+    'm-2', 'mb-2', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'me-10', 'ms-0', 'ms-4', 'ms-auto', 'mt-[3px]', 'mx-0.5', 'mx-2', 'mx-5', 'my-5',
     'max-w-[240px]',
     'md--w-1/3', 'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4',
     'no-underline',
     'open:bg-white',
-    'p-2', 'p-3','p-4', 'p-5', 'p-10', 'ps-0', 'ps-2.5', 'ps-5', 'pe-2.5', 'pe-10', 'px-2.5', 'px-5', 'px-50%', 'py-2', 'py-3', 'py-4', 'py-10', 'py-14',
+    'p-2', 'p-3','p-4', 'p-5', 'p-10', 'ps-0', 'ps-2.5', 'ps-5', 'pe-2.5', 'pe-10', 'px-1.5', 'px-2.5', 'px-5', 'px-50%', 'py-0.5', 'py-2', 'py-3', 'py-4', 'py-10', 'py-14',
     'relative',
     'row-span-2',
     'shrink-0',
