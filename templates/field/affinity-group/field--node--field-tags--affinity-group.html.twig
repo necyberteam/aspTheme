@@ -58,14 +58,14 @@
   {% if multiple %}
     <div{{ attributes.addClass(classes, 'field__items') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('field__item border-2 border-black border-solid p-2 mr-2 mb-4') }}>
+        <div{{ item.attributes.addClass('field__item border border-black border-solid hover--text-dark-teal hover--border-dark-teal p-2 mr-2 mb-4') }}>
           {{ item.content }}
         </div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field__item border-2 border-black border-solid p-2 mr-2 mb-4') }}>{{ item.content }}</div>
+      <div{{ attributes.addClass(classes, 'field__item border border-black border-solid hover--text-dark-teal hover--border-dark-teal p-2 mr-2 mb-4') }}>{{ item.content }}</div>
     {% endfor %}
   {% endif %}
 {% else %}

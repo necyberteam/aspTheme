@@ -37,7 +37,8 @@ function aspTheme_preprocess_image(&$variables) {
 function aspTheme_preprocess_field(&$variables, $hook) {
   if ($variables['field_name'] == 'field_tags') {
     foreach ($variables['items'] as $key => $item) {
-      $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline p-2';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'p-2';
     }
   }
   if ($variables['field_name'] == 'field_image') {
