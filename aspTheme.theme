@@ -23,6 +23,36 @@ function aspTheme_preprocess_image_widget(array &$variables) {
 }
 
 /**
+ * Implements template_preprocess_image().
+ */
+function aspTheme_preprocess_image(&$variables) {
+  // Check the image style.
+  if ($variables['style_name'] == 'img_fluid') {
+    // Set class.
+    $variables['attributes']['class'][] = 'img-fluid';
+  }
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function aspTheme_preprocess_field(&$variables, $hook) {
+  if ($variables['field_name'] == 'field_tags') {
+    foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'p-2';
+    }
+  }
+  if ($variables['field_name'] == 'field_image') {
+    foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'object-contain';
+      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'm-0';
+      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'h-auto';
+    }
+  }
+}
+
+/**
  * Add classes to tag field for CI Links.
  */
 function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$variables) {
