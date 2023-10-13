@@ -54,6 +54,18 @@ a.button {
   color: var(--light) !important;
 }
 
+.btn-md-teal {
+  color: #fff !important;
+  background-color: var(--md-teal);
+  border-width: 0;
+}
+.btn-md-teal a {
+  color: #fff !important;
+}
+.btn-md-teal:hover {
+  background-color: var(--dark-teal);
+}
+
 .more-link {
   display: flex;
   margin: 0 auto !important;
