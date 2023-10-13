@@ -86,3 +86,15 @@ h2.colored-square::before {
 .colored-square-orange::before {
   background: var(--orange);
 }
+table {
+  border-collapse: collapse;
+}
+/* responsive tables */
+.ci-links .view-content {
+  overflow: auto;
+  width: max-content;
+  min-width: 100%;
+}
+.ci-links .view-content table {
+  width: 100%;
+}

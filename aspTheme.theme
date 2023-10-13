@@ -5,6 +5,8 @@
  * Functions to support theming.
  */
 
+use Drupal\Core\Render\Markup;
+
 /**
  * Implements hook_preprocess_image_widget().
  */
@@ -18,4 +20,52 @@ function aspTheme_preprocess_image_widget(array &$variables) {
   if (isset($data['preview']['#access']) && $data['preview']['#access'] === FALSE) {
     unset($data['preview']);
   }
+}
+
+/**
+ * Implements template_preprocess_image().
+ */
+function aspTheme_preprocess_image(&$variables) {
+  // Check the image style.
+  if ($variables['style_name'] == 'img_fluid') {
+    // Set class.
+    $variables['attributes']['class'][] = 'img-fluid';
+  }
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function aspTheme_preprocess_field(&$variables, $hook) {
+  if ($variables['field_name'] == 'field_tags') {
+    foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'p-2';
+    }
+  }
+  if ($variables['field_name'] == 'field_image') {
+    foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'object-contain';
+      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'm-0';
+      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'h-auto';
+    }
+  }
+}
+
+/**
+ * Add classes to tag field for CI Links.
+ */
+function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$variables) {
+  $output = $variables['output'];
+  $tag_classes = 'font-normal border border-solid border-black px-1.5 py-0.5 no-underline mx-0.5 first-of-type--ms-0 last-of-type--me-0 hover--border-dark-teal';
+  // Parse the $output string to get the links and add classes to them.
+  $new_output = '';
+  $dom = new DOMDocument();
+  $dom->loadHTML($output);
+  $links = $dom->getElementsByTagName('a');
+  foreach ($links as $link) {
+    $link->setAttribute('class', $tag_classes);
+    $new_output .= $dom->saveHTML($link);
+  }
+  $variables['output'] = Markup::create($new_output);
 }

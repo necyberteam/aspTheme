@@ -26,24 +26,20 @@
  * @see template_preprocess_block()
  */
 #}
-{% if plugin_id == 'inline_block:basic' %}
-{% set margin = '' %}
-{% else %}
-{% set margin = 'mb-6' %}
-{% endif %}
-
 {%
   set classes = [
     'block',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
-    margin,
+    'mb-6',
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
+  <div class='bg-dark-teal py-2 px-4'>
+    <h2{{ title_attributes.addClass('text-white-er m-0') }}>{{ label }}</h2>
+  </div>
   {% endif %}
   {{ title_suffix }}
   {% block content %}
