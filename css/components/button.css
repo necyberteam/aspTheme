@@ -38,8 +38,8 @@ a.button {
 }
 .btn-primary {
   color: #232323 !important;
-  background-color: var(--btn-primary);
-  border-color: var(--btn-primary);
+  background-color: var(--btn-primary) !important;
+  border-color: var(--btn-primary) !important;
 }
 .btn-primary:hover {
   background-color: white;
