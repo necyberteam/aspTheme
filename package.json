@@ -6,6 +6,7 @@
     "watch": "mix watch"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.6",
     "@tailwindcss/typography": "^0.5.10",
     "browser-sync": "^2.29.3",
     "browser-sync-webpack-plugin": "^2.3.0",
