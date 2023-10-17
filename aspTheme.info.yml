@@ -5,6 +5,11 @@ starterkit: true
 version: 1.0
 # ckeditor5-stylesheets:
 #   - build/ckeditor5.css
+libraries-override:
+  layout_builder/twocol_section:
+    css:
+      theme:
+        /core/themes/stable9/layouts/layout_builder/twocol_section/twocol_section.css: css/components/twocol_section.css
 libraries:
   - aspTheme/base
   - aspTheme/messages

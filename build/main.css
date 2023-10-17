@@ -1410,16 +1410,8 @@ html {
   margin-bottom: 0.75rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
 .mb-5 {
   margin-bottom: 1.25rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
 }
 
 .me-10 {
@@ -1436,14 +1428,6 @@ html {
 
 .me-4 {
   margin-inline-end: 1rem;
-}
-
-.me-6 {
-  margin-inline-end: 1.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .ms-0 {
@@ -2168,10 +2152,6 @@ table {
   --tw-bg-opacity: 1;
   background-color: rgb(16 113 128 / var(--tw-bg-opacity));
 }
-.hover--text-dark-teal:hover {
-  --tw-text-opacity: 1;
-  color: rgb(26 91 110 / var(--tw-text-opacity));
-}
 .hover--text-light-teal:hover {
   --tw-text-opacity: 1;
   color: rgb(236 249 248 / var(--tw-text-opacity));
@@ -2248,6 +2228,10 @@ table {
   .md--py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+
+  .md--pe-10 {
+    padding-inline-end: 2.5rem;
   }
 
   .md--ps-4 {
