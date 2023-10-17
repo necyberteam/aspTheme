@@ -39,8 +39,12 @@ function aspTheme_preprocess_image(&$variables) {
 function aspTheme_preprocess_field(&$variables, $hook) {
   if ($variables['field_name'] == 'field_tags') {
     foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'font-normal';
       $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
-      $variables['items'][$key]['content']['#attributes']['class'][] = 'p-2';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'px-1.5';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'py-0.5';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'hover--border-dark-teal';
+      $variables['items'][$key]['content']['#attributes']['class'][] = 'border';
     }
   }
   if ($variables['field_name'] == 'field_image') {
