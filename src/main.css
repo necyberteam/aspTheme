@@ -95,6 +95,7 @@ table {
   overflow: auto;
   width: max-content;
   min-width: 100%;
+  max-width: 100%;
 }
 .ci-links .view-content table {
   width: 100%;

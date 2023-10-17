@@ -36,12 +36,12 @@ a.button {
 .btn a {
   text-decoration: none !important;
 }
-.btn-primary {
+a.btn-primary, button.btn-primary {
   color: #232323 !important;
   background-color: var(--btn-primary);
   border-color: var(--btn-primary);
 }
-.btn-primary:hover {
+a.btn-primary:hover, button.btn-primary:hover {
   background-color: white;
   border-color: var(--black);
 }
@@ -54,7 +54,7 @@ a.button {
   color: var(--light) !important;
 }
 
-.btn-md-teal {
+a.btn-md-teal, button.btn-md-teal {
   color: #fff !important;
   background-color: var(--md-teal);
   border-width: 0;
@@ -62,7 +62,7 @@ a.button {
 .btn-md-teal a {
   color: #fff !important;
 }
-.btn-md-teal:hover {
+a.btn-md-teal:hover, button.btn-md-teal:hover {
   background-color: var(--dark-teal);
 }
 

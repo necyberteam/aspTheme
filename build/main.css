@@ -198,7 +198,7 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button; /* 1 */
-  /* background-color: transparent; // 2 */
+  background-color: transparent; /* 2 */
   background-image: none; /* 2 */
 }
 
@@ -2130,6 +2130,7 @@ table {
   width: -moz-max-content;
   width: max-content;
   min-width: 100%;
+  max-width: 100%;
 }
 .ci-links .view-content table {
   width: 100%;
