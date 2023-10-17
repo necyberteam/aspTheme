@@ -2177,6 +2177,10 @@ table {
   --tw-border-opacity: 1;
   border-color: rgb(16 113 128 / var(--tw-border-opacity));
 }
+.hover--border-orange:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(240 117 55 / var(--tw-border-opacity));
+}
 .hover--bg-dark-teal:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(26 91 110 / var(--tw-bg-opacity));
