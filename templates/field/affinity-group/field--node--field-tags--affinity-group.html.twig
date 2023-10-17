@@ -43,47 +43,21 @@
     'flex',
     'field--name-' ~ field_name|clean_class,
     'field--type-' ~ field_type|clean_class,
-    'field--label-' ~ label_display,
-    label_display == 'inline' ? 'clearfix',
-  ]
-%}
-{%
-  set title_classes = [
-    'field__label',
-    label_display == 'visually_hidden' ? 'visually-hidden',
   ]
 %}
 {%
   set field_classes = [
-    'field__item', 'mx-0.5', 'first-of-type--ms-0', 'last-of-type--me-0'
+    'field__item', 'm-1', 'first-of-type--ms-0', 'last-of-type--me-0'
   ]
 %}
-
-{% if label_hidden %}
+<div{{ attributes.addClass(classes) }}>
   {% if multiple %}
-    <div{{ attributes.addClass(classes, 'field__items') }}>
-      {% for item in items %}
-        <div{{ item.attributes.addClass(field_classes) }}>
-          {{ item.content }}
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div{{attributes.addClass(classes, field_classes)}}>{{ item.content }}</div>
-    {% endfor %}
+    <div class="field__items flex flex-wrap mb-3">
   {% endif %}
-{% else %}
-  <div{{ attributes.addClass(classes) }}>
-    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
-    {% if multiple %}
-      <div class="field__items">
-    {% endif %}
-    {% for item in items %}
-      <div{{ item.attributes.addClass(field_classes) }}>{{ item.content }}</div>
-    {% endfor %}
-    {% if multiple %}
-      </div>
-    {% endif %}
-  </div>
-{% endif %}
+  {% for item in items %}
+    <div{{ item.attributes.addClass(field_classes) }}>{{ item.content }}</div>
+  {% endfor %}
+  {% if multiple %}
+    </div>
+  {% endif %}
+</div>

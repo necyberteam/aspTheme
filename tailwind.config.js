@@ -134,7 +134,7 @@ module.exports = {
     'leading-4', 'leading-5', 'leading-9', 'leading-tight',
     'lg--grid-cols-6',
     'list-none',
-    'm-0', 'm-2', 'mb-0', 'mb-2', 'mb-3', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'me-10', 'ms-0', 'ms-4', 'ms-auto', 'mt-0', 'mt-4', 'mt-[3px]', 'mx-0.5', 'mx-2', 'mx-5', 'my-5',
+    'm-0', 'm-1', 'm-2', 'mb-0', 'mb-2', 'mb-3', 'mb-5', 'mb-10', 'me-2', 'me-3', 'me-4', 'me-10', 'ms-0', 'ms-4', 'ms-auto', 'mt-0', 'mt-4', 'mt-[3px]', 'mx-0.5', 'mx-1', 'mx-2', 'mx-5', 'my-5',
     'max-w-[240px]',
     'md--pe-10',
     'md--w-1/3', 'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4', 'md--grid-cols-10', 'md--col-span-3', 'md--col-span-4',
