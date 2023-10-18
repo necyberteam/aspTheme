@@ -149,7 +149,7 @@ module.exports = {
     'sticky',
     'text-sm', 'text-lg', 'text-2xl', 'text-5xl', 'text-[32px]', 'text-center', 'text-dark-teal', 'text-orange', 'text-white', 'text-white-er',
     'top-0',
-    'w-6', 'w-9', 'w-24', 'w-40', 'w-[494px]', 'w-[90%]', 'w-auto', 'w-fit', 'w-full', 'w-max',
+    'w-6', 'w-9', 'w-24', 'w-40', 'w-56', 'w-[494px]', 'w-[90%]', 'w-auto', 'w-fit', 'w-full', 'w-max',
     '[&>*]--border', '[&>*]--border-solid', '[&>*]--border-black',
     '[&>*]--no-underline',
     '[&>*]--px-1.5', '[&>*]--py-0.5',
