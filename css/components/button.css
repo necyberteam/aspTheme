@@ -59,9 +59,7 @@ a.btn-md-teal, button.btn-md-teal {
   background-color: var(--md-teal);
   border-width: 0;
 }
-.btn-md-teal a {
-  color: #fff !important;
-}
+
 a.btn-md-teal:hover, button.btn-md-teal:hover {
   background-color: var(--dark-teal);
 }
