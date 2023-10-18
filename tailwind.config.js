@@ -83,7 +83,10 @@ module.exports = {
             },
             img: {
               margin: '0px',
-            }
+            },
+            'ul > li::marker': {
+              color: 'var(--black)',
+            },
           },
         },
       }),
