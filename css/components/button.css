@@ -57,11 +57,12 @@ a.btn-primary:hover, button.btn-primary:hover {
 a.btn-md-teal, button.btn-md-teal {
   color: #fff !important;
   background-color: var(--md-teal);
-  border-width: 0;
+  border: 4px solid var(--md-teal) !important;
 }
 
 a.btn-md-teal:hover, button.btn-md-teal:hover {
   background-color: var(--dark-teal);
+  border-color: var(--dark-teal) !important;
 }
 
 .more-link {
