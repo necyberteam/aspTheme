@@ -1327,6 +1327,10 @@ html {
   top: 0px;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -1401,6 +1405,10 @@ html {
 
 .mb-0 {
   margin-bottom: 0px;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .mb-10 {
@@ -1967,6 +1975,10 @@ html {
   padding-inline-start: 1.25rem;
 }
 
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
 }
@@ -2022,6 +2034,10 @@ html {
 
 .font-extrabold {
   font-weight: 800;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .font-normal {
@@ -2241,6 +2257,10 @@ table {
 
   .md--mt-0 {
     margin-top: 0px;
+  }
+
+  .md--block {
+    display: block;
   }
 
   .md--w-1\/3 {
