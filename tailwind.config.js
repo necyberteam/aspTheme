@@ -110,7 +110,7 @@ module.exports = {
   safelist: [
     'align-top',
     'aspect-square',
-    'bg-cover', 'bg-dark-teal', 'bg-dark-teal/90', 'bg-light-teal', 'bg-md-teal', 'bg-no-repeat', 'bg-orange-500', 'bg-right',
+    'bg-cover', 'bg-dark-teal', 'bg-dark-teal/90', 'bg-light-teal', 'bg-md-teal', 'bg-no-repeat', 'bg-orange', 'bg-orange-500', 'bg-right',
     "bg-[url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg')]",
     'border', 'border-0', 'border-4', 'border-b', 'border-b-2', 'border-dark-teal', 'border-orange',
     'border-x-0',
