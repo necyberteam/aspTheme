@@ -64,7 +64,7 @@ function aspTheme_preprocess_field(&$variables) {
  */
 function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$variables) {
   $output = $variables['output'];
-  if ($output == '') {
+  if ($output->count() == 0) {
     return;
   }
   $tag_classes = 'font-normal border border-solid border-black px-1.5 py-0.5 no-underline mx-0.5 first-of-type--ms-0 last-of-type--me-0 hover--border-dark-teal';
