@@ -1737,6 +1737,10 @@ html {
   flex-wrap: wrap;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1755,6 +1759,10 @@ html {
 
 .gap-10 {
   gap: 2.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-5 {
@@ -2033,6 +2041,10 @@ html {
 
 .pb-4 {
   padding-bottom: 1rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 
 .pe-10 {
@@ -2492,5 +2504,11 @@ table {
 .\[\&_img\]--object-contain img {
   -o-object-fit: contain;
      object-fit: contain;
+}
+.\[\&_label\]--font-bold label {
+  font-weight: 700;
+}
+.\[\&_select\]--w-full select {
+  width: 100%;
 }
 
