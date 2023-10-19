@@ -1390,6 +1390,11 @@ html {
   margin-right: 0.125rem;
 }
 
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -1464,6 +1469,18 @@ html {
   margin-inline-end: 1rem;
 }
 
+.me-6 {
+  margin-inline-end: 1.5rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .ms-0 {
   margin-inline-start: 0px;
 }
@@ -1482,6 +1499,10 @@ html {
 
 .mt-0 {
   margin-top: 0px;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
 }
 
 .mt-4 {
@@ -1573,6 +1594,10 @@ html {
   height: 100%;
 }
 
+.w-20 {
+  width: 5rem;
+}
+
 .w-2\/5 {
   width: 40%;
 }
@@ -1591,6 +1616,18 @@ html {
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-60 {
+  width: 15rem;
+}
+
+.w-72 {
+  width: 18rem;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .w-9 {
