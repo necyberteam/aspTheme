@@ -74,6 +74,9 @@ img {
 h2.colored-square {
   padding-left: 24px;
 }
+p.colored-square {
+ padding-left: 20px;
+}
 .colored-square::before {
   content: '';
   position: absolute;
@@ -84,8 +87,16 @@ h2.colored-square::before {
   width: 16px;
   top: calc(50% - 8px);
 }
+p.colored-square::before {
+  height: 12px;
+  width: 12px;
+  top: calc(50% - 6px);
+}
 .colored-square-orange::before {
   background: var(--orange);
+}
+.colored-square-teal::before {
+  background: var(--teal);
 }
 table {
   border-collapse: collapse;
