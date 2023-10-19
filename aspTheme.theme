@@ -36,18 +36,25 @@ function aspTheme_preprocess_image(&$variables) {
 /**
  * Implements template_preprocess_field().
  */
-function aspTheme_preprocess_field(&$variables, $hook) {
-  if ($variables['field_name'] == 'field_tags') {
-    foreach ($variables['items'] as $key => $item) {
-      $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
-      $variables['items'][$key]['content']['#attributes']['class'][] = 'p-2';
+function aspTheme_preprocess_field(&$variables) {
+  $node = $variables['element']['#object'];
+  if ($node->bundle() == 'affinity_group') {
+    if ($variables['field_name'] == 'field_tags') {
+      foreach ($variables['items'] as $key => $item) {
+        $variables['items'][$key]['content']['#attributes']['class'][] = 'font-normal';
+        $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
+        $variables['items'][$key]['content']['#attributes']['class'][] = 'px-2';
+        $variables['items'][$key]['content']['#attributes']['class'][] = 'py-1';
+        $variables['items'][$key]['content']['#attributes']['class'][] = 'hover--border-dark-teal';
+        $variables['items'][$key]['content']['#attributes']['class'][] = 'border';
+      }
     }
-  }
-  if ($variables['field_name'] == 'field_image') {
-    foreach ($variables['items'] as $key => $item) {
-      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'object-contain';
-      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'm-0';
-      $variables['items'][$key]['content']['#item_attributes']['class'][] = 'h-auto';
+    if ($variables['field_name'] == 'field_image') {
+      foreach ($variables['items'] as $key => $item) {
+        $variables['items'][$key]['content']['#item_attributes']['class'][] = 'object-contain';
+        $variables['items'][$key]['content']['#item_attributes']['class'][] = 'm-0';
+        $variables['items'][$key]['content']['#item_attributes']['class'][] = 'h-auto';
+      }
     }
   }
 }
@@ -57,6 +64,9 @@ function aspTheme_preprocess_field(&$variables, $hook) {
  */
 function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$variables) {
   $output = $variables['output'];
+  if ($output->count() == 0) {
+    return;
+  }
   $tag_classes = 'font-normal border border-solid border-black px-1.5 py-0.5 no-underline mx-0.5 first-of-type--ms-0 last-of-type--me-0 hover--border-dark-teal';
   // Parse the $output string to get the links and add classes to them.
   $new_output = '';

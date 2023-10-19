@@ -16,6 +16,7 @@
     --md-teal: #138597;
     --teal: #48C0B9;
     --yellow: #ffc42d;
+    --orange: #f07537;
     --btn-primary: var(--yellow);
     --btn-secondary: var(--md-teal);
     --black: #232323;
@@ -73,6 +74,9 @@ img {
 h2.colored-square {
   padding-left: 24px;
 }
+p.colored-square {
+ padding-left: 20px;
+}
 .colored-square::before {
   content: '';
   position: absolute;
@@ -83,8 +87,16 @@ h2.colored-square::before {
   width: 16px;
   top: calc(50% - 8px);
 }
+p.colored-square::before {
+  height: 12px;
+  width: 12px;
+  top: calc(50% - 6px);
+}
 .colored-square-orange::before {
   background: var(--orange);
+}
+.colored-square-teal::before {
+  background: var(--teal);
 }
 table {
   border-collapse: collapse;
@@ -94,6 +106,7 @@ table {
   overflow: auto;
   width: max-content;
   min-width: 100%;
+  max-width: 100%;
 }
 .ci-links .view-content table {
   width: 100%;
