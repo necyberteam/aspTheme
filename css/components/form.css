@@ -92,6 +92,9 @@ abbr.ajax-changed {
   border: 2px solid red;
 }
 
+input {
+  max-width: 100%;
+}
 /* Inline error messages. */
 .form-item--error-message:before {
   display: inline-block;
