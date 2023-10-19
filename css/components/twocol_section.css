@@ -25,7 +25,7 @@
 
   .layout--twocol-section.layout--twocol-section--33-67 > .layout__region--second,
   .layout--twocol-section.layout--twocol-section--67-33 > .layout__region--first {
-    flex: 0 1 67%;
+    flex: 0 1 66%;
   }
 
   .layout--twocol-section.layout--twocol-section--25-75 > .layout__region--first,
