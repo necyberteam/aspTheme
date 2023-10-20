@@ -1328,6 +1328,14 @@ html {
   right: 25%;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
 .right-8 {
   right: 2rem;
 }
@@ -1391,9 +1399,19 @@ html {
   margin-right: 0.125rem;
 }
 
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .mx-2 {
@@ -1409,6 +1427,11 @@ html {
 .my-0 {
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .my-5 {
@@ -1464,12 +1487,28 @@ html {
   margin-inline-end: 1rem;
 }
 
+.me-6 {
+  margin-inline-end: 1.5rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .ms-0 {
   margin-inline-start: 0px;
 }
 
 .ms-4 {
   margin-inline-start: 1rem;
+}
+
+.ms-5 {
+  margin-inline-start: 1.25rem;
 }
 
 .ms-auto {
@@ -1482,6 +1521,10 @@ html {
 
 .mt-12 {
   margin-top: 3rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
 }
 
 .mt-4 {
@@ -1564,6 +1607,10 @@ html {
   height: 42px;
 }
 
+.h-\[500px\] {
+  height: 500px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -1575,6 +1622,14 @@ html {
 
 .h-full {
   height: 100%;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.w-2\/5 {
+  width: 40%;
 }
 
 .w-24 {
@@ -1593,8 +1648,24 @@ html {
   width: 1.5rem;
 }
 
+.w-60 {
+  width: 15rem;
+}
+
+.w-72 {
+  width: 18rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
 .w-9 {
   width: 2.25rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .w-\[130px\] {
@@ -1691,6 +1762,10 @@ html {
   flex-wrap: wrap;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1709,6 +1784,10 @@ html {
 
 .gap-10 {
   gap: 2.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-5 {
@@ -1997,8 +2076,20 @@ html {
   padding-bottom: 2rem;
 }
 
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 
 .pe-10 {
@@ -2031,6 +2122,10 @@ html {
 
 .pt-10 {
   padding-top: 2.5rem;
+}
+
+.pt-24 {
+  padding-top: 6rem;
 }
 
 .pt-4 {
@@ -2215,6 +2310,9 @@ img {
 h2.colored-square {
   padding-left: 24px;
 }
+p.colored-square {
+ padding-left: 20px;
+}
 .colored-square::before {
   content: '';
   position: absolute;
@@ -2225,8 +2323,16 @@ h2.colored-square::before {
   width: 16px;
   top: calc(50% - 8px);
 }
+p.colored-square::before {
+  height: 12px;
+  width: 12px;
+  top: 9px;
+}
 .colored-square-orange::before {
   background: var(--orange);
+}
+.colored-square-teal::before {
+  background: var(--teal);
 }
 table {
   border-collapse: collapse;
@@ -2299,6 +2405,10 @@ table {
   .sm--grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .sm--pb-40 {
+    padding-bottom: 10rem;
+  }
 }
 @media (min-width: 768px) {
 
@@ -2333,6 +2443,14 @@ table {
   .md--w-1\/3 {
     width: 33.333333%;
   }
+  
+  .md--w-1\/2 {
+    width: 50%;
+  }
+
+  .md--w-1\/5 {
+    width: 20%;
+  }
 
   .md--grid-cols-10 {
     grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -2363,12 +2481,20 @@ table {
     padding-bottom: 0px;
   }
 
+  .md--pb-0 {
+    padding-bottom: 0px;
+  }
+
   .md--pe-10 {
     padding-inline-end: 2.5rem;
   }
 
   .md--ps-4 {
     padding-inline-start: 1rem;
+  }
+
+  .md--pt-0 {
+    padding-top: 0px;
   }
 }
 @media (min-width: 900px) {
@@ -2431,6 +2557,9 @@ table {
 .\[\&_a\]--no-underline a {
   text-decoration-line: none;
 }
+.\[\&_div\]--h-full div {
+  height: 100%;
+}
 .\[\&_img\]--m-0 img {
   margin: 0px;
 }
@@ -2440,5 +2569,11 @@ table {
 .\[\&_img\]--object-contain img {
   -o-object-fit: contain;
      object-fit: contain;
+}
+.\[\&_label\]--font-bold label {
+  font-weight: 700;
+}
+.\[\&_select\]--w-full select {
+  width: 100%;
 }
 
