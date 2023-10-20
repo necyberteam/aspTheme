@@ -1,0 +1,185 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template in this directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.header: Items for the header region.
+ * - page.nav_main: ACCESS Universal Navigation menu.
+ * - page.nav_additional: Additional ACCESS Navigation menu.
+ * - page.sub_nav: ACCESS Support Navigation menu.
+ * - page.breadcrumb: Items for the breadcrumb region.
+ * - page.highlighted: Items for the highlighted content region.
+ * - page.help: Dynamic help text, mostly for admin pages.
+ * - page.title_banner: Title banner for the page.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.footer: Items for the footer region.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+<div class="layout-container">
+
+  <header role="banner" data-elastic-exclude="true">
+		<div class="bg-dark-teal">
+      <div class="container px-0">
+				{{ page.header }}
+        <nav class="flex flex-col">
+					<div class="w-100 h-12 py-1 md--py-0 px-0 flex justify-between uppercase text-white-er text-menu font-black">
+						{{ page.nav_main }}
+						{{ page.nav_additional }}
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="container px-2 p-md-0">
+      <div class="flex justify-between items-center py-2 md:py-0">
+				<div class="flex items-center">
+					<div class="navbar-brand flex items-center">
+						<a href="/" title="Home" rel="home" class="site-logo block">
+							<img src="/sites/default/files/ACCS050322_ACCESS_Brand_Support-RGB.png" alt="Home">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="border-0 border-solid border-t-[3px] border-b-[1px] border-t-dark-teal border-b-gray no-underline font-black">
+			<nav class="container flex flex-col">
+				<div class="flex justify-end w-100">
+					{{ page.sub_nav }}
+				</div>
+			</nav>
+		</div>
+		{{ page.breadcrumbs }}
+  </header>
+	{{ page.cta }}
+	<div class="container prose">
+		{{ page.highlighted }}
+		{{ page.help }}
+		{{ page.title_banner }}
+	</div>
+
+{% if page.sidebar_first %}
+{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr] container" %}
+{% else %}
+{% set main_content_classes = "" %}
+{% endif %}
+
+	<main role="main" class="{{ main_content_classes }}">
+		{# link is in html.html.twig #}
+
+		<div class="order-2 layout-content container ms-0 prose">
+			<a id="main-content" tabindex="-1"></a>
+			{{ page.content }}
+		</div>{# /.layout-content #}
+
+		{% if page.sidebar_first %}
+			<aside class="order-1 layout-sidebar-first prose" role="complementary">
+				{{ page.sidebar_first }}
+			</aside>
+		{% endif %}
+
+		{% if page.sidebar_second %}
+			<aside class="order-3 layout-sidebar-second prose" role="complementary">
+				{{ page.sidebar_second }}
+			</aside>
+		{% endif %}
+
+	</main>
+
+	{% if page.footer %}
+	<footer role="contentinfo" data-elastic-exclude="true">
+		<div class="bg-dark-teal">
+			<div class="container py-14">
+				{{ page.footer }}
+			</div>
+		</div>
+		<div class="container prose py-14 grid grid-cols-1 md--grid-cols-12">
+			<div class="md--col-span-7 px-4 flex flex-wrap md--flex-nowrap">
+				<a class="flex-shrink-0" id="nsf-logo" href="https://www.nsf.gov/">
+					<img class="my-0 w-[130px]" alt="National Science Foundation" src="/themes/custom/accesstheme/assets/NSF_4-Color_bitmap_Logo_350x350.png">
+				</a>
+				<div class="mt-5 md--mt-0 md--ps-4">
+					<div>
+						ACCESS is an advanced computing and data resource supported by the
+						<a class="text-md-teal font-extrabold decoration-md-teal no-underline hover--underline" href="https://www.nsf.gov/">National Science Foundation</a>
+						and made possible through these lead institutions and their partners —
+						<a class="text-md-teal font-extrabold decoration-md-teal no-underline hover--underline" href="https://www.cmu.edu/">Carnegie Mellon University</a>,
+						<a class="text-md-teal font-extrabold decoration-md-teal no-underline hover--underline" href="https://www.colorado.edu/">University of Colorado Boulder</a>,
+						<a class="text-md-teal font-extrabold decoration-md-teal no-underline hover--underline" href="https://illinois.edu/">University of Illinois at Urbana-Champaign</a>, and
+						<a class="text-md-teal font-extrabold decoration-md-teal no-underline hover--underline" href="https://www.buffalo.edu/">State University of New York at Buffalo</a>.
+					</div>
+					<div class="py-8">
+						<a class="text-menu text-md-teal font-extrabold no-underline hover--underline" href="/contact">CONTACT ACCESS</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-span-5 flex justify-center items-center">
+				<a href="https://twitter.com/ACCESSforCI" class="p-2">
+					<svg class="h-14 scale-90 hover--scale-100 w-auto duration-300 fill-[#13294b]" width="24" height="24" viewbox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+						<path d="M22.23,5.924c-0.736,0.326-1.527,0.547-2.357,0.646c0.847-0.508,1.498-1.312,1.804-2.27 c-0.793,0.47-1.671,0.812-2.606,0.996C18.324,4.498,17.257,4,16.077,4c-2.266,0-4.103,1.837-4.103,4.103 c0,0.322,0.036,0.635,0.106,0.935C8.67,8.867,5.647,7.234,3.623,4.751C3.27,5.357,3.067,6.062,3.067,6.814 c0,1.424,0.724,2.679,1.825,3.415c-0.673-0.021-1.305-0.206-1.859-0.513c0,0.017,0,0.034,0,0.052c0,1.988,1.414,3.647,3.292,4.023 c-0.344,0.094-0.707,0.144-1.081,0.144c-0.264,0-0.521-0.026-0.772-0.074c0.522,1.63,2.038,2.816,3.833,2.85 c-1.404,1.1-3.174,1.756-5.096,1.756c-0.331,0-0.658-0.019-0.979-0.057c1.816,1.164,3.973,1.843,6.29,1.843 c7.547,0,11.675-6.252,11.675-11.675c0-0.178-0.004-0.355-0.012-0.531C20.985,7.47,21.68,6.747,22.23,5.924z"></path>
+					</svg>
+					<span class="sr-only">Twitter</span>
+				</a>
+				<a href="https://www.youtube.com/c/ACCESSforCI" class="p-2">
+					<svg class="h-14 scale-90 hover--scale-100 w-auto duration-300 fill-[#13294b]" width="24" height="24" viewbox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+						<path d="M21.8,8.001c0,0-0.195-1.378-0.795-1.985c-0.76-0.797-1.613-0.801-2.004-0.847c-2.799-0.202-6.997-0.202-6.997-0.202 h-0.009c0,0-4.198,0-6.997,0.202C4.608,5.216,3.756,5.22,2.995,6.016C2.395,6.623,2.2,8.001,2.2,8.001S2,9.62,2,11.238v1.517 c0,1.618,0.2,3.237,0.2,3.237s0.195,1.378,0.795,1.985c0.761,0.797,1.76,0.771,2.205,0.855c1.6,0.153,6.8,0.201,6.8,0.201 s4.203-0.006,7.001-0.209c0.391-0.047,1.243-0.051,2.004-0.847c0.6-0.607,0.795-1.985,0.795-1.985s0.2-1.618,0.2-3.237v-1.517 C22,9.62,21.8,8.001,21.8,8.001z M9.935,14.594l-0.001-5.62l5.404,2.82L9.935,14.594z"></path>
+					</svg>
+					<span class="sr-only">YouTube</span>
+				</a>
+				<a href="https://www.facebook.com/ACCESSforCI" class="p-2">
+					<svg class="h-14 scale-90 hover--scale-100 w-auto duration-300 fill-[#13294b]" id="Facebook" xmlns="http://www.w3.org/2000/svg" width="19.519" height="37.377" viewbox="0 0 19.519 37.377">
+						<path id="Path_1" data-name="Path 1" d="M92.667,37.378V20.35h5.814l.831-6.645H92.667V9.552c0-1.869.623-3.322,3.322-3.322h3.53V.208C98.689.208,96.612,0,94.328,0c-4.984,0-8.514,3.115-8.514,8.721v4.984H80V20.35h5.814V37.378Z" transform="translate(-80)" fill="#13294b" fill-rule="evenodd"/>
+					</svg>
+					<span class="sr-only">Facebook</span>
+				</a>
+				<a href="https://www.linkedin.com/company/accessforci/" class="p-2">
+					<svg class="h-14 scale-90 hover--scale-100 w-auto duration-300 fill-[#13294b]" width="24" height="24" viewbox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+						<path d="M19.7,3H4.3C3.582,3,3,3.582,3,4.3v15.4C3,20.418,3.582,21,4.3,21h15.4c0.718,0,1.3-0.582,1.3-1.3V4.3 C21,3.582,20.418,3,19.7,3z M8.339,18.338H5.667v-8.59h2.672V18.338z M7.004,8.574c-0.857,0-1.549-0.694-1.549-1.548 c0-0.855,0.691-1.548,1.549-1.548c0.854,0,1.547,0.694,1.547,1.548C8.551,7.881,7.858,8.574,7.004,8.574z M18.339,18.338h-2.669 v-4.177c0-0.996-0.017-2.278-1.387-2.278c-1.389,0-1.601,1.086-1.601,2.206v4.249h-2.667v-8.59h2.559v1.174h0.037 c0.356-0.675,1.227-1.387,2.526-1.387c2.703,0,3.203,1.779,3.203,4.092V18.338z"></path>
+					</svg>
+					<span class="sr-only">LinkedIn</span>
+				</a>
+			</div>
+		</div>
+		<div class="container ml--flex justify-between mb-12 pt-4 border-solid border-0 border-t border-gray text-menu">
+			<div id="footer-brand">
+				<a href="https://access-ci.org">
+					<img alt="ACCESS" src="/themes/custom/accesstheme/assets/ACCS050322_ACCESS_Brand_Tagline-RGB.png">
+				</a>
+			</div>
+			<div class="mt-5 ml--mt-0">
+				<a class="text-md-teal font-semibold decoration-md-teal no-underline hover--underline pe-2.5" href="https://access-ci.org/acceptable-use/">Acceptable Use Policy</a>
+				<a class="text-md-teal font-semibold decoration-md-teal no-underline hover--underline px-2.5" href="/code-of-conduct">Code of Conduct</a>
+				<a class="text-md-teal font-semibold decoration-md-teal no-underline hover--underline ps-2.5" href="/privacy-policy">Privacy Policy</a>
+			</div>
+			<div class="mt-5 ml--mt-0 md--align-right text-menu">©2023 ACCESS</div>
+		</div>
+	</footer>
+	{% endif %}
+</div>{# /.layout-container #}
