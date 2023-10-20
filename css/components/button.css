@@ -36,12 +36,16 @@ a.button {
 .btn a {
   text-decoration: none !important;
 }
-a.btn-primary, button.btn-primary {
+a.btn-primary,
+input.btn-primary,
+button.btn-primary {
   color: #232323 !important;
-  background-color: var(--btn-primary);
-  border-color: var(--btn-primary);
+  background-color: var(--btn-primary) !important;
+  border-color: var(--btn-primary) !important;
 }
-a.btn-primary:hover, button.btn-primary:hover {
+a.btn-primary:hover,
+input.btn-primary:hover,
+button.btn-primary:hover {
   background-color: white;
   border-color: var(--black);
 }
