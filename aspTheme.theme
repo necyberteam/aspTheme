@@ -63,7 +63,12 @@ function aspTheme_preprocess_field(&$variables) {
  * Add classes to tag field for CI Links.
  */
 function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$variables) {
-  $output = $variables['output'];
+  if ($variables['output']) {
+    $output = $variables['output'];
+  }
+  else {
+    return;
+  }
   if ($output->count() == 0) {
     return;
   }
