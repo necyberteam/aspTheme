@@ -120,7 +120,7 @@ module.exports = {
     'bg-cover', 'bg-dark-teal', 'bg-dark-teal/90', 'bg-light-teal', 'bg-md-teal', 'bg-no-repeat', 'bg-orange', 'bg-orange-500', 'bg-right',
     "bg-[url('/sites/default/files/cssn/dot-line-bg.jpg')]",
     'block',
-    'border', 'border-0', 'border-4', 'border-b', 'border-b-2', 'border-dark-teal', 'border-orange',
+    'border', 'border-0', 'border-4', 'border-b', 'border-b-2', 'border-dark-teal', 'border-gray', 'border-orange',
     'border-black',
     'border-b',
     'border-x-0',
