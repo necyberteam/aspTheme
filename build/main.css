@@ -2547,14 +2547,38 @@ table {
 .\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
   flex-direction: column;
 }
+.\[\&_a\]--mb-2 a {
+  margin-bottom: 0.5rem;
+}
+.\[\&_a\]--me-2 a {
+  margin-inline-end: 0.5rem;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
+}
+.\[\&_a\]--border a {
+  border-width: 1px;
+}
+.\[\&_a\]--px-2 a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.\[\&_a\]--py-1 a {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .\[\&_a\]--font-bold a {
   font-weight: 700;
 }
+.\[\&_a\]--font-normal a {
+  font-weight: 400;
+}
 .\[\&_a\]--no-underline a {
   text-decoration-line: none;
+}
+.\[\&_a\]--hover--border-dark-teal:hover a {
+  --tw-border-opacity: 1;
+  border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
 .\[\&_div\]--h-full div {
   height: 100%;
