@@ -1323,6 +1323,11 @@ html {
   position: sticky;
 }
 
+.inset-x-1\/4 {
+  left: 25%;
+  right: 25%;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -1337,6 +1342,10 @@ html {
 
 .top-0 {
   top: 0px;
+}
+
+.top-1\/4 {
+  top: 25%;
 }
 
 .top-10 {
@@ -1393,11 +1402,6 @@ html {
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
-}
-
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
 }
 
 .mx-2 {
@@ -1513,12 +1517,20 @@ html {
   margin-top: 2.5rem;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
 
 .mt-5 {
   margin-top: 1.25rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .mt-\[3px\] {
@@ -1579,6 +1591,10 @@ html {
 
 .h-\[350px\] {
   height: 350px;
+}
+
+.h-\[390px\] {
+  height: 390px;
 }
 
 .h-\[42px\] {
@@ -1785,6 +1801,10 @@ html {
   row-gap: 1.25rem;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1888,6 +1908,10 @@ html {
   background-color: rgb(16 113 128 / var(--tw-bg-opacity));
 }
 
+.bg-md-teal-transparent {
+  background-color: rgba(16, 113, 128, 0.8);
+}
+
 .bg-orange {
   --tw-bg-opacity: 1;
   background-color: rgb(240 117 55 / var(--tw-bg-opacity));
@@ -1898,8 +1922,8 @@ html {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\'\/themes\/contrib\/asp-theme\/images\/cta\/getting-started-bg\.svg\'\)\] {
-  background-image: url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg');
+.bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
+  background-image: url('/sites/default/files/cssn/dot-line-bg.jpg');
 }
 
 .bg-cover {
@@ -1921,6 +1945,10 @@ html {
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-10 {
@@ -2217,6 +2245,11 @@ html {
   text-decoration-color: #107180;
 }
 
+.drop-shadow-md {
+  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -2394,8 +2427,16 @@ table {
     margin-top: 0px;
   }
 
+  .md--mt-16 {
+    margin-top: 4rem;
+  }
+
   .md--block {
     display: block;
+  }
+
+  .md--hidden {
+    display: none;
   }
 
   .md--w-1\/2 {
@@ -2519,14 +2560,50 @@ table {
 .hover--\[\&\>\*\]--underline>*:hover {
   text-decoration-line: underline;
 }
+.\[\&\>div\.form-item\]--flex>div.form-item {
+  display: flex;
+}
+.\[\&\>div\.form-item\]--w-\[46\%\]>div.form-item {
+  width: 46%;
+}
+.\[\&\>div\.form-item\]--flex-col>div.form-item {
+  flex-direction: column;
+}
+.\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
+  flex-direction: column;
+}
+.\[\&_a\]--mb-2 a {
+  margin-bottom: 0.5rem;
+}
+.\[\&_a\]--me-2 a {
+  margin-inline-end: 0.5rem;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
+}
+.\[\&_a\]--border a {
+  border-width: 1px;
+}
+.\[\&_a\]--px-2 a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.\[\&_a\]--py-1 a {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .\[\&_a\]--font-bold a {
   font-weight: 700;
 }
+.\[\&_a\]--font-normal a {
+  font-weight: 400;
+}
 .\[\&_a\]--no-underline a {
   text-decoration-line: none;
+}
+.\[\&_a\]--hover--border-dark-teal:hover a {
+  --tw-border-opacity: 1;
+  border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
 .\[\&_div\]--h-full div {
   height: 100%;
