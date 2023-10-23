@@ -1493,6 +1493,10 @@ html {
   margin-inline-start: 0px;
 }
 
+.ms-20 {
+  margin-inline-start: 5rem;
+}
+
 .ms-4 {
   margin-inline-start: 1rem;
 }
@@ -2218,6 +2222,11 @@ html {
   color: rgb(240 117 55 / var(--tw-text-opacity));
 }
 
+.text-teal {
+  --tw-text-opacity: 1;
+  color: rgb(72 192 185 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2496,8 +2505,24 @@ table {
   .ml--flex {
     display: flex;
   }
+
+  .ml--grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ml--grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ml--grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 @media (min-width: 1024px) {
+
+  .lg--grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 
   .lg--grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
