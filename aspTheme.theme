@@ -41,19 +41,14 @@ function aspTheme_preprocess_field(&$variables) {
   if ($node->bundle() == 'affinity_group') {
     if ($variables['field_name'] == 'field_tags') {
       foreach ($variables['items'] as $key => $item) {
-        $variables['items'][$key]['content']['#attributes']['class'][] = 'font-normal';
-        $variables['items'][$key]['content']['#attributes']['class'][] = 'no-underline';
-        $variables['items'][$key]['content']['#attributes']['class'][] = 'px-2';
-        $variables['items'][$key]['content']['#attributes']['class'][] = 'py-1';
-        $variables['items'][$key]['content']['#attributes']['class'][] = 'hover--border-dark-teal';
-        $variables['items'][$key]['content']['#attributes']['class'][] = 'border';
+        $tag_classes = ['font-normal', 'no-underline', 'px-2', 'py-1', 'hover--border-dark-teal', 'border'];
+        $variables['items'][$key]['content']['#attributes']['class'] = $tag_classes;
       }
     }
     if ($variables['field_name'] == 'field_image') {
       foreach ($variables['items'] as $key => $item) {
-        $variables['items'][$key]['content']['#item_attributes']['class'][] = 'object-contain';
-        $variables['items'][$key]['content']['#item_attributes']['class'][] = 'm-0';
-        $variables['items'][$key]['content']['#item_attributes']['class'][] = 'h-auto';
+        $classes = ['object-contain', 'm-0', 'h-auto'];
+        $variables['items'][$key]['content']['#item_attributes']['class'] = $classes;
       }
     }
   }
