@@ -112,7 +112,7 @@ module.exports = {
     'aspect-square',
     'bg-cover', 'bg-dark-teal', 'bg-dark-teal/90', 'bg-light-teal', 'bg-md-teal', 'bg-no-repeat', 'bg-orange-500', 'bg-right',
     "bg-[url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg')]",
-    'border', 'border-0', 'border-4', 'border-b', 'border-b-2', 'border-dark-teal', 'border-orange',
+    'border', 'border-0', 'border-4', 'border-b', 'border-b-2', 'border-dark-teal', 'border-gray', 'border-orange',
     'border-x-0',
     'border-t-0',
     'border-spacing-0',
