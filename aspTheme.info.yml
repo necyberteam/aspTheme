@@ -15,17 +15,17 @@ libraries:
   - aspTheme/messages
   - core/normalize
   - aspTheme/global-scripts
-# libraries-extend:
-  # user/drupal.user:
-  #   - asp-theme/user
-  # core/drupal.dropbutton:
-  #   - asp-theme/dropbutton
-  # core/drupal.dialog:
-  #   - asp-theme/dialog
-  # file/drupal.file:
-  #   - asp-theme/file
-  # core/drupal.progress:
-  #   - asp-theme/progress
+libraries-extend:
+  user/drupal.user:
+    - aspTheme/user
+  core/drupal.dropbutton:
+    - aspTheme/dropbutton
+  core/drupal.dialog:
+    - aspTheme/dialog
+  file/drupal.file:
+    - aspTheme/file
+  core/drupal.progress:
+    - aspTheme/progress
 regions:
   header: Header
   nav_branding: 'Navigation branding region'

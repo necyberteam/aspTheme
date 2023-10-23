@@ -1311,6 +1311,10 @@ html {
   visibility: hidden;
 }
 
+.absolute {
+  position: absolute;
+}
+
 .relative {
   position: relative;
 }
@@ -1319,12 +1323,33 @@ html {
   position: sticky;
 }
 
+.inset-x-1\/4 {
+  left: 25%;
+  right: 25%;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
 .right-8 {
   right: 2rem;
 }
 
 .top-0 {
   top: 0px;
+}
+
+.top-1\/4 {
+  top: 25%;
+}
+
+.top-10 {
+  top: 2.5rem;
 }
 
 .col-span-2 {
@@ -1394,6 +1419,11 @@ html {
   margin-bottom: 0px;
 }
 
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -1401,6 +1431,10 @@ html {
 
 .mb-0 {
   margin-bottom: 0px;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .mb-10 {
@@ -1419,8 +1453,16 @@ html {
   margin-bottom: 0.75rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .me-10 {
@@ -1439,12 +1481,24 @@ html {
   margin-inline-end: 1rem;
 }
 
+.ml-0 {
+  margin-left: 0px;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .ms-0 {
   margin-inline-start: 0px;
 }
 
 .ms-4 {
   margin-inline-start: 1rem;
+}
+
+.ms-5 {
+  margin-inline-start: 1.25rem;
 }
 
 .ms-auto {
@@ -1455,12 +1509,24 @@ html {
   margin-top: 0px;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
 
 .mt-5 {
   margin-top: 1.25rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .mt-\[3px\] {
@@ -1523,8 +1589,16 @@ html {
   height: 350px;
 }
 
+.h-\[390px\] {
+  height: 390px;
+}
+
 .h-\[42px\] {
   height: 42px;
+}
+
+.h-\[500px\] {
+  height: 500px;
 }
 
 .h-auto {
@@ -1538,6 +1612,10 @@ html {
 
 .h-full {
   height: 100%;
+}
+
+.w-2\/5 {
+  width: 40%;
 }
 
 .w-20 {
@@ -1560,8 +1638,24 @@ html {
   width: 1.5rem;
 }
 
+.w-60 {
+  width: 15rem;
+}
+
+.w-72 {
+  width: 18rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
 .w-9 {
   width: 2.25rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .w-\[130px\] {
@@ -1658,6 +1752,10 @@ html {
   flex-wrap: wrap;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1678,6 +1776,10 @@ html {
   gap: 2.5rem;
 }
 
+.gap-4 {
+  gap: 1rem;
+}
+
 .gap-5 {
   gap: 1.25rem;
 }
@@ -1693,6 +1795,10 @@ html {
 
 .gap-y-5 {
   row-gap: 1.25rem;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
 .border {
@@ -1780,6 +1886,10 @@ html {
   background-color: rgb(26 91 110 / var(--tw-bg-opacity));
 }
 
+.bg-dark-teal\/80 {
+  background-color: rgb(26 91 110 / 0.8);
+}
+
 .bg-dark-teal\/90 {
   background-color: rgb(26 91 110 / 0.9);
 }
@@ -1794,13 +1904,22 @@ html {
   background-color: rgb(16 113 128 / var(--tw-bg-opacity));
 }
 
+.bg-md-teal-transparent {
+  background-color: rgba(16, 113, 128, 0.8);
+}
+
+.bg-orange {
+  --tw-bg-opacity: 1;
+  background-color: rgb(240 117 55 / var(--tw-bg-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\'\/themes\/contrib\/asp-theme\/images\/cta\/getting-started-bg\.svg\'\)\] {
-  background-image: url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg');
+.bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
+  background-image: url('/sites/default/files/cssn/dot-line-bg.jpg');
 }
 
 .bg-cover {
@@ -1822,6 +1941,10 @@ html {
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-10 {
@@ -1939,8 +2062,20 @@ html {
   padding-bottom: 2rem;
 }
 
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 
 .pe-10 {
@@ -1969,6 +2104,14 @@ html {
 
 .ps-5 {
   padding-inline-start: 1.25rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
+.pt-24 {
+  padding-top: 6rem;
 }
 
 .pt-4 {
@@ -2026,6 +2169,10 @@ html {
 
 .font-extrabold {
   font-weight: 800;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .font-normal {
@@ -2089,6 +2236,11 @@ html {
   text-decoration-color: #107180;
 }
 
+.drop-shadow-md {
+  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -2144,6 +2296,9 @@ img {
 h2.colored-square {
   padding-left: 24px;
 }
+p.colored-square {
+ padding-left: 20px;
+}
 .colored-square::before {
   content: '';
   position: absolute;
@@ -2154,8 +2309,16 @@ h2.colored-square::before {
   width: 16px;
   top: calc(50% - 8px);
 }
+p.colored-square::before {
+  height: 12px;
+  width: 12px;
+  top: calc(50% - 6px);
+}
 .colored-square-orange::before {
   background: var(--orange);
+}
+.colored-square-teal::before {
+  background: var(--teal);
 }
 table {
   border-collapse: collapse;
@@ -2202,6 +2365,10 @@ table {
   --tw-bg-opacity: 1;
   background-color: rgb(16 113 128 / var(--tw-bg-opacity));
 }
+.hover--text-dark-teal:hover {
+  --tw-text-opacity: 1;
+  color: rgb(26 91 110 / var(--tw-text-opacity));
+}
 .hover--text-light-teal:hover {
   --tw-text-opacity: 1;
   color: rgb(236 249 248 / var(--tw-text-opacity));
@@ -2228,6 +2395,10 @@ table {
   .sm--grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .sm--pb-40 {
+    padding-bottom: 10rem;
+  }
 }
 @media (min-width: 768px) {
 
@@ -2247,8 +2418,28 @@ table {
     margin-top: 0px;
   }
 
+  .md--mt-16 {
+    margin-top: 4rem;
+  }
+
+  .md--block {
+    display: block;
+  }
+
+  .md--hidden {
+    display: none;
+  }
+
+  .md--w-1\/2 {
+    width: 50%;
+  }
+
   .md--w-1\/3 {
     width: 33.333333%;
+  }
+
+  .md--w-1\/5 {
+    width: 20%;
   }
 
   .md--grid-cols-10 {
@@ -2280,12 +2471,20 @@ table {
     padding-bottom: 0px;
   }
 
+  .md--pb-0 {
+    padding-bottom: 0px;
+  }
+
   .md--pe-10 {
     padding-inline-end: 2.5rem;
   }
 
   .md--ps-4 {
     padding-inline-start: 1rem;
+  }
+
+  .md--pt-0 {
+    padding-top: 0px;
   }
 }
 @media (min-width: 900px) {
@@ -2336,6 +2535,18 @@ table {
 .hover--\[\&\>\*\]--underline>*:hover {
   text-decoration-line: underline;
 }
+.\[\&\>div\.form-item\]--flex>div.form-item {
+  display: flex;
+}
+.\[\&\>div\.form-item\]--w-\[46\%\]>div.form-item {
+  width: 46%;
+}
+.\[\&\>div\.form-item\]--flex-col>div.form-item {
+  flex-direction: column;
+}
+.\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
+  flex-direction: column;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
 }
@@ -2344,6 +2555,9 @@ table {
 }
 .\[\&_a\]--no-underline a {
   text-decoration-line: none;
+}
+.\[\&_div\]--h-full div {
+  height: 100%;
 }
 .\[\&_img\]--m-0 img {
   margin: 0px;
@@ -2354,5 +2568,11 @@ table {
 .\[\&_img\]--object-contain img {
   -o-object-fit: contain;
      object-fit: contain;
+}
+.\[\&_label\]--font-bold label {
+  font-weight: 700;
+}
+.\[\&_select\]--w-full select {
+  width: 100%;
 }
 
