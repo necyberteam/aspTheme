@@ -1857,6 +1857,11 @@ html {
   border-color: rgb(210 210 210 / var(--tw-border-opacity));
 }
 
+.border-md-teal {
+  --tw-border-opacity: 1;
+  border-color: rgb(16 113 128 / var(--tw-border-opacity));
+}
+
 .border-orange {
   --tw-border-opacity: 1;
   border-color: rgb(240 117 55 / var(--tw-border-opacity));
