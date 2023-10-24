@@ -1352,6 +1352,18 @@ html {
   top: 2.5rem;
 }
 
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
+}
+
+.order-3 {
+  order: 3;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -1412,6 +1424,11 @@ html {
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .my-0 {
@@ -1491,6 +1508,10 @@ html {
 
 .ms-0 {
   margin-inline-start: 0px;
+}
+
+.ms-2 {
+  margin-inline-start: 0.5rem;
 }
 
 .ms-20 {
@@ -1870,6 +1891,11 @@ html {
   border-color: rgb(210 210 210 / var(--tw-border-opacity));
 }
 
+.border-md-teal {
+  --tw-border-opacity: 1;
+  border-color: rgb(16 113 128 / var(--tw-border-opacity));
+}
+
 .border-orange {
   --tw-border-opacity: 1;
   border-color: rgb(240 117 55 / var(--tw-border-opacity));
@@ -1917,6 +1943,11 @@ html {
   background-color: rgb(240 117 55 / var(--tw-bg-opacity));
 }
 
+.bg-teal {
+  --tw-bg-opacity: 1;
+  background-color: rgb(72 192 185 / var(--tw-bg-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1945,6 +1976,10 @@ html {
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .p-1 {
@@ -2351,6 +2386,12 @@ table {
 .ci-links .view-content table {
   width: 100%;
 }
+.marker--text-md-teal *::marker {
+  color: rgb(16 113 128 );
+}
+.marker--text-md-teal::marker {
+  color: rgb(16 113 128 );
+}
 .first-of-type--ms-0:first-of-type {
   margin-inline-start: 0px;
 }
@@ -2477,6 +2518,10 @@ table {
 
   .md--grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md--grid-cols-\[25\%_1fr\] {
+    grid-template-columns: 25% 1fr;
   }
 
   .md--flex-nowrap {
