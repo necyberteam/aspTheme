@@ -49,6 +49,7 @@ base:
       css/components/ui-dialog.css:
         weight: -10
     theme:
+      build/tippy.css: {}
       build/main.css: {}
       build/ckeditor5.css: {}
       //fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,70,400;0,100,400;0,100,600;0,100,800;1,100,400&display=swap: {type: external}
@@ -115,3 +116,4 @@ global-scripts:
   version: 1.x
   js:
     src/js/details.js: {}
+    build/js/global.js: {}
