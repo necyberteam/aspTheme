@@ -85,22 +85,32 @@
 		{{ page.title_banner }}
 	</div>
 
-	<main role="main">
-		<a id="main-content" tabindex="-1"></a>
+{% if page.sidebar_first and page.sidebar_second %}
+{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr_25%] container" %}
+{% elseif page.sidebar_first %}
+{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr] container" %}
+{% elseif page.sidebar_second %}
+{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[1fr_25%] container" %}
+{% else %}
+{% set main_content_classes = "" %}
+{% endif %}
+
+	<main role="main" class="{{ main_content_classes }}">
 		{# link is in html.html.twig #}
 
-		<div class="layout-content container prose">
+		<div class="layout-content order-2 container prose">
+			<a id="main-content" tabindex="-1"></a>
 			{{ page.content }}
 		</div>{# /.layout-content #}
 
 		{% if page.sidebar_first %}
-			<aside class="layout-sidebar-first prose" role="complementary">
+			<aside class="layout-sidebar-first order-1 prose" role="complementary">
 				{{ page.sidebar_first }}
 			</aside>
 		{% endif %}
 
 		{% if page.sidebar_second %}
-			<aside class="layout-sidebar-second prose" role="complementary">
+			<aside class="layout-sidebar-second order-3 prose" role="complementary">
 				{{ page.sidebar_second }}
 			</aside>
 		{% endif %}
