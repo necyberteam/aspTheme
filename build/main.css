@@ -2070,6 +2070,10 @@ html {
   padding-bottom: 2.5rem;
 }
 
+.pb-20 {
+  padding-bottom: 5rem;
+}
+
 .pb-32 {
   padding-bottom: 8rem;
 }
@@ -2112,6 +2116,10 @@ html {
 
 .pt-10 {
   padding-top: 2.5rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .pt-24 {
@@ -2571,12 +2579,6 @@ table {
 }
 .\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
   flex-direction: column;
-}
-.\[\&_a\]--mb-2 a {
-  margin-bottom: 0.5rem;
-}
-.\[\&_a\]--me-2 a {
-  margin-inline-end: 0.5rem;
 }
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
