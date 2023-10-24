@@ -151,6 +151,7 @@ module.exports = {
     'max-w-[240px]', 'max-w-100',
     'md--block', 'md--pe-10',
     'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4', 'md--grid-cols-10', 'md--col-span-3', 'md--col-span-4', 'md--pb-0', 'md--pt-0', 'md--w-1/5', 'md--w-1/3', 'md--w-1/2',
+    'mx-auto',
     'no-underline',
     'object-contain',
     'open:bg-white',

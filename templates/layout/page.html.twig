@@ -44,6 +44,8 @@
  * @see html.html.twig
  */
 #}
+{% set main_content_classes = "" %}
+
 <div class="layout-container">
 
   <header role="banner" data-elastic-exclude="true">
@@ -85,28 +87,28 @@
 		{{ page.title_banner }}
 	</div>
 
-	<main role="main">
-		<a id="main-content" tabindex="-1"></a>
+	{% block content %}
+	<main role="main" class="{{ main_content_classes }}">
+		<a id="main-content" tabindex="-1" class="hidden"></a>
 		{# link is in html.html.twig #}
+
+		{% if page.sidebar_first %}
+			<aside class="layout-sidebar-first mx-auto prose" role="complementary">
+				{{ page.sidebar_first }}
+			</aside>
+		{% endif %}
 
 		<div class="layout-content container prose">
 			{{ page.content }}
 		</div>{# /.layout-content #}
 
-		{% if page.sidebar_first %}
-			<aside class="layout-sidebar-first prose" role="complementary">
-				{{ page.sidebar_first }}
-			</aside>
-		{% endif %}
-
 		{% if page.sidebar_second %}
-			<aside class="layout-sidebar-second prose" role="complementary">
+			<aside class="layout-sidebar-second mx-auto prose" role="complementary">
 				{{ page.sidebar_second }}
 			</aside>
 		{% endif %}
-
 	</main>
-
+	{% endblock %}
 	{% if page.footer %}
 	<footer role="contentinfo" data-elastic-exclude="true">
 		<div class="bg-dark-teal">
