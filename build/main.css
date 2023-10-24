@@ -1323,6 +1323,11 @@ html {
   position: sticky;
 }
 
+.inset-x-1\/4 {
+  left: 25%;
+  right: 25%;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -1337,6 +1342,10 @@ html {
 
 .top-0 {
   top: 0px;
+}
+
+.top-1\/4 {
+  top: 25%;
 }
 
 .top-10 {
@@ -1505,6 +1514,10 @@ html {
   margin-inline-start: 0.5rem;
 }
 
+.ms-20 {
+  margin-inline-start: 5rem;
+}
+
 .ms-4 {
   margin-inline-start: 1rem;
 }
@@ -1525,12 +1538,20 @@ html {
   margin-top: 2.5rem;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
 
 .mt-5 {
   margin-top: 1.25rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .mt-\[3px\] {
@@ -1591,6 +1612,10 @@ html {
 
 .h-\[350px\] {
   height: 350px;
+}
+
+.h-\[390px\] {
+  height: 390px;
 }
 
 .h-\[42px\] {
@@ -1797,6 +1822,10 @@ html {
   row-gap: 1.25rem;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1905,6 +1934,10 @@ html {
   background-color: rgb(16 113 128 / var(--tw-bg-opacity));
 }
 
+.bg-md-teal-transparent {
+  background-color: rgba(16, 113, 128, 0.8);
+}
+
 .bg-orange {
   --tw-bg-opacity: 1;
   background-color: rgb(240 117 55 / var(--tw-bg-opacity));
@@ -1920,8 +1953,8 @@ html {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\'\/themes\/contrib\/asp-theme\/images\/cta\/getting-started-bg\.svg\'\)\] {
-  background-image: url('/themes/contrib/asp-theme/images/cta/getting-started-bg.svg');
+.bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
+  background-image: url('/sites/default/files/cssn/dot-line-bg.jpg');
 }
 
 .bg-cover {
@@ -1947,6 +1980,10 @@ html {
 
 .p-0 {
   padding: 0px;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-10 {
@@ -2068,6 +2105,10 @@ html {
   padding-bottom: 2.5rem;
 }
 
+.pb-20 {
+  padding-bottom: 5rem;
+}
+
 .pb-32 {
   padding-bottom: 8rem;
 }
@@ -2110,6 +2151,10 @@ html {
 
 .pt-10 {
   padding-top: 2.5rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .pt-24 {
@@ -2220,6 +2265,11 @@ html {
   color: rgb(240 117 55 / var(--tw-text-opacity));
 }
 
+.text-teal {
+  --tw-text-opacity: 1;
+  color: rgb(72 192 185 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2236,6 +2286,11 @@ html {
 
 .decoration-md-teal {
   text-decoration-color: #107180;
+}
+
+.drop-shadow-md {
+  --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .filter {
@@ -2421,8 +2476,16 @@ table {
     margin-top: 0px;
   }
 
+  .md--mt-16 {
+    margin-top: 4rem;
+  }
+
   .md--block {
     display: block;
+  }
+
+  .md--hidden {
+    display: none;
   }
 
   .md--w-1\/2 {
@@ -2495,8 +2558,24 @@ table {
   .ml--flex {
     display: flex;
   }
+
+  .ml--grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ml--grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ml--grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 @media (min-width: 1024px) {
+
+  .lg--grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 
   .lg--grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -2534,14 +2613,44 @@ table {
 .hover--\[\&\>\*\]--underline>*:hover {
   text-decoration-line: underline;
 }
+.\[\&\>div\.form-item\]--flex>div.form-item {
+  display: flex;
+}
+.\[\&\>div\.form-item\]--w-\[46\%\]>div.form-item {
+  width: 46%;
+}
+.\[\&\>div\.form-item\]--flex-col>div.form-item {
+  flex-direction: column;
+}
+.\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
+  flex-direction: column;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
+}
+.\[\&_a\]--border a {
+  border-width: 1px;
+}
+.\[\&_a\]--px-2 a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.\[\&_a\]--py-1 a {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .\[\&_a\]--font-bold a {
   font-weight: 700;
 }
+.\[\&_a\]--font-normal a {
+  font-weight: 400;
+}
 .\[\&_a\]--no-underline a {
   text-decoration-line: none;
+}
+.\[\&_a\]--hover--border-dark-teal:hover a {
+  --tw-border-opacity: 1;
+  border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
 .\[\&_div\]--h-full div {
   height: 100%;
