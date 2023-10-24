@@ -170,6 +170,7 @@ module.exports = {
     'object-contain',
     'open:bg-white',
     'overflow-x-hidden',
+    'p-0',
     'p-1', 'p-2', 'p-3', 'p-4', 'p-5', 'p-10', 'pb-4', 'pb-5', 'pb-10', 'pb-32', 'ps-0', 'ps-2.5', 'ps-5', 'pe-2.5', 'pe-10', 'pt-4', 'pt-10', 'pt-24',
     'pt-20',
     'px-1.5', 'px-2.5', 'px-4', 'px-5', 'px-10', 'px-50%', 'py-0.5', 'py-2', 'py-3', 'py-4', 'py-5', 'py-10', 'py-14',
