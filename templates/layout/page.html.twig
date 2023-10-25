@@ -44,11 +44,15 @@
  * @see html.html.twig
  */
 #}
-{% if page.sidebar_first and page.sidebar_second %}
+{# https://www.drupal.org/project/drupal/issues/953034 #}
+{% set sidebar_first_exists = page.sidebar_first|render|striptags('<img><video><drupal-render-placeholder>')|trim is not empty %}
+{% set sidebar_second_exists = page.sidebar_second|render|striptags('<img><video><drupal-render-placeholder>')|trim is not empty %}
+
+{% if sidebar_first_exists and sidebar_second_exists %}
 	{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr_25%] container" %}
-{% elseif page.sidebar_first %}
+{% elseif sidebar_first_exists %}
 	{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr] container" %}
-{% elseif page.sidebar_second %}
+{% elseif sidebar_second_exists %}
 	{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[1fr_25%] container" %}
 {% else %}
 	{% set main_content_classes = "" %}
@@ -100,7 +104,7 @@
 		<a id="main-content" tabindex="-1" class="hidden"></a>
 		{# link is in html.html.twig #}
 
-		{% if page.sidebar_first %}
+		{% if sidebar_first_exists %}
 			<aside class="layout-sidebar-first mx-auto prose" role="complementary">
 				{{ page.sidebar_first }}
 			</aside>
@@ -110,7 +114,7 @@
 			{{ page.content }}
 		</div>{# /.layout-content #}
 
-		{% if page.sidebar_second %}
+		{% if sidebar_second_exists %}
 			<aside class="layout-sidebar-second mx-auto prose" role="complementary">
 				{{ page.sidebar_second }}
 			</aside>
