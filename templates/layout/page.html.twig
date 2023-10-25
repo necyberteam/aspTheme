@@ -44,7 +44,15 @@
  * @see html.html.twig
  */
 #}
-{% set main_content_classes = "" %}
+{% if page.sidebar_first and page.sidebar_second %}
+	{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr_25%] container" %}
+{% elseif page.sidebar_first %}
+	{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr] container" %}
+{% elseif page.sidebar_second %}
+	{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[1fr_25%] container" %}
+{% else %}
+	{% set main_content_classes = "" %}
+{% endif %}
 
 <div class="layout-container">
 
@@ -88,16 +96,6 @@
 	</div>
 
 	{% block content %}
-	{% if page.sidebar_first and page.sidebar_second %}
-		{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr_25%] container" %}
-	{% elseif page.sidebar_first %}
-		{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr] container" %}
-	{% elseif page.sidebar_second %}
-		{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[1fr_25%] container" %}
-	{% else %}
-		{% set main_content_classes = "" %}
-	{% endif %}
-
 	<main role="main" class="{{ main_content_classes }}">
 		<a id="main-content" tabindex="-1" class="hidden"></a>
 		{# link is in html.html.twig #}
