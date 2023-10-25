@@ -1,3 +1,5 @@
 {
-    "/build/main.css": "/build/main.css"
+    "/build/js/global.js": "/build/js/global.js",
+    "/build/main.css": "/build/main.css",
+    "/build/tippy.css": "/build/tippy.css"
 }

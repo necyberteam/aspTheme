@@ -1426,6 +1426,11 @@ html {
   margin-right: 1.25rem;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .my-0 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -1503,6 +1508,10 @@ html {
 
 .ms-0 {
   margin-inline-start: 0px;
+}
+
+.ms-2 {
+  margin-inline-start: 0.5rem;
 }
 
 .ms-20 {
@@ -1882,6 +1891,11 @@ html {
   border-color: rgb(210 210 210 / var(--tw-border-opacity));
 }
 
+.border-md-teal {
+  --tw-border-opacity: 1;
+  border-color: rgb(16 113 128 / var(--tw-border-opacity));
+}
+
 .border-orange {
   --tw-border-opacity: 1;
   border-color: rgb(240 117 55 / var(--tw-border-opacity));
@@ -1927,6 +1941,11 @@ html {
 .bg-orange {
   --tw-bg-opacity: 1;
   background-color: rgb(240 117 55 / var(--tw-bg-opacity));
+}
+
+.bg-teal {
+  --tw-bg-opacity: 1;
+  background-color: rgb(72 192 185 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -2367,6 +2386,12 @@ table {
 .ci-links .view-content table {
   width: 100%;
 }
+.marker--text-md-teal *::marker {
+  color: rgb(16 113 128 );
+}
+.marker--text-md-teal::marker {
+  color: rgb(16 113 128 );
+}
 .first-of-type--ms-0:first-of-type {
   margin-inline-start: 0px;
 }
@@ -2506,6 +2531,7 @@ table {
   .md--grid-cols-\[25\%_1fr_25\%\] {
     grid-template-columns: 25% 1fr 25%;
   }
+
 
   .md--flex-nowrap {
     flex-wrap: nowrap;
