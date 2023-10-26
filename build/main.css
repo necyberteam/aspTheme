@@ -2520,9 +2520,18 @@ table {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .md--grid-cols-\[1fr_25\%\] {
+    grid-template-columns: 1fr 25%;
+  }
+
   .md--grid-cols-\[25\%_1fr\] {
     grid-template-columns: 25% 1fr;
   }
+
+  .md--grid-cols-\[25\%_1fr_25\%\] {
+    grid-template-columns: 25% 1fr 25%;
+  }
+
 
   .md--flex-nowrap {
     flex-wrap: nowrap;
