@@ -1554,6 +1554,10 @@ html {
   margin-top: 1.5rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .mt-\[3px\] {
   margin-top: 3px;
 }
@@ -1918,10 +1922,6 @@ html {
 
 .bg-dark-teal\/80 {
   background-color: rgb(26 91 110 / 0.8);
-}
-
-.bg-dark-teal\/90 {
-  background-color: rgb(26 91 110 / 0.9);
 }
 
 .bg-light-teal {
@@ -2531,7 +2531,6 @@ table {
   .md--grid-cols-\[25\%_1fr_25\%\] {
     grid-template-columns: 25% 1fr 25%;
   }
-
 
   .md--flex-nowrap {
     flex-wrap: nowrap;

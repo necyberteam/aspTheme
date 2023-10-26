@@ -170,6 +170,7 @@ module.exports = {
     'md--mt-16',
     'md--pe-10',
     'md--grid-cols-2', 'md--grid-cols-3', 'md--grid-cols-4', 'md--grid-cols-10', 'md--col-span-3', 'md--col-span-4', 'md--pb-0', 'md--pt-0', 'md--w-1/5', 'md--w-1/3', 'md--w-1/2',
+    'mt-8',
     'mx-auto',
     'p-0',
     'ml--grid-cols-2', 'ml--grid-cols-3', 'ml--grid-cols-4',
