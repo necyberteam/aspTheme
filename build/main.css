@@ -566,11 +566,14 @@ select {
     --dark-teal: #1A5B6E;
     --md-teal: #138597;
     --teal: #48C0B9;
+    --light-teal: #ecf9f8;
     --yellow: #ffc42d;
     --orange: #f07537;
     --btn-primary: var(--yellow);
     --btn-secondary: var(--md-teal);
     --black: #232323;
+    --gray: #d2d2d2;
+    --light-gray: #f2f2f2;
     --light: #ecf9f8;
   }
 
@@ -1721,6 +1724,10 @@ html {
   max-width: 240px;
 }
 
+.max-w-\[860px\] {
+  max-width: 860px;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -1951,6 +1958,10 @@ html {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-white\/80 {
+  background-color: rgb(255 255 255 / 0.8);
 }
 
 .bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
@@ -2534,6 +2545,10 @@ table {
 
   .md--flex-nowrap {
     flex-wrap: nowrap;
+  }
+
+  .md--bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
+    background-image: url('/sites/default/files/cssn/dot-line-bg.jpg');
   }
 
   .md--py-0 {
