@@ -112,7 +112,7 @@ module.exports = {
     'absolute', 'relative',
     'align-top',
     'aspect-square',
-    'bg-cover', 'bg-dark-teal', 'bg-dark-teal/80', 'bg-light-teal', 'bg-md-teal', 'bg-no-repeat',
+    'bg-cover', 'bg-dark-teal', 'bg-dark-teal/90', 'bg-light-teal', 'bg-md-teal', 'bg-no-repeat',
     'bg-orange',
     'bg-orange-500',
     'bg-right',
