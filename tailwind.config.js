@@ -140,6 +140,7 @@ module.exports = {
     'justify-between',
     'float-left',
     'font-extrabold', 'font-bold', 'font-semibold',
+    'font-light',
     'grid', 'grid-cols-1', 'md--grid-cols-2', 'grid-cols-2', 'grid-cols-6', 'grid-cols-[70%_1fr]',
     'md--grid-cols-[1fr_25%]',
     'md--grid-cols-[25%_1fr_25%]',
