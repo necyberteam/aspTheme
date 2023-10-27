@@ -38,7 +38,7 @@ function aspTheme_preprocess_image(&$variables) {
  */
 function aspTheme_preprocess_field(&$variables) {
   $node = $variables['element']['#object'];
-  if ($node->bundle() == 'affinity_group') {
+  if ($node->bundle() == 'affinity_group' || $node->bundle() == 'access_news') {
     if ($variables['field_name'] == 'field_tags') {
       foreach ($variables['items'] as $key => $item) {
         $tag_classes = ['font-normal', 'no-underline', 'px-2', 'py-1', 'hover--border-dark-teal', 'border'];
