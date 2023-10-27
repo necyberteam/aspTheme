@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Display Mentor name as a link to Community Persona page
+ */
+#}
+
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    label_display == 'inline' ? 'clearfix',
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{%
+  set field_classes = [
+    'field__item',
+  ]
+%}
+
+{% if label_hidden %}
+	{% if multiple %}
+		<div{{attributes.addClass(classes,'field__items')}}>
+      {% for item in items %}
+        <div>
+          <a href='/community-persona/{{ item.content['#options']['entity'].uid.value }}'>
+            {{item.content['#title']}}
+          </a>
+        </div>
+      {% endfor %}
+		</div>
+	{% else %}
+		{% for item in items %}
+			<div{{attributes.addClass(classes,field_classes)}}>{{ item.content }}</div>
+		{% endfor %}
+	{% endif %}
+{% else %}
+	<div{{attributes.addClass(classes)}}>
+		<div{{title_attributes.addClass(title_classes)}}>{{ label }}</div>
+		{% if multiple %}
+			<div class="field__items">
+			{% endif %}
+        {% for item in items %}
+          <div>
+            <a href='/community-persona/{{ item.content['#options']['entity'].uid.value }}'>
+              {{item.content['#title']}}
+            </a>
+          </div>
+        {% endfor %}
+			{% if multiple %}
+			</div>
+		{% endif %}
+	</div>
+{% endif %}
