@@ -176,6 +176,7 @@ module.exports = {
     'ms-auto',
     'mt-8',
     'mx-auto',
+    'my-2',
     'p-0',
     'ml--grid-cols-2', 'ml--grid-cols-3', 'ml--grid-cols-4',
     'no-underline',

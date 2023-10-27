@@ -1444,6 +1444,11 @@ html {
   margin-bottom: 2.5rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -1469,12 +1474,12 @@ html {
   margin-bottom: 0.5rem;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
+.mb-20 {
+  margin-bottom: 5rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .mb-5 {
@@ -1503,10 +1508,6 @@ html {
 
 .ml-0 {
   margin-left: 0px;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .ms-0 {
@@ -2229,6 +2230,10 @@ html {
   font-weight: 800;
 }
 
+.font-light {
+  font-weight: 300;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -2433,10 +2438,6 @@ table {
 .hover--bg-md-teal:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(16 113 128 / var(--tw-bg-opacity));
-}
-.hover--text-dark-teal:hover {
-  --tw-text-opacity: 1;
-  color: rgb(26 91 110 / var(--tw-text-opacity));
 }
 .hover--text-light-teal:hover {
   --tw-text-opacity: 1;
