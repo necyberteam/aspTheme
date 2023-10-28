@@ -1717,8 +1717,16 @@ html {
   width: max-content;
 }
 
+.max-w-\[150px\] {
+  max-width: 150px;
+}
+
 .max-w-\[240px\] {
   max-width: 240px;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .flex-shrink-0 {
