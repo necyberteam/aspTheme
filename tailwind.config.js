@@ -214,6 +214,8 @@ module.exports = {
     '[&_a]--no-underline',
     '[&_a]--px-2',
     '[&_a]--py-1',
+    '[&_a]--mx-2',
+    '[&_a]--my-1',
     '[&_a]--hover--border-dark-teal',
     '[&_a]--border',
     '[&_.form-checkboxes]--flex-col',

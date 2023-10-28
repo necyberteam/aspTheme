@@ -2641,6 +2641,14 @@ table {
 .\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
   flex-direction: column;
 }
+.\[\&_a\]--mx-2 a {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.\[\&_a\]--my-1 a {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
 }
