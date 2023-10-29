@@ -114,3 +114,9 @@ table {
 .ci-links .view-content table {
   width: 100%;
 }
+/* override module styles */
+.square-tags > div {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}

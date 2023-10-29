@@ -67,7 +67,7 @@ function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$vari
   if ($output == ' ') {
     return;
   }
-  $tag_classes = 'font-normal border border-solid border-black px-1.5 py-0.5 no-underline mx-0.5 first-of-type--ms-0 last-of-type--me-0 hover--border-dark-teal';
+  $tag_classes = 'font-normal border border-solid border-black px-2 py-1 no-underline me-2 mb-2 hover--border-dark-teal';
   // Parse the $output string to get the links and add classes to them.
   $new_output = '';
   $dom = new DOMDocument();
