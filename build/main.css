@@ -1797,6 +1797,10 @@ html {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-end {
   justify-content: flex-end;
 }
@@ -1868,6 +1872,10 @@ html {
   border-bottom-width: 2px;
 }
 
+.border-b-8 {
+  border-bottom-width: 8px;
+}
+
 .border-b-\[1px\] {
   border-bottom-width: 1px;
 }
@@ -1911,6 +1919,11 @@ html {
 .border-orange {
   --tw-border-opacity: 1;
   border-color: rgb(240 117 55 / var(--tw-border-opacity));
+}
+
+.border-yellow {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 196 45 / var(--tw-border-opacity));
 }
 
 .border-b-gray {
