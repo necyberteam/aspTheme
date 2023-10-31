@@ -1114,6 +1114,7 @@ html {
 
 .prose :where(tbody td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   vertical-align: baseline;
+  vertical-align: -webkit-baseline-middle;
 }
 
 .prose :where(tfoot):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
