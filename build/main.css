@@ -1687,6 +1687,10 @@ html {
   width: 2.25rem;
 }
 
+.w-9\/12 {
+  width: 75%;
+}
+
 .w-96 {
   width: 24rem;
 }
@@ -2529,6 +2533,10 @@ table {
 
   .md--w-1\/5 {
     width: 20%;
+  }
+
+  .md--w-9\/12 {
+    width: 75%;
   }
 
   .md--grid-cols-10 {
