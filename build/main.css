@@ -1114,7 +1114,6 @@ html {
 
 .prose :where(tbody td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   vertical-align: baseline;
-  vertical-align: -webkit-baseline-middle;
 }
 
 .prose :where(tfoot):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
@@ -1565,6 +1564,10 @@ html {
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
@@ -2396,6 +2399,9 @@ p.colored-square::before {
 }
 table {
   border-collapse: collapse;
+}
+table.views-table tr td {
+  vertical-align: top;
 }
 /* responsive tables */
 .ci-links .view-content {

@@ -101,6 +101,9 @@ p.colored-square::before {
 table {
   border-collapse: collapse;
 }
+table.views-table tr td {
+  vertical-align: top;
+}
 /* responsive tables */
 .ci-links .view-content {
   overflow: auto;

@@ -153,6 +153,7 @@ module.exports = {
     'hidden',
     'hover--bg-md-teal', 'hover--bg-dark-teal', 'hover--border-md-teal', 'hover--border-dark-teal', 'hover--border-orange', 'hover--text-light-teal', 'hover--underline',
     'hover--[&>*]--underline', 'hover--[&>*]--border-dark-teal',
+    'inline-block',
     'inset-x-1/4',
     'items-center',
     'items-end',

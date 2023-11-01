@@ -18,20 +18,17 @@
  * @see template_preprocess_views_view_field()
  */
 #}
-{# {{ output|replace({"," : ""})|raw }} #}
-{# {{ kint(row._entity) }} #}
 
-{% set tags = row._entity.data.terms|split(',') %}
-
+{# output the first 3 values in the field #}
 {% set output = '' %}
-{% for key, item in tags %}
-	{% if key < 3 %}
-		{% set tag = item|split('(')|first|trim %}
-		{% set output = output ~ '<a class="mb-2 me-2 px-2 py-1 border font-normal no-underline hover--border-dark-teal inline-block" href="/tags/' ~ tag ~ '">' ~ tag ~ '</a>' %}
-	{% endif %}
+{% for key, item in row._entity.field_tags %}
+  {% if key < 3 %}
+    {% set tag = item.entity.label|lower|replace({' ':'-'}) %}
+    {% set output = output ~ '<a class="mb-2 me-2 px-2 py-1 border font-normal no-underline hover--border-dark-teal inline-block" href="/tags/' ~ tag ~ '">' ~ tag ~ '</a>' %}
+  {% endif %}
 {% endfor %}
 {{ output|raw -}}
-{% if tags|length > 3 %}
-	<span>+{{ tags|length - 3 }}
-		more tags</span>
+{% if row._entity.field_tags|length > 3 %}
+	<span>+{{ row._entity.field_tags|length - 3 }} more tags</span>
 {% endif %}
+
