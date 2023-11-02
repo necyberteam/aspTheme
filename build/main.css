@@ -2462,6 +2462,9 @@ table.views-table tr td {
 .hover--underline:hover {
   text-decoration-line: underline;
 }
+.hover--opacity-80:hover {
+  opacity: 0.8;
+}
 .group:hover .group-hover--block {
   display: block;
 }
@@ -2696,8 +2699,14 @@ table.views-table tr td {
   --tw-border-opacity: 1;
   border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
+.\[\&_div\]--flex div {
+  display: flex;
+}
 .\[\&_div\]--h-full div {
   height: 100%;
+}
+.\[\&_div\]--flex-wrap div {
+  flex-wrap: wrap;
 }
 .\[\&_img\]--m-0 img {
   margin: 0px;
