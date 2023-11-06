@@ -44,8 +44,10 @@ ul.sf-menu.menu ul {
   background-color: var(--md-teal);
   box-shadow: none;
 }
-ul.sf-menu li > ul {
-  top: 48px !important;
+@media only screen and (min-width: 769px) {
+  ul.sf-menu li > ul {
+    top: 48px !important;
+  }
 }
 ul.sf-menu li > ul li a {
   background: var(--md-teal);
@@ -66,7 +68,7 @@ ul.sf-menu li > ul li a:hover {
 /* icon menu items */
 ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before, ul.sf-menu .access-menu-item::before {
   display: inline-block;
-  height: 100%;
+  height: 45px;
   width: 14px;
   overflow: visible;
   content: ' ';
@@ -109,3 +111,161 @@ ul.sf-menu .access-menu-item:hover {
   margin: 50px 0px;
 }
 
+/* mobile menus */
+@media only screen and (max-width: 768px) {
+  .region-nav-main, .region-sub-nav {
+    width: 100%;
+  }
+  #block-accessuniversalnavmenu {
+    position: relative;
+    z-index: 1000;
+  }
+  .block-superfishaccess-universal-nav-menu ul.sf-menu.menu ul {
+    background-color: var(--dark-teal);
+  }
+
+  .block-superfishaccess-secondary-menu ul.sf-menu.menu ul {
+    background-color: #ffffff;
+  }
+  #superfish-access-universal-nav-menu-toggle {
+    margin-top: 10px;
+  }
+  #superfish-access-secondary-menu-toggle {
+    margin: 6px 0;
+  }
+  .block-superfishaccess-universal-nav-menu .sf-accordion-toggle,
+  .block-superfishaccess-secondary-menu .sf-accordion-toggle {
+    width: 100%;
+    padding-left: 28px;
+  }
+  #superfish-access-universal-nav-menu-toggle,
+  #superfish-access-secondary-menu-toggle,
+  #block-accesssecondarymenu .menuparent span  {
+    position: relative;
+    display: block;
+
+  }
+  #superfish-access-universal-nav-menu-toggle::after,
+  #superfish-access-secondary-menu-toggle::after,
+  #block-accesssecondarymenu .menuparent span::after {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    right: 26px;
+    position: absolute;
+    top: 0;
+    transition: 300ms;
+    transform-origin: center 10px;
+  }
+  #superfish-access-universal-nav-menu-toggle::after {
+    content: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-caret-down' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='caret-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' data-fa-i2svg=''%3E%3Cpath fill='%23ffffff' d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'%3E%3C/path%3E%3C/svg%3E");
+  }
+  #superfish-access-secondary-menu-toggle {
+    color: var(--dark-teal);
+  }
+  #superfish-access-secondary-menu-toggle::after,
+  #block-accesssecondarymenu .menuparent span::after {
+    content: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-caret-down' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='caret-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' data-fa-i2svg=''%3E%3Cpath fill='%231A5B6E' d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'%3E%3C/path%3E%3C/svg%3E");
+  }
+  #block-accesssecondarymenu .menuparent span::after {
+    top: 12px;
+    right: 30px;
+  }
+  #superfish-access-universal-nav-menu-toggle.sf-expanded::after,
+  #superfish-access-secondary-menu-toggle.sf-expanded::after {
+    transform: rotate(180deg);
+  }
+  li .menuparent .fa-caret-down {
+    transition: 300ms;
+    transform-origin: center 10px;
+  }
+  #block-accesssecondarymenu .menuparent span::after {
+    transition: 300ms;
+    transform-origin: center 10px;
+  }
+  li.sf-expanded .menuparent .fa-caret-down,
+  #block-accesssecondarymenu .menuparent.sf-expanded span::after {
+    transform: rotate(180deg);
+  }
+
+  ul.sf-menu .sf-sub-indicator::after {
+    display: block;
+  }
+
+  #block-accesssecondarymenu ul.menu li a, #block-accesssecondarymenu ul.menu li span.nolink {
+    color: var(--dark-teal);
+    padding: 10px 28px;
+  }
+
+
+  ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before, ul.sf-menu .access-menu-item::before {
+    height: 14px;
+    margin-left: 0px;
+    margin-top: 6px;
+  }
+
+  ul.sf-menu .access-home-menu-item, ul.sf-menu .access-home-menu-item:hover {
+    width: 100%;
+  }
+
+  ul.sf-menu li > ul li a {
+    background-color: var(--dark-teal);
+  }
+
+  ul.sf-menu.sf-accordion li a {
+    padding: 10px 28px;
+    line-height: 20px;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li {
+    border-bottom: 1px solid var(--md-teal);
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone >.menuparent span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li>a,
+  #superfish-access-additional-universal-menu-accordion-clone li>.menuparent {
+    padding: 11px 28px;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li.sf-depth-2 {
+    margin-left: 0px;
+    list-style: none;
+    background-color: #fff;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li.sf-depth-2 a {
+    color: var(--dark-teal);
+    background-color: #ffffff;
+    text-decoration: none;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li.sf-depth-2 a:hover {
+    text-decoration: underline;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone .access-menu-mobile {
+    position: relative;
+    top: 0;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone .access-menu-mobile:hover {
+    left: 0;
+  }
+  #block-accesssecondarymenu ul.menu li span.nolink:hover, #block-accesssecondarymenu ul.menu li a:hover, #block-accesssecondarymenu ul.sf-menu.menu li ul a, #block-accesssecondarymenu a.is-active {
+    background-color: #ffffff;
+    color: var(--dark-teal) !important;
+  }
+
+  #superfish-access-secondary-menu-accordion .sf-expanded li {
+    border-top: none;
+  }
+  #superfish-access-secondary-menu-accordion.sf-expanded li ~ li,
+  #superfish-access-secondary-menu-accordion li.sf-depth-1 {
+    border-top: 1px solid var(--md-teal);
+  }
+}

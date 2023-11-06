@@ -1737,12 +1737,12 @@ html {
   max-width: 240px;
 }
 
-.flex-1 {
-  flex: 1 1 0%;
-}
-
 .max-w-\[860px\] {
   max-width: 860px;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .flex-shrink-0 {
@@ -1815,10 +1815,6 @@ html {
 
 .justify-start {
   justify-content: flex-start;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .justify-center {
@@ -2453,6 +2449,56 @@ table.views-table tr td {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
 }
+@media (min-width: 768px) {
+
+  .md--container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (min-width: 600px) {
+
+    .md--container {
+      max-width: 600px;
+    }
+  }
+
+  @media (min-width: 768px) {
+
+    .md--container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 900px) {
+
+    .md--container {
+      max-width: 900px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+
+    .md--container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+
+    .md--container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+
+    .md--container {
+      max-width: 1536px;
+    }
+  }
+}
 .marker--text-md-teal *::marker {
   color: rgb(16 113 128 );
 }
@@ -2604,6 +2650,10 @@ table.views-table tr td {
 
   .md--flex-nowrap {
     flex-wrap: nowrap;
+  }
+
+  .md--justify-end {
+    justify-content: flex-end;
   }
 
   .md--bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
