@@ -1998,10 +1998,6 @@ html {
   background-color: rgb(255 255 255 / 0.8);
 }
 
-.bg-\[url\(\'\/sites\/default\/files\/cssn\/dot-line-bg\.jpg\'\)\] {
-  background-image: url('/sites/default/files/cssn/dot-line-bg.jpg');
-}
-
 .bg-cover {
   background-size: cover;
 }

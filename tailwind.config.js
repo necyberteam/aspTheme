@@ -120,7 +120,6 @@ module.exports = {
     'bg-teal',
     'bg-md-teal-transparent',
     'bg-white/80',
-    "bg-[url('/sites/default/files/cssn/dot-line-bg.jpg')]",
     "md--bg-[url('/sites/default/files/cssn/dot-line-bg.jpg')]",
     'block',
     'border', 'border-0', 'border-4',
