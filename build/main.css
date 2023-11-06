@@ -1570,6 +1570,10 @@ html {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .inline {
   display: inline;
 }
@@ -1725,8 +1729,16 @@ html {
   width: max-content;
 }
 
+.max-w-\[150px\] {
+  max-width: 150px;
+}
+
 .max-w-\[240px\] {
   max-width: 240px;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .max-w-\[860px\] {
@@ -1844,6 +1856,10 @@ html {
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .border {
@@ -2202,9 +2218,18 @@ html {
   vertical-align: top;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-5xl {
@@ -2408,6 +2433,9 @@ p.colored-square::before {
 table {
   border-collapse: collapse;
 }
+table.views-table tr td {
+  vertical-align: top;
+}
 /* responsive tables */
 .ci-links .view-content {
   overflow: auto;
@@ -2468,6 +2496,9 @@ table {
 }
 .hover--underline:hover {
   text-decoration-line: underline;
+}
+.hover--opacity-80:hover {
+  opacity: 0.8;
 }
 .group:hover .group-hover--block {
   display: block;
@@ -2682,6 +2713,14 @@ table {
 .\[\&_\.form-checkboxes\]--flex-col .form-checkboxes {
   flex-direction: column;
 }
+.\[\&_a\]--mx-2 a {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.\[\&_a\]--my-1 a {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
 }
@@ -2709,8 +2748,14 @@ table {
   --tw-border-opacity: 1;
   border-color: rgb(26 91 110 / var(--tw-border-opacity));
 }
+.\[\&_div\]--flex div {
+  display: flex;
+}
 .\[\&_div\]--h-full div {
   height: 100%;
+}
+.\[\&_div\]--flex-wrap div {
+  flex-wrap: wrap;
 }
 .\[\&_img\]--m-0 img {
   margin: 0px;

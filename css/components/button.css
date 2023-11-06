@@ -5,7 +5,8 @@
 
 .btn,
 .button,
-a.button {
+a.button,
+.a--btn a {
   display: inline-block;
   width: fit-content;
   font-size: 1rem;
@@ -33,6 +34,7 @@ a.button {
 .btn:last-child {
   margin-right: 0;
 }
+.a--btn a,
 .btn a {
   text-decoration: none !important;
 }
@@ -58,13 +60,13 @@ button.btn-primary:hover {
   color: var(--light) !important;
 }
 
-a.btn-md-teal, button.btn-md-teal, input.btn-md-teal {
+div.btn-md-teal a, a.btn-md-teal, button.btn-md-teal, input.btn-md-teal {
   color: #fff !important;
   background-color: var(--md-teal);
   border: 4px solid var(--md-teal) !important;
 }
 
-a.btn-md-teal:hover, button.btn-md-teal:hover, input.btn-md-teal:hover {
+div.btn-md-teal a:hover, a.btn-md-teal:hover, button.btn-md-teal:hover, input.btn-md-teal:hover {
   background-color: var(--dark-teal);
   border-color: var(--dark-teal) !important;
 }
