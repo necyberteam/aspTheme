@@ -1801,6 +1801,10 @@ html {
   flex-direction: column;
 }
 
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -2646,6 +2650,10 @@ table.views-table tr td {
 
   .md--grid-cols-\[25\%_1fr_25\%\] {
     grid-template-columns: 25% 1fr 25%;
+  }
+
+  .md--flex-row {
+    flex-direction: row;
   }
 
   .md--flex-nowrap {
