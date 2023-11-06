@@ -24,9 +24,6 @@
  */
 #}
 {%
-  set html_classes = html_classes.addClass('overflow-x-hidden')
-%}
-{%
   set body_classes = [
     logged_in ? 'user-logged-in',
     not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
@@ -35,7 +32,7 @@
   ]
 %}
 <!DOCTYPE html>
-<html{{ html_attributes }}>
+  <html{{html_attributes.addClass('overflow-x-hidden')}}>
   <head>
     <head-placeholder token="{{ placeholder_token }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
