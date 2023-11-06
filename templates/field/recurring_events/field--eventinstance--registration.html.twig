@@ -44,22 +44,6 @@
     'field--type-' ~ field_type|clean_class,
     'field--label-' ~ label_display,
     label_display == 'inline' ? 'clearfix',
-    'flex',
-    'flex-wrap'
-  ]
-%}
-{%
-  set item_classes = [
-    'field__item',
-    'border',
-    'border-black',
-    'border-solid',
-    'hover--text-dark-teal',
-    'hover--border-dark-teal',
-    'w-fit',
-    'p-2',
-    'mr-2',
-    'mb-4'
   ]
 %}
 {%
@@ -68,30 +52,39 @@
     label_display == 'visually_hidden' ? 'visually-hidden',
   ]
 %}
+{%
+  set field_classes = [
+    'field__item',
+  ]
+%}
 
 {% if label_hidden %}
-  {% if multiple %}
-    <div{{ attributes.addClass(classes, 'field__items') }}>
-      {% for item in items %}
-        <div{{ item.attributes.addClass(item_classes) }}>{{ item.content }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes.addClass(classes, item_classes) }}>{{ item.content }}</div>
-    {% endfor %}
-  {% endif %}
+	{% if multiple %}
+		<div{{attributes.addClass(classes,'field__items')}}>
+			{% for item in items %}
+				<div{{item.attributes.addClass(field_classes)}}>{{ item.content }}</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		{% for item in items %}
+			<div{{attributes.addClass(classes,field_classes)}}>{{ item.content }}</div>
+		{% endfor %}
+	{% endif %}
 {% else %}
-  <div{{ attributes.addClass(classes) }}>
-    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
-    {% if multiple %}
-      <div class="field__items">
-    {% endif %}
-    {% for item in items %}
-      <div{{ item.attributes.addClass(item_classes) }}>{{ item.content }}</div>
-    {% endfor %}
-    {% if multiple %}
-      </div>
-    {% endif %}
-  </div>
+	<div{{attributes.addClass(classes)}}>
+		<div{{title_attributes.addClass(title_classes)}}>{{ label }}</div>
+		{% if multiple %}
+			<div class="field__items">
+			{% endif %}
+			{% for item in items %}
+        {% set url = item.content['#url'].uri %}
+				<div{{item.attributes.addClass(field_classes)}}>
+          <a class="btn btn-primary" href="{{ url }}">Register here</a>
+        </div>
+			{% endfor %}
+			{% if multiple %}
+			</div>
+		{% endif %}
+	</div>
 {% endif %}
+

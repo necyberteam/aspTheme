@@ -15,11 +15,14 @@
     --dark-teal: #1A5B6E;
     --md-teal: #138597;
     --teal: #48C0B9;
+    --light-teal: #ecf9f8;
     --yellow: #ffc42d;
     --orange: #f07537;
     --btn-primary: var(--yellow);
     --btn-secondary: var(--md-teal);
     --black: #232323;
+    --gray: #d2d2d2;
+    --light-gray: #f2f2f2;
     --light: #ecf9f8;
   }
   html {
@@ -113,4 +116,10 @@ table.views-table tr td {
 }
 .ci-links .view-content table {
   width: 100%;
+}
+/* override module styles */
+.square-tags > div {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }

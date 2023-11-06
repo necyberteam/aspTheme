@@ -6,3 +6,104 @@
 .search-results {
   list-style: none;
 }
+
+/* Elastic Search */
+.sui-search-box {
+  max-width: 640px;
+}
+
+.sui-search-box .sui-search-box__text-input {
+    border-radius: 0;
+}
+
+.sui-search-box .sui-search-box__submit {
+  display: inline-block;
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 700 !important;
+  padding: 0.5rem 2.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0;
+  border-width: 4px !important;
+  border-style: solid !important;
+  text-transform: uppercase;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background: none;
+  background-color: var(--yellow);
+  box-shadow: none;
+  color: var(--black) !important;
+  border-color: var(--yellow) !important;
+}
+
+.sui-search-box .sui-search-box__submit:hover {
+  color: var(--black) !important;
+  background: none;
+  background-color: white !important;
+  border-color: var(--black) !important;
+  box-shadow: none;
+}
+
+.sui-layout .sui-layout-header, .sui-layout .sui-layout-body__inner {
+  padding: 0;
+}
+
+.sui-results-container .sui-result {
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+.sui-result .sui-result__title-link {
+  font-size: 18px;
+  color: var(--dark-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+.sui-result .sui-result__title-link:hover {
+  text-decoration: underline;
+}
+
+.sui-results-container .sui-result em {
+  color: var(--dark-teal);
+
+}
+.sui-results-container .sui-result em::after {
+  background-color: rgba(26, 91, 110, 0.05);
+}
+
+.sui-result .sui-result__header {
+  padding: 0;
+}
+
+.sui-result .sui-result__details {
+  padding: 12px 0px;
+}
+
+.sui-sorting .sui-sorting__label, .sui-layout-sidebar .sui-facet-legend, .sui-layout-sidebar .sui-multi-checkbox-facet {
+  color: var(--black);
+}
+
+.sui-sorting .sui-select__control, .sui-select .sui-select__control {
+  border-radius: 0;
+  border-color: var(--gray);
+  background-color: var(--light-gray);
+}
+
+.sui-layout-sidebar .sui-multi-checkbox-facet__option-count {
+  color: var(--gray);
+}
+
+.ms-auto.btn:first-child {
+  margin-left: auto;
+}
+
+.sui-layout .sui-paging .rc-pagination-item a {
+  color: var(--dark-teal);
+}
