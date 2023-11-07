@@ -2668,6 +2668,15 @@ table.views-table tr td {
     background-image: url('/sites/default/files/cssn/dot-line-bg.jpg');
   }
 
+  .md--p-10 {
+    padding: 2.5rem;
+  }
+
+  .md--px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
   .md--py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -2675,6 +2684,10 @@ table.views-table tr td {
 
   .md--pb-0 {
     padding-bottom: 0px;
+  }
+
+  .md--pb-10 {
+    padding-bottom: 2.5rem;
   }
 
   .md--pe-10 {
