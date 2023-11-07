@@ -67,8 +67,9 @@ ul.sf-menu li > ul li a:hover {
 }
 /* icon menu items */
 ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before, ul.sf-menu .access-menu-item::before {
+  position: absolute;
   display: inline-block;
-  height: 45px;
+  height: 48px;
   width: 14px;
   overflow: visible;
   content: ' ';
@@ -100,7 +101,7 @@ ul.sf-menu .access-menu-item:hover {
   letter-spacing: -1px;
   color: transparent !important;
   width: 54px;
-  height: 100%;
+  height: 48px;
   overflow: hidden;
   padding: 0;
 }
