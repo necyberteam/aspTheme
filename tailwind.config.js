@@ -165,6 +165,7 @@ module.exports = {
     'items-end',
     'justify-between',
     'justify-center',
+    'justify-end',
     'justify-start',
     'last-of-type--me-0',
     'leading-4', 'leading-5', 'leading-9',
