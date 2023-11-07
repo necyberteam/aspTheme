@@ -237,6 +237,7 @@ module.exports = {
     '[&>div.form-item]--w-[46%]',
     '[&>div.form-item]--max-w-56',
     '[&_a]--font-normal',
+    '[&_a]--inline-block',
     '[&_a]--no-underline',
     '[&_a]--px-2',
     '[&_a]--py-1',

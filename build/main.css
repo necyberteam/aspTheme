@@ -2775,6 +2775,9 @@ table.views-table tr td {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+.\[\&_a\]--inline-block a {
+  display: inline-block;
+}
 .\[\&_a\]--whitespace-nowrap a {
   white-space: nowrap;
 }

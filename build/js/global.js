@@ -3064,7 +3064,6 @@ window.addEventListener('resize', function () {
 // on document ready
 document.addEventListener('DOMContentLoaded', function () {
   universal_secondary_menu = document.getElementById('block-accessadditionaluniversalmenu');
-  console.log(universal_secondary_menu);
   handleMobileMenu();
 });
 
