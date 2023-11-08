@@ -23,3 +23,7 @@
 .field--label-inline .field__label::after {
   content: ":";
 }
+
+#views-exposed-form-tags-page-1 #edit-name-op {
+  width: 100%;
+}
