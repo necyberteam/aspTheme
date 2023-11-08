@@ -213,12 +213,13 @@ ul.sf-menu .access-menu-item:hover {
     display: block;
   }
 
-  #block-accesssecondarymenu ul.menu li a, #block-accesssecondarymenu ul.menu li span.nolink {
+  #block-accesssecondarymenu ul.menu li a,
+  #block-accesssecondarymenu ul.menu li span.nolink,
+  .sf-depth-1.menuparent.nolink:hover {
     background-color: var(--dark-teal);
     color: #ffffff;
     padding: 10px 28px;
   }
-
 
   ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before, ul.sf-menu .access-menu-item::before {
     height: 14px;
@@ -278,7 +279,8 @@ ul.sf-menu .access-menu-item:hover {
   #superfish-access-additional-universal-menu-accordion-clone .access-menu-mobile:hover {
     left: 0;
   }
-  #block-accesssecondarymenu ul.menu li span.nolink:hover, #block-accesssecondarymenu ul.menu li a:hover, #block-accesssecondarymenu ul.sf-menu.menu li ul a, #block-accesssecondarymenu a.is-active {
+
+  #block-accesssecondarymenu ul.menu li a:hover, #block-accesssecondarymenu ul.sf-menu.menu li ul a, #block-accesssecondarymenu a.is-active {
     background-color: #ffffff;
     color: var(--dark-teal) !important;
   }
