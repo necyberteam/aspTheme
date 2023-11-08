@@ -48,8 +48,8 @@ button.btn-primary {
 a.btn-primary:hover,
 input.btn-primary:hover,
 button.btn-primary:hover {
-  background-color: white;
-  border-color: var(--black);
+  background-color: white !important;
+  border-color: var(--black) !important;
 }
 .btn-outline-secondary a {
   font-size: 500 !important;
