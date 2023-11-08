@@ -41,7 +41,7 @@ function aspTheme_preprocess_field(&$variables) {
   if ($node->bundle() == 'affinity_group' || $node->bundle() == 'access_news') {
     if ($variables['field_name'] == 'field_tags') {
       foreach ($variables['items'] as $key => $item) {
-        $tag_classes = ['font-normal', 'no-underline', 'px-2', 'py-1', 'hover--border-dark-teal', 'border'];
+        $tag_classes = ['inline-block', 'font-normal', 'no-underline', 'px-2', 'py-1', 'hover--border-dark-teal', 'border'];
         $variables['items'][$key]['content']['#attributes']['class'] = $tag_classes;
       }
     }
