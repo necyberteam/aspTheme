@@ -14,6 +14,13 @@ ul.sf-menu a, ul.sf-menu span.nolink {
   line-height: 28px;
   text-decoration: none;
 }
+
+.region-nav-main .sf-depth-1 a:hover,
+.region-nav-additional .sf-depth-1 a:hover,
+.region-nav-additional .sf-depth-1 span.nolink:hover {
+  background-color: var(--md-teal);
+}
+
 ul.sf-menu li:has(ul li a:hover) a,
 ul.sf-menu li:has(ul li a:hover) span.nolink,
 #block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,
@@ -23,7 +30,7 @@ ul.sf-menu li:has(ul li a:hover) span.nolink,
   color: #ffffff;
 }
 /* Secondary menu */
-#block-accesssecondarymenuul .menu li a,
+#block-accesssecondarymenu ul.menu li a,
 #block-accesssecondarymenu ul.menu li span.nolink {
   color: var(--md-teal);
 }
@@ -227,7 +234,10 @@ ul.sf-menu .access-menu-item:hover {
     margin-top: 6px;
   }
 
-  ul.sf-menu .access-home-menu-item, ul.sf-menu .access-home-menu-item:hover {
+  ul.sf-menu .access-home-menu-item,
+  ul.sf-menu .access-home-menu-item:hover,
+  ul.sf-menu .search-menu-item,
+  ul.sf-menu .search-menu-item:hover {
     width: 100%;
   }
 

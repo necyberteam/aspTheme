@@ -3063,7 +3063,7 @@ window.addEventListener('resize', function () {
 
 // on document ready
 document.addEventListener('DOMContentLoaded', function () {
-  universal_secondary_menu = document.getElementById('block-accessadditionaluniversalmenu');
+  universal_secondary_menu = document.getElementById('block-accessadditionaluniversalmenu-3');
   handleMobileMenu();
 });
 
