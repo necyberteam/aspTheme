@@ -185,6 +185,7 @@ module.exports = {
     'md--flex-row',
     'md--hidden',
     'md--justify-end',
+    'md--mt-10',
     'md--mt-16',
     'md--p-10',
     'md--pb-10',
