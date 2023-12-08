@@ -59,38 +59,46 @@
 %}
 
 {% if label_hidden %}
-	{% if multiple %}
-		<div{{attributes.addClass(classes,'field__items')}}>
-			{% for item in items %}
-        {% set url = item.content['#url'].uri %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
-        </div>
-			{% endfor %}
-		</div>
-	{% else %}
-			{% for item in items %}
-        {% set url = item.content['#url'].uri %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
-        </div>
-			{% endfor %}
-	{% endif %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'field__items') }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass(field_classes) }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, field_classes) }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
 {% else %}
-	<div{{attributes.addClass(classes)}}>
-		<div{{title_attributes.addClass(title_classes)}}>{{ label }}</div>
-		{% if multiple %}
-			<div class="field__items">
-			{% endif %}
-			{% for item in items %}
-        {% set url = item.content['#url'].uri %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
-        </div>
-			{% endfor %}
-			{% if multiple %}
-			</div>
-		{% endif %}
-	</div>
-{% endif %}
+  <div{{ attributes.addClass(classes) }}>
+    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
+    {% if multiple %}
+      <div class="field__items">
+    {% endif %}
+    {% for item in items %}
+{% if item.content['#markup'] == 'Intermediate' %}
+  {%
+set skill = '<img class="object-contain m-0 h-auto" src="https://accessmatch-local.cnctci.lndo.site//themes/contrib/asp-theme/images/icons/SL-medium.png" alt="Beginner, Intermediate">'
 
+  %}
+{% elseif item.content['#markup'] == 'Beginner' %}
+  {%
+    set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-beginner.png" alt="Beginner">'
+  %}
+{% elseif item.content['#markup'] == 'Advanced' %}
+  {%
+    set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-advanced.png" alt="Advanced">'
+  %}
+{% else %}
+  {%
+    set skill = item.content
+  %}
+{% endif %}
+      <div{{ item.attributes.addClass(field_classes) }}>{{ skill|raw }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
