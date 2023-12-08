@@ -103,17 +103,17 @@
 		{# link is in html.html.twig #}
 
 		{% if sidebar_first %}
-			<aside class="layout-sidebar-first mx-auto prose" role="complementary">
+			<aside class="layout-sidebar-first md--mx-auto prose" role="complementary">
 				{{ page.sidebar_first }}
 			</aside>
 		{% endif %}
 
-		<div class="layout-content container prose">
+		<div class="layout-content md--container prose">
 			{{ page.content }}
 		</div>{# /.layout-content #}
 
 		{% if sidebar_second %}
-			<aside class="layout-sidebar-second mx-auto prose" role="complementary">
+			<aside class="layout-sidebar-second md--mx-auto prose" role="complementary">
 				{{ page.sidebar_second }}
 			</aside>
 		{% endif %}
