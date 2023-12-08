@@ -56,30 +56,44 @@
     'w-full',
   ]
 %}
+{%
+  set tag_classes = [
+    'field__item','me-2',
+    'mb-2',
+    '[&_a]--font-normal',
+    '[&_a]--no-underline',
+    '[&_a]--px-2',
+    '[&_a]--py-1',
+    '[&_a]--hover--border-dark-teal',
+    '[&_a]--border'
+  ]
+%}
 
-{% if label_hidden %}
-  {% if multiple %}
-    <div{{ attributes.addClass(classes, 'field__items') }}>
-      {% for item in items %}
-        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
-    {% endfor %}
-  {% endif %}
-{% else %}
-  <div{{ attributes.addClass(classes) }}>
-    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+<div class="flex flex-wrap">
+  {% if label_hidden %}
     {% if multiple %}
-      <div class="field__items">
-    {% endif %}
-    {% for item in items %}
-      <div{{item.attributes.addClass(['field__item','me-2', 'mb-2', '[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</div>
-    {% endfor %}
-    {% if multiple %}
+      <div{{ attributes.addClass(classes, 'field__items') }}>
+        {% for item in items %}
+          <div{{ item.attributes.addClass(tag_classes) }}>{{ item.content }}</div>
+        {% endfor %}
       </div>
+    {% else %}
+      {% for item in items %}
+        <div{{ attributes.addClass(tag_classes) }}>{{ item.content }}</div>
+      {% endfor %}
     {% endif %}
-  </div>
-{% endif %}
+  {% else %}
+    <div{{ attributes.addClass(classes) }}>
+      <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+      {% if multiple %}
+        <div class="field__items">
+      {% endif %}
+      {% for item in items %}
+        <div{{item.attributes.addClass(tag_classes)}}>{{ item.content }}</div>
+      {% endfor %}
+      {% if multiple %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
