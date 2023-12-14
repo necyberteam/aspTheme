@@ -307,7 +307,7 @@ module.exports = {
     'order-1',
     'order-2',
     'order-3',
-    'overflow-x-hidden',
+    'overflow-x-clip',
     'p-0',
     'p-1',
     'p-2',
