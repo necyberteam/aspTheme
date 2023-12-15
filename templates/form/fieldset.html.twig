@@ -28,6 +28,7 @@
     'form-wrapper',
   ]
 %}
+{% if children  %}
 <fieldset{{ attributes.addClass(classes) }}>
   {%
     set legend_span_classes = [
@@ -58,3 +59,4 @@
     {% endif %}
   </div>
 </fieldset>
+{% endif %}
