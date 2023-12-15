@@ -1,12 +1,6 @@
 {% extends "page.html.twig" %}
 
 {% block content %}
-	<main role="main" class="pb-5">
-		<a id="main-content" tabindex="-1" class="hidden"></a>
-
-		<div class="layout-content container prose">
-			{{ page.content }}
-		</div>{# /.layout-content #}
-
-	</main>
+	{% set main_content_classes = "pb-5" %}
+	{{ parent() }}
 {% endblock %}
