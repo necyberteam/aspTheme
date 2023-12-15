@@ -1,26 +1,12 @@
 {% extends "page.html.twig" %}
 
-{% set main_content_classes = "pb-5" %}
-
 {% block content %}
-	<main role="main" class="{{ main_content_classes }}">
+	<main role="main" class="pb-5">
 		<a id="main-content" tabindex="-1" class="hidden"></a>
-		{# link is in html.html.twig #}
-
-		{% if sidebar_first %}
-			<aside class="layout-sidebar-first mx-auto prose" role="complementary">
-				{{ page.sidebar_first }}
-			</aside>
-		{% endif %}
 
 		<div class="layout-content container prose">
 			{{ page.content }}
 		</div>{# /.layout-content #}
 
-		{% if sidebar_second %}
-			<aside class="layout-sidebar-second mx-auto prose" role="complementary">
-				{{ page.sidebar_second }}
-			</aside>
-		{% endif %}
 	</main>
 {% endblock %}
