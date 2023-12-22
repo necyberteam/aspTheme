@@ -24,6 +24,11 @@
   content: ":";
 }
 
+.form-text,
+.form-select {
+  border-color: #ccc !important;
+}
+
 #views-exposed-form-tags-page-1 #edit-name-op {
   width: 100%;
 }
