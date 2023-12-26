@@ -2,71 +2,13 @@ base:
   version: VERSION
   css:
     component:
-      build/components.css:
+      build/css/components.css:
         weight: -10
     theme:
       build/tippy.css: {}
       build/main.css: {}
       build/ckeditor5.css: {}
       //fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,70,400;0,100,400;0,100,600;0,100,800;1,100,400&display=swap: {type: external}
-
-dialog:
-  version: VERSION
-  css:
-    component:
-      css/components/dialog.css:
-        weight: -10
-dropbutton:
-  version: VERSION
-  css:
-    component:
-      css/components/dropbutton.css:
-        weight: -10
-file:
-  version: VERSION
-  css:
-    component:
-      css/components/file.css:
-        weight: -10
-image-widget:
-  version: VERSION
-  css:
-    component:
-      css/components/image-widget.css: {  }
-indented:
-  version: VERSION
-  css:
-    component:
-      css/components/indented.css: {  }
-messages:
-  version: VERSION
-  css:
-    component:
-      css/components/messages.css:
-        weight: -10
-node:
-  version: VERSION
-  css:
-    component:
-      css/components/node.css:
-        weight: -10
-progress:
-  version: VERSION
-  css:
-    component:
-      css/components/progress.css:
-        weight: -10
-search-results:
-  version: VERSION
-  css:
-    component:
-      css/components/search-results.css: {  }
-user:
-  version: VERSION
-  css:
-    component:
-      css/components/user.css:
-        weight: -10
 
 global-scripts:
   version: 1.x

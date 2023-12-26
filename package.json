@@ -4,7 +4,7 @@
     "build": "mix --production && npm run combine-components",
     "dev": "mix",
     "watch": "mix watch",
-    "combine-components": "echo '' > build/components.css && cat css/components/*.css >> build/components.css"
+    "combine-components": "echo '' > build/components.css && cat css/components/*.css >> build/css/components.css"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.6",
