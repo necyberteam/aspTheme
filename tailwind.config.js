@@ -225,6 +225,7 @@ module.exports = {
     'mb-6',
     'mb-10',
     'mb-16',
+    'me-1',
     'me-2',
     'me-3',
     'me-4',
