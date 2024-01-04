@@ -410,6 +410,7 @@ module.exports = {
     '[&_div]--h-full',
     '[&_div]--flex',
     '[&_div]--flex-wrap',
+    '[&_div.label-description]--font-normal',
     '[&>div.form-item]--flex',
     '[&>div.form-item]--flex-col',
     '[&>div.form-item]--max-w-56',
