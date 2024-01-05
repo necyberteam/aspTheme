@@ -1,9 +1,10 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mix --production",
+    "build": "mix --production && npm run combine-components",
     "dev": "mix",
-    "watch": "mix watch"
+    "watch": "mix watch",
+    "combine-components": "echo '' > build/components.css && cat css/components/*.css >> build/css/components.css"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.6",
