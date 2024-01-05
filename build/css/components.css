@@ -16498,3 +16498,1503 @@ ul.tabs {
   color: #a51b00;
   font-weight: bold;
 }
+details>summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none
+}
+summary::after {
+  content: url('/themes/contrib/asp-theme/images/icons/accordion-arrow.gif');
+  position: absolute;
+  right: 1rem;
+  transition: 300ms;
+}
+details[open] summary:after {
+   transform: rotate(-180deg);
+}
+/**
+ * @file
+ * Styles for link buttons and action links.
+ */
+
+.action-links {
+  margin: 1em 0;
+  padding: 0;
+  list-style: none;
+}
+[dir="rtl"] .action-links {
+  /* This is required to win over specificity of [dir="rtl"] ul */
+  margin-right: 0;
+}
+.action-links li {
+  display: inline-block;
+  margin: 0 0.3em;
+}
+.action-links li:first-child {
+  margin-left: 0; /* LTR */
+}
+[dir="rtl"] .action-links li:first-child {
+  margin-right: 0;
+  margin-left: 0.3em;
+}
+.button-action {
+  display: inline-block;
+  padding: 0.2em 0.5em 0.3em;
+  text-decoration: none;
+  line-height: 160%;
+}
+.button-action:before {
+  margin-left: -0.1em; /* LTR */
+  padding-right: 0.2em; /* LTR */
+  content: "+";
+  font-weight: 900;
+}
+[dir="rtl"] .button-action:before {
+  margin-right: -0.1em;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0.2em;
+}
+/**
+ * @file
+ * Styles for breadcrumbs.
+ */
+
+.breadcrumb ol {
+  margin: 0;
+  padding: 0;
+}
+[dir="rtl"] .breadcrumb ol {
+  /* This is required to win over specificity of [dir="rtl"] ol */
+  margin-right: 0;
+}
+.breadcrumb li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* IE8 does not support :not() and :last-child. */
+.breadcrumb li:before {
+  content: " \/ ";
+}
+.breadcrumb li:first-child:before {
+  content: none;
+}
+
+/**
+ * @file
+ * Visual styles for buttons.
+ */
+
+.btn,
+.button,
+a.button,
+.a--btn a {
+  display: inline-block;
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 700 !important;
+  padding: 0.5rem 2.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0;
+  border-width: 4px !important;
+  border-style: solid !important;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  /* background-color: transparent; */
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn:first-child {
+  margin-left: 0;
+}
+.btn:last-child {
+  margin-right: 0;
+}
+.a--btn a,
+.btn a {
+  text-decoration: none !important;
+}
+a.btn-primary,
+input.btn-primary,
+button.btn-primary {
+  color: #232323 !important;
+  background-color: var(--btn-primary) !important;
+  border-color: var(--btn-primary) !important;
+}
+a.btn-primary:hover,
+input.btn-primary:hover,
+button.btn-primary:hover {
+  background-color: white !important;
+  border-color: var(--black) !important;
+}
+.btn-outline-secondary a {
+  font-size: 500 !important;
+  color: var(--btn-secondary) !important;
+}
+
+.btn-outline-secondary:hover a {
+  color: var(--light) !important;
+}
+
+div.btn-md-teal a, a.btn-md-teal, button.btn-md-teal, input.btn-md-teal {
+  color: #fff !important;
+  background-color: var(--md-teal);
+  border: 4px solid var(--md-teal) !important;
+}
+
+div.btn-md-teal a:hover, a.btn-md-teal:hover, button.btn-md-teal:hover, input.btn-md-teal:hover {
+  background-color: var(--dark-teal);
+  border-color: var(--dark-teal) !important;
+}
+
+.more-link {
+  display: flex;
+  margin: 0 auto !important;
+}
+.more-link a {
+  text-decoration: none;
+}
+/**
+ * @file
+ * Inline items.
+ */
+
+.container-inline label:after,
+.container-inline .label:after {
+  content: ":";
+}
+.form-type-radios .container-inline label:after,
+.form-type-checkboxes .container-inline label:after {
+  content: "";
+}
+.form-type-radios .container-inline .form-type-radio,
+.form-type-checkboxes .container-inline .form-type-checkbox {
+  margin: 0 1em;
+}
+.container-inline .form-actions,
+.container-inline.form-actions {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/**
+ * @file
+ * Collapsible details.
+ *
+ * @see collapse.js
+ * @see http://nicolasgallagher.com/css-background-image-hacks/
+ */
+
+details {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+}
+details > .details-wrapper {
+  padding: 0.5em 1.5em;
+}
+/* @todo Regression: The summary of uncollapsible details are no longer
+     vertically aligned with the .details-wrapper in browsers without native
+     details support. */
+summary {
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+}
+/**
+ * @file
+ * Presentational styles for Drupal dialogs.
+ */
+
+.ui-dialog {
+  position: absolute;
+  z-index: 1260;
+  overflow: visible;
+  padding: 0;
+  color: #000;
+  border: solid 1px #ccc;
+  background: #fff;
+}
+
+@media all and (max-width: 48em) { /* 768px */
+  .ui-dialog {
+    width: 92% !important;
+  }
+}
+.ui-dialog .ui-dialog-titlebar {
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #ccc;
+  border-radius: 0;
+  background: #f3f4ee;
+  font-weight: bold;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+  border: 0;
+  background: none;
+}
+.ui-dialog .ui-dialog-buttonpane {
+  margin-top: 0;
+  padding: 0.3em 1em;
+  border-width: 1px 0 0 0;
+  border-color: #ccc;
+  background: #f3f4ee;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  margin: 0;
+  padding: 0;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-button-text-only .ui-button-text {
+  padding: 0;
+}
+
+/* Form action buttons are moved in dialogs. Remove empty space. */
+.ui-dialog .ui-dialog-content .form-actions {
+  margin: 0;
+  padding: 0;
+}
+.ui-dialog .ajax-progress-throbber {
+  position: fixed;
+  z-index: 1000;
+  top: 48.5%;
+  /* Can't do center:50% middle: 50%, so approximate it for a typical window size. */
+  left: 49%;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  opacity: 0.9;
+  border-radius: 7px;
+  background-color: #232323;
+  background-image: url(../../images/icons/loading-small.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.ui-dialog .ajax-progress-throbber .throbber,
+.ui-dialog .ajax-progress-throbber .message {
+  display: none;
+}
+/**
+ * @file
+ * General styles for dropbuttons.
+ */
+
+.js .dropbutton-widget {
+  border: 1px solid #ccc;
+  background-color: white;
+}
+.js .dropbutton-widget:hover {
+  border-color: #b8b8b8;
+}
+.dropbutton .dropbutton-action > * {
+  padding: 0.1em 0.5em;
+  white-space: nowrap;
+}
+.dropbutton .secondary-action {
+  border-top: 1px solid #e8e8e8;
+}
+.dropbutton-multiple .dropbutton {
+  border-right: 1px solid #e8e8e8; /* LTR */
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+  border-right: 0 none;
+  border-left: 1px solid #e8e8e8;
+}
+.dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-right: 0.25em; /* LTR */
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-right: 0;
+  margin-left: 0.25em;
+}
+/**
+ * @file
+ * Visual styles for exposed filters.
+ */
+
+.exposed-filters .filters {
+  float: left; /* LTR */
+  margin-right: 1em; /* LTR */
+}
+[dir="rtl"] .exposed-filters .filters {
+  float: right;
+  margin-right: 0;
+  margin-left: 1em;
+}
+.exposed-filters .form-item {
+  margin: 0 0 0.1em 0;
+  padding: 0;
+}
+.exposed-filters .form-item label {
+  float: left; /* LTR */
+  width: 10em;
+  font-weight: normal;
+}
+[dir="rtl"] .exposed-filters .form-item label {
+  float: right;
+}
+.exposed-filters .form-select {
+  width: 14em;
+}
+/* Current filters */
+.exposed-filters .current-filters {
+  margin-bottom: 1em;
+}
+.exposed-filters .current-filters .placeholder {
+  font-weight: bold;
+  font-style: normal;
+}
+.exposed-filters .additional-filters {
+  float: left; /* LTR */
+  margin-right: 1em; /* LTR */
+}
+[dir="rtl"] .exposed-filters .additional-filters {
+  float: right;
+  margin-right: 0;
+  margin-left: 1em;
+}
+/**
+ * @file
+ * Visual styles for fields.
+ */
+
+.field__label {
+  font-weight: bold;
+}
+.field--label-inline .field__label,
+.field--label-inline .field__items {
+  float: left; /* LTR */
+}
+.field--label-inline .field__label,
+.field--label-inline > .field__item,
+.field--label-inline .field__items {
+  padding-right: 0.5em;
+}
+[dir="rtl"] .field--label-inline .field__label,
+[dir="rtl"] .field--label-inline .field__items {
+  padding-right: 0;
+  padding-left: 0.5em;
+}
+.field--label-inline .field__label::after {
+  content: ":";
+}
+
+.form-text,
+.form-select {
+  border-color: #ccc !important;
+}
+
+#views-exposed-form-tags-page-1 #edit-name-op {
+  width: 100%;
+}
+/**
+ * @file
+ * Default style for file module.
+ */
+
+/* File icons. */
+
+.file {
+  display: inline-block;
+  min-height: 16px;
+  padding-left: 20px; /* LTR */
+  background-repeat: no-repeat;
+  background-position: left center; /* LTR */
+}
+[dir="rtl"] .file {
+  padding-right: 20px;
+  padding-left: inherit;
+  background-position: right center;
+}
+.file--general,
+.file--application-octet-stream {
+  background-image: url(../../images/icons/application-octet-stream.png);
+}
+.file--package-x-generic {
+  background-image: url(../../images/icons/package-x-generic.png);
+}
+.file--x-office-spreadsheet {
+  background-image: url(../../images/icons/x-office-spreadsheet.png);
+}
+.file--x-office-document {
+  background-image: url(../../images/icons/x-office-document.png);
+}
+.file--x-office-presentation {
+  background-image: url(../../images/icons/x-office-presentation.png);
+}
+.file--text-x-script {
+  background-image: url(../../images/icons/text-x-script.png);
+}
+.file--text-html {
+  background-image: url(../../images/icons/text-html.png);
+}
+.file--text-plain {
+  background-image: url(../../images/icons/text-plain.png);
+}
+.file--application-pdf {
+  background-image: url(../../images/icons/application-pdf.png);
+}
+.file--application-x-executable {
+  background-image: url(../../images/icons/application-x-executable.png);
+}
+.file--audio {
+  background-image: url(../../images/icons/audio-x-generic.png);
+}
+.file--video {
+  background-image: url(../../images/icons/video-x-generic.png);
+}
+.file--text {
+  background-image: url(../../images/icons/text-x-generic.png);
+}
+.file--image {
+  background-image: url(../../images/icons/image-x-generic.png);
+}
+/**
+ * @file
+ * Visual styles for form components.
+ */
+
+form .field-multiple-table {
+  margin: 0;
+}
+form .field-multiple-table .field-multiple-drag {
+  width: 30px;
+  padding-right: 0; /* LTR */
+}
+[dir="rtl"] form .field-multiple-table .field-multiple-drag {
+  padding-left: 0;
+}
+form .field-multiple-table .field-multiple-drag .tabledrag-handle {
+  padding-right: 0.5em; /* LTR */
+}
+[dir="rtl"] form .field-multiple-table .field-multiple-drag .tabledrag-handle {
+  padding-right: 0;
+  padding-left: 0.5em;
+}
+form .field-add-more-submit {
+  margin: 0.5em 0 0;
+}
+
+/**
+ * Markup generated by Form API.
+ */
+.form-item,
+.form-actions {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+tr.odd .form-item,
+tr.even .form-item {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.form-composite > .fieldset-wrapper > .description,
+.form-item .description {
+  font-size: 0.85em;
+}
+label.option {
+  display: inline;
+  font-weight: normal;
+}
+.form-composite > legend,
+.label {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: bold;
+}
+.form-checkboxes .form-item,
+.form-radios .form-item {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 2.4em; /* LTR */
+}
+[dir="rtl"] .form-type-radio .description,
+[dir="rtl"] .form-type-checkbox .description {
+  margin-right: 2.4em;
+  margin-left: 0;
+}
+.marker {
+  color: #e00;
+}
+.form-required:after {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 0.3em;
+  content: "";
+  vertical-align: super;
+  /* Use a background image to prevent screen readers from announcing the text. */
+  background-image: url(../../images/icons/required.svg);
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+}
+abbr.tabledrag-changed,
+abbr.ajax-changed {
+  border-bottom: none;
+}
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 2px solid red;
+}
+
+input {
+  max-width: 100%;
+}
+/* Inline error messages. */
+.form-item--error-message:before {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  content: "";
+  vertical-align: sub;
+  background: url(../../images/icons/error.svg) no-repeat;
+  background-size: contain;
+}
+/**
+ * @file
+ * Visual styles for icons.
+ */
+
+.icon-help {
+  padding: 1px 0 1px 20px; /* LTR */
+  background: url(../../images/icons/help.png) 0 50% no-repeat; /* LTR */
+}
+[dir="rtl"] .icon-help {
+  padding: 1px 20px 1px 0;
+  background-position: 100% 50%;
+}
+.feed-icon {
+  display: block;
+  overflow: hidden;
+  width: 16px;
+  height: 16px;
+  text-indent: -9999px;
+  background: url(../../images/icons/feed.svg) no-repeat;
+}
+/**
+ * @file
+ * Image upload widget.
+ */
+
+.image-preview {
+  float: left; /* LTR */
+  padding: 0 10px 10px 0; /* LTR */
+}
+[dir="rtl"] .image-preview {
+  float: right;
+  padding: 0 0 10px 10px;
+}
+.image-widget-data {
+  float: left; /* LTR */
+}
+[dir="rtl"] .image-widget-data {
+  float: right;
+}
+.image-widget-data .text-field {
+  width: auto;
+}
+/**
+ * @file
+ * Basic styling for comment module.
+ */
+
+/**
+ * Indent threaded comments.
+ */
+.indented {
+  margin-left: 25px; /* LTR */
+}
+[dir="rtl"] .indented {
+  margin-right: 25px;
+  margin-left: 0;
+}
+/**
+ * @file
+ * Visual styles for inline forms.
+ */
+
+.form--inline .form-item {
+  float: left; /* LTR */
+  margin-right: 0.5em; /* LTR */
+  max-width: 100%;
+}
+[dir="rtl"] .form--inline .form-item {
+  float: right;
+  margin-right: 0;
+  margin-left: 0.5em;
+}
+/* This is required to win over specificity of [dir="rtl"] .form--inline .form-item */
+[dir="rtl"] .views-filterable-options-controls .form-item {
+  margin-right: 2%;
+}
+.form--inline .form-item-separator {
+  margin-top: 2.3em;
+  margin-right: 1em; /* LTR */
+  margin-left: 0.5em; /* LTR */
+}
+[dir="rtl"] .form--inline .form-item-separator {
+  margin-right: 0.5em;
+  margin-left: 1em;
+}
+.form--inline .form-actions {
+  clear: left; /* LTR */
+}
+[dir="rtl"] .form--inline .form-actions {
+  clear: right;
+}
+/**
+ * @file
+ * Visual styles for item list.
+ */
+
+.item-list .title {
+  font-weight: bold;
+}
+.item-list ul {
+  margin: 0 0 0.75em 0;
+  padding: 0;
+}
+.item-list li {
+  margin: 0 0 0.25em 1.5em; /* LTR */
+  padding: 0;
+}
+[dir="rtl"] .item-list li {
+  margin: 0 1.5em 0.25em 0;
+}
+
+/**
+ * Comma separated lists.
+ */
+.item-list--comma-list {
+  display: inline;
+}
+.item-list--comma-list .item-list__comma-list,
+.item-list__comma-list li,
+[dir="rtl"] .item-list--comma-list .item-list__comma-list,
+[dir="rtl"] .item-list__comma-list li {
+  margin: 0;
+}
+/**
+ * @file
+ * Style another element as a link.
+ */
+
+button.link {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  font-size: 1em;
+}
+label button.link {
+  font-weight: bold;
+}
+/**
+ * @file
+ * Visual styles for links.
+ */
+
+ul.inline,
+ul.links.inline {
+  display: inline;
+  padding-left: 0; /* LTR */
+}
+[dir="rtl"] ul.inline,
+[dir="rtl"] ul.links.inline {
+  padding-right: 0;
+  padding-left: 15px;
+}
+ul.inline li {
+  display: inline;
+  padding: 0 0.5em;
+  list-style-type: none;
+}
+ul.links a.is-active {
+  color: #000;
+}
+/**
+ * @file
+ * Visual styles for menu.
+ */
+
+.block-superfish {
+  height: 100%;
+}
+ul.sf-menu.menu, ul.sf-menu.menu ul, ul.sf-menu.menu li {
+  height: 100%;
+}
+ul.sf-menu a, ul.sf-menu span.nolink {
+  padding: 10px 20px;
+  line-height: 28px;
+  text-decoration: none;
+}
+
+.region-nav-main .sf-depth-1 a:hover,
+.region-nav-additional .sf-depth-1 a:hover,
+.region-nav-additional .sf-depth-1 span.nolink:hover {
+  background-color: var(--md-teal);
+}
+
+ul.sf-menu li:has(ul li a:hover) a,
+ul.sf-menu li:has(ul li a:hover) span.nolink,
+#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,
+#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) span.nolink
+{
+  background-color: var(--md-teal);
+  color: #ffffff;
+}
+/* Secondary menu */
+#block-accesssecondarymenu ul.menu li a,
+#block-accesssecondarymenu ul.menu li span.nolink {
+  color: var(--md-teal);
+}
+#block-accesssecondarymenu ul.menu li a,
+#block-accesssecondarymenu ul.menu li span.nolink {
+  color: var(--md-teal);
+}
+#block-accesssecondarymenu ul.menu li span.nolink:hover,
+#block-accesssecondarymenu ul.menu li a:hover,
+#block-accesssecondarymenu ul.sf-menu.menu li ul a,
+#block-accesssecondarymenu a.is-active {
+  background-color: var(--md-teal);
+  color: #ffffff !important;
+}
+/* submenus */
+ul.sf-menu.menu ul {
+  height: auto;
+  background-color: var(--md-teal);
+  box-shadow: none;
+}
+@media only screen and (min-width: 769px) {
+  ul.sf-menu li > ul {
+    top: 48px !important;
+  }
+}
+ul.sf-menu li > ul li a {
+  background: var(--md-teal);
+  color: white;
+  text-transform: none;
+  line-height: 20px;
+  padding: 8px 20px;
+}
+ul.sf-menu li > ul li:first-of-type a {
+  margin-top: 4px;
+}
+ul.sf-menu li > ul li:last-of-type a {
+  margin-bottom: 4px;
+}
+ul.sf-menu li > ul li a:hover {
+  text-decoration: underline;
+}
+/* icon menu items */
+ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before, ul.sf-menu .access-menu-item::before {
+  position: absolute;
+  display: inline-block;
+  height: 48px;
+  width: 14px;
+  overflow: visible;
+  content: ' ';
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  margin-left: 20px;
+}
+
+ul.sf-menu .search-menu-item::before {
+  background-image: url("data:image/svg+xml,%3Csvg version='1.1' class='universal-navbar__search-icon' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='18' height='18' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100; fill: %23ffffff;' xml:space='preserve'%3E%3Cg%3E%3Cpath class='st0' d='M98.22,92.72l-5.48,5.47c-1.8,1.82-4.74,1.82-6.55,0L66.9,78.9c-0.87-0.87-1.35-2.05-1.35-3.29v-3.15 c-6.83,5.34-15.42,8.51-24.76,8.51c-22.23,0-40.24-18.01-40.24-40.24S18.55,0.49,40.78,0.49S81.02,18.5,81.02,40.73 c0,9.34-3.18,17.94-8.51,24.76h3.15c1.24,0,2.42,0.48,3.29,1.35l19.29,19.29C100.03,87.95,100.03,90.89,98.22,92.72z M65.54,40.73 c0-13.7-11.08-24.76-24.76-24.76c-13.7,0-24.76,11.08-24.76,24.76c0,13.7,11.08,24.76,24.76,24.76 C54.47,65.49,65.54,54.41,65.54,40.73z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+}
+
+ul.sf-menu .access-home-menu-item::before {
+  background-image: url("data: image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' fill='%23ffffff' viewBox='0 0 576 512' %3E%3Cpath d='M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z' /%3E%3C/svg%3E");
+}
+
+ul.sf-menu .access-menu-item::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' fill='%23ffffff' viewBox='0 0 448 512'%3E%3C!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath d='M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z'/%3E%3C/svg%3E");
+}
+
+ul.sf-menu .search-menu-item,
+ul.sf-menu .search-menu-item:hover,
+ul.sf-menu .access-home-menu-item,
+ul.sf-menu .access-home-menu-item:hover,
+ul.sf-menu .access-menu-item.nolink,
+ul.sf-menu .access-menu-item:hover {
+  font-size: 1px !important;
+  letter-spacing: -1px;
+  color: transparent !important;
+  width: 54px;
+  height: 48px;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* logo */
+.navbar-brand img {
+  height: 79px;
+  margin: 50px 0px;
+}
+
+/* mobile menus */
+@media only screen and (max-width: 768px) {
+  .region-nav-main, .region-sub-nav {
+    width: 100%;
+  }
+
+  #block-accessuniversalnavmenu {
+    position: relative;
+    z-index: 1000;
+  }
+
+  .block-superfishaccess-universal-nav-menu ul.sf-menu.menu ul {
+    background-color: var(--dark-teal);
+  }
+
+  .block-superfishaccess-secondary-menu ul.sf-menu.menu ul {
+    background-color: #ffffff;
+  }
+
+  #superfish-access-universal-nav-menu-toggle {
+    margin-top: 10px;
+  }
+
+  #superfish-access-secondary-menu-toggle {
+    margin: 6px 0;
+  }
+
+  .block-superfishaccess-universal-nav-menu .sf-accordion-toggle,
+  .block-superfishaccess-secondary-menu .sf-accordion-toggle {
+    width: 100%;
+    padding-left: 28px;
+  }
+
+  #superfish-access-universal-nav-menu-toggle,
+  #superfish-access-secondary-menu-toggle,
+  #block-accesssecondarymenu .menuparent span,
+  #block-accesssecondarymenu .sf-depth-1.menuparent > a  {
+    position: relative;
+    display: block;
+  }
+
+  #superfish-access-universal-nav-menu-toggle::after,
+  #superfish-access-secondary-menu-toggle::after,
+  #block-accesssecondarymenu .menuparent span::after,
+  #block-accesssecondarymenu .sf-depth-1.menuparent > a::after {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    right: 26px;
+    position: absolute;
+    top: 0;
+    transition: 300ms;
+    transform-origin: center 10px;
+  }
+
+  #superfish-access-universal-nav-menu-toggle::after {
+    content: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-caret-down' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='caret-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' data-fa-i2svg=''%3E%3Cpath fill='%23ffffff' d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'%3E%3C/path%3E%3C/svg%3E");
+  }
+
+  #superfish-access-secondary-menu-toggle {
+    color: var(--dark-teal);
+  }
+
+  #superfish-access-secondary-menu-toggle::after {
+    content: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-caret-down' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='caret-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' data-fa-i2svg=''%3E%3Cpath fill='%231A5B6E' d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'%3E%3C/path%3E%3C/svg%3E");
+  }
+
+  #block-accesssecondarymenu .menuparent span::after,
+  #block-accesssecondarymenu .sf-depth-1.menuparent > a::after {
+      content: url("data:image/svg+xml,%3Csvg class='svg-inline--fa fa-caret-down' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='caret-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' data-fa-i2svg=''%3E%3Cpath fill='%23ffffff' d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'%3E%3C/path%3E%3C/svg%3E");
+  }
+
+  #block-accesssecondarymenu .menuparent span::after,
+  #block-accesssecondarymenu .sf-depth-1.menuparent > a::after {
+    top: 12px;
+    right: 26px;
+  }
+  #superfish-access-universal-nav-menu-toggle.sf-expanded::after,
+  #superfish-access-secondary-menu-toggle.sf-expanded::after {
+    transform: rotate(180deg);
+  }
+  li .menuparent .fa-caret-down {
+    transition: 300ms;
+    transform-origin: center 8px;
+  }
+  #block-accesssecondarymenu .menuparent span::after,
+  #block-accesssecondarymenu .sf-depth-1.menuparent > a::after {
+    transition: 300ms;
+    transform-origin: center 10px;
+  }
+
+  li.sf-expanded .menuparent .fa-caret-down,
+  #block-accesssecondarymenu .menuparent.sf-expanded span::after,
+  #block-accesssecondarymenu .sf-depth-1.menuparent.sf-expanded > a::after {
+    transform: rotate(180deg);
+  }
+
+  ul.sf-menu .sf-sub-indicator::after {
+    display: block;
+  }
+
+  #block-accesssecondarymenu ul.menu li a,
+  #block-accesssecondarymenu ul.menu li span.nolink,
+  .sf-depth-1.menuparent.nolink:hover {
+    background-color: var(--dark-teal);
+    color: #ffffff;
+    padding: 10px 28px;
+  }
+
+  ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before, ul.sf-menu .access-menu-item::before {
+    height: 14px;
+    margin-left: 0px;
+    margin-top: 6px;
+  }
+
+  ul.sf-menu .access-home-menu-item,
+  ul.sf-menu .access-home-menu-item:hover,
+  ul.sf-menu .search-menu-item,
+  ul.sf-menu .search-menu-item:hover {
+    width: 100%;
+  }
+
+  ul.sf-menu li > ul li a {
+    background-color: var(--dark-teal);
+  }
+
+  ul.sf-menu.sf-accordion li a {
+    padding: 10px 28px;
+    line-height: 20px;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li {
+    border-bottom: 1px solid var(--md-teal);
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone >.menuparent span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li>a,
+  #superfish-access-additional-universal-menu-accordion-clone li>.menuparent {
+    padding: 11px 28px;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li.sf-depth-2 {
+    margin-left: 0px;
+    list-style: none;
+    background-color: #fff;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li.sf-depth-2 a {
+    color: var(--dark-teal);
+    background-color: #ffffff;
+    text-decoration: none;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone li.sf-depth-2 a:hover {
+    text-decoration: underline;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone .access-menu-mobile {
+    position: relative;
+    top: 0;
+  }
+
+  #superfish-access-additional-universal-menu-accordion-clone .access-menu-mobile:hover {
+    left: 0;
+  }
+
+  #block-accesssecondarymenu ul.menu li a:hover, #block-accesssecondarymenu ul.sf-menu.menu li ul a, #block-accesssecondarymenu a.is-active {
+    background-color: #ffffff;
+    color: var(--dark-teal) !important;
+  }
+
+  #superfish-access-secondary-menu-accordion .sf-expanded li {
+    border-top: none;
+  }
+  #superfish-access-secondary-menu-accordion.sf-expanded li ~ li,
+  #superfish-access-secondary-menu-accordion li.sf-depth-1 {
+    border-top: 1px solid var(--md-teal);
+  }
+}
+/**
+ * @file
+ * Styles for system messages.
+ */
+
+.messages {
+  padding: 15px 20px 15px 35px; /* LTR */
+  word-wrap: break-word;
+  background: no-repeat 10px 17px;  /* LTR */
+  overflow-wrap: break-word;
+  margin-bottom: 20px;
+}
+[dir="rtl"] .messages {
+  padding-right: 35px;
+  padding-left: 20px;
+  text-align: right;
+  background-position: right 10px top 17px;
+}
+.messages + .messages {
+  margin-top: 1.538em;
+}
+.messages__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.messages__item + .messages__item {
+  margin-top: 0.769em;
+}
+.messages--status {
+  color: #3E7540;
+  background-color: #D4EDDA;
+  box-shadow: -8px 0 0 #3E7540; /* LTR */
+}
+[dir="rtl"] .messages--status {
+  margin-left: 0;
+  box-shadow: 8px 0 0 #77b259;
+}
+.messages--warning {
+  color: #004085;
+  background-color: #CCE5FF;
+  box-shadow: -8px 0 0 #004085; /* LTR */
+}
+[dir="rtl"] .messages--warning {
+  box-shadow: 8px 0 0 #004085;
+}
+.messages--error {
+  color: #900000;
+  background-color: #F4E6E6;
+  box-shadow: -8px 0 0 #900000; /* LTR */
+}
+[dir="rtl"] .messages--error {
+  box-shadow: 8px 0 0 #900000;
+}
+.messages--error p.error {
+  color: #900000;
+}
+/**
+ * @file
+ * Markup generated by #type 'more_link'.
+ */
+
+.more-link {
+  display: block;
+  text-align: right; /* LTR */
+}
+[dir="rtl"] .more-link {
+  text-align: left;
+}
+/**
+ * @file
+ * Visual styles for nodes.
+ */
+
+.node--unpublished {
+  background-color: #fff4f4;
+}
+/**
+ * @file
+ * Visual styles for pager.
+ */
+
+.pager__items {
+  clear: both;
+  text-align: center;
+}
+.pager__item {
+  display: inline;
+  padding: 0.5em;
+}
+.pager__item.is-active {
+  font-weight: bold;
+}
+/**
+ * @file
+ * Visual styles for progress bar.
+ *
+ * @see progress.js
+ */
+
+.progress__track {
+  border-color: #b3b3b3;
+  border-radius: 10em;
+  background-color: #f2f1eb;
+  background-image: linear-gradient(#e7e7df, #f0f0f0);
+  box-shadow: inset 0 1px 3px hsla(0, 0%, 0%, 0.16);
+}
+.progress__bar {
+  height: 16px;
+  margin-top: -1px;
+  margin-left: -1px; /* LTR */
+  padding: 0 1px;
+  -webkit-transition: width 0.5s ease-out;
+  transition: width 0.5s ease-out;
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  border: 1px #07629a solid;
+  border-radius: 10em;
+  background: #057ec9;
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)),
+    linear-gradient(to right bottom, #0094f0 0%, #0094f0 25%, #007ecc 25%, #007ecc 50%, #0094f0 50%, #0094f0 75%, #0094f0 100%);
+  background-size: 40px 40px;
+}
+[dir="rtl"] .progress__bar {
+  margin-right: -1px;
+  margin-left: 0;
+  -webkit-animation-direction: reverse;
+  -moz-animation-direction: reverse;
+  animation-direction: reverse;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .progress__bar {
+    -webkit-transition: none;
+    transition: none;
+    -webkit-animation: none;
+    -moz-animation: none;
+  }
+}
+
+/**
+ * Progress bar animations.
+ */
+@keyframes animate-stripes {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 0 0, -80px 0; }
+}
+/**
+ * @file
+ * Stylesheet for results generated by the Search module.
+ */
+
+.search-results {
+  list-style: none;
+}
+
+/* Elastic Search */
+.sui-search-box {
+  max-width: 640px;
+}
+
+.sui-search-box .sui-search-box__text-input {
+    border-radius: 0;
+}
+
+.sui-search-box .sui-search-box__submit {
+  display: inline-block;
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 700 !important;
+  padding: 0.5rem 2.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0;
+  border-width: 4px !important;
+  border-style: solid !important;
+  text-transform: uppercase;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background: none;
+  background-color: var(--yellow);
+  box-shadow: none;
+  color: var(--black) !important;
+  border-color: var(--yellow) !important;
+}
+
+.sui-search-box .sui-search-box__submit:hover {
+  color: var(--black) !important;
+  background: none;
+  background-color: white !important;
+  border-color: var(--black) !important;
+  box-shadow: none;
+}
+
+.sui-layout .sui-layout-header, .sui-layout .sui-layout-body__inner {
+  padding: 0;
+}
+
+.sui-results-container .sui-result {
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+.sui-result .sui-result__title-link {
+  font-size: 18px;
+  color: var(--dark-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+.sui-result .sui-result__title-link:hover {
+  text-decoration: underline;
+}
+
+.sui-results-container .sui-result em {
+  color: var(--dark-teal);
+
+}
+.sui-results-container .sui-result em::after {
+  background-color: rgba(26, 91, 110, 0.05);
+}
+
+.sui-result .sui-result__header {
+  padding: 0;
+}
+
+.sui-result .sui-result__details {
+  padding: 12px 0px;
+}
+
+.sui-sorting .sui-sorting__label, .sui-layout-sidebar .sui-facet-legend, .sui-layout-sidebar .sui-multi-checkbox-facet {
+  color: var(--black);
+}
+
+.sui-sorting .sui-select__control, .sui-select .sui-select__control {
+  border-radius: 0;
+  border-color: var(--gray);
+  background-color: var(--light-gray);
+}
+
+.sui-layout-sidebar .sui-multi-checkbox-facet__option-count {
+  color: var(--gray);
+}
+
+.ms-auto.btn:first-child {
+  margin-left: auto;
+}
+
+.sui-layout .sui-paging .rc-pagination-item a {
+  color: var(--dark-teal);
+}
+/**
+ * @file
+ * Visual styles for table drag.
+ */
+
+tr.drag {
+  background-color: #fffff0;
+}
+tr.drag-previous {
+  background-color: #ffd;
+}
+body div.tabledrag-changed-warning {
+  margin-bottom: 0.5em;
+}
+/**
+ * @file
+ * Table select behavior.
+ *
+ * @see tableselect.js
+ */
+
+tr.selected td {
+  background: #ffc;
+}
+td.checkbox,
+th.checkbox {
+  text-align: center;
+}
+[dir="rtl"] td.checkbox,
+[dir="rtl"] th.checkbox {
+  /* This is required to win over specificity of [dir="rtl"] td */
+  text-align: center;
+}
+/**
+ * @file
+ * Table sort indicator.
+ */
+
+th.is-active img {
+  display: inline;
+}
+td.is-active {
+  background-color: #ddd;
+}
+/**
+ * @file
+ * Visual styles for tabs.
+ */
+
+div.tabs {
+  margin: 1em 0;
+}
+ul.tabs {
+  margin: 0 0 0.5em;
+  padding: 0;
+  list-style: none;
+}
+.tabs > li {
+  display: inline-block;
+  margin-right: 0.3em; /* LTR */
+}
+[dir="rtl"] .tabs > li {
+  margin-right: 0;
+  margin-left: 0.3em;
+}
+.tabs a {
+  display: block;
+  padding: 0.2em 1em;
+  text-decoration: none;
+}
+.tabs a.is-active {
+  background-color: #eee;
+}
+.tabs a:focus,
+.tabs a:hover {
+  background-color: #f5f5f5;
+}
+/**
+ * @file
+ * Visual styles for a resizable textarea.
+ */
+
+.form-textarea-wrapper textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+/*
+ * @file
+ * Provides the layout styles for two-column layout section.
+ */
+
+.layout--twocol-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layout--twocol-section > .layout__region {
+  flex: 0 1 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .layout--twocol-section.layout--twocol-section--50-50 > .layout__region--first,
+  .layout--twocol-section.layout--twocol-section--50-50 > .layout__region--second {
+    flex: 0 1 50%;
+  }
+
+  .layout--twocol-section.layout--twocol-section--33-67 > .layout__region--first,
+  .layout--twocol-section.layout--twocol-section--67-33 > .layout__region--second {
+    flex: 0 1 33%;
+  }
+
+  .layout--twocol-section.layout--twocol-section--33-67 > .layout__region--second,
+  .layout--twocol-section.layout--twocol-section--67-33 > .layout__region--first {
+    flex: 0 1 66%;
+  }
+
+  .layout--twocol-section.layout--twocol-section--25-75 > .layout__region--first,
+  .layout--twocol-section.layout--twocol-section--75-25 > .layout__region--second {
+    flex: 0 1 25%;
+    max-width: 25%;
+  }
+
+  .layout--twocol-section.layout--twocol-section--25-75 > .layout__region--second,
+  .layout--twocol-section.layout--twocol-section--75-25 > .layout__region--first {
+    flex: 0 1 75%;
+  }
+}
+/**
+ * @file
+ * Styles for modal windows.
+ */
+
+.ui-dialog--narrow {
+  max-width: 500px;
+}
+
+@media screen and (max-width: 600px) {
+  .ui-dialog--narrow {
+    min-width: 95%;
+    max-width: 95%;
+  }
+}
+/**
+ * @file
+ * Theme styling for user module.
+ */
+
+/* Visual styling for the Password strength indicator */
+.password-strength__meter {
+  margin-top: 0.5em;
+  background-color: #ebeae4;
+}
+.password-strength__indicator {
+  -webkit-transition: width 0.5s ease-out;
+  transition: width 0.5s ease-out;
+  background-color: #77b259;
+}
+.password-strength__indicator.is-weak {
+  background-color: #e62600;
+}
+.password-strength__indicator.is-fair {
+  background-color: #e09600;
+}
+.password-strength__indicator.is-good {
+  background-color: #0074bd;
+}
+.password-strength__indicator.is-strong {
+  background-color: #77b259;
+}
+
+.password-confirm,
+.password-field,
+.password-strength,
+.password-confirm-match,
+.password-confirm-message {
+  width: 55%;
+}
+
+.password-suggestions {
+  max-width: 34.7em;
+  margin: 0.7em 0;
+  padding: 0.2em 0.5em;
+  border: 1px solid #b4b4b4;
+}
+.password-suggestions ul {
+  margin-bottom: 0;
+}
+
+.confirm-parent,
+.password-parent {
+  clear: left; /* LTR */
+  overflow: hidden;
+  max-width: 33em;
+  margin: 0;
+}
+[dir="rtl"] .confirm-parent,
+[dir="rtl"] .password-parent {
+  clear: right;
+}
+
+/* Styling for the status indicator of the passwords match test.  */
+.password-confirm .ok {
+  color: #325e1c;
+  font-weight: bold;
+}
+.password-confirm .error {
+  color: #a51b00;
+  font-weight: bold;
+}
