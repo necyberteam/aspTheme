@@ -330,6 +330,7 @@ module.exports = {
     'ps-0',
     'ps-2.5',
     'ps-5',
+    'pt-0',
     'pt-4',
     'pt-10',
     'pt-20',
