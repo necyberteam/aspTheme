@@ -123,3 +123,7 @@ table.views-table tr td {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
 }
+/* override recurring event styles */
+#field-inheritance--wrapper {
+  display:none;
+}
