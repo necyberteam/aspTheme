@@ -78,7 +78,7 @@
 	{% endif %}
 {% else %}
 	<div{{attributes.addClass(classes)}}>
-		<div{{title_attributes.addClass(title_classes)}}>{{ label }}</div>
+		<h3{{title_attributes.addClass(title_classes)}}>{{ label }}</h3>
 		{% if multiple %}
 			<div class="field__items">
 			{% endif %}
