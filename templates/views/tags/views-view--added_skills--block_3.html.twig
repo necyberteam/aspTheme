@@ -63,8 +63,23 @@
 
   {% if rows %}
     <div class="flex flex-wrap view-content">
-      {{ rows }}
+      {# show 5 tags with + x more following#}
+      {% set output = '' %}
+      {% for count,item in view.result | slice(0,5) %}
+        {% set tag = item._entity.label|trim|lower|replace({' ':'-'}) %}
+        {% set tagu = tag|e('url') %}
+	      {% set output = output
+          ~ '<div class="[&_a]--border [&_a]--hover--border-dark-teal mb-2 me-2 [&_a]--font-normal [&_a]--no-underline [&_a]--px-2 [&_a]--py-1">
+            <a href="/tags/' ~ tagu ~ '">' ~ tag ~ '</a></div>'
+        %}
+      {% endfor %}
+      {{ output|raw -}}
+
+      {% if view.result|length > 5 %}
+	      <span>+{{ view.result|length - 5 }} more tags</span>
+      {% endif %}
     </div>
+
   {% elseif empty %}
     <div class="view-empty">
       {{ empty }}
