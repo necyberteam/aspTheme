@@ -142,6 +142,7 @@ module.exports = {
     'border-orange',
     'border-spacing-0',
     'border-t-0',
+    'border-t-4',
     'border-x-0',
     'border-yellow',
     'bottom-0',
