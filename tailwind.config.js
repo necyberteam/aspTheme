@@ -404,6 +404,7 @@ module.exports = {
     '[&>*]--px-2',
     '[&>*]--py-1',
     '[&>*]--text-white',
+    '[&_a]--block',
     '[&_a]--border',
     '[&_a]--font-bold',
     '[&_a]--font-normal',
