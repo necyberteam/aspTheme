@@ -208,6 +208,14 @@ summary {
   padding: 0.2em 0.5em;
   cursor: pointer;
 }
+
+details.search-ci-links summary button {
+  display:none;
+}
+
+details.search-ci-links summary:hover button {
+  display:block;
+}
 /**
  * @file
  * Presentational styles for Drupal dialogs.
