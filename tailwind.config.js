@@ -381,7 +381,7 @@ module.exports = {
     'text-[32px]',
     'top-0',
     'top-1.5',
-    'top-3',
+    'top-4',
     'top-10',
     'top-1/4',
     'underline',
