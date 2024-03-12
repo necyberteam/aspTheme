@@ -209,11 +209,11 @@ summary {
   cursor: pointer;
 }
 
-details.search-ci-links summary button {
+button.copyclip:has(+ details.search-ci-links summary) {
   display:none;
 }
 
-details.search-ci-links summary:hover button {
+button.copyclip:has(:hover, + details.search-ci-links summary:hover) {
   display:block;
 }
 /**

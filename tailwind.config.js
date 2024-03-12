@@ -404,6 +404,7 @@ module.exports = {
     'w-full',
     'w-max',
     'whitespace-nowrap',
+    'z-10',
     '[&>*]--border',
     '[&>*]--border-black',
     '[&>*]--border-solid',
