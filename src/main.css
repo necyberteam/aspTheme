@@ -127,3 +127,7 @@ table.views-table tr td {
 #field-inheritance--wrapper {
   display:none;
 }
+
+.font-condensed {
+  font-stretch: condensed;
+}

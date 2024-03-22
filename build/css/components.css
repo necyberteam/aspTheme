@@ -880,13 +880,51 @@ ul.sf-menu .access-menu-item:hover {
 }
 
 /* logo */
-.navbar-brand img {
+/* .navbar-brand img {
   height: 79px;
   margin: 50px 0px;
+} */
+.navbar-brand {
+  padding: 50px 0px;
+}
+.nsf-logo {
+  width: 82px;
+  height: 82px;
+  margin-right: 20px;
+}
+.navbar-brand .divider {
+  width: 2px;
+  height: 70px;
+  margin-top: 6px;
+}
+.site-logo {
+  width: 253px;
+  height: 75px;
+  margin-left: 23px;
+  margin-top: 22px;
 }
 
 /* mobile menus */
 @media only screen and (max-width: 768px) {
+  .navbar-brand {
+  padding: 25px 0px 38px 0px;
+}
+.nsf-logo {
+  width: 49px;
+  height: 49px;
+  margin-right: 13px;
+}
+.navbar-brand .divider {
+  width: 1px;
+  height: 41px;
+  margin-top: 4px;
+}
+.site-logo {
+  width: 152px;
+  height: 45px;
+  margin-left: 14px;
+  margin-top: 13px;
+}
   .region-nav-main, .region-sub-nav {
     width: 100%;
   }
