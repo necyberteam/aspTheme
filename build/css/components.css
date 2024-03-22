@@ -208,6 +208,14 @@ summary {
   padding: 0.2em 0.5em;
   cursor: pointer;
 }
+
+button.copyclip:has(+ details.search-ci-links summary) {
+  display:none;
+}
+
+button.copyclip:has(:hover, + details.search-ci-links summary:hover) {
+  display:block;
+}
 /**
  * @file
  * Presentational styles for Drupal dialogs.
@@ -738,6 +746,23 @@ ul.inline li {
 }
 ul.links a.is-active {
   color: #000;
+}
+
+.list-image-link::before {
+  display: inline-block;
+  content: '';
+  height: 32px;
+  width: 32px;
+  background-image: url('/modules/custom/access/modules/access_cilink/img/link.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.list-image-link {
+  display: flex;
+  align-items: center;
+}
+.list-image-link a {
+  padding-left: 8px;
 }
 /**
  * @file

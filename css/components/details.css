@@ -21,3 +21,11 @@ summary {
   padding: 0.2em 0.5em;
   cursor: pointer;
 }
+
+button.copyclip:has(+ details.search-ci-links summary) {
+  display:none;
+}
+
+button.copyclip:has(:hover, + details.search-ci-links summary:hover) {
+  display:block;
+}
