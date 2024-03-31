@@ -426,6 +426,8 @@ module.exports = {
     '[&_a]--hover--border-dark-teal',
     '[&_a]--inline-block',
     '[&_a]--no-underline',
+    '[&_a]--mb-2',
+    '[&_a]--me-2',
     '[&_a]--mx-2',
     '[&_a]--my-1',
     '[&_a]--px-2',
@@ -454,6 +456,7 @@ module.exports = {
     '[&_label]--font-bold',
     '[&_select]--w-full',
     '-mx-50%',
+    '[&_td]--p-5',
   ],
   // Drupal filters out special characters
   separator: '--',
