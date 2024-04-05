@@ -457,6 +457,7 @@ module.exports = {
     '[&_label]--font-bold',
     '[&_select]--w-full',
     '[&_ul]--list-none',
+    '[&_ul]--mb-0',
     '[&_li]--inline-block',
     '[&_li]--ms-0',
     '[&_li]--me-1',
