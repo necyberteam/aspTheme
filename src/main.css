@@ -143,3 +143,12 @@ table.views-table tr td {
 .access-break-links a {
   word-break:break-all;
 }
+
+.stretched-link::after {
+  content: "";
+  @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
+}
+.layout-content .block-views-exposed-filter-blockcssn-directory-page-1 .form-item-search-api-fulltext,
+.region-sidebar-first .form-item-items-per-page {
+  @apply hidden;
+}
