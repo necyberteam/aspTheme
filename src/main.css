@@ -137,7 +137,8 @@ table.views-table tr td {
   @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
 }
 .layout-content .block-views-exposed-filter-blockcssn-directory-page-1 .form-item-search-api-fulltext,
-.region-sidebar-first .form-item-items-per-page {
+.region-sidebar-first .form-item-items-per-page,
+.layout-sidebar-first .facets-reset .facet-item__count {
   @apply hidden;
 }
 
