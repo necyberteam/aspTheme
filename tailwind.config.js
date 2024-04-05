@@ -458,6 +458,7 @@ module.exports = {
     '[&_li]--inline-block',
     '[&_li]--ms-0',
     '[&_li]--me-1',
+    '[&_li]--mb-3',
     '[&_li]--relative',
     '[&_li]--z-10',
     '-mx-50%',
