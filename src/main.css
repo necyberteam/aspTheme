@@ -140,3 +140,9 @@ table.views-table tr td {
 .region-sidebar-first .form-item-items-per-page {
   @apply hidden;
 }
+
+.cssn-photo img {
+  height: 100px;
+  width: 90px;
+  @apply object-cover;
+}
