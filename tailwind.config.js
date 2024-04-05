@@ -447,6 +447,7 @@ module.exports = {
     '[&>div.form-item]--flex-col',
     '[&>div.form-item]--max-w-56',
     '[&>div.form-item]--w-[46%]',
+    '[&_div.item-list]--m-0',
     '[&>div\:nth-of-type(1)]--md--order-1',
     '[&>div\:nth-of-type(2)]--md--order-2',
     '[&>div\:nth-of-type(1)]--order-2',
