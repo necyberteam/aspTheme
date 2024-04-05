@@ -30,3 +30,7 @@
 [dir="rtl"] .item-list__comma-list li {
   margin: 0;
 }
+
+.cssn-directory-item li:nth-of-type(1n+6) {
+  display: none;
+}
