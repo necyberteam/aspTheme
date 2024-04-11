@@ -131,3 +131,15 @@ table.views-table tr td {
 .font-condensed {
   font-stretch: condensed;
 }
+
+/* prevent long user-entered links from breaking layout for
+ * for user-authored areas such as events, event view, news
+*/
+.node--type-access-news .field--name-body a,
+.view-access-news .views-field-body a,
+.path-events .field--name-body a,
+.path-events .field--name-description a,
+.view-recurring-events-event-instances .views-field-body__format a,
+.access-break-links a {
+  word-break:break-all;
+}
