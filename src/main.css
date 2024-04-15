@@ -131,3 +131,31 @@ table.views-table tr td {
 .font-condensed {
   font-stretch: condensed;
 }
+
+/* prevent long user-entered links from breaking layout for
+ * for user-authored areas such as events, event view, news
+*/
+.node--type-access-news .field--name-body a,
+.view-access-news .views-field-body a,
+.path-events .field--name-body a,
+.path-events .field--name-description a,
+.view-recurring-events-event-instances .views-field-body__format a,
+.access-break-links a {
+  word-break:break-all;
+}
+
+.stretched-link::after {
+  content: "";
+  @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
+}
+.layout-content .block-views-exposed-filter-blockcssn-directory-page-1 .form-item-search-api-fulltext,
+.region-sidebar-first .form-item-items-per-page,
+.layout-sidebar-first .facets-reset .facet-item__count {
+  @apply hidden;
+}
+
+.cssn-photo img {
+  height: 100px;
+  width: 90px;
+  @apply object-cover;
+}
