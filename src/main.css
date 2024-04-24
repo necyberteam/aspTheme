@@ -160,3 +160,6 @@ table.views-table tr td {
   width: 90px;
   @apply object-cover;
 }
+.cssn-directory-item .square-tags > div {
+  margin: 0;
+}
