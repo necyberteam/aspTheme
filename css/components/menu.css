@@ -10,7 +10,7 @@ ul.sf-menu.menu, ul.sf-menu.menu ul, ul.sf-menu.menu li {
   height: 100%;
 }
 ul.sf-menu a, ul.sf-menu span.nolink {
-  padding: 10px 20px;
+  padding: 10.5px 4.5px 9.5px 5px;
   line-height: 28px;
   text-decoration: none;
 }
