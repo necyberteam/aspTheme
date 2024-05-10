@@ -27,6 +27,7 @@ ul.sf-menu a {
 }
 
 .region-nav-main .sf-depth-1 a:hover,
+.region-nav-main .sf-depth-1 a.is-active,
 .region-nav-additional .sf-depth-1 a:hover,
 .region-nav-additional .sf-depth-1 span.nolink:hover {
   background-color: var(--md-teal);
