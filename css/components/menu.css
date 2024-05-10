@@ -10,9 +10,20 @@ ul.sf-menu.menu, ul.sf-menu.menu ul, ul.sf-menu.menu li {
   height: 100%;
 }
 ul.sf-menu a, ul.sf-menu span.nolink {
-  padding: 10.5px 4.5px 9.5px 5px;
   line-height: 28px;
   text-decoration: none;
+}
+
+ul.sf-menu span.nolink {
+  padding: 10.5px 4.5px 9.5px 5px;
+}
+
+ul.sf-menu li:last-child span.nolink {
+  padding: 10.5px 20px 9.5px 20px;
+}
+
+ul.sf-menu a {
+  padding: 10.5px 10px 9.5px 10px;
 }
 
 .region-nav-main .sf-depth-1 a:hover,
@@ -335,4 +346,12 @@ ul.sf-menu .access-menu-item:hover {
   #superfish-access-secondary-menu-accordion li.sf-depth-1 {
     border-top: 1px solid var(--md-teal);
   }
+}
+
+ul.sf-menu.menu {
+  margin-left: -10px;
+}
+
+ul.sf-menu li:last-child {
+  margin-right: -20px;
 }
