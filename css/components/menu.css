@@ -33,6 +33,10 @@ ul.sf-menu a {
   background-color: var(--md-teal);
 }
 
+#block-accesssecondarymenu ul.sf-menu span {
+  padding: 10px 20px;
+}
+
 ul.sf-menu li:has(ul li a:hover) a,
 ul.sf-menu li:has(ul li a:hover) span.nolink,
 #block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,

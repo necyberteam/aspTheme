@@ -800,6 +800,10 @@ ul.sf-menu a {
   padding: 10.5px 10px 9.5px 10px;
 }
 
+#block-accesssecondarymenu ul.sf-menu span {
+  padding: 10px 20px;
+}
+
 .region-nav-main .sf-depth-1 a:hover,
 .region-nav-main .sf-depth-1 a.is-active,
 .region-nav-additional .sf-depth-1 a:hover,
