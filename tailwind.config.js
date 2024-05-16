@@ -153,6 +153,7 @@ module.exports = {
     'col-span-2',
     'col-span-3',
     'col-span-4',
+    'lg--col-start-10',
     'col-start-10',
     'cursor-pointer',
     'drop-shadow-md',

@@ -27,7 +27,7 @@ ul.sf-menu a {
 }
 
 .region-nav-main .sf-depth-1 a:hover,
-.region-nav-main .sf-depth-1 a.is-active,
+.region-nav-main .sf-depth-1:nth-child(2) a,
 .region-nav-additional .sf-depth-1 a:hover,
 .region-nav-additional .sf-depth-1 span.nolink:hover {
   background-color: var(--md-teal);
@@ -37,14 +37,6 @@ ul.sf-menu a {
   padding: 10px 20px;
 }
 
-ul.sf-menu li:has(ul li a:hover) a,
-ul.sf-menu li:has(ul li a:hover) span.nolink,
-#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,
-#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) span.nolink
-{
-  background-color: var(--md-teal);
-  color: #ffffff;
-}
 /* Secondary menu */
 #block-accesssecondarymenu ul.menu li a,
 #block-accesssecondarymenu ul.menu li span.nolink {
@@ -68,7 +60,17 @@ ul.sf-menu.menu ul {
   box-shadow: none;
 }
 @media only screen and (min-width: 769px) {
-  ul.sf-menu li > ul {
+
+ul.sf-menu li:has(ul li a:hover) a,
+ul.sf-menu li:has(ul li a:hover) span.nolink,
+#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,
+#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) span.nolink
+{
+  background-color: var(--md-teal);
+  color: #ffffff;
+}
+
+ul.sf-menu li > ul {
     top: 48px !important;
   }
 }
