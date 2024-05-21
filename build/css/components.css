@@ -869,7 +869,7 @@ ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before,
   position: absolute;
   display: inline-block;
   height: 48px;
-  width: 14px;
+  width: 16px;
   overflow: visible;
   content: ' ';
   background-size: contain;
@@ -899,7 +899,7 @@ ul.sf-menu .access-menu-item:hover {
   font-size: 1px !important;
   letter-spacing: -1px;
   color: transparent !important;
-  width: 54px;
+  width: 55px;
   height: 48px;
   overflow: hidden;
   padding: 0;

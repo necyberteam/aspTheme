@@ -383,6 +383,7 @@ module.exports = {
     'shrink-0',
     'sm--grid-cols-2',
     'sm--pb-40',
+    'sm--py-0',
     'sticky',
     'text-center',
     'text-dark-teal',
