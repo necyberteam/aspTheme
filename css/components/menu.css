@@ -10,25 +10,33 @@ ul.sf-menu.menu, ul.sf-menu.menu ul, ul.sf-menu.menu li {
   height: 100%;
 }
 ul.sf-menu a, ul.sf-menu span.nolink {
-  padding: 10px 20px;
   line-height: 28px;
   text-decoration: none;
 }
 
+ul.sf-menu span.nolink {
+  padding: 10.5px 4.5px 9.5px 5px;
+}
+
+ul.sf-menu li:last-child span.nolink {
+  padding: 10.5px 20px 9.5px 20px;
+}
+
+ul.sf-menu a {
+  padding: 10.5px 10px 9.5px 10px;
+}
+
 .region-nav-main .sf-depth-1 a:hover,
+.region-nav-main .sf-depth-1:nth-child(2) a,
 .region-nav-additional .sf-depth-1 a:hover,
 .region-nav-additional .sf-depth-1 span.nolink:hover {
   background-color: var(--md-teal);
 }
 
-ul.sf-menu li:has(ul li a:hover) a,
-ul.sf-menu li:has(ul li a:hover) span.nolink,
-#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,
-#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) span.nolink
-{
-  background-color: var(--md-teal);
-  color: #ffffff;
+#block-accesssecondarymenu ul.sf-menu span {
+  padding: 10px 20px;
 }
+
 /* Secondary menu */
 #block-accesssecondarymenu ul.menu li a,
 #block-accesssecondarymenu ul.menu li span.nolink {
@@ -52,7 +60,17 @@ ul.sf-menu.menu ul {
   box-shadow: none;
 }
 @media only screen and (min-width: 769px) {
-  ul.sf-menu li > ul {
+
+ul.sf-menu li:has(ul li a:hover) a,
+ul.sf-menu li:has(ul li a:hover) span.nolink,
+#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) a,
+#block-accesssecondarymenu ul.sf-menu li:has(ul li a:hover) span.nolink
+{
+  background-color: var(--md-teal);
+  color: #ffffff;
+}
+
+ul.sf-menu li > ul {
     top: 48px !important;
   }
 }
@@ -77,7 +95,7 @@ ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before,
   position: absolute;
   display: inline-block;
   height: 48px;
-  width: 14px;
+  width: 16px;
   overflow: visible;
   content: ' ';
   background-size: contain;
@@ -107,7 +125,7 @@ ul.sf-menu .access-menu-item:hover {
   font-size: 1px !important;
   letter-spacing: -1px;
   color: transparent !important;
-  width: 54px;
+  width: 55px;
   height: 48px;
   overflow: hidden;
   padding: 0;
@@ -172,6 +190,7 @@ ul.sf-menu .access-menu-item:hover {
   }
 
   #superfish-access-universal-nav-menu-toggle {
+    margin-left: 2.2em;
     margin-top: 10px;
   }
 
@@ -182,7 +201,6 @@ ul.sf-menu .access-menu-item:hover {
   .block-superfishaccess-universal-nav-menu .sf-accordion-toggle,
   .block-superfishaccess-secondary-menu .sf-accordion-toggle {
     width: 100%;
-    padding-left: 28px;
   }
 
   #superfish-access-universal-nav-menu-toggle,
@@ -335,4 +353,14 @@ ul.sf-menu .access-menu-item:hover {
   #superfish-access-secondary-menu-accordion li.sf-depth-1 {
     border-top: 1px solid var(--md-teal);
   }
+}
+
+@media screen and (min-width: 768px) {
+  ul.sf-menu.menu {
+    margin-left: -10px;
+  }
+}
+
+ul.sf-menu li:last-child {
+  margin-right: -20px;
 }
