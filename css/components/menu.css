@@ -95,7 +95,7 @@ ul.sf-menu .search-menu-item::before, ul.sf-menu .access-home-menu-item::before,
   position: absolute;
   display: inline-block;
   height: 48px;
-  width: 14px;
+  width: 16px;
   overflow: visible;
   content: ' ';
   background-size: contain;
@@ -125,7 +125,7 @@ ul.sf-menu .access-menu-item:hover {
   font-size: 1px !important;
   letter-spacing: -1px;
   color: transparent !important;
-  width: 54px;
+  width: 55px;
   height: 48px;
   overflow: hidden;
   padding: 0;
@@ -190,6 +190,7 @@ ul.sf-menu .access-menu-item:hover {
   }
 
   #superfish-access-universal-nav-menu-toggle {
+    margin-left: 2.2em;
     margin-top: 10px;
   }
 
@@ -354,8 +355,10 @@ ul.sf-menu .access-menu-item:hover {
   }
 }
 
-ul.sf-menu.menu {
-  margin-left: -10px;
+@media screen and (min-width: 768px) {
+  ul.sf-menu.menu {
+    margin-left: -10px;
+  }
 }
 
 ul.sf-menu li:last-child {

@@ -33,31 +33,41 @@
 .container {
   max-width: calc(100% - 60px);
 }
+
+header .bg-dark-teal .container {
+  max-width: 100%;
+}
+
 @media screen(sm) {
+  header .bg-dark-teal .container,
   .container {
     max-width: calc(100% - 60px);
   }
 }
 
 @media screen(md) {
+  header .bg-dark-teal .container,
   .container {
     max-width: 712px;
   }
 }
 
 @media screen(ml) {
+  header .bg-dark-teal .container,
   .container {
     max-width: 840px;
   }
 }
 
 @media screen(lg) {
+  header .bg-dark-teal .container,
   .container {
     max-width: 940px;
   }
 }
 
 @media screen(xl) {
+  header .bg-dark-teal .container,
   .container {
     max-width: 1180px;
   }
