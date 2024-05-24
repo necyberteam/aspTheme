@@ -124,6 +124,7 @@ module.exports = {
     'bg-no-repeat',
     'bg-orange',
     'bg-orange-500',
+    'bg-yellow',
     'bg-right',
     'bg-slate-100',
     'bg-teal',
