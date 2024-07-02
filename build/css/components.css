@@ -14,9 +14,6 @@ details[open] summary:after {
    transform: rotate(-180deg);
 }
 
-.block-simple-list-member summary::after {
-  right: 2rem;
-}
 /**
  * @file
  * Styles for link buttons and action links.
