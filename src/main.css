@@ -173,3 +173,24 @@ table.views-table tr td {
 .cssn-directory-item .square-tags > div {
   margin: 0;
 }
+
+
+/* Access events page filters */
+.page-node-6117 {
+  .layout__region--first .block-views-exposed-filter-blockrecurring-events-event-instances-block-1 {
+    .form-item-field-affiliation-value,
+    .form-item-field-affinity-group-target-id-1,
+    .form-item-field-event-type-value,
+    .form-item-field-skill-level-value,
+    .form-type-select js-form-item-tid form-item-tid,
+    .form-item-tid {
+      @apply hidden;
+    }
+  }
+
+  .layout__region--second .block-views-exposed-filter-blockrecurring-events-event-instances-block-1 {
+    .form-type-textfield {
+      @apply hidden;
+    }
+  }
+}
