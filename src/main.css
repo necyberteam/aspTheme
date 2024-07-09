@@ -173,3 +173,13 @@ table.views-table tr td {
 .cssn-directory-item .square-tags > div {
   margin: 0;
 }
+
+/* Announcment side titles */
+.page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affiliation)) .page-title:first-child {
+  display: none !important;
+}
+
+.page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affinity-group-node)) .page-title:not(:first-child) {
+  display: none !important;
+}
+
