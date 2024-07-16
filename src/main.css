@@ -191,10 +191,6 @@ table.views-table tr td {
   }
 
   .layout__region--second {
-    [data-drupal-selector="views-exposed-form-recurring-events-event-series-block-1"] {
-      @apply hidden;
-    }
-
     .block-views-exposed-filter-blockrecurring-events-event-instances-block-1 {
       .form-type-textfield,
       view-display-id-block_1 {
@@ -203,4 +199,10 @@ table.views-table tr td {
     }
   }
 
+}
+
+body.page-node-6117:not(.user-logged-in) .layout__region--second {
+  [data-drupal-selector="views-exposed-form-recurring-events-event-series-block-1"] {
+    @apply hidden;
+  }
 }
