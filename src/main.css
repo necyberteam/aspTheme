@@ -174,7 +174,6 @@ table.views-table tr td {
   margin: 0;
 }
 
-
 /* Access events page filters */
 .page-node-6117 {
   .layout__region--first {
@@ -205,4 +204,13 @@ body.page-node-6117:not(.user-logged-in) .layout__region--second {
   [data-drupal-selector="views-exposed-form-recurring-events-event-series-block-1"] {
     @apply hidden;
   }
+}
+
+/* Announcment side titles */
+.page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affiliation)) .page-title:first-child {
+  display: none !important;
+}
+
+.page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affinity-group-node)) .page-title:not(:first-child) {
+  display: none !important;
 }
