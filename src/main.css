@@ -174,6 +174,38 @@ table.views-table tr td {
   margin: 0;
 }
 
+/* Access events page filters */
+.page-node-6117 {
+  .layout__region--first {
+    .block-views-exposed-filter-blockrecurring-events-event-instances-block-1 {
+      .form-item-field-affiliation-value,
+      .form-item-field-affinity-group-target-id-1,
+      .form-item-field-event-type-value,
+      .form-item-field-skill-level-value,
+      .form-type-select js-form-item-tid form-item-tid,
+      .form-item-tid {
+        @apply hidden;
+      }
+    }
+  }
+
+  .layout__region--second {
+    .block-views-exposed-filter-blockrecurring-events-event-instances-block-1 {
+      .form-type-textfield,
+      view-display-id-block_1 {
+        @apply hidden;
+      }
+    }
+  }
+
+}
+
+body.page-node-6117:not(.user-logged-in) .layout__region--second {
+  [data-drupal-selector="views-exposed-form-recurring-events-event-series-block-1"] {
+    @apply hidden;
+  }
+}
+
 /* Announcment side titles */
 .page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affiliation)) .page-title:first-child {
   display: none !important;
@@ -182,4 +214,3 @@ table.views-table tr td {
 .page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affinity-group-node)) .page-title:not(:first-child) {
   display: none !important;
 }
-
