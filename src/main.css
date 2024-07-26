@@ -165,10 +165,13 @@ table.views-table tr td {
   @apply hidden;
 }
 
-.cssn-photo img {
-  height: 100px;
-  width: 90px;
-  @apply object-cover;
+.cssn-photo {
+  width: 180px;
+  img {
+    height: 100px;
+    width: 90px;
+    @apply object-cover;
+  }
 }
 .cssn-directory-item .square-tags > div {
   margin: 0;
