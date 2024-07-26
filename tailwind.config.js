@@ -215,6 +215,7 @@ module.exports = {
     'hover--[&>*]--underline',
     'inline-block',
     'inset-x-1/4',
+    'items-start',
     'items-center',
     'items-end',
     'justify-between',
