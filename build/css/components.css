@@ -1513,6 +1513,90 @@ ul.tabs {
   width: 100%;
   margin: 0;
 }
+[data-toggle="tooltip"] {
+  display: block;
+  position: relative;
+}
+[data-toggle="tooltip"]:before {
+  content: attr(title);
+  position: absolute;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  padding: 0.5rem;
+  width: 100px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  border-radius: .5rem;
+  transition: opacity 0.3s;
+}
+
+[data-toggle="tooltip"]:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+[data-placement='top']:before {
+  bottom: calc(100% + 10px);
+  left: calc(50% - 50px);
+}
+
+[data-placement='top']:after {
+  bottom: 100%;
+  left: calc(50% - 10px);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(0, 0, 0, 0.9);
+}
+
+.bottom[data-toggle="tooltip"]:before {
+  top: calc(100% + 10px);
+  left: calc(50% - 50px);
+}
+
+.bottom[data-toggle="tooltip"]:after {
+  top: 100%;
+  left: calc(50% - 10px);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgba(0, 0, 0, 0.9);
+}
+
+.left[data-toggle="tooltip"]:before {
+  right: calc(100% + 10px);
+}
+
+.left[data-toggle="tooltip"]:after {
+  bottom: calc(50% - 10px);
+  right: 100%;
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-left: 10px solid rgba(0, 0, 0, 0.9);
+}
+
+.right[data-toggle="tooltip"]:before {
+  left: calc(100% + 10px);
+}
+
+.right[data-toggle="tooltip"]:after {
+  bottom: calc(50% - 10px);
+  left: 100%;
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-right: 10px solid rgba(0, 0, 0, 0.9);
+}
+
+[data-toggle="tooltip"]:hover:after,
+[data-toggle="tooltip"]:hover:before {
+  opacity: 1;
+}
 /*
  * @file
  * Provides the layout styles for two-column layout section.
