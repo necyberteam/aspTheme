@@ -57,10 +57,11 @@
 
 [data-placement='left']:before {
   right: calc(100% + 5px);
+  top: -7px;
 }
 
 [data-placement='left']:after {
-  bottom: 50%;
+  bottom: calc(50% - 5px);
   right: 100%;
   border-bottom: 5px solid transparent;
   border-top: 5px solid transparent;
@@ -69,10 +70,11 @@
 
 [data-placement='right']:before {
   left: calc(100% + 15px);
+  top: -7px;
 }
 
 [data-placement='right']:after {
-  bottom: 50%;
+  bottom: calc(50% - 5px);
   left: 100%;
   border-bottom: 5px solid transparent;
   border-top: 5px solid transparent;
