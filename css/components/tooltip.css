@@ -8,8 +8,8 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
-  padding: 0.5rem;
-  width: 150px;
+  padding: 15px;
+  width: 160px;
   background: rgba(0, 0, 0, 0.9);
   color: #fff;
   display: flex;
@@ -31,7 +31,7 @@
 
 [data-placement='top']:before {
   bottom: calc(100% + 10px);
-  left: calc(50% - 75px);
+  left: calc(50% - 80px);
 }
 
 [data-placement='top']:after {
@@ -44,7 +44,7 @@
 
  [data-placement='bottom']:before {
   top: calc(100% + 10px);
-  left: calc(50% - 75px);
+  left: calc(50% - 80px);
 }
 
 [data-placement='bottom']:after {
@@ -60,7 +60,7 @@
 }
 
 [data-placement='left']:after {
-  bottom: calc(50% - 10px);
+  bottom: calc(50% - 15px);
   right: 100%;
   border-bottom: 10px solid transparent;
   border-top: 10px solid transparent;
@@ -68,7 +68,7 @@
 }
 
 [data-placement='right']:before {
-  left: calc(100% + 10px);
+  left: calc(100% + 15px);
 }
 
 [data-placement='right']:after {
