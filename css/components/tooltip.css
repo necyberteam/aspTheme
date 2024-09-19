@@ -5,17 +5,18 @@
 [data-toggle="tooltip"]:before {
   content: attr(title);
   position: absolute;
-  font-size: 0.8rem;
-  line-height: 1rem;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
   padding: 0.5rem;
-  width: 100px;
+  width: 150px;
   background: rgba(0, 0, 0, 0.9);
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  border-radius: .5rem;
+  border-radius: 10px;
   transition: opacity 0.3s;
 }
 
@@ -30,7 +31,7 @@
 
 [data-placement='top']:before {
   bottom: calc(100% + 10px);
-  left: calc(50% - 50px);
+  left: calc(50% - 75px);
 }
 
 [data-placement='top']:after {
@@ -43,7 +44,7 @@
 
  [data-placement='bottom']:before {
   top: calc(100% + 10px);
-  left: calc(50% - 50px);
+  left: calc(50% - 75px);
 }
 
 [data-placement='bottom']:after {
