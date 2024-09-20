@@ -1513,6 +1513,93 @@ ul.tabs {
   width: 100%;
   margin: 0;
 }
+[data-toggle="tooltip"] {
+  display: block;
+  position: relative;
+}
+[data-toggle="tooltip"]:before {
+  content: attr(title);
+  position: absolute;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  padding: 15px;
+  width: 160px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  border-radius: 10px;
+  transition: opacity 0.3s;
+}
+
+[data-toggle="tooltip"]:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+[data-placement='top']:before {
+  bottom: calc(100% + 5px);
+  left: calc(50% - 85px);
+}
+
+[data-placement='top']:after {
+  bottom: 100%;
+  left: calc(50% - 10px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.9);
+}
+
+ [data-placement='bottom']:before {
+  top: calc(100% + 5px);
+  left: calc(50% - 85px);
+}
+
+[data-placement='bottom']:after {
+  top: 100%;
+  left: calc(50% - 10px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.9);
+}
+
+[data-placement='left']:before {
+  right: calc(100% + 5px);
+  top: -7px;
+}
+
+[data-placement='left']:after {
+  bottom: calc(50% - 5px);
+  right: 100%;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+  border-left: 5px solid rgba(0, 0, 0, 0.9);
+}
+
+[data-placement='right']:before {
+  left: calc(100% + 15px);
+  top: -7px;
+}
+
+[data-placement='right']:after {
+  bottom: calc(50% - 5px);
+  left: 100%;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+  border-right: 5px solid rgba(0, 0, 0, 0.9);
+}
+
+[data-toggle="tooltip"]:hover:after,
+[data-toggle="tooltip"]:hover:before {
+  opacity: 1;
+}
 /*
  * @file
  * Provides the layout styles for two-column layout section.
