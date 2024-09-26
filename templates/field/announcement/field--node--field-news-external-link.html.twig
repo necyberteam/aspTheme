@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Display Coordinator name as a link to Community Persona page
+ */
+#}
+
+  <div>
+  {% for item in items %}
+    <div>
+      <a class="btn btn-primary" href='{{ item.content['#url'].uri }}'>
+        Read More
+      </a>
+    </div>
+  {% endfor %}
+</div>
