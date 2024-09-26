@@ -1516,6 +1516,10 @@ ul.tabs {
 [data-toggle="tooltip"] {
   display: block;
   position: relative;
+  z-index: 100;
+}
+[data-toggle="tooltip"]:hover {
+  z-index: 102;
 }
 [data-toggle="tooltip"]:before {
   content: attr(title);
@@ -1533,6 +1537,7 @@ ul.tabs {
   opacity: 0;
   border-radius: 10px;
   transition: opacity 0.3s;
+  z-index: 101;
 }
 
 [data-toggle="tooltip"]:after {
@@ -1542,6 +1547,7 @@ ul.tabs {
   height: 0;
   opacity: 0;
   transition: opacity 0.3s;
+  z-index: 101;
 }
 
 [data-placement='top']:before {
@@ -1598,6 +1604,7 @@ ul.tabs {
 
 [data-toggle="tooltip"]:hover:after,
 [data-toggle="tooltip"]:hover:before {
+  transition-delay: 0.3s;
   opacity: 1;
 }
 /*
