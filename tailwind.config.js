@@ -406,6 +406,7 @@ module.exports = {
     'top-0',
     'top-1.5',
     'top-4',
+    'top-5',
     'top-10',
     'top-1/4',
     'underline',
