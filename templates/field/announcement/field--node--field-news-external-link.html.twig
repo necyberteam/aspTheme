@@ -9,7 +9,11 @@
   {% for item in items %}
     <div>
       <a class="btn btn-primary" href='{{ item.content['#url'].uri }}'>
-        Read More
+        {% if not (item.content['#title'] starts with 'http') %}
+          {{item.content['#title']}}
+        {% else %}
+          Read More
+        {% endif %}
       </a>
     </div>
   {% endfor %}
