@@ -17,7 +17,6 @@
   width: 160px;
   background: rgba(0, 0, 0, 0.9);
   color: #fff;
-  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -88,5 +87,5 @@
 [data-toggle="tooltip"]:hover:after,
 [data-toggle="tooltip"]:hover:before {
   transition-delay: 0.3s;
-  display: block;
+  display: flex;
 }
