@@ -1522,6 +1522,7 @@ ul.tabs {
   z-index: 102;
 }
 [data-toggle="tooltip"]:before {
+  display: none;
   content: attr(title);
   position: absolute;
   font-size: 14px;
@@ -1534,19 +1535,16 @@ ul.tabs {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
   border-radius: 10px;
-  transition: opacity 0.3s;
   z-index: 101;
 }
 
 [data-toggle="tooltip"]:after {
   content: "";
+  display: none;
   position: absolute;
   width: 0;
   height: 0;
-  opacity: 0;
-  transition: opacity 0.3s;
   z-index: 101;
 }
 
@@ -1605,7 +1603,7 @@ ul.tabs {
 [data-toggle="tooltip"]:hover:after,
 [data-toggle="tooltip"]:hover:before {
   transition-delay: 0.3s;
-  opacity: 1;
+  display: block;
 }
 /*
  * @file
