@@ -1,7 +1,7 @@
 [data-toggle="tooltip"] {
   display: block;
   position: relative;
-  z-index: 100;
+  z-index: 11;
 }
 [data-toggle="tooltip"]:hover {
   z-index: 102;
