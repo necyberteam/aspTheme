@@ -217,3 +217,8 @@ body.page-node-6117:not(.user-logged-in) .layout__region--second {
 .page-node-type-access-news .layout__region--second:not(:has(.block-field-blocknodeaccess-newsfield-affinity-group-node)) .page-title:not(:first-child) {
   display: none !important;
 }
+
+.access-qa-bot {
+  position: relative;
+  z-index: 1000;
+}

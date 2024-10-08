@@ -164,6 +164,7 @@ module.exports = {
     'flex-wrap',
     'flex-1',
     'float-left',
+    'float-right',
     'font-bold',
     'font-extrabold',
     'font-light',
