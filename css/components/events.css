@@ -27,3 +27,30 @@
   }
 }
 
+html:has(#edit-recur-type-wrapper) {
+  h4 {
+    font-family: "Archivo", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1A5B6E;
+    div {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #333;
+    }
+  }
+
+  #edit-body-0-format,
+  .form-item--recur-type:has(#edit-recur-type-daily-recurring-date),
+  .form-item--recur-type:has(#edit-recur-type-consecutive-recurring-date),
+  .form-item-recur-type:has(#edit-recur-type-daily-recurring-date),
+  .form-item-recur-type:has(#edit-recur-type-consecutive-recurring-date) {
+    display: none;
+  }
+
+  #edit-field-affinity-group-node-wrapper {
+    border-top: 1px solid #ccc;
+  }
+
+}
+
