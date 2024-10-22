@@ -1777,7 +1777,7 @@ html:has(#edit-recur-type-wrapper) {
   .form-item-recur-type:has(#edit-recur-type-daily-recurring-date),
   .form-item-recur-type:has(#edit-recur-type-consecutive-recurring-date),
   .form-type-vertical-tabs,
-  #included-dates-values,
+  #included-dates-add-more-wrapper,
   [data-drupal-selector="tabledrag-toggle-weight"],
   table#custom-date-values tr:not(:first-child) {
     display: none;
