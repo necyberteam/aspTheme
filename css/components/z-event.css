@@ -29,21 +29,15 @@
 
 html:has(#edit-recur-type-wrapper) {
   h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+  }
+  th h4, #edit-weekly-recurring-date-0 legend, #edit-monthly-recurring-date-0 legend{
     font-family: "Archivo", sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
     color: #1A5B6E;
-    div {
-      font-size: 1rem;
-      font-weight: 400;
-      color: #333;
-    }
-  }
-
-  #edit-custom-date-wrapper h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
   }
 
   label:not(.option) {
