@@ -1,0 +1,113 @@
+.page-node-6117 {
+  .layout__region--first {
+    form {
+      .form--inline {
+        width: fit-content;
+        position: relative;
+
+        .form-item {
+          width: 100%;
+          input {
+            padding-right: 28px;
+          }
+        }
+      }
+    }
+
+    input[type='submit'] {
+      text-indent: -99999em;
+      height: 15px;
+      width: 15px;
+      top: 28px;
+      right: -45px;
+      position: absolute;
+      border-width: 0 !important;
+      background: top left url("../../images/icons/search.svg") no-repeat;
+    }
+  }
+}
+
+html:has(#edit-recur-type-wrapper) {
+  h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+  }
+  th h4, #edit-weekly-recurring-date-0 legend, #edit-monthly-recurring-date-0 legend{
+    font-family: "Archivo", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1A5B6E;
+  }
+
+  label:not(.option) {
+    font-weight: 700;
+  }
+
+  input[value="X"] {
+    padding: .75rem 1rem;
+  }
+
+  a.tabledrag-handle .handle {
+    width: 25px;
+    height: 25px;
+    margin-top: 0;
+  }
+
+  #edit-field-registration-wrapper label {
+    display: block;
+  }
+
+  #edit-field-contact-0-format,
+  #edit-field-location-0-format,
+  #edit-custom-date-wrapper .tabledrag-toggle-weight-wrapper,
+  #edit-custom-date-wrapper thead,
+  #edit-custom-date-wrapper .field-multiple-drag,
+  #edit-custom-date-wrapper #edit-custom-date-0-actions-delete,
+  #edit-custom-date-wrapper #edit-custom-date--description,
+  #edit-custom-date-wrapper #edit-custom-date-add-more,
+  .form-item--recur-type:has(#edit-recur-type-daily-recurring-date),
+  .form-item--recur-type:has(#edit-recur-type-consecutive-recurring-date),
+  .form-item-recur-type:has(#edit-recur-type-daily-recurring-date),
+  .form-item-recur-type:has(#edit-recur-type-consecutive-recurring-date),
+  .form-type-vertical-tabs,
+  #included-dates-add-more-wrapper,
+  [data-drupal-selector="tabledrag-toggle-weight"],
+  table#custom-date-values tr:not(:first-child) {
+    display: none;
+  }
+
+  #edit-body-0-format {
+    display: flex;
+    align-items: center;
+  }
+
+  .form-item-body-0-format {
+    margin: 0;
+  }
+
+  #edit-body-0-format-help {
+    order: 2;
+    margin-left: 1rem;
+  }
+
+  #edit-field-event-type-wrapper .form-radios {
+    display: flex;
+  }
+
+  .form-type-checkbox,
+  .form-type-radio {
+    margin-right: 1rem;
+  }
+
+  #edit-field-affinity-group-node-wrapper,
+  #edit-field-event-type-wrapper {
+    border-top: 1px solid #ccc;
+  }
+
+  #edit-field-broadcast-affinity-groups-wrapper {
+    border-bottom: 1px solid #ccc;
+  }
+
+}
+
