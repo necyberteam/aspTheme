@@ -288,6 +288,7 @@ module.exports = {
     'max-w-[150px]',
     'max-w-[240px]',
     'max-w-[860px]',
+    'max-w-full',
     "md--bg-[url('/sites/default/files/cssn/dot-line-bg.jpg')]",
     'md--block',
     'md--col-span-1',
