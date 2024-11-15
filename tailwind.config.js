@@ -231,6 +231,7 @@ module.exports = {
     'leading-tight',
     'left-0',
     'left-1.5',
+    'lg--grid-cols-2',
     'lg--grid-cols-4',
     'lg--grid-cols-6',
     'list-none',
