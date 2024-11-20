@@ -76,27 +76,28 @@
     {% if multiple %}
       <div class="field__items">
     {% endif %}
-    {% for item in items %}
-{% if item.content['#markup'] == 'Intermediate' %}
-  {%
-set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-medium.png" alt="Beginner, Intermediate">'
+    {% set setSkills = [] %}
 
-  %}
-{% elseif item.content['#markup'] == 'Beginner' %}
-  {%
-    set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-beginner.png" alt="Beginner">'
-  %}
-{% elseif item.content['#markup'] == 'Advanced' %}
-  {%
-    set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-advanced.png" alt="Advanced">'
-  %}
-{% else %}
-  {%
-    set skill = item.content
-  %}
-{% endif %}
-      <div{{ item.attributes.addClass(field_classes) }}>{{ skill|raw }}</div>
+    {% for item in items %}
+      {% set setSkills = setSkills|merge([item.content['#markup']]) %}
     {% endfor %}
+
+    {% if 'Intermediate' in setSkills and 'Beginner' in setSkills and 'Advanced' in setSkills %}
+      {% set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-all.png" alt="Beginner, Intermediate, Advanced">' %}
+    {% elseif 'Intermediate' in setSkills and 'Beginner' in setSkills %}
+      {% set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-beginner-medium.png" alt="Beginner, Intermediate">' %}
+    {% elseif 'Intermediate' in setSkills and 'Advanced' in setSkills %}
+      {% set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-medium-advanced.png" alt="Intermediate, Advanced">' %}
+    {% elseif 'Beginner' in setSkills %}
+        {% set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-beginner.png" alt="Beginner">' %}
+    {% elseif 'Intermediate' in setSkills %}
+        {% set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-medium.png" alt="Beginner, Intermediate">' %}
+    {% elseif 'Advanced' in setSkills %}
+        {% set skill = '<img class="object-contain m-0 h-auto" src="/themes/contrib/asp-theme/images/icons/SL-advanced.png" alt="Advanced">' %}
+    {% endif %}
+
+    <div{{ item.attributes.addClass(field_classes) }}>{{ skill|raw }}</div>
+
     {% if multiple %}
       </div>
     {% endif %}
