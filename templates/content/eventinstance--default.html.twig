@@ -41,6 +41,9 @@
       {{ content.tags }}
       <div class="mb-5">{{ content.date }}</div>
       <div class="mb-5">{{ content.location }}</div>
+      {% if content.virtual_meeting_link['#access'] == true %}
+        <div class="mb-5">{{ content.virtual_meeting_link }}</div>
+      {% endif %}
       {% if content.field_video['#items'] is not empty %}
       <div class="mb-5">
         {{ content.field_video }}

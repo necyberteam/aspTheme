@@ -84,6 +84,12 @@
 			{% endif %}
 			{% for item in items %}
         {% set url = item.content['#url'].uri %}
+        {% if url == 'base:here' %}
+          {% set current = url('<current>') %}
+          {% set url_array = current['#markup']|split('/') %}
+          {% set eventinstance_id = url_array[4] %}
+          {% set url = "/events/" ~ eventinstance_id  ~ "/registrations/add?destination=/events/" ~ eventinstance_id  %}
+        {% endif %}
 				<div{{item.attributes.addClass(field_classes)}}>
           <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
         </div>

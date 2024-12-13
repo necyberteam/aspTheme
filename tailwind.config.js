@@ -392,6 +392,7 @@ module.exports = {
     'rounded-full',
     'row-span-2',
     'row-span-4',
+    'row-span-5',
     'shrink-0',
     'sm--grid-cols-2',
     'sm--pb-40',
