@@ -1727,11 +1727,43 @@ ul.tabs {
   }
 }
 
-html:has(#edit-recur-type-wrapper) {
-  h4 {
-    font-size: 1rem;
+#edit-event-registration-0 > legend .fieldset-legend,
+h4.label {
+  font-family: "Archivo", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1A5B6E;
+}
+
+#field-affinity-group-node-values h4 .description {
+  font-weight: 100;
+  color: black;
+  font-size: .75em;
+}
+
+#edit-event-registration-0:has(#edit-event-registration-0-registration:checked) {
+  padding: 1rem;
+  background:
+    linear-gradient(to bottom, transparent 120px, rgb(236 249 248) 25px),
+    linear-gradient(100deg, #fff, #fff);
+}
+
+.form-item-event-registration-0-capacity label {
+  display: block;
+}
+
+#edit-registration-reminders-wrapper {
+  margin-top: -18px;
+  padding: 0 1rem;
+  background-color: rgb(236 249 248);
+  .fieldset-legend {
     font-weight: 700;
-    color: #333;
+  }
+}
+
+html:has(#edit-recur-type-wrapper) {
+  th.field-label {
+    text-align: left;
   }
   th h4, #edit-weekly-recurring-date-0 legend, #edit-monthly-recurring-date-0 legend{
     font-family: "Archivo", sans-serif;

@@ -59,32 +59,12 @@
 %}
 
 {% if label_hidden %}
-	{% if multiple %}
-		<div{{attributes.addClass(classes,'field__items')}}>
-			{% for item in items %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'field__items') }}>
+      {% for item in items %}
+
         {% set url = item.content['#url'].uri %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
-        </div>
-			{% endfor %}
-		</div>
-	{% else %}
-			{% for item in items %}
-        {% set url = item.content['#url'].uri %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
-        </div>
-			{% endfor %}
-	{% endif %}
-{% else %}
-	<div{{attributes.addClass(classes)}}>
-		<h3{{title_attributes.addClass(title_classes)}}>{{ label }}</h3>
-		{% if multiple %}
-			<div class="field__items">
-			{% endif %}
-			{% for item in items %}
-        {% set url = item.content['#url'].uri %}
-        {% if url == 'base:here' %}
+        {% if url == 'http://example.com' %}
           {% set current = url('<current>') %}
           {% set url_array = current['#markup']|split('/') %}
           {% set eventinstance_id = url_array[4] %}
@@ -93,10 +73,36 @@
 				<div{{item.attributes.addClass(field_classes)}}>
           <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
         </div>
-			{% endfor %}
-			{% if multiple %}
-			</div>
-		{% endif %}
-	</div>
-{% endif %}
 
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, field_classes) }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
+    {% if multiple %}
+      <div class="field__items">
+    {% endif %}
+    {% for item in items %}
+
+        {% set url = item.content['#url'].uri %}
+        {% if url == 'http://example.com' %}
+          {% set current = url('<current>') %}
+          {% set url_array = current['#markup']|split('/') %}
+          {% set eventinstance_id = url_array[4] %}
+          {% set url = "/events/" ~ eventinstance_id  ~ "/registrations/add?destination=/events/" ~ eventinstance_id  %}
+        {% endif %}
+				<div{{item.attributes.addClass(field_classes)}}>
+          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
+        </div>
+
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
