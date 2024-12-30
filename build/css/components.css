@@ -395,7 +395,10 @@ button.copyclip:has(:hover, + details.search-ci-links summary:hover) {
 }
 
 .form-text,
-.form-select {
+.form-select,
+.form-date,
+.form-time,
+.form-url {
   border-color: #ccc !important;
 }
 
@@ -475,6 +478,9 @@ button.copyclip:has(:hover, + details.search-ci-links summary:hover) {
  * Visual styles for form components.
  */
 
+form {
+  max-width: 65ch;
+}
 form .field-multiple-table {
   margin: 0;
 }
@@ -529,12 +535,16 @@ label.option {
   font-weight: normal;
 }
 .form-composite > legend,
-.label {
-  display: inline;
+.label, label {
+  display: inline-block;
   margin: 0;
   padding: 0;
+  font-family: Archivo;
   font-size: inherit;
   font-weight: bold;
+}
+form label {
+  display: block;
 }
 .form-checkboxes .form-item,
 .form-radios .form-item {
@@ -1735,29 +1745,60 @@ h4.label {
   color: #1A5B6E;
 }
 
-#field-affinity-group-node-values h4 .description {
+table[id^="field-affinity-group-node-values"] h4 .description {
   font-weight: 100;
   color: black;
   font-size: .75em;
 }
 
-#edit-event-registration-0:has(#edit-event-registration-0-registration:checked) {
+#edit-event-registration-0:has(#edit-event-registration-0-registration:checked) > .fieldset-wrapper {
   padding: 1rem;
-  background:
-    linear-gradient(to bottom, transparent 120px, rgb(236 249 248) 25px),
-    linear-gradient(100deg, #fff, #fff);
+  background-color: var(--light-teal);
 }
 
 .form-item-event-registration-0-capacity label {
   display: block;
 }
 
+#edit-event-registration-0 fieldset {
+  background-color: var(--light-teal)
+}
+
+.form-type-checkbox, .form-type-radio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  label.option {
+    margin-left: 0.25rem;
+  }
+  .description {
+    width: 100%;
+    margin-left: 0;
+  }
+}
 #edit-registration-reminders-wrapper {
   margin-top: -18px;
+  margin-bottom: 36px;
   padding: 0 1rem;
   background-color: rgb(236 249 248);
   .fieldset-legend {
     font-weight: 700;
+  }
+  .form-item-registration-reminders-0-data-reminder-data-reminder-amount {
+    display: inline-block;
+    width: 7ch;
+  }
+  .form-item-registration-reminders-0-data-reminder-data-reminder-units {
+    display: inline-block;
+  }
+  .ck-editor {
+    max-width: 65ch;
+  }
+  #edit-registration-reminders-0-data-reminder-data-message--description {
+    display: none;
+  }
+  #edit-registration-reminders-0-data > .fieldset-wrapper {
+    padding-bottom: 30px;
   }
 }
 
@@ -1765,7 +1806,9 @@ html:has(#edit-recur-type-wrapper) {
   th.field-label {
     text-align: left;
   }
-  th h4, #edit-weekly-recurring-date-0 legend, #edit-monthly-recurring-date-0 legend{
+  th h4,
+  #edit-monthly-recurring-date-0 > legend,
+  #edit-weekly-recurring-date-0 > legend {
     font-family: "Archivo", sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
@@ -1777,7 +1820,7 @@ html:has(#edit-recur-type-wrapper) {
   }
 
   input[value="X"] {
-    padding: .75rem 1rem;
+    padding: .25rem;
   }
 
   a.tabledrag-handle .handle {
@@ -1840,6 +1883,69 @@ html:has(#edit-recur-type-wrapper) {
   #edit-field-broadcast-affinity-groups-wrapper {
     border-bottom: 1px solid #ccc;
   }
-
+  #edit-weekly-recurring-date-0,
+  #edit-monthly-recurring-date-0 {
+    h4 {
+      margin: 0;
+    }
+  }
+  div[id^="excluded-dates-add-more-wrapper"] {
+    h4 {
+      font-size: 1rem;
+      color: var(--black);
+    }
+    .fieldset-wrapper {
+      display: flex;
+      align-items: center;
+      h4 {
+        margin: 0;
+      }
+      input {
+        margin-left: 0.25rem;
+        margin-right: 1rem;
+      }
+    }
+  }
+  #custom-date-values .label,
+  #edit-weekly-recurring-date-0 .label,
+  #edit-excluded-dates-0 .label,
+  #edit-monthly-recurring-date-0 .label,
+  #edit-monthly-recurring-date-0-day-occurrence--wrapper legend,
+  #edit-monthly-recurring-date-0-days--wrapper legend,
+  #edit-monthly-recurring-date-0-type--wrapper legend,
+  table[id^="field-event-speakers-values"] th .label {
+    color: var(--black);
+    font-size: 1rem;
+    margin: 0;
+  }
+  #custom-date-values {
+    tr {
+      border: 0;
+      td {
+        padding: 0;
+        h4:last-of-type {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
 }
-
+#registrant-default-add-form {
+  margin-bottom: 50px;
+}
+#views-exposed-form-recurring-events-registrations-event-registrant-list {
+  input#edit-created-1,
+  input#edit-created-2 {
+    width: 120px;
+  }
+  input#edit-uid {
+    width: 240px;
+  }
+}
+.view-recurring-events-registrations ul.dropbutton li {
+  margin: 0;
+  a {
+    font-weight: 400;
+    text-decoration: none;
+  }
+}
