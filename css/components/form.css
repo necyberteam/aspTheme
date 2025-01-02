@@ -57,8 +57,8 @@ label.option {
   font-weight: normal;
 }
 .form-composite > legend,
-.label {
-  display: inline;
+.label, form label {
+  display: inline-block;
   margin: 0;
   padding: 0;
   font-size: inherit;
