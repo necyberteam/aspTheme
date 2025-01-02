@@ -192,6 +192,7 @@ module.exports = {
     'group-hover--hidden',
     'group-hover--text-md-teal',
     'group-hover--text-white',
+    'h-6',
     'h-10',
     'h-11',
     'h-12',
