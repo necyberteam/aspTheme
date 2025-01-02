@@ -10,7 +10,7 @@ summary::after {
   right: 1rem;
   transition: 300ms;
 }
-details[open] summary:after {
+details[open] > summary:after {
    transform: rotate(-180deg);
 }
 
