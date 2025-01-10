@@ -10,7 +10,7 @@ summary::after {
   right: 1rem;
   transition: 300ms;
 }
-details[open] summary:after {
+details[open] > summary:after {
    transform: rotate(-180deg);
 }
 
@@ -535,7 +535,7 @@ label.option {
   font-weight: normal;
 }
 .form-composite > legend,
-.label, label {
+.label, form label {
   display: inline-block;
   margin: 0;
   padding: 0;
