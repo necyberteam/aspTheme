@@ -223,6 +223,17 @@ body.page-node-6117:not(.user-logged-in) .layout__region--second {
   z-index: 1000;
 }
 
+form[data-drupal-selector="recurring-events-registration-contact-form"] {
+  @apply mb-10;
+}
+
+form[data-drupal-selector="views-exposed-form-recurring-events-registrations-event-registrant-list"] {
+  max-width: 75ch;
+  .form-submit {
+    @apply mt-10;
+  }
+}
+
 .event-series {
   main .field__label {
     @apply mt-6 text-xl font-bold;
