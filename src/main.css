@@ -218,6 +218,17 @@ body.page-node-6117:not(.user-logged-in) .layout__region--second {
   display: none !important;
 }
 
+/* Join the CSSN form */
+details.webform-submission-information,
+nav#webform-submission-navigation-join_the_cssn_network {
+  @apply hidden;
+}
+
+.bg-md-teal [type="checkbox"]:checked,
+.bg-md-teal [type="radio"]:checked {
+  @apply bg-dark-teal border-white;
+}
+
 .access-qa-bot {
   position: relative;
   z-index: 1000;

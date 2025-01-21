@@ -78,3 +78,7 @@ div.btn-md-teal a:hover, a.btn-md-teal:hover, button.btn-md-teal:hover, input.bt
 .more-link a {
   text-decoration: none;
 }
+
+#join-cssn.bg-md-teal input#edit-actions-submit {
+  border: 4px solid white !important;
+}
