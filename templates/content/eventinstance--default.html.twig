@@ -41,6 +41,9 @@
       {{ content.tags }}
       <div class="mb-5">{{ content.date }}</div>
       <div class="mb-5">{{ content.location }}</div>
+      {% if content.virtual_meeting_link['#access'] == true %}
+        <div class="mb-5">{{ content.virtual_meeting_link }}</div>
+      {% endif %}
       {% if content.field_video['#items'] is not empty %}
       <div class="mb-5">
         {{ content.field_video }}
@@ -57,6 +60,7 @@
       <div class="mb-5">{{ content.event_type }}</div>
       <div class="mb-5">{{ content.affinity_group_node_ref }}</div>
       <div class="mb-5">{{ content.event_affiliation }}</div>
+      <div class="mb-5">{{ content.event_ical_link }}</div>
     </div>
   </div>
 {% endblock %}

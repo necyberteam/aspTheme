@@ -25,7 +25,10 @@
 }
 
 .form-text,
-.form-select {
+.form-select,
+.form-date,
+.form-time,
+.form-url {
   border-color: #ccc !important;
 }
 

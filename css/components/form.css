@@ -3,6 +3,9 @@
  * Visual styles for form components.
  */
 
+form {
+  max-width: 65ch;
+}
 form .field-multiple-table {
   margin: 0;
 }
@@ -61,8 +64,12 @@ label.option {
   display: inline-block;
   margin: 0;
   padding: 0;
+  font-family: Archivo;
   font-size: inherit;
   font-weight: bold;
+}
+form label {
+  display: block;
 }
 .form-checkboxes .form-item,
 .form-radios .form-item {

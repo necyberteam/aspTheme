@@ -43,6 +43,7 @@
     'field--name-' ~ field_name|clean_class,
     'field--type-' ~ field_type|clean_class,
     'field--label-' ~ label_display,
+    'my-6',
     label_display == 'inline' ? 'clearfix',
   ]
 %}
@@ -62,44 +63,40 @@
   {% if multiple %}
     <div{{ attributes.addClass(classes, 'field__items') }}>
       {% for item in items %}
-
-        {% set url = item.content['#url'].uri %}
-        {% if url == 'http://example.com' %}
-          {% set current = url('<current>') %}
-          {% set url_array = current['#markup']|split('/') %}
-          {% set eventinstance_id = url_array[4] %}
-          {% set url = "/events/" ~ eventinstance_id  ~ "/registrations/add?destination=/events/" ~ eventinstance_id  %}
-        {% endif %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
+        <div{{ item.attributes.addClass(field_classes) }}>
+          {% if item.content['#markup'] == 'Show' %}
+            {{ 'This event is displayed in public event listings'|trans }}
+          {% else %}
+            {{ 'This event is not displayed in public event listings'|trans }}
+          {% endif %}
         </div>
-
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, field_classes) }}>{{ item.content }}</div>
+      <div{{ attributes.addClass(classes, field_classes) }}>
+        {% if item.content['#markup'] == 'Show' %}
+          {{ 'This event is displayed in public event listings'|trans }}
+        {% else %}
+          {{ 'This event is not displayed in public event listings'|trans }}
+        {% endif %}
+      </div>
     {% endfor %}
   {% endif %}
 {% else %}
   <div{{ attributes.addClass(classes) }}>
-    <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
     {% if multiple %}
       <div class="field__items">
     {% endif %}
     {% for item in items %}
-
-        {% set url = item.content['#url'].uri %}
-        {% if url == 'http://example.com' %}
-          {% set current = url('<current>') %}
-          {% set url_array = current['#markup']|split('/') %}
-          {% set eventinstance_id = url_array[4] %}
-          {% set url = "/events/" ~ eventinstance_id  ~ "/registrations/add?destination=/events/" ~ eventinstance_id  %}
+      <div{{ item.attributes.addClass(field_classes) }}>
+        {% if item.content['#markup'] == 'Show' %}
+          {{ 'This event is displayed in public event listings'|trans }}
+        {% else %}
+          {{ 'This event is not displayed in public event listings'|trans }}
         {% endif %}
-				<div{{item.attributes.addClass(field_classes)}}>
-          <a class="btn btn-primary text-xl" href="{{ url }}">Register</a>
-        </div>
-
+      </div>
     {% endfor %}
     {% if multiple %}
       </div>
