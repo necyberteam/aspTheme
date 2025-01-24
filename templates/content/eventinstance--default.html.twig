@@ -36,7 +36,7 @@
 {% set attributes = attributes.removeAttribute('class') %}
 
 {% block content %}
-  <div class="grid grid-cols-1 md--grid-cols-4 gap-5 mb-20">
+  <div class="prose mb-20">
     <div class="md--col-span-3">
       {{ content.tags }}
       <div class="mb-5">{{ content.date }}</div>
@@ -51,16 +51,6 @@
       </div>
       {% endif %}
       <div class="mb-5">{{ content.description }}</div>
-    </div>
-    <div>
-      <div class="mb-5">{{ content.registration }}</div>
-      <div class="mb-5">{{ content.speakers }}</div>
-      <div class="mb-5">{{ content.contact }}</div>
-      <div class="mb-5">{{ content.skill_level }}</div>
-      <div class="mb-5">{{ content.event_type }}</div>
-      <div class="mb-5">{{ content.affinity_group_node_ref }}</div>
-      <div class="mb-5">{{ content.event_affiliation }}</div>
-      <div class="mb-5">{{ content.event_ical_link }}</div>
     </div>
   </div>
 {% endblock %}
