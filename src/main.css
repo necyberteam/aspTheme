@@ -256,3 +256,19 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-eve
     @apply flex items-center my-6;
   }
 }
+
+.view-id-recurring_events_registrations {
+  thead {
+    @apply border-x-0 border-b border-t border-black border-solid;
+    th {
+      @apply font-bold;
+      font-size: 18px;
+    }
+  }
+  tbody {
+    td {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+}
