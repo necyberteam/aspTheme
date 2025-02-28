@@ -245,6 +245,13 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-eve
   }
 }
 
+form[data-drupal-selector="views-exposed-form-recurring-events-registrations-user-event-registrations"] {
+  @apply max-w-full items-end;
+  > div {
+    @apply items-end;
+  }
+}
+
 .event-series {
   main .field__label {
     @apply mt-6 text-xl font-bold;
