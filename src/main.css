@@ -257,3 +257,9 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
     @apply mt-6 text-xl font-bold;
   }
 }
+
+.page-node-6106 {
+  .form-check {
+    @apply flex items-center my-6;
+  }
+}
