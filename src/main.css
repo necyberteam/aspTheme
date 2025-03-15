@@ -243,6 +243,16 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-eve
   .form-submit {
     @apply mt-10;
   }
+  > div {
+    @apply items-end;
+  }
+}
+
+form[data-drupal-selector="views-exposed-form-recurring-events-registrations-user-event-registrations"] {
+  @apply max-w-full items-end;
+  > div {
+    @apply items-end;
+  }
 }
 
 .event-series {
