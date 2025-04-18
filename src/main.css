@@ -263,7 +263,7 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
 
 .page-node-6106 {
   .form-check {
-    @apply flex items-center my-6;
+    @apply flex items-center my-4;
   }
 }
 
