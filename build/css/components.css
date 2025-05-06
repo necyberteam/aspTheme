@@ -79,6 +79,7 @@ details[open] > summary:after {
 /* IE8 does not support :not() and :last-child. */
 .breadcrumb li:before {
   content: " \/ ";
+  margin: 0 12px;
 }
 .breadcrumb li:first-child:before {
   content: none;
