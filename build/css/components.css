@@ -747,6 +747,16 @@ button.link {
 label button.link {
   font-weight: bold;
 }
+
+p a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+p a:hover {
+  text-decoration: none;
+  color: var(--dark-teal);
+}
 /**
  * @file
  * Visual styles for links.
