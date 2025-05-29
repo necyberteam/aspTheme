@@ -16,7 +16,7 @@ function aspTheme_preprocess_html(&$variables) {
   if (isset($path_args[1]) && isset($path_args[2]) && ($path_args[1] == 'node') && (is_numeric($path_args[2]))) {
     $variables['attributes']['class'][] = 'page-node-' . $path_args[2];
   }
-  if (isset($path_args[1]) && isset($path_args[2]) && ($path_args[1] == 'events') && ($path_args[2] == 'series') && (is_numeric($path_args[3]))) {
+  if (isset($path_args[1]) && isset($path_args[2]) && isset($path_args[3]) && ($path_args[1] == 'events') && ($path_args[2] == 'series') && (is_numeric($path_args[3]))) {
     $variables['attributes']['class'][] = 'event-series';
   }
 
