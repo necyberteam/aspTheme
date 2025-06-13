@@ -282,3 +282,11 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
     }
   }
 }
+
+.select2-selection {
+  min-width: 240px;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__rendered {
+  display: flex;
+}
