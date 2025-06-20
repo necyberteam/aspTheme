@@ -290,3 +290,20 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
 .select2-container .select2-selection--multiple .select2-selection__rendered {
   display: flex;
 }
+
+form.node-match-engagement-form {
+  h4.label {
+    color: var(--black);
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    font-family: Archivo;
+    font-size: 1.2em;
+  }
+  .ck-editor {
+    --ck-min-height: 200px !important;
+  }
+  .tabledrag-toggle-weight-wrapper {
+    display: none;
+  }
+}
