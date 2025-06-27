@@ -291,10 +291,6 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
   display: flex;
 }
 
-[for=edit-field-mentor-0-target-id] {
-  @apply invisible;
-}
-
 form.node-match-engagement-form {
   h4.label {
     color: var(--black);
@@ -309,5 +305,17 @@ form.node-match-engagement-form {
   }
   .tabledrag-toggle-weight-wrapper {
     display: none;
+  }
+  #edit-field-match-office-hours-wrapper {
+    @apply border border-yellow px-4;
+    .form-item-field-match-office-hours-value {
+      @apply flex;
+    }
+  }
+  [id=edit-field-match-office-hours-value--description] {
+    @apply w-auto ps-2;
+  }
+  [for=edit-field-mentor-0-target-id] {
+    @apply invisible;
   }
 }
