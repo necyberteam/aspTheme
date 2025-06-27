@@ -291,6 +291,10 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
   display: flex;
 }
 
+[for=edit-field-mentor-0-target-id] {
+  @apply invisible;
+}
+
 form.node-match-engagement-form {
   h4.label {
     color: var(--black);
