@@ -59,7 +59,7 @@ table[id^="field-affinity-group-node-values"] h4 .description {
   flex-wrap: wrap;
   align-items: center;
   label.option {
-    margin-left: 0.25rem;
+    margin-left: 0.5rem;
   }
   .description {
     width: 100%;
