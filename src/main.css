@@ -290,3 +290,9 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
 .select2-container .select2-selection--multiple .select2-selection__rendered {
   display: flex;
 }
+
+.path-taxonomy {
+  h2 a .field--name-name {
+    @apply hidden;
+  }
+}
