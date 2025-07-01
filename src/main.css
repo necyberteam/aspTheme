@@ -291,6 +291,36 @@ form[data-drupal-selector="views-exposed-form-recurring-events-registrations-use
   display: flex;
 }
 
+form.node-match-engagement-form {
+  h4.label {
+    color: var(--black);
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    font-family: Archivo;
+    font-size: 1.2em;
+  }
+  .ck-editor {
+    --ck-min-height: 200px !important;
+  }
+  .tabledrag-toggle-weight-wrapper {
+    display: none;
+  }
+  #edit-field-match-office-hours-wrapper {
+    @apply border border-yellow px-4;
+    .form-item-field-match-office-hours-value {
+      @apply flex;
+    }
+  }
+  [id=edit-field-match-office-hours-value--description] {
+    @apply w-auto ps-2;
+  }
+  [for=edit-field-mentor-0-target-id] {
+    @apply invisible;
+  }
+}
+
+
 .path-taxonomy {
   h2 a .field--name-name {
     @apply hidden;
