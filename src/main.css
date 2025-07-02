@@ -319,3 +319,10 @@ form.node-match-engagement-form {
     @apply invisible;
   }
 }
+
+
+.path-taxonomy {
+  h2 a .field--name-name {
+    @apply hidden;
+  }
+}
