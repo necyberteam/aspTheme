@@ -450,6 +450,8 @@ module.exports = {
     'w-fit',
     'w-full',
     'w-max',
+    'md--max-w-[14rem]',
+    'lg--max-w-[18rem]',
     'whitespace-nowrap',
     'z-10',
     '[&>*]--border',

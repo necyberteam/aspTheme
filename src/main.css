@@ -320,9 +320,30 @@ form.node-match-engagement-form {
   }
 }
 
-
 .path-taxonomy {
   h2 a .field--name-name {
     @apply hidden;
   }
 }
+
+.region-sidebar-first:has(.form-item-search-api-fulltext) {
+  @apply border-solid border-2 p-4;
+
+  #edit-search-api-fulltext--3 {
+    @apply md--max-w-[14rem] lg--max-w-[18rem];
+  }
+
+  button h2 {
+    @apply font-normal;
+  }
+}
+
+@media screen(md) {
+  .region-sidebar-first:has(.form-item-search-api-fulltext) {
+    @apply border-0 p-0;
+    button h2 {
+      @apply font-bold;
+    }
+  }
+}
+
