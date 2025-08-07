@@ -320,6 +320,15 @@ form.node-match-engagement-form {
   }
 }
 
+.block-facets {
+  h2 {
+    @apply mb-2;
+  }
+  ul {
+    @apply mt-2;
+  }
+}
+
 .path-taxonomy {
   h2 a .field--name-name {
     @apply hidden;
