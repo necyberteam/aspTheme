@@ -13,4 +13,27 @@ summary::after {
 details[open] > summary:after {
    transform: rotate(-180deg);
 }
+div .collapsiblockTitleCollapsed button {
+  position: relative;
+  background: none;
+  &:after {
+    content: url('/themes/contrib/asp-theme/images/icons/accordion-arrow.gif');
+    position: absolute;
+    right: 1rem;
+    top: 5px;
+    transition: 300ms;
+  }
 
+}
+.collapsiblockTitle button[aria-expanded="true"] {
+  position: relative;
+  background: none;
+  &:after {
+    content: url('/themes/contrib/asp-theme/images/icons/accordion-arrow.gif');
+    position: absolute;
+    right: 1rem;
+    top: 5px;
+    transition: 300ms;
+    transform: rotate(-180deg);
+  }
+}
