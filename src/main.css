@@ -356,3 +356,9 @@ form.node-match-engagement-form {
   }
 }
 
+.events-recorded-webinar {
+  iframe {
+    @apply rounded-md h-[250px];
+  }
+}
+
