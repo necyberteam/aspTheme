@@ -360,8 +360,8 @@ form.node-match-engagement-form {
   iframe {
     @apply rounded-md;
     aspect-ratio: 16 / 9;
-    width: 100% !important;
-    height: inherit !important;
+    width: 100%;
+    height: inherit;
   }
 }
 
