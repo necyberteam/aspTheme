@@ -356,3 +356,12 @@ form.node-match-engagement-form {
   }
 }
 
+.events-recorded-webinar {
+  iframe {
+    @apply rounded-md;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: inherit;
+  }
+}
+
