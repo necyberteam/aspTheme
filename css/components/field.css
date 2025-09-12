@@ -38,3 +38,11 @@
 #edit-search-api-fulltext--2 {
   width: 100%;
 }
+
+.field--name-field-media-oembed-video .field__item {
+  aspect-ratio: 16 / 9;
+}
+.field--name-field-media-oembed-video .field__item iframe {
+  width: 100%;
+  height: 100%;
+}
