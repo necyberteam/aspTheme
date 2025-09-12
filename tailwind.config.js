@@ -136,6 +136,7 @@ module.exports = {
     'border-4',
     'border-b',
     'border-b-2',
+    'border-b-4',
     'border-b-8',
     'border-black',
     'border-collapse',
