@@ -365,3 +365,9 @@ form.node-match-engagement-form {
   }
 }
 
+.path-events {
+  .form-autocomplete {
+    max-width: 516px;
+  }
+}
+
