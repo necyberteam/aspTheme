@@ -366,8 +366,9 @@ form.node-match-engagement-form {
 }
 
 .path-events {
+  #edit-field-event-speakers-0-value,
   .form-autocomplete {
-    max-width: 516px;
+    max-width: 475px;
   }
 }
 
