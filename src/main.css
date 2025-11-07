@@ -365,3 +365,8 @@ form.node-match-engagement-form {
   }
 }
 
+.path-node {
+  #edit-field-affinity-group-node-wrapper .tabledrag-toggle-weight {
+    @apply hidden;
+  }
+}
