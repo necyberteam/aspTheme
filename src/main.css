@@ -373,3 +373,15 @@ form.node-match-engagement-form {
   }
 }
 
+.events-mine .views-table {
+  tr td:nth-child(1),
+  tr td:nth-child(2),
+  th:nth-child(1),
+  th:nth-child(2) {
+    width: 50px;
+  }
+  tr td:nth-child(4) {
+    text-wrap: nowrap;
+  }
+}
+
