@@ -365,6 +365,26 @@ form.node-match-engagement-form {
   }
 }
 
+.path-events {
+  #edit-field-event-allocation-grant-0-value,
+  #edit-field-event-speakers-0-value,
+  .form-autocomplete {
+    max-width: 475px;
+  }
+}
+
+.events-mine .views-table {
+  tr td:nth-child(1),
+  tr td:nth-child(2),
+  th:nth-child(1),
+  th:nth-child(2) {
+    width: 50px;
+  }
+  tr td:nth-child(4) {
+    text-wrap: nowrap;
+  }
+}
+
 .path-node {
   #edit-field-affinity-group-node-wrapper .tabledrag-toggle-weight {
     @apply hidden;
