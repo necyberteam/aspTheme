@@ -375,6 +375,7 @@ module.exports = {
     'pb-32',
     'pe-2.5',
     'pe-4',
+    'pe-6',
     'pe-10',
     'pe-20',
     'ps-0',
