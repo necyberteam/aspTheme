@@ -160,6 +160,7 @@ module.exports = {
     'col-span-4',
     'col-span-5',
     'col-span-9',
+    'col-span-full',
     'lg--col-start-10',
     'col-start-10',
     'cursor-pointer',
