@@ -70,7 +70,11 @@
             {% set cell_classes = cell_classes|merge(['text-xl', 'font-bold', 'text-dark-teal']) %}
           {% endif %}
           <{{ cell.tag }}{{ cell.attributes.addClass(cell_classes) }}>
-            {{- cell.content -}}
+            {%- if cell.content is empty and cell.tag == 'th' -%}
+              {{ 'Actions'|t }}
+            {%- else -%}
+              {{- cell.content -}}
+            {%- endif -%}
           </{{ cell.tag }}>
         {% endfor %}
       </tr>
