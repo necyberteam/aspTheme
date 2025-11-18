@@ -65,6 +65,10 @@
               cell.active_table_sort ? 'is-active',
             ]
           %}
+          {% if cell.content["#tag"] is defined and cell.content["#tag"] == 'h4' %}
+            {% set cell = cell|merge({'content': cell.content|merge({'#tag': 'span'})}) %}
+            {% set cell_classes = cell_classes|merge(['text-xl', 'font-bold', 'text-dark-teal']) %}
+          {% endif %}
           <{{ cell.tag }}{{ cell.attributes.addClass(cell_classes) }}>
             {{- cell.content -}}
           </{{ cell.tag }}>
