@@ -371,6 +371,9 @@ form.node-match-engagement-form {
   .form-autocomplete {
     max-width: 475px;
   }
+  th .description {
+    @apply text-black font-normal text-sm;
+  }
 }
 
 .view-event-instance-mine .views-table {

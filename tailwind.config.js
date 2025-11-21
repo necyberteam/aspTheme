@@ -419,6 +419,7 @@ module.exports = {
     'text-md-teal',
     'text-orange',
     'text-sm',
+    'text-base',
     'text-sky-900',
     'text-teal',
     'text-lg',

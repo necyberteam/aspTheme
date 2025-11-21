@@ -21,7 +21,7 @@
   ]
 %}
 {% if title %}
-  <h4{{ title_attributes.addClass(title_classes) }}>{{ title }}</h4>
+  <span{{ title_attributes.addClass(title_classes) }}>{{ title }}</span>
 {% endif %}
 {{ content }}
 {% if errors %}
