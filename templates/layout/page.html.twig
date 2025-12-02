@@ -70,12 +70,6 @@
 		</div>
 		{{ page.breadcrumbs }}
   </header>
-	{{ page.cta }}
-	<div class="container prose">
-		{{ page.highlighted }}
-		{{ page.help }}
-		{{ page.title_banner }}
-	</div>
 
 	{% set main_content_classes = "" %}
 	{% block content %}
@@ -93,6 +87,14 @@
     {% set main_wrapper_classes = "layout-content" %}
 	{% endif %}
 	<main role="main" class="{{ main_content_classes }}">
+    {{ page.cta }}
+
+    <div class="container prose col-span-full">
+      {{ page.highlighted }}
+      {{ page.help }}
+      {{ page.title_banner }}
+    </div>
+
 		<a id="main-content" tabindex="-1" class="hidden"></a>
 		{# link is in html.html.twig #}
 
