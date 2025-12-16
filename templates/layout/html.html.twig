@@ -42,23 +42,28 @@
     <js-placeholder token="{{ placeholder_token }}">
   </head>
   <body{{ attributes.addClass(body_classes) }}>
-    <div id="universal-menus"></div>
-    <div id="header"></div>
-    <div id="site-menus"></div>
 
+    <nav role="navigation" aria-label="{{ 'Primary menu'|t }}">
+      <a href="#main-content" class="visually-hidden focusable skip-link">
+        {{ 'Skip to main content'|t }}
+      </a>
+
+      <div id="universal-menus"></div>
+      <div id="header"></div>
+      <div id="site-menus"></div>
+    </nav>
 
     {#
       Keyboard navigation/accessibility link to main content section in
       page.html.twig.
     #}
-    <a href="#main-content" class="visually-hidden focusable skip-link">
-      {{ 'Skip to main content'|t }}
-    </a>
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
-    <div id="footer-menus"></div>
-    <div id="footer"></div>
+    <footer>
+      <div id="footer-menus"></div>
+      <div id="footer"></div>
+    </footer>
     <div id="qa-bot"></div>
     <js-bottom-placeholder token="{{ placeholder_token }}">
   </body>
