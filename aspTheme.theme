@@ -70,6 +70,25 @@ function aspTheme_preprocess_field(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_webform_element_help().
+ *
+ * Fix accessibility issues with webform help tooltips.
+ */
+function aspTheme_preprocess_webform_element_help(array &$variables) {
+  // Change role from "tooltip" to "button" since this is an interactive element.
+  $variables['attributes']['role'] = 'button';
+
+  // Update aria-label to indicate this is a help button.
+  $help_title = $variables['help_title'] ?? '';
+  if ($help_title) {
+    $variables['attributes']['aria-label'] = t('Help for @title', ['@title' => $help_title]);
+  }
+  else {
+    $variables['attributes']['aria-label'] = t('Help');
+  }
+}
+
+/**
  * Add classes to tag field for CI Links.
  */
 function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$variables) {
