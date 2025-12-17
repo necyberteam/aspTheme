@@ -14,4 +14,6 @@
  * @see template_preprocess_menu_local_task()
  */
 #}
+{%- apply spaceless -%}
 <li{{ attributes.addClass(is_active ? 'is-active') }}>{{ link }}</li>
+{%- endapply -%}
