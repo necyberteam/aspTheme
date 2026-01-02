@@ -767,6 +767,17 @@ input {
 .cssn-directory-item li:nth-of-type(1n+6) {
   display: none;
 }
+
+.event-tags .item-list {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  li {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
 /**
  * @file
  * Style another element as a link.
