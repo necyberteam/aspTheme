@@ -35,7 +35,7 @@
   display: none;
 }
 
-.event-tags .item-list {
+.tag-list .item-list {
   ul {
     display: flex;
     flex-wrap: wrap;
