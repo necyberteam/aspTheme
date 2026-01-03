@@ -83,7 +83,7 @@
     {% endif %}
     <ul class="ps-0">
     {% for item in items %}
-      <li{{item.attributes.addClass(['field__item', "ps-0", 'list-none','me-2', 'mb-2', '[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</li>
+      <li{{item.attributes.addClass(['field__item', 'ps-0', 'list-none','me-2', 'mb-2', '[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</li>
     {% endfor %}
     </ul>
     {% if multiple %}

@@ -47,16 +47,24 @@
 %}
 {%
   set field_classes = [
-    'field__item', 'mb-2', 'me-2'
+    'field__item',
+    'ps-0',
+    'list-none',
+    'mb-2',
+    'me-2'
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
   {% if multiple %}
     <div class="field__items flex flex-wrap mb-3">
   {% endif %}
+  <ul class="ps-0 flex flex-wrap mb-0">
   {% for item in items %}
-    <div{{ item.attributes.addClass(field_classes) }}>{{ item.content }}</div>
+    <li{{ item.attributes.addClass(field_classes) }}>
+      {{ item.content }}
+    </li>
   {% endfor %}
+  </ul>
   {% if multiple %}
     </div>
   {% endif %}
