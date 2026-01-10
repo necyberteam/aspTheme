@@ -396,7 +396,7 @@ form.node-match-engagement-form {
   }
 }
 
-.page-node-11371 .views-field-custom-event-tags {
+.full-recorded-webinar .views-field-custom-event-tags {
   ul {
     @apply list-none p-0 m-0 flex flex-wrap;
   }
