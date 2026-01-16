@@ -59,15 +59,21 @@
 
 {% if label_hidden %}
   {% if multiple %}
-    <div{{ attributes.addClass(classes, 'field__items') }}>
+    <ul{{ attributes.addClass(classes, 'field__items', 'ps-0') }}>
       {% for item in items %}
-        <div{{item.attributes.addClass(['field__item','me-2','mb-2','[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</div>
+        <li{{item.attributes.addClass(['field__item', "ps-0",  'list-none','me-2','mb-2','[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>
+        {{ item.content }}
+        </li>
       {% endfor %}
-    </div>
+    </ul>
   {% else %}
+    <ul{{ attributes.addClass(classes, 'field__items', 'ps-0') }}>
     {% for item in items %}
-      <div{{item.attributes.addClass(['field__item','me-2','mb-2','[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</div>
+      <li{{item.attributes.addClass(['field__item', "ps-0", 'list-none','me-2','mb-2','[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>
+        {{ item.content }}
+      </li>
     {% endfor %}
+    </ul>
   {% endif %}
 {% else %}
   <div{{ attributes.addClass(classes) }}>
@@ -75,9 +81,11 @@
     {% if multiple %}
       <div class="field__items">
     {% endif %}
+    <ul class="ps-0">
     {% for item in items %}
-      <div{{item.attributes.addClass(['field__item','me-2', 'mb-2', '[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</div>
+      <li{{item.attributes.addClass(['field__item', 'ps-0', 'list-none','me-2', 'mb-2', '[&_a]--font-normal','[&_a]--no-underline','[&_a]--px-2','[&_a]--py-1','[&_a]--hover--border-dark-teal','[&_a]--border'])}}>{{ item.content }}</li>
     {% endfor %}
+    </ul>
     {% if multiple %}
       </div>
     {% endif %}

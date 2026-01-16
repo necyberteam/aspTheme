@@ -18,7 +18,7 @@
         </a>
       </li>
     {% for item in breadcrumb %}
-      <li class="uppercase text-menu font-semibold font-condensed">
+      <li class="uppercase text-menu font-semibold font-condensed text-ellipsis max-w-[150px] whitespace-nowrap overflow-hidden">
         {% if item.url %}
           <a href="{{ item.url }}" class="text-dark-teal no-underline hover--underline">{{ item.text }}</a>
         {% else %}

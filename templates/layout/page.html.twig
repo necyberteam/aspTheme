@@ -74,11 +74,11 @@
 	{% set main_content_classes = "" %}
 	{% block content %}
 	{% if sidebar_first and sidebar_second %}
-		{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr_25%] container" %}
+		{% set main_content_classes = "grid grid-cols-1 gap-5 pb-5 md--grid-cols-[25%_1fr_25%] container" %}
 	{% elseif sidebar_first %}
-		{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[25%_1fr] container" %}
+		{% set main_content_classes = "grid grid-cols-1 gap-5 pb-5 md--grid-cols-[25%_1fr] container" %}
 	{% elseif sidebar_second %}
-		{% set main_content_classes = "grid grid-cols-1 gap-5 py-5 md--grid-cols-[1fr_25%] container" %}
+		{% set main_content_classes = "grid grid-cols-1 gap-5 pb-5 md--grid-cols-[1fr_25%] container" %}
 	{% endif %}
 	{% if sidebar_first_classes is null %}
     {% set sidebar_first_classes = "layout-sidebar-first md--mx-auto prose" %}

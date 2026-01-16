@@ -42,7 +42,7 @@
     'top-10'
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
+<nav{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
     <h2{{ title_attributes }}>{{ label }}</h2>
@@ -51,4 +51,4 @@
   {% block content %}
     {{ content }}
   {% endblock %}
-</div>
+</nav>
