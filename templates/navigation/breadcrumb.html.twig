@@ -18,6 +18,7 @@
         </a>
       </li>
     {% for item in breadcrumb %}
+      {% if not (is_front and loop.last) %}
       <li class="uppercase text-menu font-semibold font-condensed text-ellipsis max-w-[150px] whitespace-nowrap overflow-hidden">
         {% if item.url %}
           <a href="{{ item.url }}" class="text-dark-teal no-underline hover--underline">{{ item.text }}</a>
@@ -25,6 +26,7 @@
           {{ item.text }}
         {% endif %}
       </li>
+      {% endif %}
     {% endfor %}
     </ol>
   </nav>
