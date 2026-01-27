@@ -5,12 +5,12 @@
  */
 #}
 
-  <div>
+  <ul class="list-none m-0 p-0">
   {% for item in items %}
-    <div>
+    <li class="m-0 mb-1 p-0">
       <a href='/community-persona/{{ item.content['#options']['entity'].uid.value }}'>
         {{item.content['#title']}}
       </a>
-    </div>
+    </li>
   {% endfor %}
-</div>
+</ul>
