@@ -407,3 +407,9 @@ form.node-match-engagement-form {
     @apply hover--text-black text-dark-teal font-normal no-underline whitespace-nowrap;
   }
 }
+
+/* Fix tag overlap on CC community-persona */
+.path-community-persona li.mb-1 {
+  margin-bottom: 0.75rem !important;
+}
+
