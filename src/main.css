@@ -155,6 +155,10 @@ table.views-table tr td {
   word-break:break-all;
 }
 
+.path-events .layout-content .field--name-description a {
+  word-break: normal;
+}
+
 .stretched-link::after {
   content: "";
   @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
