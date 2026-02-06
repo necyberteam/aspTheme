@@ -22,7 +22,7 @@
 {% set output = '' %}
 {% for key, item in row._entity.name %}
     {% set tag = item.entity.label|trim|lower|replace({' ':'-'}) %}
-    {% set output = output ~ '<a class="mb-2 me-2 px-2 py-1 border font-normal no-underline hover--border-dark-teal inline-block" href="/tags/' ~ tag ~ '">' ~ tag ~ '</a>' %}
+    {% set output = output ~ '<a class="mb-1 me-1 px-2 py-1 border font-normal no-underline hover--border-dark-teal inline-block" href="/tags/' ~ tag ~ '">' ~ tag ~ '</a>' %}
 {% endfor %}
 {{ output|raw -}}
 
