@@ -395,3 +395,7 @@ form.node-match-engagement-form {
     @apply hidden;
   }
 }
+
+.page-node-6114 .breadcrumb ol:has(.home) li:last-child {
+  @apply hidden;
+}
