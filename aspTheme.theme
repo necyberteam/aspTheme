@@ -5,7 +5,17 @@
  * Functions to support theming.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for \Drupal\node\NodeForm.
+ *
+ * Uses the node_edit_form theme hook to enable two-column layout.
+ */
+function aspTheme_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#theme'] = ['node_edit_form'];
+}
 
 /**
  * Implements hook_preprocess_html() for block templates.
