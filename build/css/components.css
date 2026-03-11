@@ -1283,6 +1283,85 @@ ul.sf-menu li:last-child {
 }
 /**
  * @file
+ * Node edit form two-column layout and sidebar vertical tabs as dropdowns.
+ */
+
+/* Override form max-width for node edit forms */
+form:has(.layout-node-form) {
+  max-width: none;
+}
+
+/* Reset stable9 float-based layout */
+.layout-region-node-main,
+.layout-region-node-footer,
+.layout-region-node-secondary {
+  float: none;
+  width: auto;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Two-column layout */
+.layout-node-form {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.layout-region-node-footer {
+  grid-column: 1 / -1;
+}
+
+/* Responsive: stack on narrow screens */
+@media (max-width: 768px) {
+  .layout-node-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Sidebar vertical tabs as dropdowns === */
+
+/* Reset vertical-tabs wrapper (core adds 15em left margin for the menu) */
+.layout-region-node-secondary .vertical-tabs {
+  margin: 0;
+  border: 0;
+}
+
+/* Hide the left tab menu */
+.layout-region-node-secondary .vertical-tabs__menu {
+  display: none;
+}
+
+/* Reset panes container */
+.layout-region-node-secondary .vertical-tabs__panes {
+  margin: 0;
+}
+
+/* Show all panes as collapsible details */
+.layout-region-node-secondary .vertical-tabs__pane {
+  display: block !important;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+/* Limit pane content height */
+details.vertical-tabs__pane > .details-wrapper {
+  max-height: 500px;
+  overflow: scroll;
+}
+
+/* Show the summary that core vertical-tabs CSS hides */
+.layout-region-node-secondary .vertical-tabs__pane > summary {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+}
+/**
+ * @file
  * Visual styles for nodes.
  */
 
