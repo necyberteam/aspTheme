@@ -1879,6 +1879,7 @@ ul.tabs {
 }
 
 #edit-event-registration-0 > legend .fieldset-legend,
+h2.label,
 h4.label {
   font-family: "Archivo", sans-serif;
   font-size: 1.25rem;
@@ -2003,7 +2004,6 @@ html:has(#edit-recur-type-wrapper) {
   }
 
   #edit-body-0-format-help {
-    order: 2;
     margin-left: 1rem;
   }
 
