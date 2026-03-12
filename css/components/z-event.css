@@ -30,10 +30,10 @@
 #edit-event-registration-0 > legend .fieldset-legend,
 h2.label,
 h4.label {
-  font-family: "Archivo", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1A5B6E;
+  font-family: "Archivo", sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #1A5B6E !important;
 }
 
 table[id^="field-affinity-group-node-values"] h4 .description {
