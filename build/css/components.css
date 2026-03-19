@@ -1244,7 +1244,7 @@ ul.sf-menu li:last-child {
 .messages--status {
   color: #1E4620;
   background-color: #D4EDDA;
-  box-shadow: -8px 0 0 #3E7540; /* LTR */
+  box-shadow: -8px 0 0 #1E4620; /* LTR */
 }
 [dir="rtl"] .messages--status {
   margin-left: 0;
