@@ -21,6 +21,7 @@
 .breadcrumb li:before {
   content: " \/ ";
   margin: 0 12px;
+  speak: none;
 }
 .breadcrumb li:first-child:before {
   content: none;
