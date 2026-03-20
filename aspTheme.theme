@@ -99,6 +99,17 @@ function aspTheme_preprocess_webform_element_help(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_datetime_wrapper().
+ *
+ * Pass the element ID to the template so labels can use a 'for' attribute.
+ */
+function aspTheme_preprocess_datetime_wrapper(&$variables) {
+  if (!empty($variables['element']['#id'])) {
+    $variables['for_id'] = $variables['element']['#id'] . '-date';
+  }
+}
+
+/**
  * Implements hook_preprocess_breadcrumb().
  */
 function aspTheme_preprocess_breadcrumb(&$variables) {

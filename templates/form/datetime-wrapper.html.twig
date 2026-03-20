@@ -21,7 +21,7 @@
   ]
 %}
 {% if title %}
-  <span{{ title_attributes.addClass(title_classes) }}>{{ title }}</span>
+  <label{{ title_attributes.addClass(title_classes) }}{% if for_id %} for="{{ for_id }}"{% endif %}>{{ title }}</label>
 {% endif %}
 {{ content }}
 {% if errors %}
