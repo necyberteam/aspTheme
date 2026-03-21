@@ -19,9 +19,8 @@
 }
 /* IE8 does not support :not() and :last-child. */
 .breadcrumb li:before {
-  content: " \/ ";
+  content: " \/ " / "";
   margin: 0 12px;
-  speak: none;
 }
 .breadcrumb li:first-child:before {
   content: none;
