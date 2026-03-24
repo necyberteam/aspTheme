@@ -184,7 +184,7 @@ div.btn-md-teal a:hover, a.btn-md-teal:hover, button.btn-md-teal:hover, input.bt
 
 .container-inline label:after,
 .container-inline .label:after {
-  content: ":";
+  content: ":" / "";
 }
 .form-type-radios .container-inline label:after,
 .form-type-checkboxes .container-inline label:after {
@@ -421,7 +421,7 @@ details[open] > summary:after {
   padding-left: 0.5em;
 }
 .field--label-inline .field__label::after {
-  content: ":";
+  content: ":" / "";
 }
 
 .form-text,
@@ -445,7 +445,8 @@ details[open] > summary:after {
 .field--name-field-media-oembed-video .field__item iframe {
   width: 100%;
   height: 100%;
-}/**
+}
+/**
  * @file
  * Default style for file module.
  */

@@ -21,7 +21,7 @@
   padding-left: 0.5em;
 }
 .field--label-inline .field__label::after {
-  content: ":";
+  content: ":" / "";
 }
 
 .form-text,
