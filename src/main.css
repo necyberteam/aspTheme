@@ -422,3 +422,15 @@ form.node-match-engagement-form {
   background-size: 300px 238px, 50% auto;
 }
 
+#node-access-news-form {
+  .layout-region-node-main {
+    @apply max-w-[85vw];
+  }
+  [data-drupal-selector="edit-field-affinity-group-node-0-target-id"] {
+    @apply max-w-[60vw];
+  }
+  [data-drupal-selector="edit-field-news-external-link-0-title"],
+  [data-drupal-selector="edit-field-news-external-link-0-uri"] {
+    @apply max-w-[90vw];
+  }
+}
