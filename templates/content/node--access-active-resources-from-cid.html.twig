@@ -1,0 +1,505 @@
+{#
+/**
+ * @file
+ * Theme override for ACCESS Active Resource (CiDeR) RP documentation page.
+ *
+ * Renders the full resource provider documentation page with:
+ * - ARA recommendation banner (driven by URL params / localStorage)
+ * - Resource title with MFA/account badges
+ * - Description from field_rp_description
+ * - Login section with SSH dropdown + OnDemand login
+ * - File transfer table
+ * - Storage table with external storage section
+ * - Queue specifications table
+ * - Most frequently used software table
+ * - Datasets section
+ * - Sidebar with support links, useful links, office hours, chatbot
+ *
+ * Field data is accessed directly from the node entity for maximum
+ * template control. Paragraph fields are iterated for tabular display.
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'rp-documentation',
+  ]
+%}
+{{ attach_library('aspTheme/node') }}
+
+{# Extract field values for easier access in the template #}
+{% set rp_description = node.field_rp_description.value %}
+{% set mfa_required = node.field_rp_mfa_required.value %}
+{% set account_required = node.field_rp_account_required.value %}
+{% set recommended_login = node.field_rp_recommended_login.value %}
+{% set ondemand_url = node.field_rp_ondemand_url.0.url %}
+{% set office_hours = node.field_rp_office_hours.value %}
+{% set external_storage = node.field_rp_external_storage.value %}
+{% set top_software_json = node.field_rp_top_software.value %}
+{% set last_updated = node.getChangedTime()|date('m/d/y') %}
+
+<article{{ attributes.addClass(classes) }}>
+
+  {# ========== ARA Recommendation Banner ========== #}
+  <div id="ara-recommendation-banner" class="bg-primary-blue-bg text-primary-blue border-l-4 border-primary-blue p-4 mb-6 hidden">
+    <p class="font-bold mb-1">The ACCESS Resource Advisor recommends this resource for your work.</p>
+    <p id="ara-recommendation-text" class="m-0 text-sm"></p>
+    <button id="ara-dismiss" class="text-sm underline text-primary-blue mt-2 cursor-pointer bg-transparent border-0 p-0">Dismiss</button>
+  </div>
+
+  <div class="grid grid-cols-1 gap-8 md--grid-cols-[1fr_25%]">
+
+    {# ========== Main Content Column ========== #}
+    <div class="rp-main-content">
+
+      {# ========== Title + Badges ========== #}
+      <div class="mb-1">
+        <p class="text-sm text-dark-gray mb-1">Last update {{ last_updated }}</p>
+      </div>
+
+      {{ title_prefix }}
+      {{ title_suffix }}
+      <div class="flex flex-wrap items-center gap-4 mb-4 justify-between">
+        <div class="flex gap-4 items-center ms-auto">
+          {% if mfa_required %}
+            <span class="flex items-center gap-1 text-sm">
+              <i class="bi bi-check-circle-fill text-teal"></i> 2FA/MFA
+            </span>
+          {% endif %}
+          {% if account_required %}
+            <span class="flex items-center gap-1 text-sm">
+              <i class="bi bi-check-circle-fill text-teal"></i> RP account needed
+            </span>
+          {% endif %}
+        </div>
+      </div>
+      {{ title_suffix }}
+
+      {# --- Description --- #}
+      {% if rp_description %}
+        <div class="rp-description prose mb-8">
+          {{ node.field_rp_description.value|raw }}
+        </div>
+      {% endif %}
+
+      {# --- Embedded Chatbot --- #}
+      <div class="rp-chatbot mb-8">
+        <div class="flex items-center gap-4" style="flex-direction: row-reverse;">
+          <button id="rp-chatbot-toggle" data-label="Ask about {{ node.label }}" class="flex items-center justify-center bg-dark-teal text-white cursor-pointer border-0 hover--bg-md-teal" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;" aria-label="Ask about {{ node.label }}">
+            <img src="/themes/contrib/asp-theme/images/icons/ACCESS-arrrow.svg" alt="ACCESS" style="width: 36px; height: 36px;">
+          </button>
+          <span id="rp-chatbot-tooltip" class="text-white text-sm py-1 px-3 rounded-md whitespace-nowrap" style="background: #107180; position: relative;">Ask about {{ node.label }}<span style="position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid #107180;"></span></span>
+        </div>
+        <div id="rp-chatbot-container" class="mt-4 border border-light-gray rounded-md overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease;">
+          <div class="embedded-qa-bot" style="min-height: 450px;"></div>
+        </div>
+      </div>
+
+      {# --- Login Section --- #}
+      {% set ssh_logins = node.field_rp_ssh_logins %}
+      {% if ssh_logins|length > 0 or ondemand_url %}
+        <div class="rp-login mb-8">
+          <h2>Login to {{ node.label }}</h2>
+          <div class="grid grid-cols-1 gap-4 md--grid-cols-2">
+
+            {# SSH Login dropdown — hostname extracted from link URL #}
+            {% if ssh_logins|length > 0 %}
+              <div class="border border-light-gray rounded-md p-4">
+                <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
+                {% set first_hostname = ssh_logins[0].uri|replace({'https://': '', 'http://': '', 'internal:/': ''}) %}
+                <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2">
+                  {% for login in ssh_logins %}
+                    {% set hostname = login.uri|replace({'https://': '', 'http://': '', 'internal:/': ''}) %}
+                    {% set is_recommended = (hostname == recommended_login) %}
+                    <option value="{{ hostname }}" {{ is_recommended ? 'selected' : '' }}>
+                      {{ login.title }}{% if is_recommended and 'RECOMMENDED' not in login.title %} | RECOMMENDED{% endif %}
+                    </option>
+                    {% if is_recommended %}
+                      {% set first_hostname = hostname %}
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
+                  <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh &lt;your_username&gt;@<span id="rp-ssh-hostname">{{ first_hostname }}</span></code>
+                </div>
+
+                {# Login help links #}
+                {% set login_help = node.field_rp_login_help_links %}
+                {% if login_help|length > 0 %}
+                  <div class="flex flex-wrap gap-3 text-sm">
+                    {% for link in login_help %}
+                      <a href="{{ link.uri|replace({'internal:': ''}) }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
+                        <i class="bi bi-play-circle"></i> {{ link.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {# OnDemand Login #}
+            {% if ondemand_url %}
+              <div class="border border-light-gray rounded-md p-4">
+                <h3 class="text-lg font-bold mt-0 mb-3">ACCESS OnDemand Login</h3>
+                <a href="{{ ondemand_url }}" class="inline-block bg-orange text-white font-bold py-2 px-5 rounded-md no-underline hover--opacity-80">
+                  LOGIN
+                </a>
+                <div class="mt-3">
+                  <a href="https://ondemand.connectci.org" class="text-sm text-md-teal no-underline hover--underline flex items-center gap-1">
+                    <i class="bi bi-box-arrow-up-right"></i> How do I use ACCESS OnDemand?
+                  </a>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          {# Account setup link #}
+          {% set account_setup = node.field_rp_account_setup_url %}
+          {% if account_setup|length > 0 %}
+            <div class="mt-3">
+              <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-md-teal no-underline hover--underline">
+                {{ account_setup.0.title ?: 'RP Account Setup' }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {# --- File Transfer Table --- #}
+      {% if field_rp_file_transfer_items|length > 0 %}
+        <div class="rp-file-transfer mb-8">
+          <h2>File Transfer</h2>
+          <p class="text-sm text-dark-gray mb-3">Use Globus for large transfers. SCP and Rsync are recommended for small to medium-sized transfers only.</p>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="border-b-2 border-gray">
+                  <th class="text-left py-2 pr-4 font-semibold">Supported Methods</th>
+                  <th class="text-left py-2 pr-4 font-semibold">Data Transfer Node</th>
+                  <th class="text-left py-2 font-semibold">URL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for paragraph in field_rp_file_transfer_items %}
+                  <tr class="border-b border-light-gray">
+                    <td class="py-2 pr-4">
+                      {{ paragraph.field_rp_method.value|upper }}
+                      {% if paragraph.field_rp_recommended.value %}
+                        <span class="text-xs font-bold text-dark-gray">| RECOMMENDED</span>
+                      {% endif %}
+                    </td>
+                    <td class="py-2 pr-4">{{ paragraph.field_rp_transfer_node.value }}</td>
+                    <td class="py-2">
+                      {% if paragraph.field_rp_transfer_url.0.uri %}
+                        <a href="{{ paragraph.field_rp_transfer_url.0.uri|replace({'internal:': ''}) }}" class="text-md-teal no-underline hover--underline">
+                          {{ paragraph.field_rp_transfer_url.0.title ?: paragraph.field_rp_transfer_url.0.uri|replace({'internal:': ''}) }}
+                        </a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+
+      {# --- Storage Section --- #}
+      {% if field_rp_storage_items|length > 0 or external_storage %}
+        <div class="rp-storage mb-8">
+          <h2>Storage</h2>
+
+          {# File System Table #}
+          {% if field_rp_storage_items|length > 0 %}
+            <h3 class="text-teal font-bold">File System</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="border-b-2 border-gray">
+                    <th class="text-left py-2 pr-4 font-semibold">Directory</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Path</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Quota</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Purge</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Backup</th>
+                    <th class="text-left py-2 font-semibold">Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for paragraph in field_rp_storage_items %}
+                    <tr class="border-b border-light-gray">
+                      <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value }}</td>
+                      <td class="py-2 pr-4"><code>{{ paragraph.field_rp_fs_path.value }}</code></td>
+                      <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value }}</td>
+                      <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value }}</td>
+                      <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value }}</td>
+                      <td class="py-2">{{ paragraph.field_rp_fs_notes.value }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% endif %}
+
+          {# External Storage #}
+          {% if external_storage %}
+            <h3 class="text-teal font-bold mt-6">External Storage</h3>
+            <div class="prose">
+              {{ external_storage|raw }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {# --- Jobs / Queue Specifications --- #}
+      {% if field_rp_queue_specs_items|length > 0 %}
+        <div class="rp-queue-specs mb-8">
+          <h2>Jobs</h2>
+          <h3>Queue specifications</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="border-b-2 border-gray">
+                  <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                  <th class="text-left py-2 pr-4 font-semibold">Wall Time</th>
+                  <th class="text-left py-2 pr-4 font-semibold">Purpose</th>
+                  <th class="text-left py-2 pr-4 font-semibold">CPUs</th>
+                  <th class="text-left py-2 pr-4 font-semibold">GPUs</th>
+                  <th class="text-left py-2 pr-4 font-semibold">RAM</th>
+                  <th class="text-left py-2 font-semibold">Wait Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for paragraph in field_rp_queue_specs_items %}
+                  <tr class="border-b border-light-gray">
+                    <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_queue_name.value }}</td>
+                    <td class="py-2 pr-4"><!-- dynamic from XDMoD --></td>
+                    <td class="py-2 pr-4 text-sm">
+                      {{ paragraph.field_rp_queue_purpose.value }}
+                    </td>
+                    <td class="py-2 pr-4">{{ paragraph.field_rp_cpus.value }}</td>
+                    <td class="py-2 pr-4">{{ paragraph.field_rp_gpus.value }}</td>
+                    <td class="py-2 pr-4">{{ paragraph.field_rp_ram.value }}</td>
+                    <td class="py-2"><!-- dynamic from XDMoD --></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+
+      {# --- Most Frequently Used Software --- #}
+      {% if top_software|length > 0 %}
+        <div class="rp-top-software mb-8">
+          <h2>Most Frequently Used Software</h2>
+          <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}.</p>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="border-b-2 border-gray">
+                  <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                  <th class="text-left py-2 pr-4 font-semibold">Version</th>
+                  <th class="text-left py-2 pr-4 font-semibold">Description</th>
+                  <th class="text-left py-2 font-semibold">Research Discipline</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for software in top_software %}
+                  <tr class="border-b border-light-gray">
+                    <td class="py-2 pr-4 font-semibold">{{ software.name }}</td>
+                    <td class="py-2 pr-4">{{ software.version }}</td>
+                    <td class="py-2 pr-4 text-sm">
+                      {% if software.description|length > 120 %}
+                        {{ software.description|slice(0, 120) }}...
+                        <button class="text-md-teal text-sm bg-transparent border-0 cursor-pointer underline p-0">more</button>
+                      {% else %}
+                        {{ software.description }}
+                      {% endif %}
+                    </td>
+                    <td class="py-2">{{ software.discipline }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endif %}
+
+      {# --- Datasets --- #}
+      {% if field_rp_datasets_items|length > 0 %}
+        <div class="rp-datasets mb-8">
+          <h2>Datasets</h2>
+          {% for paragraph in field_rp_datasets_items %}
+            <div class="mb-4">
+              <h3 class="mt-0">{{ paragraph.field_rp_dataset_name.value }}</h3>
+              {% if paragraph.field_rp_dataset_description.value %}
+                <div class="prose">
+                  {{ paragraph.field_rp_dataset_description.value|raw }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+    </div>{# /.rp-main-content #}
+
+    {# ========== Sidebar ========== #}
+    <aside class="rp-sidebar">
+
+      {# Support Links #}
+      {% set support_links = node.field_rp_support_links %}
+      {% if support_links|length > 0 or office_hours %}
+        <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
+          <h3 class="mt-0 text-lg font-bold text-white">Get Support</h3>
+          {% if support_links|length > 0 %}
+            <ul class="list-none p-0 m-0 mb-3">
+              {% for link in support_links %}
+                <li class="mb-2">
+                  <a href="{{ link.uri|replace({'internal:': ''}) }}" class="text-white no-underline hover--underline hover--text-white">
+                    {{ link.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if office_hours %}
+            <div class="border-t border-md-teal pt-3">
+              <p class="font-bold mb-1 text-sm">OFFICE HOURS</p>
+              <p class="m-0 text-sm">{{ office_hours }}</p>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {# In-page Navigation #}
+      <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
+        <h3 class="mt-0 text-lg font-bold text-white">{{ node.label }}</h3>
+        <ul class="list-none p-0 m-0">
+          {% if ssh_logins|length > 0 or ondemand_url %}
+            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-login').scrollIntoView({behavior:'smooth'});return false;">Login Information</a></li>
+          {% endif %}
+          {% if field_rp_file_transfer_items|length > 0 %}
+            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-file-transfer').scrollIntoView({behavior:'smooth'});return false;">File Transfer</a></li>
+          {% endif %}
+          {% if field_rp_storage_items|length > 0 or external_storage %}
+            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-storage').scrollIntoView({behavior:'smooth'});return false;">Storage</a></li>
+          {% endif %}
+          {% if field_rp_queue_specs_items|length > 0 %}
+            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-queue-specs').scrollIntoView({behavior:'smooth'});return false;">Jobs</a></li>
+          {% endif %}
+          {% if top_software_json %}
+            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-top-software').scrollIntoView({behavior:'smooth'});return false;">Frequently Used Software</a></li>
+          {% endif %}
+          {% if field_rp_datasets_items|length > 0 %}
+            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-datasets').scrollIntoView({behavior:'smooth'});return false;">Datasets</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {# Useful Links #}
+      {% set useful_links = node.field_rp_useful_links %}
+      {% if useful_links|length > 0 %}
+        <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
+          {% for link in useful_links %}
+            <a href="{{ link.uri|replace({'internal:': ''}) }}" class="block text-white no-underline hover--underline hover--text-white mb-2 text-sm">
+              {{ link.title }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {# Personalize / Login CTA #}
+      <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
+        <h3 class="mt-0 text-lg font-bold text-white">PERSONALIZE THIS PAGE</h3>
+        <a href="/user/login?destination={{ url }}" class="inline-block bg-orange text-white font-bold py-2 px-4 rounded-md no-underline hover--opacity-80 text-sm">
+          LOGIN TO ACCESS
+        </a>
+      </div>
+
+    </aside>{# /.rp-sidebar #}
+
+  </div>{# /.grid #}
+
+</article>
+
+{# ========== ARA Banner JavaScript ========== #}
+<script>
+(function() {
+  var banner = document.getElementById('ara-recommendation-banner');
+  var textEl = document.getElementById('ara-recommendation-text');
+  var dismissBtn = document.getElementById('ara-dismiss');
+  var storageKey = 'ara_recommendation_{{ node.id }}';
+
+  // Check URL params first, then localStorage
+  var params = new URLSearchParams(window.location.search);
+  var araContext = params.get('ara_context');
+
+  if (araContext) {
+    localStorage.setItem(storageKey, araContext);
+  } else {
+    araContext = localStorage.getItem(storageKey);
+  }
+
+  if (araContext) {
+    textEl.textContent = araContext;
+    banner.classList.remove('hidden');
+  }
+
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', function() {
+      localStorage.removeItem(storageKey);
+      banner.classList.add('hidden');
+    });
+  }
+})();
+</script>
+
+{# ========== SSH Login Selector JavaScript ========== #}
+<script>
+(function() {
+  var select = document.getElementById('rp-ssh-login-select');
+  var hostname = document.getElementById('rp-ssh-hostname');
+  if (select && hostname) {
+    select.addEventListener('change', function() {
+      hostname.textContent = this.value;
+    });
+  }
+})();
+</script>
+
+{# ========== Chatbot Toggle JavaScript ========== #}
+<script>
+(function() {
+  var toggle = document.getElementById('rp-chatbot-toggle');
+  var container = document.getElementById('rp-chatbot-container');
+  var tooltip = document.getElementById('rp-chatbot-tooltip');
+  var isOpen = false;
+  function toggleChat() {
+    isOpen = !isOpen;
+    if (isOpen) {
+      container.style.maxHeight = container.scrollHeight + 'px';
+      container.style.opacity = '1';
+    } else {
+      container.style.maxHeight = '0';
+      container.style.opacity = '0';
+    }
+    if (tooltip) {
+      tooltip.style.opacity = isOpen ? '0' : '1';
+      tooltip.style.transition = 'opacity 0.3s ease';
+    }
+  }
+  if (toggle && container) {
+    toggle.addEventListener('click', toggleChat);
+    if (tooltip) {
+      tooltip.style.cursor = 'pointer';
+      tooltip.addEventListener('click', toggleChat);
+    }
+  }
+})();
+</script>
