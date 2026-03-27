@@ -27,6 +27,8 @@ module.exports = {
         'black': '#232323',
         'white': '#ffffff',
         'white-er': '#ffffff',
+        'primary-blue-bg': '#CCE5FF',
+        'primary-blue': '#004086',
       },
       fontSize: {
         'menu': '14px'

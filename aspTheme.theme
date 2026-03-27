@@ -110,6 +110,46 @@ function aspTheme_preprocess_datetime_wrapper(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_node() for access_active_resources_from_cid.
+ *
+ * Prepares variables for the RP documentation page template.
+ */
+function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables) {
+  $node = $variables['node'];
+
+  // Parse top software JSON into a render-ready array.
+  $variables['top_software'] = [];
+  if ($node->hasField('field_rp_top_software') && !$node->get('field_rp_top_software')->isEmpty()) {
+    $json = $node->get('field_rp_top_software')->value;
+    $decoded = json_decode($json, TRUE);
+    if (is_array($decoded)) {
+      $variables['top_software'] = $decoded;
+    }
+  }
+
+  // Pre-load paragraph data to avoid $ref->entity NULL issues.
+  $paragraph_storage = \Drupal::entityTypeManager()->getStorage('paragraph');
+  $paragraph_fields = [
+    'field_rp_file_transfer',
+    'field_rp_storage',
+    'field_rp_queue_specs',
+    'field_rp_datasets',
+    'field_rp_ssh_login_nodes',
+  ];
+  foreach ($paragraph_fields as $field_name) {
+    $variables[$field_name . '_items'] = [];
+    if ($node->hasField($field_name)) {
+      foreach ($node->get($field_name) as $ref) {
+        $paragraph = $paragraph_storage->loadRevision($ref->target_revision_id);
+        if ($paragraph) {
+          $variables[$field_name . '_items'][] = $paragraph;
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_breadcrumb().
  */
 function aspTheme_preprocess_breadcrumb(&$variables) {
