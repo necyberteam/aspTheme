@@ -136,6 +136,18 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
       }
     }
   }
+
+  // Parse queue metrics JSON and build a lookup keyed by queue name.
+  $variables['queue_metrics'] = [];
+  $variables['queue_metrics_updated'] = NULL;
+  if ($node->hasField('field_rp_queue_metrics') && !$node->get('field_rp_queue_metrics')->isEmpty()) {
+    $json = $node->get('field_rp_queue_metrics')->value;
+    $decoded = json_decode($json, TRUE);
+    if (is_array($decoded) && !empty($decoded['queues'])) {
+      $variables['queue_metrics'] = $decoded['queues'];
+      $variables['queue_metrics_updated'] = $decoded['updated'] ?? NULL;
+    }
+  }
 }
 
 /**
