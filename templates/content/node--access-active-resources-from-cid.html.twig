@@ -36,7 +36,6 @@
 {% set rp_description = node.field_rp_description.value %}
 {% set mfa_required = node.field_rp_mfa_required.value %}
 {% set account_required = node.field_rp_account_required.value %}
-{% set recommended_login = node.field_rp_recommended_login.value %}
 {% set ondemand_url = node.field_rp_ondemand_url.0.url %}
 {% set office_hours = node.field_rp_office_hours.value %}
 {% set external_storage = node.field_rp_external_storage.value %}
@@ -101,27 +100,29 @@
       </div>
 
       {# --- Login Section --- #}
-      {% set ssh_logins = node.field_rp_ssh_logins %}
+      {% set ssh_logins = field_rp_ssh_login_nodes_items %}
       {% if ssh_logins|length > 0 or ondemand_url %}
         <div class="rp-login mb-8">
           <h2>Login to {{ node.label }}</h2>
           <div class="grid grid-cols-1 gap-4 md--grid-cols-2">
 
-            {# SSH Login dropdown — hostname extracted from link URL #}
+            {# SSH Login dropdown — uses paragraph with recommended boolean #}
             {% if ssh_logins|length > 0 %}
               <div class="border border-light-gray rounded-md p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
-                {% set first_hostname = ssh_logins[0].uri|replace({'https://': '', 'http://': '', 'internal:/': ''}) %}
+                {% set first_hostname = ssh_logins[0].field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
+                {% for login in ssh_logins %}
+                  {% if login.field_rp_recommended.value %}
+                    {% set first_hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
+                  {% endif %}
+                {% endfor %}
                 <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2">
                   {% for login in ssh_logins %}
-                    {% set hostname = login.uri|replace({'https://': '', 'http://': '', 'internal:/': ''}) %}
-                    {% set is_recommended = (hostname == recommended_login) %}
+                    {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
+                    {% set is_recommended = login.field_rp_recommended.value %}
                     <option value="{{ hostname }}" {{ is_recommended ? 'selected' : '' }}>
-                      {{ login.title }}{% if is_recommended and 'RECOMMENDED' not in login.title %} | RECOMMENDED{% endif %}
+                      {{ login.field_rp_ssh_url.title ?: hostname }}{% if is_recommended %} | RECOMMENDED{% endif %}
                     </option>
-                    {% if is_recommended %}
-                      {% set first_hostname = hostname %}
-                    {% endif %}
                   {% endfor %}
                 </select>
                 <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
@@ -381,7 +382,7 @@
       <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
         <h3 class="mt-0 text-lg font-bold text-white">{{ node.label }}</h3>
         <ul class="list-none p-0 m-0">
-          {% if ssh_logins|length > 0 or ondemand_url %}
+          {% if field_rp_ssh_login_nodes_items|length > 0 or ondemand_url %}
             <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-login').scrollIntoView({behavior:'smooth'});return false;">Login Information</a></li>
           {% endif %}
           {% if field_rp_file_transfer_items|length > 0 %}

@@ -123,6 +123,7 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
     'field_rp_storage',
     'field_rp_queue_specs',
     'field_rp_datasets',
+    'field_rp_ssh_login_nodes',
   ];
   foreach ($paragraph_fields as $field_name) {
     $variables[$field_name . '_items'] = [];
