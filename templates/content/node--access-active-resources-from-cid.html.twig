@@ -13,7 +13,7 @@
  * - Queue specifications table
  * - Most frequently used software table
  * - Datasets section
- * - Sidebar with support links, useful links, office hours, chatbot
+ * - Sidebar with support links, office hours, software CTAs, chatbot
  *
  * Field data is accessed directly from the node entity for maximum
  * template control. Paragraph fields are iterated for tabular display.
@@ -37,11 +37,9 @@
 {% set mfa_required = node.field_rp_mfa_required.value %}
 {% set account_required = node.field_rp_account_required.value %}
 {% set ondemand_url = node.field_rp_ondemand_url.0.url %}
-{% set office_hours = node.field_rp_office_hours.value %}
+{% set office_hours = node.field_rp_office_hours.0 %}
 {% set external_storage = node.field_rp_external_storage.value %}
 {% set top_software_json = node.field_rp_top_software.value %}
-{% set last_updated = node.getChangedTime()|date('m/d/y') %}
-
 <article{{ attributes.addClass(classes) }}>
 
   {# ========== ARA Recommendation Banner ========== #}
@@ -55,11 +53,6 @@
 
     {# ========== Main Content Column ========== #}
     <div class="rp-main-content">
-
-      {# ========== Title + Badges ========== #}
-      <div class="mb-1">
-        <p class="text-sm text-dark-gray mb-1">Last update {{ last_updated }}</p>
-      </div>
 
       {{ title_prefix }}
       <div class="flex flex-wrap items-center gap-4 mb-4 justify-between">
@@ -107,7 +100,7 @@
 
             {# SSH Login dropdown — uses paragraph with recommended boolean #}
             {% if ssh_logins|length > 0 %}
-              <div class="border border-light-gray rounded-md p-4">
+              <div class="border-2 border-dark-teal rounded-md p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
                 {% set first_hostname = ssh_logins[0].field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
                 {% for login in ssh_logins %}
@@ -144,9 +137,9 @@
 
             {# OnDemand Login #}
             {% if ondemand_url %}
-              <div class="border border-light-gray rounded-md p-4">
+              <div class="border-2 border-dark-teal rounded-md p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">ACCESS OnDemand Login</h3>
-                <a href="{{ ondemand_url }}" class="inline-block bg-orange text-white font-bold py-2 px-5 rounded-md no-underline hover--opacity-80">
+                <a href="{{ ondemand_url }}" class="btn btn-primary">
                   LOGIN
                 </a>
                 <div class="mt-3">
@@ -267,13 +260,13 @@
       {# Support Links #}
       {% set support_links = node.field_rp_support_links %}
       {% if support_links|length > 0 or office_hours %}
-        <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
+        <div class="bg-dark-teal text-white p-4 mb-4">
           <h3 class="mt-0 text-lg font-bold text-white">Get Support</h3>
           {% if support_links|length > 0 %}
-            <ul class="list-none p-0 m-0 mb-3">
+            <ul class="list-none p-0 m-0 mb-3 font-normal">
               {% for link in support_links %}
                 <li class="mb-2">
-                  <a href="{{ link.uri|replace({'internal:': ''}) }}" class="text-white no-underline hover--underline hover--text-white">
+                  <a href="{{ link.uri|replace({'internal:': ''}) }}" class="text-white no-underline hover--underline hover--text-white font-normal">
                     {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }}
                   </a>
                 </li>
@@ -283,14 +276,16 @@
           {% if office_hours %}
             <div class="border-t border-md-teal pt-3">
               <p class="font-bold mb-1 text-sm">OFFICE HOURS</p>
-              <p class="m-0 text-sm">{{ office_hours }}</p>
+              <a href="{{ office_hours.uri|replace({'internal:': ''}) }}" class="text-white no-underline hover--underline hover--text-white font-normal text-sm">
+                {{ office_hours.title ?: 'View Office Hours' }}
+              </a>
             </div>
           {% endif %}
         </div>
       {% endif %}
 
       {# In-page Navigation #}
-      <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
+      <div class="bg-dark-teal text-white p-4 mb-4">
         <h3 class="mt-0 text-lg font-bold text-white">{{ node.label }}</h3>
         <ul class="list-none p-0 m-0">
           {% if field_rp_ssh_login_nodes_items|length > 0 or ondemand_url %}
@@ -314,25 +309,30 @@
         </ul>
       </div>
 
-      {# Useful Links #}
-      {% set useful_links = node.field_rp_useful_links %}
-      {% if useful_links|length > 0 %}
-        <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
-          {% for link in useful_links %}
-            <a href="{{ link.uri|replace({'internal:': ''}) }}" class="block text-white no-underline hover--underline hover--text-white mb-2 text-sm">
-              {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }}
-            </a>
-          {% endfor %}
+      {# Software CTA: RP's official software page #}
+      {% set software_list_url = node.field_rp_software_list_url.0 %}
+      {% if software_list_url %}
+        <div class="bg-dark-teal text-white p-4 mb-4">
+          <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
+          <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
+            {{ software_list_url.title ?: 'VIEW SOFTWARE' }}
+          </a>
         </div>
       {% endif %}
 
-      {# Personalize / Login CTA #}
-      <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
-        <h3 class="mt-0 text-lg font-bold text-white">PERSONALIZE THIS PAGE</h3>
-        <a href="/user/login?destination={{ url }}" class="inline-block bg-orange text-white font-bold py-2 px-4 rounded-md no-underline hover--opacity-80 text-sm">
-          LOGIN TO ACCESS
-        </a>
-      </div>
+      {# Software CTA: SDS explorer — conditional on whether SDS has data for this resource #}
+      {% if sds_has_software and sds_resource_name %}
+        <div class="bg-dark-teal text-white p-4 mb-4">
+          <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
+          <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="btn btn-primary">
+            EXPLORE IN SDS
+          </a>
+        </div>
+      {% else %}
+        <div class="bg-light-gray p-4 mb-4">
+          <p class="text-sm text-dark-gray m-0">{{ node.label }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Discovery Service</a>.</p>
+        </div>
+      {% endif %}
 
     </aside>{# /.rp-sidebar (top) #}
 
@@ -467,71 +467,60 @@
         </div>
       {% endif %}
 
-  {# ========== Most Frequently Used Software (two-column with sidebar) ========== #}
+  {# ========== Most Frequently Used Software (full width) ========== #}
   {% if top_software|length > 0 %}
-    <div class="grid grid-cols-1 gap-8 md--grid-cols-[1fr_25%] mb-8">
-      <div class="rp-top-software">
-        <h2>Most Frequently Used Software</h2>
-        <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}.</p>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse">
-            <thead>
-              <tr class="border-b-2 border-gray">
-                <th class="text-left py-2 pr-4 font-semibold">Name</th>
-                <th class="text-left py-2 pr-4 font-semibold">Version</th>
-                <th class="text-left py-2 pr-4 font-semibold">Description</th>
-                <th class="text-left py-2 font-semibold">Research Discipline</th>
+    <div class="rp-top-software mb-8">
+      <h2>Most Frequently Used Software</h2>
+      <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="border-b-2 border-gray">
+              <th class="text-left py-2 pr-4 font-semibold">Name</th>
+              <th class="text-left py-2 pr-4 font-semibold">Version</th>
+              <th class="text-left py-2 pr-4 font-semibold">Description</th>
+              <th class="text-left py-2 font-semibold">Research Discipline</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for software in top_software %}
+              <tr class="border-b border-light-gray">
+                <td class="py-2 pr-4 font-semibold">{{ software.name }}</td>
+                <td class="py-2 pr-4">{{ software.versions|join(', ') }}</td>
+                <td class="py-2 pr-4 text-sm">{{ software.description }}</td>
+                <td class="py-2">{{ software.research_field }}</td>
               </tr>
-            </thead>
-            <tbody>
-              {% for software in top_software %}
-                <tr class="border-b border-light-gray">
-                  <td class="py-2 pr-4 font-semibold">{{ software.name }}</td>
-                  <td class="py-2 pr-4">{{ software.versions|join(', ') }}</td>
-                  <td class="py-2 pr-4 text-sm">{{ software.description }}</td>
-                  <td class="py-2">{{ software.research_field }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-
-      {# Software sidebar CTAs #}
-      <aside>
-        {% set software_list_url = node.field_rp_software_list_url.0 %}
-        {% if software_list_url %}
-          <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
-            <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
-            <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="inline-block bg-orange text-white font-bold py-2 px-4 rounded-md no-underline hover--opacity-80 text-sm">
-              {{ software_list_url.title ?: 'VIEW SOFTWARE' }}
-            </a>
-          </div>
-        {% endif %}
-        <div class="bg-dark-teal text-white rounded-md p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE IN ACCESS</h3>
-          <a href="https://sds-ara.access-ci.org" class="inline-block bg-orange text-white font-bold py-2 px-4 rounded-md no-underline hover--opacity-80 text-sm">
-            EXPLORE SOFTWARE
-          </a>
-        </div>
-      </aside>
-    </div>{# /.grid (software section) #}
+    </div>
   {% endif %}
 
   {# ========== Datasets (full width) ========== #}
   {% if field_rp_datasets_items|length > 0 %}
     <div class="rp-datasets mb-8">
       <h2>Datasets</h2>
-      {% for paragraph in field_rp_datasets_items %}
-        <div class="mb-4">
-          <h3 class="mt-0">{{ paragraph.field_rp_dataset_name.value }}</h3>
-          {% if paragraph.field_rp_dataset_description.value %}
-            <div class="prose">
-              {{ paragraph.field_rp_dataset_description.processed }}
-            </div>
-          {% endif %}
-        </div>
-      {% endfor %}
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="border-b-2 border-gray">
+              <th class="text-left py-2 pr-4 font-semibold">Name</th>
+              <th class="text-left py-2 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for paragraph in field_rp_datasets_items %}
+              {% if paragraph.field_rp_dataset_name.value|default('') %}
+              <tr class="border-b border-light-gray">
+                <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_dataset_name.value }}</td>
+                <td class="py-2 text-sm">{{ paragraph.field_rp_dataset_description.value|default('') ? paragraph.field_rp_dataset_description.processed : '' }}</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   {% endif %}
 
