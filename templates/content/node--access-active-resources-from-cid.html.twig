@@ -471,24 +471,30 @@
   {% if top_software|length > 0 %}
     <div class="rp-top-software mb-8">
       <h2>Most Frequently Used Software</h2>
-      <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}.</p>
+      <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
       <div class="overflow-x-auto">
         <table class="w-full border-collapse">
           <thead>
             <tr class="border-b-2 border-gray">
-              <th class="text-left py-2 pr-4 font-semibold">Name</th>
-              <th class="text-left py-2 pr-4 font-semibold">Version</th>
+              <th class="text-left py-2 pr-4 font-semibold">Application</th>
               <th class="text-left py-2 pr-4 font-semibold">Description</th>
-              <th class="text-left py-2 font-semibold">Research Discipline</th>
+              <th class="text-left py-2 pr-4 font-semibold">Research Discipline</th>
+              <th class="text-right py-2 font-semibold">Jobs</th>
             </tr>
           </thead>
           <tbody>
             {% for software in top_software %}
               <tr class="border-b border-light-gray">
-                <td class="py-2 pr-4 font-semibold">{{ software.name }}</td>
-                <td class="py-2 pr-4">{{ software.versions|join(', ') }}</td>
-                <td class="py-2 pr-4 text-sm">{{ software.description }}</td>
-                <td class="py-2">{{ software.research_field }}</td>
+                <td class="py-2 pr-4 font-semibold whitespace-nowrap">
+                  {%- if software.web_page -%}
+                    <a href="{{ software.web_page }}" class="text-md-teal no-underline hover--underline">{{ software.name }}</a>
+                  {%- else -%}
+                    {{ software.name }}
+                  {%- endif -%}
+                </td>
+                <td class="py-2 pr-4 text-sm">{{ software.description|default('') }}</td>
+                <td class="py-2 pr-4 text-sm">{{ software.research_field|default('') }}</td>
+                <td class="py-2 text-right whitespace-nowrap">{{ software.job_count|number_format }}</td>
               </tr>
             {% endfor %}
           </tbody>
