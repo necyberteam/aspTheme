@@ -1,0 +1,117 @@
+{#
+/**
+ * @file
+ * Theme override for Resource Group node on RP documentation listing.
+ *
+ * Renders a group of related resources with:
+ * - ARA recommendation banner (driven by URL params / localStorage)
+ * - Group description
+ * - Table of linked resources with links to their individual RP doc pages
+ *
+ * The ara_context parameter is passed through to individual resource links
+ * so the ARA banner persists when navigating from group to resource.
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'rp-documentation',
+    'rp-resource-group',
+  ]
+%}
+{{ attach_library('aspTheme/node') }}
+
+<article{{ attributes.addClass(classes) }}>
+
+  {# ========== ARA Recommendation Banner ========== #}
+  <div id="ara-recommendation-banner" class="bg-primary-blue-bg text-primary-blue border-l-4 border-primary-blue p-4 mb-6 hidden">
+    <p class="font-bold mb-1">The ACCESS Resource Advisor recommends these resources for your work.</p>
+    <p id="ara-recommendation-text" class="m-0 text-sm"></p>
+    <button id="ara-dismiss" class="text-sm underline text-primary-blue mt-2 cursor-pointer bg-transparent border-0 p-0">Dismiss</button>
+  </div>
+
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {# --- Description --- #}
+  {% if node.field_rp_description.value %}
+    <div class="rp-description prose mb-8">
+      {{ node.field_rp_description.processed }}
+    </div>
+  {% endif %}
+
+  {# --- Resources Table --- #}
+  {% if resources|length > 0 %}
+    <div class="rp-resource-group-list">
+      <h2>Resources in this group</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="border-b-2 border-gray">
+              <th class="text-left py-2 pr-4 font-semibold">Resource</th>
+              <th class="text-left py-2 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for resource in resources %}
+              <tr class="border-b border-light-gray">
+                <td class="py-3 pr-4 font-semibold whitespace-nowrap">
+                  <a href="{{ resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-link">
+                    {{ resource.title }}
+                  </a>
+                </td>
+                <td class="py-3 text-sm">
+                  {{ resource.description|raw }}
+                  <a href="{{ resource.url }}" class="text-md-teal no-underline hover--underline whitespace-nowrap">read more &raquo;</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+
+</article>
+
+{# ========== ARA Banner + Link Passthrough JavaScript ========== #}
+<script>
+(function() {
+  var banner = document.getElementById('ara-recommendation-banner');
+  var textEl = document.getElementById('ara-recommendation-text');
+  var dismissBtn = document.getElementById('ara-dismiss');
+  var storageKey = 'ara_recommendation_{{ node.id }}';
+
+  var params = new URLSearchParams(window.location.search);
+  var araContext = params.get('ara_context');
+
+  if (araContext) {
+    localStorage.setItem(storageKey, araContext);
+  } else {
+    araContext = localStorage.getItem(storageKey);
+  }
+
+  if (araContext) {
+    textEl.textContent = araContext;
+    banner.classList.remove('hidden');
+
+    // Append ara_context to all resource links so it persists through navigation.
+    var links = document.querySelectorAll('.rp-resource-link');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      var sep = href.indexOf('?') === -1 ? '?' : '&';
+      links[i].setAttribute('href', href + sep + 'ara_context=' + encodeURIComponent(araContext));
+    }
+  }
+
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', function() {
+      localStorage.removeItem(storageKey);
+      banner.classList.add('hidden');
+    });
+  }
+})();
+</script>
