@@ -199,6 +199,17 @@ function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$vari
 }
 
 /**
+ * Implements hook_preprocess_views_view() for rp_documentation_index.
+ *
+ * Passes permission flags to the view template for action buttons.
+ */
+function aspTheme_preprocess_views_view__rp_documentation_index(&$variables) {
+  $current_user = \Drupal::currentUser();
+  $variables['can_create_resource_group'] = $current_user->hasPermission('create resource_group content');
+  $variables['can_edit_resources'] = $current_user->hasPermission('edit any access_active_resources_from_cid content');
+}
+
+/**
  * Implements hook_preprocess_views_view_fields() for rp_documentation_index.
  *
  * For resource_group rows, adds child resources to render as an inline table.

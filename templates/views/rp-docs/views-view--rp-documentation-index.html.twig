@@ -21,6 +21,16 @@
   {% if header %}
     <header>
       {{ header }}
+      {% if can_create_resource_group or can_edit_resources %}
+        <div class="rp-admin-actions mb-4">
+          {% if can_create_resource_group %}
+            <a href="/node/add/resource_group" class="btn btn-sm btn-primary mr-2">+ Add Resource Group</a>
+          {% endif %}
+          {% if can_edit_resources %}
+            <a href="/rp-resources/manage" class="btn btn-sm btn-outline-secondary">Manage Resources</a>
+          {% endif %}
+        </div>
+      {% endif %}
     </header>
   {% endif %}
   {% if exposed %}
