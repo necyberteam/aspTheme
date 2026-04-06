@@ -225,7 +225,7 @@ function aspTheme_preprocess_views_view_fields__rp_documentation_index(&$variabl
       }
       $resources[] = [
         'title' => $resource->label(),
-        'url' => $resource->toUrl('canonical')->toString(),
+        'url' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $resource->id()),
         'description' => $description,
       ];
     }
@@ -264,7 +264,7 @@ function aspTheme_preprocess_node__resource_group(&$variables) {
       }
       $resources[] = [
         'title' => $resource->label(),
-        'url' => $resource->toUrl('canonical')->toString(),
+        'url' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $resource->id()),
         'description' => $description,
       ];
     }
