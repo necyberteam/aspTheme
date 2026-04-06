@@ -197,3 +197,78 @@ function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$vari
   }
   $variables['output'] = Markup::create($new_output);
 }
+
+/**
+ * Implements hook_preprocess_views_view_fields() for rp_documentation_index.
+ *
+ * For resource_group rows, adds child resources to render as an inline table.
+ */
+function aspTheme_preprocess_views_view_fields__rp_documentation_index(&$variables) {
+  $row = $variables['row'];
+  $node = $row->_entity ?? NULL;
+  $variables['rp_group_resources'] = [];
+
+  if ($node && $node->bundle() === 'resource_group' && $node->hasField('field_cider_resources')) {
+    $resources = [];
+    foreach ($node->get('field_cider_resources')->referencedEntities() as $resource) {
+      // Use rp_description summary if available, fall back to trimmed value.
+      $description = '';
+      if ($resource->hasField('field_rp_description') && !$resource->get('field_rp_description')->isEmpty()) {
+        $field = $resource->get('field_rp_description')->first();
+        if (!empty($field->summary)) {
+          $description = check_markup($field->summary, $field->format);
+        }
+        else {
+          $text = strip_tags($field->processed);
+          $description = mb_strlen($text) > 200 ? mb_substr($text, 0, 200) . '...' : $text;
+        }
+      }
+      $resources[] = [
+        'title' => $resource->label(),
+        'url' => $resource->toUrl('canonical')->toString(),
+        'description' => $description,
+      ];
+    }
+    $variables['rp_group_resources'] = $resources;
+
+    // Provide slug and node ID for anchor links and ARA banner.
+    $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id());
+    $slug = basename($alias);
+    $variables['rp_group_slug'] = $slug;
+    $variables['rp_node_id'] = $node->id();
+  }
+}
+
+/**
+ * Implements hook_preprocess_node() for resource_group.
+ *
+ * Builds the resources array for the resource group template by loading
+ * referenced CIDER resources and extracting their title, URL, and description.
+ */
+function aspTheme_preprocess_node__resource_group(&$variables) {
+  $node = $variables['node'];
+  $resources = [];
+
+  if ($node->hasField('field_cider_resources') && !$node->get('field_cider_resources')->isEmpty()) {
+    foreach ($node->get('field_cider_resources')->referencedEntities() as $resource) {
+      $description = '';
+      if ($resource->hasField('field_rp_description') && !$resource->get('field_rp_description')->isEmpty()) {
+        $field = $resource->get('field_rp_description')->first();
+        if (!empty($field->summary)) {
+          $description = check_markup($field->summary, $field->format);
+        }
+        else {
+          $text = strip_tags($field->processed);
+          $description = mb_strlen($text) > 200 ? mb_substr($text, 0, 200) . '...' : $text;
+        }
+      }
+      $resources[] = [
+        'title' => $resource->label(),
+        'url' => $resource->toUrl('canonical')->toString(),
+        'description' => $description,
+      ];
+    }
+  }
+
+  $variables['resources'] = $resources;
+}
