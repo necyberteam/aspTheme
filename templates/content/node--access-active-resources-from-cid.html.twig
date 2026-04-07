@@ -87,7 +87,7 @@
           <span id="rp-chatbot-tooltip" class="text-white text-sm py-1 px-3 rounded-md whitespace-nowrap" style="background: #107180; position: relative;">Ask about {{ node.label }}<span style="position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid #107180;"></span></span>
         </div>
         <div id="rp-chatbot-container" class="mt-4 border border-light-gray rounded-md overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease;">
-          <div class="embedded-qa-bot" style="min-height: 450px;"></div>
+          <div class="embedded-qa-bot" data-resource-context="{{ resource_context }}" style="min-height: 450px;"></div>
         </div>
       </div>
 
