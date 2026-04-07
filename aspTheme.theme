@@ -163,6 +163,23 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
       $variables['queue_metrics_updated'] = $decoded['updated'] ?? NULL;
     }
   }
+
+  // Look up the parent Resource Group for this resource, if any.
+  // Provides the resource context name for the embedded QA bot.
+  // Falls back to the resource's own title if not in a group.
+  $resource_groups = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties([
+      'type' => 'resource_group',
+      'field_cider_resources' => $node->id(),
+    ]);
+  if ($resource_groups) {
+    $group = reset($resource_groups);
+    $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($group->getTitle());
+  }
+  else {
+    $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($node->getTitle());
+  }
 }
 
 /**
