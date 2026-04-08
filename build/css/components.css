@@ -86,7 +86,7 @@ div .collapsiblockTitleCollapsed button {
 }
 /* IE8 does not support :not() and :last-child. */
 .breadcrumb li:before {
-  content: " \/ ";
+  content: " \/ " / "";
   margin: 0 12px;
 }
 .breadcrumb li:first-child:before {
@@ -184,7 +184,7 @@ div.btn-md-teal a:hover, a.btn-md-teal:hover, button.btn-md-teal:hover, input.bt
 
 .container-inline label:after,
 .container-inline .label:after {
-  content: ":";
+  content: ":" / "";
 }
 .form-type-radios .container-inline label:after,
 .form-type-checkboxes .container-inline label:after {
@@ -421,7 +421,7 @@ details[open] > summary:after {
   padding-left: 0.5em;
 }
 .field--label-inline .field__label::after {
-  content: ":";
+  content: ":" / "";
 }
 
 .form-text,
@@ -445,7 +445,8 @@ details[open] > summary:after {
 .field--name-field-media-oembed-video .field__item iframe {
   width: 100%;
   height: 100%;
-}/**
+}
+/**
  * @file
  * Default style for file module.
  */
@@ -748,6 +749,11 @@ input {
 .item-list li {
   margin: 0 0 0.25em 1.5em; /* LTR */
   padding: 0;
+}
+.checkbullet-img li {
+  background: url('../../images/icons/check-bullet.png') no-repeat;
+  background-size: 25px 24px;
+  padding-left: 35px;
 }
 [dir="rtl"] .item-list li {
   margin: 0 1.5em 0.25em 0;
@@ -1242,9 +1248,9 @@ ul.sf-menu li:last-child {
   margin-top: 0.769em;
 }
 .messages--status {
-  color: #3E7540;
+  color: #1E4620;
   background-color: #D4EDDA;
-  box-shadow: -8px 0 0 #3E7540; /* LTR */
+  box-shadow: -8px 0 0 #1E4620; /* LTR */
 }
 [dir="rtl"] .messages--status {
   margin-left: 0;
@@ -1879,11 +1885,12 @@ ul.tabs {
 }
 
 #edit-event-registration-0 > legend .fieldset-legend,
+h2.label,
 h4.label {
-  font-family: "Archivo", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1A5B6E;
+  font-family: "Archivo", sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #1A5B6E !important;
 }
 
 table[id^="field-affinity-group-node-values"] h4 .description {
@@ -2003,7 +2010,6 @@ html:has(#edit-recur-type-wrapper) {
   }
 
   #edit-body-0-format-help {
-    order: 2;
     margin-left: 1rem;
   }
 

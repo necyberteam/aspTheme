@@ -42,7 +42,7 @@
     'top-10'
   ]
 %}
-<nav{{ attributes.addClass(classes) }}>
+<nav{{ attributes.addClass(classes) }} aria-label="Tags navigation">
   {{ title_prefix }}
   {% if label %}
     <h2{{ title_attributes }}>{{ label }}</h2>

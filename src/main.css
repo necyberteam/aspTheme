@@ -417,3 +417,20 @@ form.node-match-engagement-form {
   margin-bottom: 0.75rem !important;
 }
 
+.page-node-6106 #block-ticketingchoices-2 {
+  background: url('/themes/contrib/asp-theme/images/misc/shapes-top.svg') no-repeat top right, url('/themes/contrib/asp-theme/images/misc/shapes-bottom.svg') no-repeat bottom right;;
+  background-size: 300px 238px, 50% auto;
+}
+
+#node-access-news-form {
+  .layout-region-node-main {
+    @apply max-w-[85vw];
+  }
+  [data-drupal-selector="edit-field-affinity-group-node-0-target-id"] {
+    @apply max-w-[60vw];
+  }
+  [data-drupal-selector="edit-field-news-external-link-0-title"],
+  [data-drupal-selector="edit-field-news-external-link-0-uri"] {
+    @apply max-w-[90vw];
+  }
+}
