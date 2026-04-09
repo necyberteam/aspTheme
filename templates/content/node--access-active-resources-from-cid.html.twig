@@ -93,9 +93,21 @@
 
       {# --- Login Section --- #}
       {% set ssh_logins = field_rp_ssh_login_nodes_items %}
-      {% if ssh_logins|length > 0 or ondemand_url %}
+      {% set login_text = node.field_rp_login_text.value %}
+      {% set login_help = node.field_rp_login_help_links %}
+      {% set account_setup = node.field_rp_account_setup_url %}
+      {% if ssh_logins|length > 0 or ondemand_url or login_text or login_help|length > 0 or account_setup|length > 0 %}
         <div class="rp-login mb-8">
           <h2>Login to {{ node.label }}</h2>
+
+          {# Login text — rich text above login boxes #}
+          {% if login_text %}
+            <div class="prose mb-4">
+              {{ node.field_rp_login_text.processed }}
+            </div>
+          {% endif %}
+
+          {% if ssh_logins|length > 0 or ondemand_url %}
           <div class="grid grid-cols-1 gap-4 md--grid-cols-2">
 
             {# SSH Login dropdown — uses paragraph with recommended boolean #}
@@ -120,18 +132,6 @@
                 <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
                   <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh &lt;your_username&gt;@<span id="rp-ssh-hostname">{{ first_hostname }}</span></code>
                 </div>
-
-                {# Login help links #}
-                {% set login_help = node.field_rp_login_help_links %}
-                {% if login_help|length > 0 %}
-                  <div class="flex flex-wrap gap-3 text-sm">
-                    {% for link in login_help %}
-                      <a href="{{ link.uri|replace({'internal:': ''}) }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
-                        <i class="bi bi-play-circle"></i> {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }}
-                      </a>
-                    {% endfor %}
-                  </div>
-                {% endif %}
               </div>
             {% endif %}
 
@@ -150,9 +150,20 @@
               </div>
             {% endif %}
           </div>
+          {% endif %}
+
+          {# Login help links #}
+          {% if login_help|length > 0 %}
+            <div class="flex flex-wrap gap-3 text-sm mt-3">
+              {% for link in login_help %}
+                <a href="{{ link.uri|replace({'internal:': ''}) }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
+                  <i class="bi bi-play-circle"></i> {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
 
           {# Account setup link #}
-          {% set account_setup = node.field_rp_account_setup_url %}
           {% if account_setup|length > 0 %}
             <div class="mt-3">
               <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-md-teal no-underline hover--underline">
@@ -167,7 +178,6 @@
       {% if field_rp_file_transfer_items|length > 0 %}
         <div class="rp-file-transfer mb-8">
           <h2>File Transfer</h2>
-          <p class="text-sm text-dark-gray mb-3">Use Globus for large transfers. SCP and Rsync are recommended for small to medium-sized transfers only.</p>
           <div class="overflow-x-auto">
             <table class="w-full border-collapse">
               <thead>
@@ -229,7 +239,7 @@
                     {% if paragraph.field_rp_directory.value|default('') %}
                     <tr class="border-b border-light-gray">
                       <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
-                      <td class="py-2 pr-4"><code>{{ paragraph.field_rp_fs_path.value|default('') }}</code></td>
+                      <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
                       <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value|default('') }}</td>
                       <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value|default('') }}</td>
                       <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value|default('') }}</td>
@@ -330,7 +340,7 @@
         </div>
       {% else %}
         <div class="bg-light-gray p-4 mb-4">
-          <p class="text-sm text-dark-gray m-0">{{ node.label }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Discovery Service</a>.</p>
+          <p class="text-sm text-dark-gray m-0">{{ node.label }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Documentation Service</a>.</p>
         </div>
       {% endif %}
 
