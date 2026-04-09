@@ -56,7 +56,7 @@
 
       {{ title_prefix }}
       <div class="flex flex-wrap items-center gap-4 mb-4 justify-between">
-        <div class="flex gap-4 items-center ms-auto">
+        <div class="flex gap-4 items-center">
           {% if mfa_required %}
             <span class="flex items-center gap-1 text-sm">
               <i class="bi bi-check-circle-fill text-teal"></i> 2FA/MFA
@@ -73,7 +73,7 @@
 
       {# --- Description --- #}
       {% if rp_description %}
-        <div class="rp-description prose mb-8">
+        <div class="rp-description prose max-w-none mb-8">
           {{ node.field_rp_description.processed }}
         </div>
       {% endif %}
@@ -102,7 +102,7 @@
 
           {# Login text — rich text above login boxes #}
           {% if login_text %}
-            <div class="prose mb-4">
+            <div class="prose max-w-none mb-4">
               {{ node.field_rp_login_text.processed }}
             </div>
           {% endif %}
@@ -112,7 +112,7 @@
 
             {# SSH Login dropdown — uses paragraph with recommended boolean #}
             {% if ssh_logins|length > 0 %}
-              <div class="border-2 border-dark-teal rounded-md p-4">
+              <div class="border border-dark-teal p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
                 {% set first_hostname = ssh_logins[0].field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
                 {% for login in ssh_logins %}
@@ -137,7 +137,7 @@
 
             {# OnDemand Login #}
             {% if ondemand_url %}
-              <div class="border-2 border-dark-teal rounded-md p-4">
+              <div class="border border-dark-teal p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">ACCESS OnDemand Login</h3>
                 <a href="{{ ondemand_url }}" class="btn btn-primary">
                   LOGIN
@@ -176,7 +176,7 @@
 
       {# --- File Transfer Table --- #}
       {% if field_rp_file_transfer_items|length > 0 %}
-        <div class="rp-file-transfer mb-8">
+        <div class="rp-file-transfer mb-8 border-t-4 border-md-teal pt-4">
           <h2>File Transfer</h2>
           <div class="overflow-x-auto">
             <table class="w-full border-collapse">
@@ -216,7 +216,7 @@
 
       {# --- Storage Section --- #}
       {% if field_rp_storage_items|length > 0 or external_storage %}
-        <div class="rp-storage mb-8">
+        <div class="rp-storage mb-8 border-t-4 border-md-teal pt-4">
           <h2>Storage</h2>
 
           {# File System Table #}
@@ -255,7 +255,7 @@
           {# External Storage #}
           {% if external_storage %}
             <h3 class="text-teal font-bold mt-6">External Storage</h3>
-            <div class="prose">
+            <div class="prose max-w-none">
               {{ node.field_rp_external_storage.processed }}
             </div>
           {% endif %}
@@ -351,10 +351,10 @@
   {# ========== Jobs / Queue Specifications (full width) ========== #}
   {% set jobs_info = node.field_rp_jobs_info.value %}
   {% if field_rp_queue_specs_items|length > 0 or jobs_info %}
-    <div class="rp-queue-specs mb-8">
+    <div class="rp-queue-specs mb-8 border-t-4 border-md-teal pt-4">
       <h2>Jobs</h2>
       {% if jobs_info %}
-        <div class="prose mb-6">
+        <div class="prose max-w-none mb-6">
           {{ node.field_rp_jobs_info.processed }}
         </div>
       {% endif %}
@@ -479,7 +479,7 @@
 
   {# ========== Most Frequently Used Software (full width) ========== #}
   {% if top_software|length > 0 %}
-    <div class="rp-top-software mb-8">
+    <div class="rp-top-software mb-8 border-t-4 border-md-teal pt-4">
       <h2>Most Frequently Used Software</h2>
       <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
       <div class="overflow-x-auto">
@@ -515,7 +515,7 @@
 
   {# ========== Datasets (full width) ========== #}
   {% if field_rp_datasets_items|length > 0 %}
-    <div class="rp-datasets mb-8">
+    <div class="rp-datasets mb-8 border-t-4 border-md-teal pt-4">
       <h2>Datasets</h2>
       <div class="overflow-x-auto">
         <table class="w-full border-collapse">
