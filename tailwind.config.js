@@ -291,6 +291,7 @@ module.exports = {
     'mt-8',
     'mt-10',
     'mt-12',
+    'mt-40',
     'mt-auto',
     'mt-[3px]',
     'mx-0.5',
