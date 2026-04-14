@@ -422,6 +422,7 @@ form.node-match-engagement-form {
   background-size: 300px 238px, 50% auto;
 }
 
+#node-access-news-edit-form,
 #node-access-news-form {
   .layout-region-node-main {
     @apply max-w-[85vw];
