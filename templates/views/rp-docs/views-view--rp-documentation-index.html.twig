@@ -45,8 +45,17 @@
   {% endif %}
 
   {% if rows %}
-    <div class="view-content">
-      {{ rows }}
+    <div class="view-content grid grid-cols-1 gap-8 md--grid-cols-[1fr_25%]">
+      <div class="rp-listing-main">
+        {{ rows }}
+      </div>
+      <aside class="rp-listing-sidebar">
+        <div class="bg-dark-teal text-white p-4 mb-4">
+          <h3 class="mt-0 text-lg font-bold text-white">NEED HELP CHOOSING?</h3>
+          <p class="text-sm mb-3">The ACCESS Resource Advisor (ARA) helps match your project to the right resources.</p>
+          <a href="https://ara.access-ci.org/" class="btn btn-primary">TRY THE ARA</a>
+        </div>
+      </aside>
     </div>
   {% elseif empty %}
     <div class="view-empty">
@@ -148,8 +157,6 @@
       banner.classList.remove('hidden');
     }
 
-    target.classList.add('ring-2', 'ring-primary-blue', 'rounded', 'p-3');
-
     // Pass ara_context through to resource links.
     var links = target.querySelectorAll('.rp-resource-link');
     for (var i = 0; i < links.length; i++) {
@@ -178,9 +185,6 @@
       var slug = row ? row.id.replace('group-', '') : null;
 
       btn.closest('.ara-group-banner').classList.add('hidden');
-      if (row) {
-        row.classList.remove('ring-2', 'ring-primary-blue', 'rounded', 'p-3');
-      }
 
       if (slug) {
         var recs = loadRecs().filter(function(r) { return r.group !== slug; });

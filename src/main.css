@@ -434,3 +434,130 @@ form.node-match-engagement-form {
     @apply max-w-[90vw];
   }
 }
+
+/* Smooth-scroll when jumping via anchor links on the RP doc page. */
+html:has(body.page-node-type-access-active-resources-from-cid) {
+  scroll-behavior: smooth;
+}
+
+/* Give jump-to targets enough space to clear the sticky jump menu. */
+.rp-documentation [id^="rp-"] {
+  scroll-margin-top: 6rem;
+}
+
+/* ===== RP Documentation pages ===== */
+.rp-documentation {
+  /* Base body-text size: applies to cells, list items, and any free text that
+     isn't inside a .prose block. Prose blocks keep their richer typography. */
+  font-size: 1rem;
+  line-height: 1.55;
+
+  /* Section divider: subheading-colored rule between sections */
+  .rp-section-rule {
+    @apply my-8 border-0;
+    border-top: 3px solid #107180;
+  }
+
+  /* H4s all-caps for visual rhythm */
+  h4 {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Descriptive body copy inside .rp-documentation — standalone description
+     block and section-intro paragraphs (e.g. the XDMoD note above the
+     software table) — should match the base body text. Ad-hoc utility
+     classes like text-sm / text-dark-gray on paragraphs get overridden.
+     Tables are left alone so they keep their own consistent sizing. */
+  .rp-description,
+  .rp-description *,
+  p.text-sm,
+  p.text-dark-gray {
+    font-size: inherit;
+    color: inherit;
+  }
+
+  /* Tables: all lines the same weight and color (ACCESS style guide: #232323) */
+  table {
+    @apply border-collapse;
+    font-size: 0.95rem;
+  }
+  thead tr,
+  tbody tr {
+    border-bottom: 1px solid #232323;
+  }
+  th {
+    @apply font-semibold;
+    line-height: 1.2;
+  }
+
+  /* Drop ad-hoc text-sm on table cells inside this region so they match the
+     base table font-size instead of varying per section. */
+  table td.text-sm,
+  table th.text-sm {
+    font-size: inherit;
+  }
+
+  /* Content rendered through filtered text (e.g. dataset descriptions) gets
+     wrapped in <p>. Keep that matching the enclosing table-cell size. */
+  table td p {
+    font-size: inherit;
+    color: inherit;
+    margin: 0;
+  }
+
+  /* SSH login select: reserve room for the native dropdown chevron */
+  select#rp-ssh-login-select {
+    @apply pr-8;
+  }
+
+  /* Long links in prose: prevent horizontal overflow */
+  .prose a {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* Tighten spacing above tables — default Tailwind prose gives them ~2em
+     margin which is more than we need. */
+  .overflow-x-auto {
+    @apply mt-2;
+  }
+  table {
+    @apply mt-0 mb-0;
+  }
+
+  /* Inline `code` support inside prose */
+  .prose code {
+    @apply bg-light-gray px-1 py-[1px] rounded text-sm font-mono;
+  }
+  .prose code::before,
+  .prose code::after {
+    content: none;
+  }
+}
+
+/* RP documentation listing: fixed-width title column so descriptions line up
+   consistently across every group/individual row on the page. */
+.rp-listing-table {
+  table-layout: fixed;
+}
+.rp-listing-title {
+  width: 16rem;
+}
+
+/* Jump-to anchor nav — sticks to the top of the viewport as the user scrolls.
+   Uses generous top padding so the links sit visually offset from the page top
+   without leaving a gap where content could scroll through above the bar. */
+.rp-jump-to {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  padding-top: 1rem;
+}
+.rp-jump-to a {
+  color: #232323;
+}
+.rp-jump-to a:hover {
+  text-decoration: underline;
+}

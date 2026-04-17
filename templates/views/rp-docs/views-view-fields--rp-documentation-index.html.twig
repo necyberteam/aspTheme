@@ -16,32 +16,33 @@
  * - rp_node_id: Node ID for this row.
  */
 #}
-<div{% if rp_group_slug %} id="group-{{ rp_group_slug }}"{% endif %} class="rp-listing-row{% if rp_group_slug %} rp-resource-group-row{% endif %}">
+{% set is_group = rp_group_slug is not empty %}
+<div{% if rp_group_slug %} id="group-{{ rp_group_slug }}"{% endif %} class="rp-listing-row{% if is_group %} rp-resource-group-row{% else %} rp-individual-resource-row{% endif %}">
 
-{% for field in fields -%}
-  {{ field.separator }}
-  {%- if field.wrapper_element -%}
-    <{{ field.wrapper_element }}{{ field.wrapper_attributes }}>
-  {%- endif %}
-  {%- if field.label -%}
-    {%- if field.label_element -%}
-      <{{ field.label_element }}{{ field.label_attributes }}>{{ field.label }}{{ field.label_suffix }}</{{ field.label_element }}>
-    {%- else -%}
-      {{ field.label }}{{ field.label_suffix }}
+{% if is_group %}
+  {# Render group header (title via fields loop) plus the inline resources table. #}
+  {% for field in fields -%}
+    {{ field.separator }}
+    {%- if field.wrapper_element -%}
+      <{{ field.wrapper_element }}{{ field.wrapper_attributes }}>
+    {%- endif %}
+    {%- if field.label -%}
+      {%- if field.label_element -%}
+        <{{ field.label_element }}{{ field.label_attributes }}>{{ field.label }}{{ field.label_suffix }}</{{ field.label_element }}>
+      {%- else -%}
+        {{ field.label }}{{ field.label_suffix }}
+      {%- endif -%}
     {%- endif -%}
-  {%- endif -%}
-  {%- if field.element_type -%}
-    <{{ field.element_type }}{{ field.element_attributes }}>{{ field.content }}</{{ field.element_type }}>
-  {%- else -%}
-    {{ field.content }}
-  {%- endif -%}
-  {%- if field.wrapper_element -%}
-    </{{ field.wrapper_element }}>
-  {%- endif -%}
-{%- endfor %}
+    {%- if field.element_type -%}
+      <{{ field.element_type }}{{ field.element_attributes }}>{{ field.content }}</{{ field.element_type }}>
+    {%- else -%}
+      {{ field.content }}
+    {%- endif -%}
+    {%- if field.wrapper_element -%}
+      </{{ field.wrapper_element }}>
+    {%- endif -%}
+  {%- endfor %}
 
-{# Inline resources table for Resource Group nodes #}
-{% if rp_group_resources|length > 0 %}
   {# ARA recommendation banner — shown when ara_context targets this group #}
   <div class="ara-group-banner bg-primary-blue-bg text-primary-blue border-l-4 border-primary-blue p-3 mb-3 mt-3 hidden" data-group-slug="{{ rp_group_slug }}" data-node-id="{{ rp_node_id }}">
     <p class="font-bold mb-1 text-sm">Recommended by the ACCESS Resource Advisor</p>
@@ -50,17 +51,11 @@
   </div>
 
   <div class="rp-resource-group-list mt-3">
-    <table class="w-full border-collapse text-sm">
-      <thead>
-        <tr class="border-b border-gray">
-          <th class="text-left py-1 pr-4 font-semibold">Resource</th>
-          <th class="text-left py-1 font-semibold">Description</th>
-        </tr>
-      </thead>
+    <table class="rp-listing-table w-full border-collapse text-sm">
       <tbody>
         {% for resource in rp_group_resources %}
-          <tr class="border-b border-light-gray">
-            <td class="py-2 pr-4 whitespace-nowrap">
+          <tr>
+            <td class="rp-listing-title py-2 pr-4 whitespace-nowrap">
               <a href="{{ resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-link">
                 {{ resource.title }}
               </a>
@@ -70,6 +65,28 @@
             </td>
           </tr>
         {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% elseif rp_individual_resource %}
+  {#
+    Ungrouped resource: render the Title as an <h2> and a single-row table,
+    matching the header-plus-table pattern used for Resource Groups.
+  #}
+  <h2 class="mt-0 mb-1">{{ rp_individual_resource.title }}</h2>
+  <div class="rp-individual-resource-list mt-3">
+    <table class="rp-listing-table w-full border-collapse text-sm">
+      <tbody>
+        <tr>
+          <td class="rp-listing-title py-2 pr-4 whitespace-nowrap">
+            <a href="{{ rp_individual_resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-link">
+              {{ rp_individual_resource.title }}
+            </a>
+          </td>
+          <td class="py-2 text-sm">
+            {{ rp_individual_resource.description|raw }}
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

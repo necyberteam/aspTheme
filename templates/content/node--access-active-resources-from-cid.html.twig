@@ -78,6 +78,37 @@
         </div>
       {% endif %}
 
+      {# --- Jump-to anchor nav --- #}
+      {% set has_login = field_rp_ssh_login_nodes_items|length > 0 or ondemand_url %}
+      {% set has_file_transfer = field_rp_file_transfer_items|length > 0 %}
+      {% set has_storage = field_rp_storage_items|length > 0 or external_storage %}
+      {% set has_jobs = field_rp_queue_specs_items|length > 0 or node.field_rp_jobs_info.value %}
+      {% set has_software = top_software|length > 0 %}
+      {% set has_datasets = field_rp_datasets_items|length > 0 %}
+      {% if has_login or has_file_transfer or has_storage or has_jobs or has_software or has_datasets %}
+        <nav class="rp-jump-to mb-6 pb-4 border-b border-gray flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Jump to section">
+          <span class="text-dark-gray">Jump to:</span>
+          {% if has_login %}
+            <a href="#rp-login" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+          {% endif %}
+          {% if has_file_transfer %}
+            <a href="#rp-file-transfer" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-arrow-left-right"></i> File Transfer</a>
+          {% endif %}
+          {% if has_storage %}
+            <a href="#rp-storage" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-database"></i> Storage</a>
+          {% endif %}
+          {% if has_jobs %}
+            <a href="#rp-jobs" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-card-checklist"></i> Jobs</a>
+          {% endif %}
+          {% if has_software %}
+            <a href="#rp-software" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-terminal"></i> Software</a>
+          {% endif %}
+          {% if has_datasets %}
+            <a href="#rp-datasets" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-table"></i> Datasets</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+
       {# --- Embedded Chatbot --- #}
       <div class="rp-chatbot mb-8">
         <div class="flex items-center gap-4" style="flex-direction: row-reverse;">
@@ -97,8 +128,8 @@
       {% set login_help = node.field_rp_login_help_links %}
       {% set account_setup = node.field_rp_account_setup_url %}
       {% if ssh_logins|length > 0 or ondemand_url or login_text or login_help|length > 0 or account_setup|length > 0 %}
-        <div class="rp-login mb-8">
-          <h2>Login to {{ node.label }}</h2>
+        <div id="rp-login" class="rp-login mb-8">
+          <h2 class="flex items-center gap-2"><i class="bi bi-box-arrow-in-right"></i> Login to {{ node.label }}</h2>
 
           {# Login text — rich text above login boxes #}
           {% if login_text %}
@@ -112,25 +143,50 @@
 
             {# SSH Login dropdown — uses paragraph with recommended boolean #}
             {% if ssh_logins|length > 0 %}
+              {# Build a render-friendly list, preferring the structured fields
+                 with a fallback to the legacy field_rp_ssh_url for paragraphs
+                 that haven't been migrated yet. #}
+              {% set ssh_entries = [] %}
+              {% for login in ssh_logins %}
+                {% set hostname = login.field_rp_ssh_hostname.value|default('') %}
+                {% set placeholder = login.field_rp_ssh_user_placeholder.value|default('<your_username>') %}
+                {% set docs_uri = login.field_rp_ssh_docs_url.0.uri|default('') %}
+                {% set docs_title = login.field_rp_ssh_docs_url.0.title|default('') %}
+                {% if hostname is empty and login.field_rp_ssh_url.uri %}
+                  {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
+                {% endif %}
+                {% set ssh_entries = ssh_entries|merge([{
+                  'hostname': hostname,
+                  'placeholder': placeholder,
+                  'docs_uri': docs_uri,
+                  'docs_title': docs_title,
+                  'recommended': login.field_rp_recommended.value,
+                }]) %}
+              {% endfor %}
+
+              {% set first_entry = ssh_entries[0] %}
+              {% for entry in ssh_entries %}
+                {% if entry.recommended %}
+                  {% set first_entry = entry %}
+                {% endif %}
+              {% endfor %}
+
               <div class="border-2 border-dark-teal p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
-                {% set first_hostname = ssh_logins[0].field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
-                {% for login in ssh_logins %}
-                  {% if login.field_rp_recommended.value %}
-                    {% set first_hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
-                  {% endif %}
-                {% endfor %}
-                <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2">
-                  {% for login in ssh_logins %}
-                    {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
-                    {% set is_recommended = login.field_rp_recommended.value %}
-                    <option value="{{ hostname }}" {{ is_recommended ? 'selected' : '' }}>
-                      {{ login.field_rp_ssh_url.title ?: hostname }}{% if is_recommended %} | RECOMMENDED{% endif %}
+                <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;">
+                  {% for entry in ssh_entries %}
+                    <option value="{{ entry.hostname }}" data-placeholder="{{ entry.placeholder }}" data-docs-uri="{{ entry.docs_uri }}" data-docs-title="{{ entry.docs_title }}" {{ entry.recommended ? 'selected' : '' }}>
+                      {{ entry.hostname }}{% if entry.recommended %} | RECOMMENDED{% endif %}
                     </option>
                   {% endfor %}
                 </select>
                 <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
-                  <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh &lt;your_username&gt;@<span id="rp-ssh-hostname">{{ first_hostname }}</span></code>
+                  <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ first_entry.placeholder }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
+                </div>
+                <div id="rp-ssh-docs" class="text-sm{% if not first_entry.docs_uri %} hidden{% endif %}">
+                  <a id="rp-ssh-docs-link" href="{{ first_entry.docs_uri }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
+                    <i class="bi bi-box-arrow-up-right"></i> <span id="rp-ssh-docs-text">{{ first_entry.docs_title ?: 'Login instructions' }}</span>
+                  </a>
                 </div>
               </div>
             {% endif %}
@@ -162,26 +218,24 @@
               {% endfor %}
             </div>
           {% endif %}
-
-          {# Account setup link #}
-          {% if account_setup|length > 0 %}
-            <div class="mt-3">
-              <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-md-teal no-underline hover--underline">
-                {{ account_setup.0.title ?: 'RP Account Setup' }}
-              </a>
-            </div>
-          {% endif %}
         </div>
       {% endif %}
 
       {# --- File Transfer Table --- #}
       {% if field_rp_file_transfer_items|length > 0 %}
-        <div class="rp-file-transfer mb-8 border-t-4 border-light-teal pt-4">
-          <h2>File Transfer</h2>
+        <div id="rp-file-transfer" class="rp-file-transfer mb-8">
+          <hr class="rp-section-rule">
+          <h2 class="flex items-center gap-2"><i class="bi bi-arrow-left-right"></i> File Transfer</h2>
+          {% set file_transfer_text = node.field_rp_file_transfer_text.value %}
+          {% if file_transfer_text %}
+            <div class="prose max-w-none mb-4">
+              {{ node.field_rp_file_transfer_text.processed }}
+            </div>
+          {% endif %}
           <div class="overflow-x-auto">
             <table class="w-full border-collapse">
               <thead>
-                <tr class="border-b-2 border-gray">
+                <tr>
                   <th class="text-left py-2 pr-4 font-semibold">Supported Methods</th>
                   <th class="text-left py-2 pr-4 font-semibold">Data Transfer Node</th>
                   <th class="text-left py-2 font-semibold">URL</th>
@@ -190,7 +244,7 @@
               <tbody>
                 {% for paragraph in field_rp_file_transfer_items %}
                   {% if paragraph.field_rp_method.value|default('') %}
-                  <tr class="border-b border-light-gray">
+                  <tr>
                     <td class="py-2 pr-4">
                       {{ paragraph.field_rp_method.value|default('')|upper }}
                       {% if paragraph.field_rp_recommended.value %}
@@ -216,8 +270,9 @@
 
       {# --- Storage Section --- #}
       {% if field_rp_storage_items|length > 0 or external_storage %}
-        <div class="rp-storage mb-8 border-t-4 border-light-teal pt-4">
-          <h2>Storage</h2>
+        <div id="rp-storage" class="rp-storage mb-8">
+          <hr class="rp-section-rule">
+          <h2 class="flex items-center gap-2"><i class="bi bi-database"></i> Storage</h2>
 
           {# File System Table #}
           {% if field_rp_storage_items|length > 0 %}
@@ -225,7 +280,7 @@
             <div class="overflow-x-auto">
               <table class="w-full border-collapse">
                 <thead>
-                  <tr class="border-b-2 border-gray">
+                  <tr>
                     <th class="text-left py-2 pr-4 font-semibold">Directory</th>
                     <th class="text-left py-2 pr-4 font-semibold">Path</th>
                     <th class="text-left py-2 pr-4 font-semibold">Quota</th>
@@ -237,7 +292,7 @@
                 <tbody>
                   {% for paragraph in field_rp_storage_items %}
                     {% if paragraph.field_rp_directory.value|default('') %}
-                    <tr class="border-b border-light-gray">
+                    <tr>
                       <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
                       <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
                       <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value|default('') }}</td>
@@ -294,30 +349,15 @@
         </div>
       {% endif %}
 
-      {# In-page Navigation #}
-      <div class="bg-dark-teal text-white p-4 mb-4">
-        <h3 class="mt-0 text-lg font-bold text-white">{{ node.label }}</h3>
-        <ul class="list-none p-0 m-0">
-          {% if field_rp_ssh_login_nodes_items|length > 0 or ondemand_url %}
-            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-login').scrollIntoView({behavior:'smooth'});return false;">Login Information</a></li>
-          {% endif %}
-          {% if field_rp_file_transfer_items|length > 0 %}
-            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-file-transfer').scrollIntoView({behavior:'smooth'});return false;">File Transfer</a></li>
-          {% endif %}
-          {% if field_rp_storage_items|length > 0 or external_storage %}
-            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-storage').scrollIntoView({behavior:'smooth'});return false;">Storage</a></li>
-          {% endif %}
-          {% if field_rp_queue_specs_items|length > 0 %}
-            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-queue-specs').scrollIntoView({behavior:'smooth'});return false;">Jobs</a></li>
-          {% endif %}
-          {% if top_software_json %}
-            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-top-software').scrollIntoView({behavior:'smooth'});return false;">Frequently Used Software</a></li>
-          {% endif %}
-          {% if field_rp_datasets_items|length > 0 %}
-            <li class="mb-1"><a href="#" class="text-white no-underline hover--underline hover--text-white text-sm" onclick="document.querySelector('.rp-datasets').scrollIntoView({behavior:'smooth'});return false;">Datasets</a></li>
-          {% endif %}
-        </ul>
-      </div>
+      {# RP Account Setup — primary CTA for the login section #}
+      {% if account_setup|length > 0 %}
+        <div class="bg-dark-teal text-white p-4 mb-4">
+          <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ node.label|upper }}</h3>
+          <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
+            {{ account_setup.0.title ?: 'RP Account Setup' }}
+          </a>
+        </div>
+      {% endif %}
 
       {# Software CTA: RP's official software page #}
       {% set software_list_url = node.field_rp_software_list_url.0 %}
@@ -351,8 +391,9 @@
   {# ========== Jobs / Queue Specifications (full width) ========== #}
   {% set jobs_info = node.field_rp_jobs_info.value %}
   {% if field_rp_queue_specs_items|length > 0 or jobs_info %}
-    <div class="rp-queue-specs mb-8 border-t-4 border-light-teal pt-4">
-      <h2>Jobs</h2>
+    <div id="rp-jobs" class="rp-queue-specs mb-8">
+      <hr class="rp-section-rule">
+      <h2 class="flex items-center gap-2"><i class="bi bi-card-checklist"></i> Jobs</h2>
       {% if jobs_info %}
         <div class="prose max-w-none mb-6">
           {{ node.field_rp_jobs_info.processed }}
@@ -366,7 +407,7 @@
           <div class="overflow-x-auto">
             <table class="w-full border-collapse">
               <thead>
-                <tr class="border-b-2 border-gray">
+                <tr>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Name</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Purpose</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">CPUs</th>
@@ -388,7 +429,7 @@
                   {% set qname = paragraph.field_rp_queue_name.value|default('') %}
                   {% if qname %}
                   {% set qmetrics = queue_metrics[qname] ?? null %}
-                  <tr class="border-b border-light-gray">
+                  <tr>
                     <td class="py-2 pr-4 font-semibold">{{ qname }}</td>
                     <td class="py-2 pr-4 text-sm">
                       {{ paragraph.field_rp_queue_purpose.value|default('') }}
@@ -479,13 +520,14 @@
 
   {# ========== Most Frequently Used Software (full width) ========== #}
   {% if top_software|length > 0 %}
-    <div class="rp-top-software mb-8 border-t-4 border-light-teal pt-4">
-      <h2>Most Frequently Used Software</h2>
+    <div id="rp-software" class="rp-top-software mb-8">
+      <hr class="rp-section-rule">
+      <h2 class="flex items-center gap-2"><i class="bi bi-terminal"></i> Most Frequently Used Software</h2>
       <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
       <div class="overflow-x-auto">
         <table class="w-full border-collapse">
           <thead>
-            <tr class="border-b-2 border-gray">
+            <tr>
               <th class="text-left py-2 pr-4 font-semibold">Application</th>
               <th class="text-left py-2 pr-4 font-semibold">Description</th>
               <th class="text-left py-2 pr-4 font-semibold">Research Discipline</th>
@@ -494,7 +536,7 @@
           </thead>
           <tbody>
             {% for software in top_software %}
-              <tr class="border-b border-light-gray">
+              <tr>
                 <td class="py-2 pr-4 font-semibold whitespace-nowrap">
                   {%- if software.web_page -%}
                     <a href="{{ software.web_page }}" class="text-md-teal no-underline hover--underline">{{ software.name }}</a>
@@ -515,12 +557,13 @@
 
   {# ========== Datasets (full width) ========== #}
   {% if field_rp_datasets_items|length > 0 %}
-    <div class="rp-datasets mb-8 border-t-4 border-light-teal pt-4">
-      <h2>Datasets</h2>
+    <div id="rp-datasets" class="rp-datasets mb-8">
+      <hr class="rp-section-rule">
+      <h2 class="flex items-center gap-2"><i class="bi bi-table"></i> Datasets</h2>
       <div class="overflow-x-auto">
         <table class="w-full border-collapse">
           <thead>
-            <tr class="border-b-2 border-gray">
+            <tr>
               <th class="text-left py-2 pr-4 font-semibold">Name</th>
               <th class="text-left py-2 font-semibold">Description</th>
             </tr>
@@ -528,7 +571,7 @@
           <tbody>
             {% for paragraph in field_rp_datasets_items %}
               {% if paragraph.field_rp_dataset_name.value|default('') %}
-              <tr class="border-b border-light-gray">
+              <tr>
                 <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_dataset_name.value }}</td>
                 <td class="py-2 text-sm">{{ paragraph.field_rp_dataset_description.value|default('') ? paragraph.field_rp_dataset_description.processed : '' }}</td>
               </tr>
@@ -578,12 +621,35 @@
 <script>
 (function() {
   var select = document.getElementById('rp-ssh-login-select');
-  var hostname = document.getElementById('rp-ssh-hostname');
-  if (select && hostname) {
-    select.addEventListener('change', function() {
-      hostname.textContent = this.value;
-    });
+  var hostnameEl = document.getElementById('rp-ssh-hostname');
+  var placeholderEl = document.getElementById('rp-ssh-placeholder');
+  var docsContainer = document.getElementById('rp-ssh-docs');
+  var docsLink = document.getElementById('rp-ssh-docs-link');
+  var docsText = document.getElementById('rp-ssh-docs-text');
+  if (!select || !hostnameEl) return;
+
+  var fallback = select.getAttribute('data-placeholder-fallback') || '<your_username>';
+
+  function apply() {
+    var opt = select.options[select.selectedIndex];
+    hostnameEl.textContent = opt.value;
+    if (placeholderEl) {
+      placeholderEl.textContent = opt.getAttribute('data-placeholder') || fallback;
+    }
+    if (docsContainer && docsLink && docsText) {
+      var docsUri = opt.getAttribute('data-docs-uri');
+      var docsTitle = opt.getAttribute('data-docs-title');
+      if (docsUri) {
+        docsLink.href = docsUri;
+        docsText.textContent = docsTitle || 'Login instructions';
+        docsContainer.classList.remove('hidden');
+      } else {
+        docsContainer.classList.add('hidden');
+      }
+    }
   }
+
+  select.addEventListener('change', apply);
 })();
 </script>
 

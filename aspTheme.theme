@@ -117,6 +117,51 @@ function aspTheme_preprocess_datetime_wrapper(&$variables) {
 function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables) {
   $node = $variables['node'];
 
+  // Resource Group inheritance: for each inheritable field, if the Resource
+  // is empty and the parent Group has a value, use the Group's value as a
+  // fallback for display. Copied onto the in-memory node only — never saved.
+  // Compute-related fields (jobs_info, queue_specs, xdmod_resource_id) are
+  // intentionally excluded — those are always per-resource.
+  $inheritable_fields = [
+    'field_rp_login_text',
+    'field_rp_ondemand_url',
+    'field_rp_mfa_required',
+    'field_rp_account_required',
+    'field_rp_account_setup_url',
+    'field_rp_ssh_login_nodes',
+    'field_rp_login_help_links',
+    'field_rp_file_transfer_text',
+    'field_rp_file_transfer',
+    'field_rp_storage',
+    'field_rp_external_storage',
+    'field_rp_software_list_url',
+    'field_rp_datasets',
+    'field_rp_support_links',
+    'field_rp_office_hours',
+  ];
+  $parent_group = NULL;
+  $parent_groups = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties([
+      'type' => 'resource_group',
+      'field_cider_resources' => $node->id(),
+    ]);
+  if ($parent_groups) {
+    $parent_group = reset($parent_groups);
+    foreach ($inheritable_fields as $field_name) {
+      if (!$node->hasField($field_name) || !$parent_group->hasField($field_name)) {
+        continue;
+      }
+      if (!$node->get($field_name)->isEmpty()) {
+        continue;
+      }
+      if ($parent_group->get($field_name)->isEmpty()) {
+        continue;
+      }
+      $node->set($field_name, $parent_group->get($field_name)->getValue());
+    }
+  }
+
   // Parse top software JSON into a render-ready array.
   $variables['top_software'] = [];
   if ($node->hasField('field_rp_top_software') && !$node->get('field_rp_top_software')->isEmpty()) {
@@ -175,18 +220,10 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
     }
   }
 
-  // Look up the parent Resource Group for this resource, if any.
-  // Provides the resource context name for the embedded QA bot.
-  // Falls back to the resource's own title if not in a group.
-  $resource_groups = \Drupal::entityTypeManager()
-    ->getStorage('node')
-    ->loadByProperties([
-      'type' => 'resource_group',
-      'field_cider_resources' => $node->id(),
-    ]);
-  if ($resource_groups) {
-    $group = reset($resource_groups);
-    $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($group->getTitle());
+  // Resource context name for the embedded QA bot — uses the parent Group's
+  // title if available, otherwise the resource's own title.
+  if ($parent_group) {
+    $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($parent_group->getTitle());
   }
   else {
     $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($node->getTitle());
@@ -246,8 +283,13 @@ function aspTheme_preprocess_views_view_fields__rp_documentation_index(&$variabl
   $row = $variables['row'];
   $node = $row->_entity ?? NULL;
   $variables['rp_group_resources'] = [];
+  $variables['rp_individual_resource'] = NULL;
 
-  if ($node && $node->bundle() === 'resource_group' && $node->hasField('field_cider_resources')) {
+  if (!$node) {
+    return;
+  }
+
+  if ($node->bundle() === 'resource_group' && $node->hasField('field_cider_resources')) {
     $resources = [];
     foreach ($node->get('field_cider_resources')->referencedEntities() as $resource) {
       // Use rp_description summary if available, fall back to trimmed value.
@@ -274,6 +316,27 @@ function aspTheme_preprocess_views_view_fields__rp_documentation_index(&$variabl
     $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id());
     $slug = basename($alias);
     $variables['rp_group_slug'] = $slug;
+    $variables['rp_node_id'] = $node->id();
+  }
+  elseif ($node->bundle() === 'access_active_resources_from_cid') {
+    // Ungrouped resource: provide title, URL, and trimmed description
+    // so the template can render it as a single table row.
+    $description = '';
+    if ($node->hasField('field_rp_description') && !$node->get('field_rp_description')->isEmpty()) {
+      $field = $node->get('field_rp_description')->first();
+      if (!empty($field->summary)) {
+        $description = check_markup($field->summary, $field->format);
+      }
+      else {
+        $text = strip_tags($field->processed);
+        $description = mb_strlen($text) > 200 ? mb_substr($text, 0, 200) . '...' : $text;
+      }
+    }
+    $variables['rp_individual_resource'] = [
+      'title' => $node->label(),
+      'url' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id()),
+      'description' => $description,
+    ];
     $variables['rp_node_id'] = $node->id();
   }
 }
