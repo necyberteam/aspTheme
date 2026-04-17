@@ -170,12 +170,15 @@ table.views-table tr td {
 }
 
 .cssn-photo {
-  width: 180px;
+  width: 110px;
   img {
     height: 100px;
     width: 90px;
     @apply object-cover;
   }
+}
+.cssn-badges {
+  max-width: 130px;
 }
 .cssn-directory-item .square-tags > div {
   margin: 0;
