@@ -270,8 +270,8 @@ function aspTheme_preprocess_views_view_field__webform_submission_value_8(&$vari
  */
 function aspTheme_preprocess_views_view__rp_documentation_index(&$variables) {
   $current_user = \Drupal::currentUser();
-  $variables['can_create_resource_group'] = $current_user->hasPermission('create resource_group content');
   $variables['can_edit_resources'] = $current_user->hasPermission('edit any access_active_resources_from_cid content');
+  $variables['can_edit_resource_groups'] = $current_user->hasPermission('edit any resource_group content');
 }
 
 /**

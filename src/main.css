@@ -545,6 +545,48 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   width: 16rem;
 }
 
+/* ===== RP admin views (Resources, Groups) ===== */
+.view-rp-resources-admin,
+.view-rp-groups-admin {
+  /* Drop the grey background on the first column cell that Drupal applies to
+     linked title cells in admin views. */
+  td.views-field-title,
+  td.views-field-title a {
+    background: transparent;
+  }
+  td.views-field-title {
+    @apply pl-2;
+  }
+
+  /* Operations dropbutton: sit within the row at rest, but let its dropdown
+     expand over adjacent content when opened. */
+  td.views-field-operations {
+    @apply whitespace-nowrap align-middle relative;
+    overflow: visible;
+  }
+  td.views-field-operations .dropbutton-wrapper {
+    @apply inline-block align-middle;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  td.views-field-operations .dropbutton-widget {
+    position: static;
+  }
+}
+
+/* Align the Filter submit button with the bottom of the input box — not the
+   vertical center of the label+input stack. Scoped to the RP admin views so
+   we don't touch other site-wide filter forms. */
+.view-rp-resources-admin .form--inline,
+.view-rp-groups-admin .form--inline {
+  align-items: flex-end;
+}
+.view-rp-resources-admin .form--inline .form-actions,
+.view-rp-groups-admin .form--inline .form-actions {
+  margin-bottom: 1em;
+}
+
 /* Jump-to anchor nav — sticks to the top of the viewport as the user scrolls.
    Uses generous top padding so the links sit visually offset from the page top
    without leaving a gap where content could scroll through above the bar. */
