@@ -115,52 +115,22 @@ function aspTheme_preprocess_datetime_wrapper(&$variables) {
  * Prepares variables for the RP documentation page template.
  */
 function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables) {
-  $node = $variables['node'];
-
-  // Resource Group inheritance: for each inheritable field, if the Resource
-  // is empty and the parent Group has a value, use the Group's value as a
-  // fallback for display. Copied onto the in-memory node only — never saved.
-  // Compute-related fields (jobs_info, queue_specs, xdmod_resource_id) are
-  // intentionally excluded — those are always per-resource.
-  $inheritable_fields = [
-    'field_rp_login_text',
-    'field_rp_ondemand_url',
-    'field_rp_mfa_required',
-    'field_rp_account_required',
-    'field_rp_account_setup_url',
-    'field_rp_ssh_login_nodes',
-    'field_rp_login_help_links',
-    'field_rp_file_transfer_text',
-    'field_rp_file_transfer',
-    'field_rp_storage',
-    'field_rp_external_storage',
-    'field_rp_software_list_url',
-    'field_rp_datasets',
-    'field_rp_support_links',
-    'field_rp_office_hours',
-  ];
+  // Resource Group inheritance: Group defaults are applied as in-memory
+  // fallbacks so the template can read field values directly from $node.
+  // Mutate a clone so our changes don't leak into Drupal's static entity
+  // cache for code that runs later in the same request.
+  //
+  // The inheritance service lives in operations_cider; gracefully skip if
+  // that module isn't enabled so the theme stays renderable.
   $parent_group = NULL;
-  $parent_groups = \Drupal::entityTypeManager()
-    ->getStorage('node')
-    ->loadByProperties([
-      'type' => 'resource_group',
-      'field_cider_resources' => $node->id(),
-    ]);
-  if ($parent_groups) {
-    $parent_group = reset($parent_groups);
-    foreach ($inheritable_fields as $field_name) {
-      if (!$node->hasField($field_name) || !$parent_group->hasField($field_name)) {
-        continue;
-      }
-      if (!$node->get($field_name)->isEmpty()) {
-        continue;
-      }
-      if ($parent_group->get($field_name)->isEmpty()) {
-        continue;
-      }
-      $node->set($field_name, $parent_group->get($field_name)->getValue());
-    }
+  if (\Drupal::hasService('operations_cider.resource_group_inheritance')) {
+    $inheritance_service = \Drupal::service('operations_cider.resource_group_inheritance');
+    $parent_group = $inheritance_service->findParentGroup($variables['node']);
+    $node = clone $variables['node'];
+    $inheritance_service->applyInheritance($node);
+    $variables['node'] = $node;
   }
+  $node = $variables['node'];
 
   // Parse top software JSON into a render-ready array.
   $variables['top_software'] = [];

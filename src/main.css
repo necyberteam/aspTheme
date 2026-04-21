@@ -543,6 +543,8 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
 }
 .rp-listing-title {
   width: 16rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* ===== RP admin views (Resources, Groups) ===== */
