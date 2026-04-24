@@ -28,6 +28,6 @@ regions:
   sidebar_first: 'Sidebar first'
   sidebar_second: 'Sidebar second'
   footer: Footer
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 generator: 'starterkit_theme:10.0.10'
 
