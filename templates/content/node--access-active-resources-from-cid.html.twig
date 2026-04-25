@@ -112,10 +112,10 @@
       {# --- Embedded Chatbot --- #}
       <div class="rp-chatbot mb-8">
         <div class="flex items-center gap-4" style="flex-direction: row-reverse;">
-          <button id="rp-chatbot-toggle" data-label="Ask about {{ node.label }}" class="flex items-center justify-center bg-dark-teal text-white cursor-pointer border-0 hover--bg-md-teal" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;" aria-label="Ask about {{ node.label }}">
+          <button id="rp-chatbot-toggle" data-label="Ask about {{ rp_display_name }}" class="flex items-center justify-center bg-dark-teal text-white cursor-pointer border-0 hover--bg-md-teal" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;" aria-label="Ask about {{ rp_display_name }}">
             <img src="/themes/contrib/asp-theme/images/icons/ACCESS-arrrow.svg" alt="ACCESS" style="width: 36px; height: 36px;">
           </button>
-          <span id="rp-chatbot-tooltip" class="text-white text-sm py-1 px-3 rounded-md whitespace-nowrap" style="background: #107180; position: relative;">Ask about {{ node.label }}<span style="position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid #107180;"></span></span>
+          <span id="rp-chatbot-tooltip" class="text-white text-sm py-1 px-3 rounded-md whitespace-nowrap" style="background: #107180; position: relative;">Ask about {{ rp_display_name }}<span style="position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid #107180;"></span></span>
         </div>
         <div id="rp-chatbot-container" class="mt-4 border border-light-gray rounded-md overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease;">
           <div class="embedded-qa-bot" data-resource-context="{{ resource_context }}" style="min-height: 450px;"></div>
@@ -129,7 +129,7 @@
       {% set account_setup = node.field_rp_account_setup_url %}
       {% if ssh_logins|length > 0 or ondemand_url or login_text or login_help|length > 0 or account_setup|length > 0 %}
         <div id="rp-login" class="rp-login mb-8">
-          <h2 class="flex items-center gap-2"><i class="bi bi-box-arrow-in-right"></i> Login to {{ node.label }}</h2>
+          <h2 class="flex items-center gap-2"><i class="bi bi-box-arrow-in-right"></i> Login to {{ rp_display_name }}</h2>
 
           {# Login text — rich text above login boxes #}
           {% if login_text %}
@@ -352,7 +352,7 @@
       {# RP Account Setup — primary CTA for the login section #}
       {% if account_setup|length > 0 %}
         <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ node.label|upper }}</h3>
+          <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ rp_display_name|upper }}</h3>
           <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
             {{ account_setup.0.title ?: 'RP Account Setup' }}
           </a>
@@ -363,7 +363,7 @@
       {% set software_list_url = node.field_rp_software_list_url.0 %}
       {% if software_list_url %}
         <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
+          <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ rp_display_name|upper }}</h3>
           <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
             {{ software_list_url.title ?: 'VIEW SOFTWARE' }}
           </a>
@@ -373,14 +373,14 @@
       {# Software CTA: SDS explorer — conditional on whether SDS has data for this resource #}
       {% if sds_has_software and sds_resource_name %}
         <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
+          <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ rp_display_name|upper }}</h3>
           <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="btn btn-primary">
             EXPLORE IN SDS
           </a>
         </div>
       {% else %}
         <div class="bg-light-gray p-4 mb-4">
-          <p class="text-sm text-dark-gray m-0">{{ node.label }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Documentation Service</a>.</p>
+          <p class="text-sm text-dark-gray m-0">{{ rp_display_name }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Documentation Service</a>.</p>
         </div>
       {% endif %}
 
@@ -523,7 +523,7 @@
     <div id="rp-software" class="rp-top-software mb-8">
       <hr class="rp-section-rule">
       <h2 class="flex items-center gap-2"><i class="bi bi-terminal"></i> Most Frequently Used Software</h2>
-      <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
+      <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ rp_display_name }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
       <div class="overflow-x-auto">
         <table class="w-full border-collapse">
           <thead>
