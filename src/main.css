@@ -530,13 +530,22 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
     @apply mt-0 mb-0;
   }
 
-  /* Inline `code` support inside prose */
-  .prose code {
+  /* Inline `code` inside prose: light-gray pill. */
+  .prose :not(pre) > code {
     @apply bg-light-gray px-1 py-[1px] rounded text-sm font-mono;
   }
   .prose code::before,
   .prose code::after {
     content: none;
+  }
+  /* Block `<pre><code>` samples: light surface to match the page rather
+     than the default Tailwind typography slate-900 (which made code
+     invisible against our re-tinted inline-code background). */
+  .prose pre {
+    @apply bg-light-gray text-black border border-gray rounded p-3 text-sm font-mono;
+  }
+  .prose pre code {
+    @apply bg-transparent text-black p-0;
   }
 }
 
