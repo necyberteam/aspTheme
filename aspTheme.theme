@@ -173,6 +173,14 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
     }
   }
 
+  // Filter datasets to those with a non-empty name. Stub paragraphs (rows
+  // with all fields blank) shouldn't open the Datasets section.
+  $variables['field_rp_datasets_items'] = array_values(array_filter(
+    $variables['field_rp_datasets_items'],
+    fn($p) => $p->hasField('field_rp_dataset_name')
+      && trim((string) $p->get('field_rp_dataset_name')->value) !== ''
+  ));
+
   // Extract SDS resource name from global resource ID (first segment).
   // e.g. "deltaai.ncsa.access-ci.org" → "deltaai" for SDS ?installed_on= param.
   $variables['sds_resource_name'] = NULL;
