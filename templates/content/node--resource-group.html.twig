@@ -59,7 +59,7 @@
             {% for resource in resources %}
               <tr class="border-b border-light-gray">
                 <td class="py-3 pr-4 font-semibold whitespace-nowrap">
-                  <a href="{{ resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-link">
+                  <a href="{{ resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-list-link">
                     {{ resource.title }}
                   </a>
                 </td>
@@ -99,7 +99,7 @@
     banner.classList.remove('hidden');
 
     // Append ara_context to all resource links so it persists through navigation.
-    var links = document.querySelectorAll('.rp-resource-link');
+    var links = document.querySelectorAll('.rp-resource-list-link');
     for (var i = 0; i < links.length; i++) {
       var href = links[i].getAttribute('href');
       var sep = href.indexOf('?') === -1 ? '?' : '&';
