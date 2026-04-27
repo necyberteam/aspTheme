@@ -36,7 +36,8 @@
 {% set rp_description = node.field_rp_description.value %}
 {% set mfa_required = node.field_rp_mfa_required.value %}
 {% set account_required = node.field_rp_account_required.value %}
-{% set ondemand_url = node.field_rp_ondemand_url.0.url %}
+{% set ondemand = node.field_rp_ondemand_url.0 %}
+{% set ondemand_url = ondemand.url %}
 {% set office_hours = node.field_rp_office_hours.0 %}
 {% set external_storage = node.field_rp_external_storage.value %}
 {% set top_software_json = node.field_rp_top_software.value %}
@@ -196,7 +197,7 @@
               <div class="border-2 border-dark-teal p-4">
                 <h3 class="text-lg font-bold mt-0 mb-3">ACCESS OnDemand Login</h3>
                 <a href="{{ ondemand_url }}" class="btn btn-primary">
-                  LOGIN
+                  {{ ondemand.title|default('LOGIN')|upper }}
                 </a>
                 <div class="mt-3">
                   <a href="https://ondemand.connectci.org" class="text-sm text-md-teal no-underline hover--underline flex items-center gap-1">

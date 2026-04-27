@@ -50,46 +50,36 @@
     <button class="ara-dismiss text-xs underline text-primary-blue mt-1 cursor-pointer bg-transparent border-0 p-0">Dismiss</button>
   </div>
 
-  <div class="rp-resource-group-list mt-3">
-    <table class="rp-listing-table w-full border-collapse text-sm">
-      <tbody>
-        {% for resource in rp_group_resources %}
-          <tr>
-            <td class="rp-listing-title py-2 pr-4">
-              <a href="{{ resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-link">
-                {{ resource.title }}
-              </a>
-            </td>
-            <td class="py-2 text-sm">
-              {{ resource.description|raw }}
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  <ul class="rp-resource-list rp-resource-group-list mt-3">
+    {% for resource in rp_group_resources %}
+      <li class="rp-resource-list-item">
+        <a href="{{ resource.url }}" class="rp-resource-list-link">
+          <span class="rp-resource-list-title">{{ resource.title }}</span>
+          <span class="rp-resource-list-desc">{{ resource.description|raw }}</span>
+          <span class="rp-resource-list-arrow" aria-hidden="true">
+            <i class="bi bi-arrow-right"></i>
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 {% elseif rp_individual_resource %}
   {#
-    Ungrouped resource: render the Title as an <h2> and a single-row table,
-    matching the header-plus-table pattern used for Resource Groups.
+    Ungrouped resource: render the Title as an <h2> and a single-row entry
+    matching the structure used for Resource Group children.
   #}
   <h2 class="mt-0 mb-1">{{ rp_individual_resource.title }}</h2>
-  <div class="rp-individual-resource-list mt-3">
-    <table class="rp-listing-table w-full border-collapse text-sm">
-      <tbody>
-        <tr>
-          <td class="rp-listing-title py-2 pr-4">
-            <a href="{{ rp_individual_resource.url }}" class="text-md-teal no-underline hover--underline rp-resource-link">
-              {{ rp_individual_resource.title }}
-            </a>
-          </td>
-          <td class="py-2 text-sm">
-            {{ rp_individual_resource.description|raw }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ul class="rp-resource-list rp-individual-resource-list mt-3">
+    <li class="rp-resource-list-item">
+      <a href="{{ rp_individual_resource.url }}" class="rp-resource-list-link">
+        <span class="rp-resource-list-title">{{ rp_individual_resource.title }}</span>
+        <span class="rp-resource-list-desc">{{ rp_individual_resource.description|raw }}</span>
+        <span class="rp-resource-list-arrow" aria-hidden="true">
+          <i class="bi bi-arrow-right"></i>
+        </span>
+      </a>
+    </li>
+  </ul>
 {% endif %}
 
 </div>

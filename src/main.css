@@ -99,12 +99,15 @@ p.colored-square {
 h2.colored-square::before {
   height: 16px;
   width: 16px;
-  top: calc(50% - 8px);
+  /* Align with the top of the first line of text (cap height). Was
+     vertically centered on the heading box, which drifted as headings
+     wrapped to multiple lines. */
+  top: 0.25em;
 }
 p.colored-square::before {
   height: 12px;
   width: 12px;
-  top: calc(50% - 6px);
+  top: 0.35em;
 }
 .colored-square-orange::before {
   background: var(--orange);
@@ -142,6 +145,7 @@ table.views-table tr td {
 .font-condensed {
   font-stretch: condensed;
 }
+
 
 /* prevent long user-entered links from breaking layout for
  * for user-authored areas such as events, event view, news
@@ -549,15 +553,129 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   }
 }
 
-/* RP documentation listing: fixed-width title column so descriptions line up
-   consistently across every group/individual row on the page. */
-.rp-listing-table {
-  table-layout: fixed;
+/* RP documentation listing: each row is a CSS-Grid card with name | description
+   | arrow on desktop, stacking to a single column on mobile. The whole row is
+   one anchor for a generous click target. */
+.rp-resource-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* Top + bottom rules wrap the list per the design; inner separators come
+     from each item's bottom border. */
+  border-top: 1px solid theme('colors.dark-gray');
+  border-bottom: 1px solid theme('colors.dark-gray');
 }
-.rp-listing-title {
-  width: 16rem;
+.rp-resource-list-item {
+  margin: 0;
+  /* Override .prose ul>li typography plugin's default left padding so the
+     row's interior padding comes from the inner link, not the list item. */
+  padding-left: 0;
+  border-bottom: 1px solid theme('colors.dark-gray');
+}
+.rp-resource-list-item:last-child {
+  border-bottom: 0;
+}
+.rp-resource-list-link {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr auto;
+  align-items: start;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  /* .prose a sets font-weight: 800 by default — neutralize so descendant
+     spans render at their own weights. */
+  font-weight: normal;
+}
+.rp-resource-list-link:hover,
+.rp-resource-list-link:focus-visible {
+  background-color: theme('colors.light-gray');
+}
+.rp-resource-list-link:focus-visible {
+  outline: 2px solid theme('colors.dark-teal');
+  outline-offset: -2px;
+}
+.rp-resource-list-title {
+  font-weight: 700;
+  color: theme('colors.black');
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+.rp-resource-list-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.rp-resource-list-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Title and description top-align in their grid cells; the arrow stays
+     visually balanced with the title's first line by aligning to its
+     baseline area, not the entire row's vertical center (which drifts
+     when descriptions wrap). */
+  align-self: start;
+  margin-top: 0.125rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: theme('colors.yellow');
+  color: theme('colors.black');
+  font-size: 1.125rem;
+  flex-shrink: 0;
+  transition: background-color 150ms ease;
+}
+.rp-resource-list-link:hover .rp-resource-list-arrow,
+.rp-resource-list-link:focus-visible .rp-resource-list-arrow {
+  background-color: theme('colors.orange');
+}
+
+/* Mobile: stack into a single column. Title on top, description below,
+   arrow lower-right anchored via grid-area. */
+@media (max-width: 640px) {
+  .rp-resource-list-link {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'title arrow'
+      'desc desc';
+    column-gap: 0.5rem;
+    row-gap: 0.25rem;
+    padding: 0.875rem 1rem;
+  }
+  .rp-resource-list-title {
+    grid-area: title;
+    align-self: center;
+  }
+  .rp-resource-list-arrow {
+    grid-area: arrow;
+    align-self: center;
+  }
+  .rp-resource-list-desc {
+    grid-area: desc;
+  }
+}
+
+/* RP listing: small teal square in front of each group/individual h2,
+   per the new landing-page design. Square aligns with the top of the
+   first line of text, not the center, so it stays anchored when
+   headings wrap to multiple lines. The group h2 is wrapped by Views in
+   <div class="views-field views-field-title">, so the selector targets
+   any descendant h2 of the row wrapper. */
+.rp-resource-group-row h2,
+.rp-individual-resource-row h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+.rp-resource-group-row h2::before,
+.rp-individual-resource-row h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  /* Sit on the cap-height line of the first line of heading text. */
+  margin-top: 0.35em;
+  background-color: theme('colors.teal');
+  flex-shrink: 0;
 }
 
 /* ===== RP admin views (Resources, Groups) ===== */
