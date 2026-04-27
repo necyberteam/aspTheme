@@ -431,21 +431,21 @@
                   {% if qname %}
                   {% set qmetrics = queue_metrics[qname] ?? null %}
                   <tr>
-                    <td class="py-2 pr-4 font-semibold">{{ qname }}</td>
-                    <td class="py-2 pr-4 text-sm">
+                    <td class="py-2 pr-4 font-semibold align-top">{{ qname }}</td>
+                    <td class="py-2 pr-4 text-sm align-top">
                       {{ paragraph.field_rp_queue_purpose.value|default('') }}
                     </td>
-                    <td class="py-2 pr-4">{{ paragraph.field_rp_cpus.value|default('') }}</td>
-                    <td class="py-2 pr-4">{{ paragraph.field_rp_gpus.value|default('') }}</td>
-                    <td class="py-2 pr-4">{{ paragraph.field_rp_ram.value|default('') }}</td>
-                    <td class="py-2 pr-4 text-right">
+                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_cpus.value|default('') }}</td>
+                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_gpus.value|default('') }}</td>
+                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_ram.value|default('') }}</td>
+                    <td class="py-2 pr-4 text-right align-top">
                       {% if qmetrics and qmetrics.job_count is not null %}
                         {{ qmetrics.job_count|number_format(0) }}
                       {% else %}
                         <span class="text-dark-gray">&mdash;</span>
                       {% endif %}
                     </td>
-                    <td class="py-2 pr-4">
+                    <td class="py-2 pr-4 align-top">
                       {% if qmetrics and qmetrics.daily_wait|default([])|length > 1 %}
                         {% set vals = qmetrics.daily_wait %}
                         {% set avg = qmetrics.wait_time %}
@@ -477,7 +477,7 @@
                         <span class="text-dark-gray" aria-label="No data">&mdash;</span>
                       {% endif %}
                     </td>
-                    <td class="py-2">
+                    <td class="py-2 align-top">
                       {% if qmetrics and qmetrics.daily_wall|default([])|length > 1 %}
                         {% set vals = qmetrics.daily_wall %}
                         {% set avg = qmetrics.wall_time %}
