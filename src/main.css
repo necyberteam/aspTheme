@@ -331,6 +331,10 @@ form.node-match-engagement-form {
   }
 }
 
+.border-t-14 {
+  border-top-width: 14px;
+}
+
 .block-facets {
   h2 {
     @apply mb-2;
@@ -735,4 +739,38 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
 }
 .rp-jump-to a:hover {
   text-decoration: underline;
+}
+
+.tools-research-studies {
+  .views-row {
+    @apply pt-12;
+  }
+  .views-row:first-child {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/tools-shapes.svg') no-repeat top right;
+    background-size: 35%;
+  }
+  .views-row:nth-child(3n+2) {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/tri-y.svg') no-repeat top right;
+    background-size: 5%;
+  }
+  .views-row:nth-child(3n+3) {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/quart-t.svg') no-repeat top right;
+    background-size: 5%;
+  }
+  .views-row:nth-child(3n+4) {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/lines-o.svg') no-repeat top right;
+    background-size: 5%;
+  }
+
+  .project-summary {
+    @apply max-h-[200px] overflow-hidden;
+    transition: max-height 1s ease-in-out;
+  }
+
+  dl {
+  }
+
+  .tcs-researchers-block__photo .image-style-thumbnail {
+    @apply rounded-full object-cover w-[60px] h-[60px];
+  }
 }
