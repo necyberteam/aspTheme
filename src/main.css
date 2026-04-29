@@ -767,7 +767,23 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
     transition: max-height 1s ease-in-out;
   }
 
-  dl {
+  dl dt,
+  dl dd {
+    @apply inline;
+  }
+
+  dl dt:not(:first-child)::before {
+    content: '\A';
+    white-space: pre;
+  }
+
+  dl dt {
+    font-weight: bold;
+    margin-top: 0.;
+  }
+
+  dl dd {
+    padding-left: .25rem;
   }
 
   .tcs-researchers-block__photo .image-style-thumbnail {
