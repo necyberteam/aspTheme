@@ -747,24 +747,23 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   }
   .views-row:first-child {
     background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/tools-shapes.svg') no-repeat top right;
-    background-size: 35%;
+    background-size: 350px;
   }
   .views-row:nth-child(3n+2) {
     background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/tri-y.svg') no-repeat top right;
-    background-size: 5%;
+    background-size: 50px;
   }
   .views-row:nth-child(3n+3) {
     background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/quart-t.svg') no-repeat top right;
-    background-size: 5%;
+    background-size: 50px;
   }
   .views-row:nth-child(3n+4) {
     background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/lines-o.svg') no-repeat top right;
-    background-size: 5%;
+    background-size: 50px;
   }
 
   .project-summary {
-    @apply max-h-[200px] overflow-hidden;
-    transition: max-height 1s ease-in-out;
+    @apply max-h-[400px] overflow-y-auto;
   }
 
   dl dt,
@@ -785,8 +784,25 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   dl dd {
     padding-left: .25rem;
   }
-
-  .tcs-researchers-block__photo .image-style-thumbnail {
-    @apply rounded-full object-cover w-[60px] h-[60px];
+  .clip-title button {
+    @apply hidden;
   }
+
+  .clip-title:hover button {
+    @apply block;
+  }
+}
+
+.tcs-researchers-block__photo .image-style-thumbnail {
+  @apply rounded-full object-cover w-[60px] h-[60px];
+}
+.block-views-blocktool-case-study-slideshow-block-1 {
+  @apply bg-light-teal -mx-50% px-50%;
+}
+
+.block-views-blocktool-case-study-slideshow-block-1 .tcs-hero img {
+  @apply object-cover h-[110px] w-full;
+}
+.block-views-blocktool-case-study-slideshow-block-1 .carousel-item {
+  background: #fff;
 }
