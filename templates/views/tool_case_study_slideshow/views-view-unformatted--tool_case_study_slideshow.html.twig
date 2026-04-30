@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% if header %}
+  {{ header }}
+{% endif %}
+<div id="projectSlider" class="carousel">
+  <a class="carousel-control-prev" href="#projectSlider" role="button" data-slide="prev">
+    <span class="bi-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <div class="carousel-track">
+    <div class="carousel-inner">
+      {% for row in rows %}
+        <div{{ row.attributes.addClass('carousel-item') }}>
+          {{- row.content -}}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <a class="carousel-control-next" href="#projectSlider" role="button" data-slide="next">
+    <span class="bi-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
