@@ -736,3 +736,7 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
 .rp-jump-to a:hover {
   text-decoration: underline;
 }
+
+.webform-element-description {
+  color: #232323;
+}
