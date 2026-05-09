@@ -182,7 +182,7 @@
                   {% endfor %}
                 </select>
                 <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
-                  <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ first_entry.placeholder }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
+                  <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ user_rp_username|default(first_entry.placeholder) }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
                 </div>
                 <div id="rp-ssh-docs" class="text-sm{% if not first_entry.docs_uri %} hidden{% endif %}">
                   <a id="rp-ssh-docs-link" href="{{ first_entry.docs_uri }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
@@ -350,8 +350,62 @@
         </div>
       {% endif %}
 
-      {# RP Account Setup — primary CTA for the login section #}
-      {% if account_setup|length > 0 %}
+      {# RP account panel — user-specific. State decision tree:
+       - has rows                          → YOUR ACCOUNT panel (data-stale="1" if rows_stale)
+       - no_rows_unknown / rows_stale / error (logged in) → loading skeleton (JS refreshes)
+       - no_rows_fresh (logged in) OR anonymous → existing GET AN ACCOUNT CTA
+      #}
+      {% set rp_panel_state = user_rp_accounts_state ?: (logged_in ? 'no_rows_unknown' : 'anon') %}
+
+      {% if user_rp_accounts is defined and user_rp_accounts|length > 0 %}
+        <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
+             data-rp-nid="{{ node.id }}"
+             {% if rp_panel_state == 'rows_stale' %}data-stale="1"{% endif %}>
+          <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ rp_display_name|upper }}</h3>
+          {% if user_rp_username %}
+            <p class="text-sm text-white mb-3">Username: <strong class="text-white">{{ user_rp_username }}</strong></p>
+          {% endif %}
+
+          <div class="rp-account-grants">
+            {% for grant in user_rp_accounts %}
+              <div class="rp-grant mb-3 pb-3{% if not loop.last %} border-b border-md-teal{% endif %}">
+                <div class="text-sm font-semibold">{{ grant.grant_number }}</div>
+                {% if grant.grant_title %}
+                  <div class="text-xs text-light-gray mb-1" title="{{ grant.grant_title }}">
+                    {{ grant.grant_title|length > 50 ? grant.grant_title|slice(0, 50) ~ '…' : grant.grant_title }}
+                  </div>
+                {% endif %}
+                {% if grant.project_end %}
+                  <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
+                {% endif %}
+                <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
+                  {% if grant.project_balance %}
+                    Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
+                  {% else %}
+                    <span class="rp-balance-loading">Loading balance…</span>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white">
+            Manage allocations →
+          </a>
+        </div>
+
+      {% elseif rp_panel_state in ['no_rows_unknown', 'rows_stale', 'error'] and logged_in %}
+        {# DB has no rows but we may not yet have asked. Skeleton with state attr for JS. #}
+        <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
+             data-rp-nid="{{ node.id }}"
+             data-state="{{ rp_panel_state }}">
+          <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ rp_display_name|upper }}</h3>
+          <p class="text-sm">Loading account info…</p>
+        </div>
+
+      {% elseif account_setup|length > 0 %}
+        {# rp_panel_state in ('no_rows_fresh', 'anon'): we know there's no
+           account, or user is anonymous. Show the existing CTA. #}
         <div class="bg-dark-teal text-white p-4 mb-4">
           <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ rp_display_name|upper }}</h3>
           <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="btn btn-primary">

@@ -216,6 +216,41 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
   else {
     $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($node->getTitle());
   }
+
+  // Per-user account panel data. See RpAccountService for the state enum.
+  $current_user = \Drupal::currentUser();
+  $variables['user_rp_accounts'] = [];
+  $variables['user_rp_accounts_state'] = NULL;
+  $variables['user_rp_username'] = NULL;
+
+  if ($current_user->isAuthenticated()
+    && !empty($variables['node'])
+    && $variables['node'] instanceof \Drupal\node\NodeInterface) {
+    try {
+      /** @var \Drupal\access_affinitygroup\Service\RpAccountService $svc */
+      $svc = \Drupal::service('access_affinitygroup.rp_account');
+      $result = $svc->getAccountsForUserAndRp(
+        (int) $current_user->id(),
+        (int) $variables['node']->id()
+      );
+      $variables['user_rp_accounts'] = $result['rows'];
+      $variables['user_rp_accounts_state'] = $result['state'];
+
+      $usernames = array_unique(array_filter(array_column($result['rows'], 'rp_username')));
+      if (count($usernames) === 1) {
+        $variables['user_rp_username'] = reset($usernames);
+      }
+    }
+    catch (\Throwable $e) {
+      \Drupal::logger('access_affinitygroup')
+        ->error('aspTheme RP account panel preprocessor failed: @m', ['@m' => $e->getMessage()]);
+      $variables['user_rp_accounts_state'] = 'error';
+    }
+  }
+
+  // User-specific cache context (each user sees their own panel data;
+  // anonymous traffic shares a single cache entry).
+  $variables['#cache']['contexts'][] = 'user';
 }
 
 /**
