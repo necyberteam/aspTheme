@@ -242,8 +242,8 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
       }
     }
     catch (\Throwable $e) {
-      \Drupal::logger('access_affinitygroup')
-        ->error('aspTheme RP account panel preprocessor failed: @m', ['@m' => $e->getMessage()]);
+      \Drupal::logger('aspTheme')
+        ->error('RP account panel preprocessor failed: @m', ['@m' => $e->getMessage()]);
       $variables['user_rp_accounts_state'] = 'error';
     }
   }

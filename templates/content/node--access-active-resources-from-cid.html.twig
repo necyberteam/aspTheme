@@ -379,7 +379,7 @@
                   <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
                 {% endif %}
                 <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
-                  {% if grant.project_balance %}
+                  {% if grant.project_balance is not null and grant.project_balance|trim != '' %}
                     Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
                   {% else %}
                     <span class="rp-balance-loading">Loading balance…</span>
