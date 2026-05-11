@@ -84,36 +84,12 @@
         <div class="embedded-qa-bot" data-resource-context="{{ resource_context }}"></div>
       </div>
 
-      {# --- Jump-to anchor nav --- #}
       {% set has_login = field_rp_ssh_login_nodes_items|length > 0 or ondemand_url %}
       {% set has_file_transfer = field_rp_file_transfer_items|length > 0 %}
       {% set has_storage = field_rp_storage_items|length > 0 or external_storage %}
       {% set has_jobs = field_rp_queue_specs_items|length > 0 or node.field_rp_jobs_info.value %}
       {% set has_software = top_software|length > 0 %}
       {% set has_datasets = field_rp_datasets_items|length > 0 %}
-      {% if has_login or has_file_transfer or has_storage or has_jobs or has_software or has_datasets %}
-        <nav class="rp-jump-to mb-6 pb-4 border-b border-gray flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Jump to section">
-          <span class="text-dark-gray">Jump to:</span>
-          {% if has_login %}
-            <a href="#rp-login" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-box-arrow-in-right"></i> Login</a>
-          {% endif %}
-          {% if has_file_transfer %}
-            <a href="#rp-file-transfer" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-arrow-left-right"></i> File Transfer</a>
-          {% endif %}
-          {% if has_storage %}
-            <a href="#rp-storage" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-database"></i> Storage</a>
-          {% endif %}
-          {% if has_jobs %}
-            <a href="#rp-jobs" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-card-checklist"></i> Jobs</a>
-          {% endif %}
-          {% if has_software %}
-            <a href="#rp-software" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-terminal"></i> Software</a>
-          {% endif %}
-          {% if has_datasets %}
-            <a href="#rp-datasets" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-table"></i> Datasets</a>
-          {% endif %}
-        </nav>
-      {% endif %}
 
       {# account_setup is used by the sidebar CTA; declared here, rendered in Login block at bottom of page #}
       {% set account_setup = node.field_rp_account_setup_url %}
@@ -208,7 +184,7 @@
            account, or user is anonymous. Show the existing CTA. #}
         <div class="bg-dark-teal text-white p-4 mb-4">
           <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ node.label|upper }}</h3>
-          <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
+          <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white">
             {{ account_setup.0.title ?: 'RP Account Setup' }}
           </a>
         </div>
@@ -217,6 +193,31 @@
     </aside>{# /.rp-sidebar (top) #}
 
   </div>{# /.grid (top section) #}
+
+  {# --- Jump-to anchor nav (full-width, sticky) --- #}
+  {% if has_login or has_file_transfer or has_storage or has_jobs or has_software or has_datasets %}
+    <nav class="rp-jump-to mb-6 py-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Jump to section">
+      <span class="text-dark-gray">Jump to:</span>
+      {% if has_jobs %}
+        <a href="#rp-jobs" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-card-checklist"></i> Jobs</a>
+      {% endif %}
+      {% if has_software %}
+        <a href="#rp-software" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-terminal"></i> Software</a>
+      {% endif %}
+      {% if has_datasets %}
+        <a href="#rp-datasets" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-table"></i> Datasets</a>
+      {% endif %}
+      {% if has_storage %}
+        <a href="#rp-storage" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-database"></i> Storage</a>
+      {% endif %}
+      {% if has_file_transfer %}
+        <a href="#rp-file-transfer" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-arrow-left-right"></i> File Transfer</a>
+      {% endif %}
+      {% if has_login %}
+        <a href="#rp-login" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+      {% endif %}
+    </nav>
+  {% endif %}
 
   {# ========== Jobs / Queue Specifications (full width) ========== #}
   {% set jobs_info = node.field_rp_jobs_info.value %}
@@ -404,7 +405,7 @@
           {% if software_list_url %}
             <div class="bg-dark-teal text-white p-4 mb-4">
               <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
-              <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
+              <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white">
                 {{ software_list_url.title ?: 'VIEW SOFTWARE' }}
               </a>
             </div>
@@ -414,7 +415,7 @@
           {% if sds_has_software and sds_resource_name %}
             <div class="bg-dark-teal text-white p-4 mb-4">
               <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
-              <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="btn btn-primary">
+              <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="text-white text-sm no-underline hover--underline hover--text-white">
                 EXPLORE IN SDS
               </a>
             </div>

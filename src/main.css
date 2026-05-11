@@ -551,6 +551,77 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   .prose pre code {
     @apply bg-transparent text-black p-0;
   }
+
+  .rp-sidebar,
+  .rp-software-sidebar {
+    h3 {
+      text-transform: uppercase;
+      font-stretch: 75%;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+    a {
+      text-transform: uppercase;
+      font-stretch: 75%;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    > div:nth-child(even) {
+      background-color: #C4F0ED !important;
+      color: #232323;
+
+      h3 {
+        color: #232323 !important;
+      }
+      a {
+        color: #232323 !important;
+        text-decoration: underline;
+      }
+      a:hover {
+        color: #107180 !important;
+        text-decoration: none;
+      }
+    }
+  }
+
+}
+
+.rp-documentation .rp-main-content {
+  align-self: start;
+}
+
+/* overflow-x-clip on html/body breaks position:sticky for descendants.
+   Lift it on RP doc pages so the jump-to nav can stick. */
+html:has(body.page-node-type-access-active-resources-from-cid),
+body.page-node-type-access-active-resources-from-cid {
+  overflow-x: visible;
+}
+
+.rp-jump-to {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  padding-top: 1rem;
+  border-top: 3px solid #107180;
+  border-bottom: 3px solid #107180;
+}
+.rp-jump-to a {
+  color: #232323;
+  font-weight: 800;
+  font-size: 1.125rem;
+  text-decoration: underline;
+}
+.rp-jump-to a:hover {
+  color: #107180;
+  text-decoration: none;
+}
+.rp-jump-to > span {
+  color: #232323;
+  font-weight: 700;
+  font-size: 0.875rem;
 }
 
 /* RP documentation listing: each row is a CSS-Grid card with name | description
@@ -720,19 +791,3 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   margin-bottom: 1em;
 }
 
-/* Jump-to anchor nav — sticks to the top of the viewport as the user scrolls.
-   Uses generous top padding so the links sit visually offset from the page top
-   without leaving a gap where content could scroll through above the bar. */
-.rp-jump-to {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: white;
-  padding-top: 1rem;
-}
-.rp-jump-to a {
-  color: #232323;
-}
-.rp-jump-to a:hover {
-  text-decoration: underline;
-}
