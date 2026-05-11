@@ -392,6 +392,8 @@
                 </tbody>
               </table>
             </div>
+          {% else %}
+            <p class="text-sm text-dark-gray">No software usage data is currently reported for {{ node.label }} in <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
           {% endif %}
         </div>
 
