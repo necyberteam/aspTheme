@@ -132,16 +132,6 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
   }
   $node = $variables['node'];
 
-  // Display name prefers the CIDER short_name (e.g. "Jetstream2 LM") over
-  // the long descriptive name. Used for sidebar CTAs, chatbot button,
-  // section headings — places where the long org-prefixed title reads
-  // awkwardly. Falls back to the node label when short_name is empty
-  // (e.g. for stale nodes no longer in the active feed).
-  $short = $node->hasField('field_cider_short_name') && !$node->get('field_cider_short_name')->isEmpty()
-    ? $node->get('field_cider_short_name')->value
-    : NULL;
-  $variables['rp_display_name'] = $short ?: $node->label();
-
   // Parse top software JSON into a render-ready array.
   $variables['top_software'] = [];
   if ($node->hasField('field_rp_top_software') && !$node->get('field_rp_top_software')->isEmpty()) {
