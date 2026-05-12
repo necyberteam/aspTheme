@@ -16,3 +16,8 @@ global-scripts:
   js:
     src/js/details.js: {}
     build/js/global.js: {}
+
+node:
+  version: 1.x
+  js:
+    js/rp-account-panel.js: {}
