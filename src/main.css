@@ -572,7 +572,10 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
       background-color: #C4F0ED !important;
       color: #232323;
 
-      h3 {
+      h3,
+      .text-white,
+      .text-light-gray,
+      strong.text-white {
         color: #232323 !important;
       }
       a {
