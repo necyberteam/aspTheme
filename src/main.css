@@ -806,3 +806,7 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
 .block-views-blocktool-case-study-slideshow-block-1 .carousel-item {
   background: #fff;
 }
+
+article.node--type-tools-case-study {
+  @apply mb-5;
+}
