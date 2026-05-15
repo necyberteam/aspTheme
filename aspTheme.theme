@@ -132,16 +132,6 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
   }
   $node = $variables['node'];
 
-  // Display name prefers the CIDER short_name (e.g. "Jetstream2 LM") over
-  // the long descriptive name. Used for sidebar CTAs, chatbot button,
-  // section headings — places where the long org-prefixed title reads
-  // awkwardly. Falls back to the node label when short_name is empty
-  // (e.g. for stale nodes no longer in the active feed).
-  $short = $node->hasField('field_cider_short_name') && !$node->get('field_cider_short_name')->isEmpty()
-    ? $node->get('field_cider_short_name')->value
-    : NULL;
-  $variables['rp_display_name'] = $short ?: $node->label();
-
   // Parse top software JSON into a render-ready array.
   $variables['top_software'] = [];
   if ($node->hasField('field_rp_top_software') && !$node->get('field_rp_top_software')->isEmpty()) {
@@ -181,14 +171,24 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
       && trim((string) $p->get('field_rp_dataset_name')->value) !== ''
   ));
 
-  // Extract SDS resource name from global resource ID (first segment).
-  // e.g. "deltaai.ncsa.access-ci.org" → "deltaai" for SDS ?installed_on= param.
+  // Build the SDS group slug + display label.
+  // SDS's website ?installed_on= param accepts the group slug only (e.g. "anvil",
+  // not "anvil-cpu"). When the node is grouped, derive both from the parent
+  // group's title. Otherwise fall back to the global ID's first segment with
+  // sub-resource suffixes stripped (mirroring SdsAvailabilityService line 64).
   $variables['sds_resource_name'] = NULL;
-  if ($node->hasField('field_access_global_resource_id') && !$node->get('field_access_global_resource_id')->isEmpty()) {
+  $variables['sds_resource_label'] = NULL;
+  if ($parent_group) {
+    $variables['sds_resource_name'] = \Drupal\Component\Utility\Html::getClass($parent_group->getTitle());
+    $variables['sds_resource_label'] = $parent_group->getTitle();
+  }
+  elseif ($node->hasField('field_access_global_resource_id') && !$node->get('field_access_global_resource_id')->isEmpty()) {
     $global_id = $node->get('field_access_global_resource_id')->value;
-    $parts = explode('.', $global_id);
-    if (!empty($parts[0])) {
-      $variables['sds_resource_name'] = $parts[0];
+    $slug = explode('.', $global_id)[0];
+    $slug = preg_replace('/-(?:gpu|cpu|ai|storage|em|rm|lm|ps|ocean)$/', '', $slug);
+    if (!empty($slug)) {
+      $variables['sds_resource_name'] = $slug;
+      $variables['sds_resource_label'] = $node->label();
     }
   }
 
@@ -216,6 +216,41 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
   else {
     $variables['resource_context'] = \Drupal\Component\Utility\Html::getClass($node->getTitle());
   }
+
+  // Per-user account panel data. See RpAccountService for the state enum.
+  $current_user = \Drupal::currentUser();
+  $variables['user_rp_accounts'] = [];
+  $variables['user_rp_accounts_state'] = NULL;
+  $variables['user_rp_username'] = NULL;
+
+  if ($current_user->isAuthenticated()
+    && !empty($variables['node'])
+    && $variables['node'] instanceof \Drupal\node\NodeInterface) {
+    try {
+      /** @var \Drupal\access_affinitygroup\Service\RpAccountService $svc */
+      $svc = \Drupal::service('access_affinitygroup.rp_account');
+      $result = $svc->getAccountsForUserAndRp(
+        (int) $current_user->id(),
+        (int) $variables['node']->id()
+      );
+      $variables['user_rp_accounts'] = $result['rows'];
+      $variables['user_rp_accounts_state'] = $result['state'];
+
+      $usernames = array_unique(array_filter(array_column($result['rows'], 'rp_username')));
+      if (count($usernames) === 1) {
+        $variables['user_rp_username'] = reset($usernames);
+      }
+    }
+    catch (\Throwable $e) {
+      \Drupal::logger('aspTheme')
+        ->error('RP account panel preprocessor failed: @m', ['@m' => $e->getMessage()]);
+      $variables['user_rp_accounts_state'] = 'error';
+    }
+  }
+
+  // User-specific cache context (each user sees their own panel data;
+  // anonymous traffic shares a single cache entry).
+  $variables['#cache']['contexts'][] = 'user';
 }
 
 /**

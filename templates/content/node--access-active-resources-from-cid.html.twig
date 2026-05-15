@@ -79,249 +79,25 @@
         </div>
       {% endif %}
 
-      {# --- Jump-to anchor nav --- #}
+      {# --- Embedded Chatbot --- #}
+      <div class="rp-chatbot mb-8">
+        <div class="embedded-qa-bot" data-resource-context="{{ resource_context }}"></div>
+      </div>
+
       {% set has_login = field_rp_ssh_login_nodes_items|length > 0 or ondemand_url %}
       {% set has_file_transfer = field_rp_file_transfer_items|length > 0 %}
       {% set has_storage = field_rp_storage_items|length > 0 or external_storage %}
       {% set has_jobs = field_rp_queue_specs_items|length > 0 or node.field_rp_jobs_info.value %}
       {% set has_software = top_software|length > 0 %}
       {% set has_datasets = field_rp_datasets_items|length > 0 %}
-      {% if has_login or has_file_transfer or has_storage or has_jobs or has_software or has_datasets %}
-        <nav class="rp-jump-to mb-6 pb-4 border-b border-gray flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Jump to section">
-          <span class="text-dark-gray">Jump to:</span>
-          {% if has_login %}
-            <a href="#rp-login" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-box-arrow-in-right"></i> Login</a>
-          {% endif %}
-          {% if has_file_transfer %}
-            <a href="#rp-file-transfer" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-arrow-left-right"></i> File Transfer</a>
-          {% endif %}
-          {% if has_storage %}
-            <a href="#rp-storage" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-database"></i> Storage</a>
-          {% endif %}
-          {% if has_jobs %}
-            <a href="#rp-jobs" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-card-checklist"></i> Jobs</a>
-          {% endif %}
-          {% if has_software %}
-            <a href="#rp-software" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-terminal"></i> Software</a>
-          {% endif %}
-          {% if has_datasets %}
-            <a href="#rp-datasets" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-table"></i> Datasets</a>
-          {% endif %}
-        </nav>
-      {% endif %}
 
-      {# --- Embedded Chatbot --- #}
-      <div class="rp-chatbot mb-8">
-        <div class="flex items-center gap-4" style="flex-direction: row-reverse;">
-          <button id="rp-chatbot-toggle" data-label="Ask about {{ rp_display_name }}" class="flex items-center justify-center bg-dark-teal text-white cursor-pointer border-0 hover--bg-md-teal" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;" aria-label="Ask about {{ rp_display_name }}">
-            <img src="/themes/contrib/asp-theme/images/icons/ACCESS-arrrow.svg" alt="ACCESS" style="width: 36px; height: 36px;">
-          </button>
-          <span id="rp-chatbot-tooltip" class="text-white text-sm py-1 px-3 rounded-md whitespace-nowrap" style="background: #107180; position: relative;">Ask about {{ rp_display_name }}<span style="position: absolute; right: -8px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid #107180;"></span></span>
-        </div>
-        <div id="rp-chatbot-container" class="mt-4 border border-light-gray rounded-md overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease;">
-          <div class="embedded-qa-bot" data-resource-context="{{ resource_context }}" style="min-height: 450px;"></div>
-        </div>
-      </div>
-
-      {# --- Login Section --- #}
-      {% set ssh_logins = field_rp_ssh_login_nodes_items %}
-      {% set login_text = node.field_rp_login_text.value %}
-      {% set login_help = node.field_rp_login_help_links %}
+      {# account_setup is used by the sidebar CTA; declared here, rendered in Login block at bottom of page #}
       {% set account_setup = node.field_rp_account_setup_url %}
-      {% if ssh_logins|length > 0 or ondemand_url or login_text or login_help|length > 0 or account_setup|length > 0 %}
-        <div id="rp-login" class="rp-login mb-8">
-          <h2 class="flex items-center gap-2"><i class="bi bi-box-arrow-in-right"></i> Login to {{ rp_display_name }}</h2>
-
-          {# Login text — rich text above login boxes #}
-          {% if login_text %}
-            <div class="prose max-w-none mb-4">
-              {{ node.field_rp_login_text.processed }}
-            </div>
-          {% endif %}
-
-          {% if ssh_logins|length > 0 or ondemand_url %}
-          <div class="grid grid-cols-1 gap-4 md--grid-cols-2">
-
-            {# SSH Login dropdown — uses paragraph with recommended boolean #}
-            {% if ssh_logins|length > 0 %}
-              {# Build a render-friendly list, preferring the structured fields
-                 with a fallback to the legacy field_rp_ssh_url for paragraphs
-                 that haven't been migrated yet. #}
-              {% set ssh_entries = [] %}
-              {% for login in ssh_logins %}
-                {% set hostname = login.field_rp_ssh_hostname.value|default('') %}
-                {% set placeholder = login.field_rp_ssh_user_placeholder.value|default('<your_username>') %}
-                {% set docs_uri = login.field_rp_ssh_docs_url.0.uri|default('') %}
-                {% set docs_title = login.field_rp_ssh_docs_url.0.title|default('') %}
-                {% if hostname is empty and login.field_rp_ssh_url.uri %}
-                  {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
-                {% endif %}
-                {% set ssh_entries = ssh_entries|merge([{
-                  'hostname': hostname,
-                  'placeholder': placeholder,
-                  'docs_uri': docs_uri,
-                  'docs_title': docs_title,
-                  'recommended': login.field_rp_recommended.value,
-                }]) %}
-              {% endfor %}
-
-              {% set first_entry = ssh_entries[0] %}
-              {% for entry in ssh_entries %}
-                {% if entry.recommended %}
-                  {% set first_entry = entry %}
-                {% endif %}
-              {% endfor %}
-
-              <div class="border-2 border-dark-teal p-4">
-                <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
-                <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;">
-                  {% for entry in ssh_entries %}
-                    <option value="{{ entry.hostname }}" data-placeholder="{{ entry.placeholder }}" data-docs-uri="{{ entry.docs_uri }}" data-docs-title="{{ entry.docs_title }}" {{ entry.recommended ? 'selected' : '' }}>
-                      {{ entry.hostname }}{% if entry.recommended %} | RECOMMENDED{% endif %}
-                    </option>
-                  {% endfor %}
-                </select>
-                <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
-                  <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ first_entry.placeholder }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
-                </div>
-                <div id="rp-ssh-docs" class="text-sm{% if not first_entry.docs_uri %} hidden{% endif %}">
-                  <a id="rp-ssh-docs-link" href="{{ first_entry.docs_uri }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
-                    <i class="bi bi-box-arrow-up-right"></i> <span id="rp-ssh-docs-text">{{ first_entry.docs_title ?: 'Login instructions' }}</span>
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-
-            {# OnDemand Login #}
-            {% if ondemand_url %}
-              <div class="border-2 border-dark-teal p-4">
-                <h3 class="text-lg font-bold mt-0 mb-3">ACCESS OnDemand Login</h3>
-                <a href="{{ ondemand_url }}" class="btn btn-primary">
-                  {{ ondemand.title|default('LOGIN')|upper }}
-                </a>
-                <div class="mt-3">
-                  <a href="https://support.access-ci.org/tools/ondemand" class="text-sm text-md-teal no-underline hover--underline flex items-center gap-1">
-                    <i class="bi bi-box-arrow-up-right"></i> How do I use ACCESS OnDemand?
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          {# Login help links #}
-          {% if login_help|length > 0 %}
-            <div class="flex flex-wrap gap-3 text-sm mt-3">
-              {% for link in login_help %}
-                <a href="{{ link.uri|replace({'internal:': ''}) }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
-                  <i class="bi bi-play-circle"></i> {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }}
-                </a>
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
-      {% endif %}
-
-      {# --- File Transfer Table --- #}
-      {% if field_rp_file_transfer_items|length > 0 %}
-        <div id="rp-file-transfer" class="rp-file-transfer mb-8">
-          <hr class="rp-section-rule">
-          <h2 class="flex items-center gap-2"><i class="bi bi-arrow-left-right"></i> File Transfer</h2>
-          {% set file_transfer_text = node.field_rp_file_transfer_text.value %}
-          {% if file_transfer_text %}
-            <div class="prose max-w-none mb-4">
-              {{ node.field_rp_file_transfer_text.processed }}
-            </div>
-          {% endif %}
-          <div class="overflow-x-auto">
-            <table class="w-full border-collapse">
-              <thead>
-                <tr>
-                  <th class="text-left py-2 pr-4 font-semibold">Supported Methods</th>
-                  <th class="text-left py-2 pr-4 font-semibold">Data Transfer Node</th>
-                  <th class="text-left py-2 font-semibold">URL</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for paragraph in field_rp_file_transfer_items %}
-                  {% if paragraph.field_rp_method.value|default('') %}
-                  <tr>
-                    <td class="py-2 pr-4">
-                      {{ paragraph.field_rp_method.value|default('')|upper }}
-                      {% if paragraph.field_rp_recommended.value %}
-                        <span class="text-xs font-bold text-dark-gray">| RECOMMENDED</span>
-                      {% endif %}
-                    </td>
-                    <td class="py-2 pr-4">{{ paragraph.field_rp_transfer_node.value|default('') }}</td>
-                    <td class="py-2">
-                      {% if paragraph.field_rp_transfer_url.0.uri %}
-                        <a href="{{ paragraph.field_rp_transfer_url.0.uri|replace({'internal:': ''}) }}" class="text-md-teal no-underline hover--underline">
-                          {{ paragraph.field_rp_transfer_url.0.title ?: paragraph.field_rp_transfer_url.0.uri|replace({'internal:': ''}) }}
-                        </a>
-                      {% endif %}
-                    </td>
-                  </tr>
-                  {% endif %}
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      {% endif %}
-
-      {# --- Storage Section --- #}
-      {% if field_rp_storage_items|length > 0 or external_storage %}
-        <div id="rp-storage" class="rp-storage mb-8">
-          <hr class="rp-section-rule">
-          <h2 class="flex items-center gap-2"><i class="bi bi-database"></i> Storage</h2>
-
-          {# File System Table #}
-          {% if field_rp_storage_items|length > 0 %}
-            <h3 class="text-teal font-bold">File System</h3>
-            <div class="overflow-x-auto">
-              <table class="w-full border-collapse">
-                <thead>
-                  <tr>
-                    <th class="text-left py-2 pr-4 font-semibold">Directory</th>
-                    <th class="text-left py-2 pr-4 font-semibold">Path</th>
-                    <th class="text-left py-2 pr-4 font-semibold">Quota</th>
-                    <th class="text-left py-2 pr-4 font-semibold">Purge</th>
-                    <th class="text-left py-2 pr-4 font-semibold">Backup</th>
-                    <th class="text-left py-2 font-semibold">Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for paragraph in field_rp_storage_items %}
-                    {% if paragraph.field_rp_directory.value|default('') %}
-                    <tr>
-                      <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
-                      <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
-                      <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value|default('') }}</td>
-                      <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value|default('') }}</td>
-                      <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value|default('') }}</td>
-                      <td class="py-2">{{ paragraph.field_rp_fs_notes.value|default('') }}</td>
-                    </tr>
-                    {% endif %}
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          {% endif %}
-
-          {# External Storage #}
-          {% if external_storage %}
-            <h3 class="text-teal font-bold mt-6">External Storage</h3>
-            <div class="prose max-w-none">
-              {{ node.field_rp_external_storage.processed }}
-            </div>
-          {% endif %}
-        </div>
-      {% endif %}
 
     </div>{# /.rp-main-content #}
 
     {# ========== Sidebar (top section) ========== #}
-    <aside class="rp-sidebar">
+    <div class="rp-sidebar">
 
       {# Support Links #}
       {% set support_links = node.field_rp_support_links %}
@@ -350,44 +126,98 @@
         </div>
       {% endif %}
 
-      {# RP Account Setup — primary CTA for the login section #}
-      {% if account_setup|length > 0 %}
+      {# RP account panel — user-specific. State decision tree:
+       - has rows                          → YOUR ACCOUNT panel (data-stale="1" if rows_stale)
+       - no_rows_unknown / rows_stale / error (logged in) → loading skeleton (JS refreshes)
+       - no_rows_fresh (logged in) OR anonymous → existing GET AN ACCOUNT CTA
+      #}
+      {% set rp_panel_state = user_rp_accounts_state ?: (logged_in ? 'no_rows_unknown' : 'anon') %}
+
+      {% if user_rp_accounts is defined and user_rp_accounts|length > 0 %}
+        <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
+             data-rp-nid="{{ node.id }}"
+             {% if rp_panel_state == 'rows_stale' %}data-stale="1"{% endif %}>
+          <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ node.label|upper }}</h3>
+          {% if user_rp_username %}
+            <p class="text-sm text-white mb-3">Username: <strong class="text-white">{{ user_rp_username }}</strong></p>
+          {% endif %}
+
+          <div class="rp-account-grants">
+            {% for grant in user_rp_accounts %}
+              <div class="rp-grant mb-3 pb-3{% if not loop.last %} border-b border-md-teal{% endif %}">
+                <div class="text-sm font-semibold">{{ grant.grant_number }}</div>
+                {% if grant.grant_title %}
+                  <div class="text-xs text-light-gray mb-1" title="{{ grant.grant_title }}">
+                    {{ grant.grant_title|length > 50 ? grant.grant_title|slice(0, 50) ~ '…' : grant.grant_title }}
+                  </div>
+                {% endif %}
+                {% if grant.project_end %}
+                  <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
+                {% endif %}
+                <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
+                  {% if grant.project_balance is not null and grant.project_balance|trim != '' %}
+                    Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
+                  {% else %}
+                    <span class="rp-balance-loading">Loading balance…</span>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white">
+            Manage allocations →
+          </a>
+        </div>
+
+      {% elseif rp_panel_state in ['no_rows_unknown', 'rows_stale', 'error'] and logged_in %}
+        {# DB has no rows but we may not yet have asked. Skeleton with state attr for JS. #}
+        <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
+             data-rp-nid="{{ node.id }}"
+             data-state="{{ rp_panel_state }}">
+          <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ node.label|upper }}</h3>
+          <p class="text-sm">Loading account info…</p>
+        </div>
+
+      {% elseif account_setup|length > 0 %}
+        {# rp_panel_state in ('no_rows_fresh', 'anon'): we know there's no
+           account, or user is anonymous. Show the existing CTA. #}
         <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ rp_display_name|upper }}</h3>
-          <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
+          <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ node.label|upper }}</h3>
+          <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white">
             {{ account_setup.0.title ?: 'RP Account Setup' }}
           </a>
         </div>
       {% endif %}
 
-      {# Software CTA: RP's official software page #}
-      {% set software_list_url = node.field_rp_software_list_url.0 %}
-      {% if software_list_url %}
-        <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ rp_display_name|upper }}</h3>
-          <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="btn btn-primary">
-            {{ software_list_url.title ?: 'VIEW SOFTWARE' }}
-          </a>
-        </div>
-      {% endif %}
-
-      {# Software CTA: SDS explorer — conditional on whether SDS has data for this resource #}
-      {% if sds_has_software and sds_resource_name %}
-        <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ rp_display_name|upper }}</h3>
-          <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="btn btn-primary">
-            EXPLORE IN SDS
-          </a>
-        </div>
-      {% else %}
-        <div class="bg-light-gray p-4 mb-4">
-          <p class="text-sm text-dark-gray m-0">{{ rp_display_name }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Documentation Service</a>.</p>
-        </div>
-      {% endif %}
-
-    </aside>{# /.rp-sidebar (top) #}
+    </div>{# /.rp-sidebar (top) #}
 
   </div>{# /.grid (top section) #}
+
+  {# --- Jump-to anchor nav (full-width, sticky) --- #}
+  {% if has_login or has_file_transfer or has_storage or has_jobs or has_software or has_datasets %}
+    <nav class="rp-jump-to mb-6 py-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" aria-label="Jump to section">
+      <span class="text-dark-gray">Jump to:</span>
+      {% if has_jobs %}
+        <a href="#rp-jobs" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-card-checklist"></i> Jobs</a>
+      {% endif %}
+      {% if has_software %}
+        <a href="#rp-software" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-terminal"></i> Software</a>
+      {% endif %}
+      {% if has_datasets %}
+        <a href="#rp-datasets" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-table"></i> Datasets</a>
+      {% endif %}
+      {% if has_storage %}
+        <a href="#rp-storage" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-database"></i> Storage</a>
+      {% endif %}
+      {% if has_file_transfer %}
+        <a href="#rp-file-transfer" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-arrow-left-right"></i> File Transfer</a>
+      {% endif %}
+      {% if has_login %}
+        <a href="#rp-login" class="flex items-center gap-1 text-dark-gray no-underline hover--underline font-bold"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+      {% endif %}
+    </nav>
+  {% endif %}
 
   {# ========== Jobs / Queue Specifications (full width) ========== #}
   {% set jobs_info = node.field_rp_jobs_info.value %}
@@ -519,40 +349,84 @@
         </div>
       {% endif %}
 
-  {# ========== Most Frequently Used Software (full width) ========== #}
-  {% if top_software|length > 0 %}
+  {# ========== Software (full width) ========== #}
+  {% set has_top_software = top_software|length > 0 %}
+  {% set has_software_list_url = node.field_rp_software_list_url.0 is not null %}
+  {% set has_sds_card = sds_has_software and sds_resource_name %}
+  {% if has_top_software or has_software_list_url or has_sds_card %}
     <div id="rp-software" class="rp-top-software mb-8">
       <hr class="rp-section-rule">
-      <h2 class="flex items-center gap-2"><i class="bi bi-terminal"></i> Most Frequently Used Software</h2>
-      <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ rp_display_name }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
-      <div class="overflow-x-auto">
-        <table class="w-full border-collapse">
-          <thead>
-            <tr>
-              <th class="text-left py-2 pr-4 font-semibold">Application</th>
-              <th class="text-left py-2 pr-4 font-semibold">Description</th>
-              <th class="text-left py-2 pr-4 font-semibold">Research Discipline</th>
-              <th class="text-right py-2 font-semibold">Jobs</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for software in top_software %}
-              <tr>
-                <td class="py-2 pr-4 font-semibold whitespace-nowrap">
-                  {%- if software.web_page -%}
-                    <a href="{{ software.web_page }}" class="text-md-teal no-underline hover--underline">{{ software.name }}</a>
-                  {%- else -%}
-                    {{ software.name }}
-                  {%- endif -%}
-                </td>
-                <td class="py-2 pr-4 text-sm">{{ software.description|default('') }}</td>
-                <td class="py-2 pr-4 text-sm">{{ software.research_field|default('') }}</td>
-                <td class="py-2 text-right whitespace-nowrap">{{ software.job_count|number_format }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+      <h2 class="flex items-center gap-2"><i class="bi bi-terminal"></i> Software</h2>
+
+      <div class="grid grid-cols-1 gap-8 md--grid-cols-[1fr_25%]">
+
+        {# Left column: top-software table + intro #}
+        <div class="rp-software-main">
+          {% if has_top_software %}
+            <p class="text-sm text-dark-gray mb-3">The following software packages are among the most frequently used on {{ node.label }}, based on job data from <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
+            <h3 class="text-teal font-bold">Most Frequently Used</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th class="text-left py-2 pr-4 font-semibold">Application</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Description</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Research Discipline</th>
+                    <th class="text-right py-2 font-semibold">Jobs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for software in top_software %}
+                    <tr>
+                      <td class="py-2 pr-4 font-semibold whitespace-nowrap">
+                        {%- if software.web_page -%}
+                          <a href="{{ software.web_page }}" class="text-md-teal no-underline hover--underline">{{ software.name }}</a>
+                        {%- else -%}
+                          {{ software.name }}
+                        {%- endif -%}
+                      </td>
+                      <td class="py-2 pr-4 text-sm">{{ software.description|default('') }}</td>
+                      <td class="py-2 pr-4 text-sm">{{ software.research_field|default('') }}</td>
+                      <td class="py-2 text-right whitespace-nowrap">{{ software.job_count|number_format }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <p class="text-sm text-dark-gray">No software usage data is currently reported for {{ node.label }} in <a href="https://xdmod.access-ci.org" class="text-md-teal no-underline hover--underline">XDMoD</a>.</p>
+          {% endif %}
+        </div>
+
+        {# Right column: sidebar CTAs #}
+        <div class="rp-software-sidebar">
+          {# Software CTA: RP's official software page #}
+          {% set software_list_url = node.field_rp_software_list_url.0 %}
+          {% if software_list_url %}
+            <div class="bg-dark-teal text-white p-4 mb-4">
+              <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
+              <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white">
+                {{ software_list_url.title ?: 'VIEW SOFTWARE' }}
+              </a>
+            </div>
+          {% endif %}
+
+          {# Software CTA: SDS explorer — conditional on whether SDS has data for this resource #}
+          {% if sds_has_software and sds_resource_name %}
+            <div class="bg-dark-teal text-white p-4 mb-4">
+              <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ (sds_resource_label ?: node.label)|upper }}</h3>
+              <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="text-white text-sm no-underline hover--underline hover--text-white">
+                EXPLORE SOFTWARE
+              </a>
+            </div>
+          {% else %}
+            <div class="bg-light-gray p-4 mb-4">
+              <p class="text-sm text-dark-gray m-0">{{ node.label }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Documentation Service</a>.</p>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>{# /.grid #}
     </div>
   {% endif %}
 
@@ -581,6 +455,204 @@
           </tbody>
         </table>
       </div>
+    </div>
+  {% endif %}
+
+  {# ========== Storage (full width, near bottom) ========== #}
+  {# --- Storage Section --- #}
+  {% if field_rp_storage_items|length > 0 or external_storage %}
+    <div id="rp-storage" class="rp-storage mb-8">
+      <hr class="rp-section-rule">
+      <h2 class="flex items-center gap-2"><i class="bi bi-database"></i> Storage</h2>
+
+      {# File System Table #}
+      {% if field_rp_storage_items|length > 0 %}
+        <h3 class="text-teal font-bold">File System</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th class="text-left py-2 pr-4 font-semibold">Directory</th>
+                <th class="text-left py-2 pr-4 font-semibold">Path</th>
+                <th class="text-left py-2 pr-4 font-semibold">Quota</th>
+                <th class="text-left py-2 pr-4 font-semibold">Purge</th>
+                <th class="text-left py-2 pr-4 font-semibold">Backup</th>
+                <th class="text-left py-2 font-semibold">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for paragraph in field_rp_storage_items %}
+                {% if paragraph.field_rp_directory.value|default('') %}
+                <tr>
+                  <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
+                  <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
+                  <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value|default('') }}</td>
+                  <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value|default('') }}</td>
+                  <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value|default('') }}</td>
+                  <td class="py-2">{{ paragraph.field_rp_fs_notes.value|default('') }}</td>
+                </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+
+      {# External Storage #}
+      {% if external_storage %}
+        <h3 class="text-teal font-bold mt-6">External Storage</h3>
+        <div class="prose max-w-none">
+          {{ node.field_rp_external_storage.processed }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {# ========== File Transfer (full width, near bottom) ========== #}
+  {# --- File Transfer Table --- #}
+  {% if field_rp_file_transfer_items|length > 0 %}
+    <div id="rp-file-transfer" class="rp-file-transfer mb-8">
+      <hr class="rp-section-rule">
+      <h2 class="flex items-center gap-2"><i class="bi bi-arrow-left-right"></i> File Transfer</h2>
+      {% set file_transfer_text = node.field_rp_file_transfer_text.value %}
+      {% if file_transfer_text %}
+        <div class="prose max-w-none mb-4">
+          {{ node.field_rp_file_transfer_text.processed }}
+        </div>
+      {% endif %}
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="text-left py-2 pr-4 font-semibold">Supported Methods</th>
+              <th class="text-left py-2 pr-4 font-semibold">Data Transfer Node</th>
+              <th class="text-left py-2 font-semibold">URL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for paragraph in field_rp_file_transfer_items %}
+              {% if paragraph.field_rp_method.value|default('') %}
+              <tr>
+                <td class="py-2 pr-4">
+                  {{ paragraph.field_rp_method.value|default('')|upper }}
+                  {% if paragraph.field_rp_recommended.value %}
+                    <span class="text-xs font-bold text-dark-gray">| RECOMMENDED</span>
+                  {% endif %}
+                </td>
+                <td class="py-2 pr-4">{{ paragraph.field_rp_transfer_node.value|default('') }}</td>
+                <td class="py-2">
+                  {% if paragraph.field_rp_transfer_url.0.uri %}
+                    <a href="{{ paragraph.field_rp_transfer_url.0.uri|replace({'internal:': ''}) }}" class="text-md-teal no-underline hover--underline">
+                      {{ paragraph.field_rp_transfer_url.0.title ?: paragraph.field_rp_transfer_url.0.uri|replace({'internal:': ''}) }}
+                    </a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+
+  {# ========== Login (full width, at bottom — the "do this last" CTA) ========== #}
+  {# --- Login Section --- #}
+  {% set ssh_logins = field_rp_ssh_login_nodes_items %}
+  {% set login_text = node.field_rp_login_text.value %}
+  {% set login_help = node.field_rp_login_help_links %}
+  {% if ssh_logins|length > 0 or ondemand_url or login_text or login_help|length > 0 or account_setup|length > 0 %}
+    <div id="rp-login" class="rp-login mb-8">
+      <hr class="rp-section-rule">
+      <h2 class="flex items-center gap-2"><i class="bi bi-box-arrow-in-right"></i> Login to {{ node.label }}</h2>
+
+      {# Login text — rich text above login boxes #}
+      {% if login_text %}
+        <div class="prose max-w-none mb-4">
+          {{ node.field_rp_login_text.processed }}
+        </div>
+      {% endif %}
+
+      {% if ssh_logins|length > 0 or ondemand_url %}
+      <div class="grid grid-cols-1 gap-4 md--grid-cols-2">
+
+        {# SSH Login dropdown — uses paragraph with recommended boolean #}
+        {% if ssh_logins|length > 0 %}
+          {# Build a render-friendly list, preferring the structured fields
+             with a fallback to the legacy field_rp_ssh_url for paragraphs
+             that haven't been migrated yet. #}
+          {% set ssh_entries = [] %}
+          {% for login in ssh_logins %}
+            {% set hostname = login.field_rp_ssh_hostname.value|default('') %}
+            {% set placeholder = login.field_rp_ssh_user_placeholder.value|default('<your_username>') %}
+            {% set docs_uri = login.field_rp_ssh_docs_url.0.uri|default('') %}
+            {% set docs_title = login.field_rp_ssh_docs_url.0.title|default('') %}
+            {% if hostname is empty and login.field_rp_ssh_url.uri %}
+              {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
+            {% endif %}
+            {% set ssh_entries = ssh_entries|merge([{
+              'hostname': hostname,
+              'placeholder': placeholder,
+              'docs_uri': docs_uri,
+              'docs_title': docs_title,
+              'recommended': login.field_rp_recommended.value,
+            }]) %}
+          {% endfor %}
+
+          {% set first_entry = ssh_entries[0] %}
+          {% for entry in ssh_entries %}
+            {% if entry.recommended %}
+              {% set first_entry = entry %}
+            {% endif %}
+          {% endfor %}
+
+          <div class="border-2 border-dark-teal p-4">
+            <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
+            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;">
+              {% for entry in ssh_entries %}
+                <option value="{{ entry.hostname }}" data-placeholder="{{ entry.placeholder }}" data-docs-uri="{{ entry.docs_uri }}" data-docs-title="{{ entry.docs_title }}" {{ entry.recommended ? 'selected' : '' }}>
+                  {{ entry.hostname }}{% if entry.recommended %} | RECOMMENDED{% endif %}
+                </option>
+              {% endfor %}
+            </select>
+            <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
+              <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ user_rp_username|default(first_entry.placeholder) }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
+            </div>
+            <div id="rp-ssh-docs" class="text-sm{% if not first_entry.docs_uri %} hidden{% endif %}">
+              <a id="rp-ssh-docs-link" href="{{ first_entry.docs_uri }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
+                <i class="bi bi-box-arrow-up-right"></i> <span id="rp-ssh-docs-text">{{ first_entry.docs_title ?: 'Login instructions' }}</span>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+
+        {# OnDemand Login #}
+        {% if ondemand_url %}
+          <div class="border-2 border-dark-teal p-4">
+            <h3 class="text-lg font-bold mt-0 mb-3">ACCESS OnDemand Login</h3>
+            <a href="{{ ondemand_url }}" class="btn btn-primary">
+              {{ ondemand.title|default('LOGIN')|upper }}
+            </a>
+            <div class="mt-3">
+              <a href="https://support.access-ci.org/tools/ondemand" class="text-sm text-md-teal no-underline hover--underline flex items-center gap-1">
+                <i class="bi bi-box-arrow-up-right"></i> How do I use ACCESS OnDemand?
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {# Login help links #}
+      {% if login_help|length > 0 %}
+        <div class="flex flex-wrap gap-3 text-sm mt-3">
+          {% for link in login_help %}
+            <a href="{{ link.uri|replace({'internal:': ''}) }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
+              <i class="bi bi-play-circle"></i> {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   {% endif %}
 
@@ -654,33 +726,3 @@
 })();
 </script>
 
-{# ========== Chatbot Toggle JavaScript ========== #}
-<script>
-(function() {
-  var toggle = document.getElementById('rp-chatbot-toggle');
-  var container = document.getElementById('rp-chatbot-container');
-  var tooltip = document.getElementById('rp-chatbot-tooltip');
-  var isOpen = false;
-  function toggleChat() {
-    isOpen = !isOpen;
-    if (isOpen) {
-      container.style.maxHeight = container.scrollHeight + 'px';
-      container.style.opacity = '1';
-    } else {
-      container.style.maxHeight = '0';
-      container.style.opacity = '0';
-    }
-    if (tooltip) {
-      tooltip.style.opacity = isOpen ? '0' : '1';
-      tooltip.style.transition = 'opacity 0.3s ease';
-    }
-  }
-  if (toggle && container) {
-    toggle.addEventListener('click', toggleChat);
-    if (tooltip) {
-      tooltip.style.cursor = 'pointer';
-      tooltip.addEventListener('click', toggleChat);
-    }
-  }
-})();
-</script>

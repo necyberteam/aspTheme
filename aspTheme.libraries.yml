@@ -24,3 +24,8 @@ carousel:
       src/css/carousel.css: {}
   js:
     src/js/carousel.js: {}
+
+node:
+  version: 1.x
+  js:
+    js/rp-account-panel.js: {}
