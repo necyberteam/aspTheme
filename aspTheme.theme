@@ -171,14 +171,24 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
       && trim((string) $p->get('field_rp_dataset_name')->value) !== ''
   ));
 
-  // Extract SDS resource name from global resource ID (first segment).
-  // e.g. "deltaai.ncsa.access-ci.org" → "deltaai" for SDS ?installed_on= param.
+  // Build the SDS group slug + display label.
+  // SDS's website ?installed_on= param accepts the group slug only (e.g. "anvil",
+  // not "anvil-cpu"). When the node is grouped, derive both from the parent
+  // group's title. Otherwise fall back to the global ID's first segment with
+  // sub-resource suffixes stripped (mirroring SdsAvailabilityService line 64).
   $variables['sds_resource_name'] = NULL;
-  if ($node->hasField('field_access_global_resource_id') && !$node->get('field_access_global_resource_id')->isEmpty()) {
+  $variables['sds_resource_label'] = NULL;
+  if ($parent_group) {
+    $variables['sds_resource_name'] = \Drupal\Component\Utility\Html::getClass($parent_group->getTitle());
+    $variables['sds_resource_label'] = $parent_group->getTitle();
+  }
+  elseif ($node->hasField('field_access_global_resource_id') && !$node->get('field_access_global_resource_id')->isEmpty()) {
     $global_id = $node->get('field_access_global_resource_id')->value;
-    $parts = explode('.', $global_id);
-    if (!empty($parts[0])) {
-      $variables['sds_resource_name'] = $parts[0];
+    $slug = explode('.', $global_id)[0];
+    $slug = preg_replace('/-(?:gpu|cpu|ai|storage|em|rm|lm|ps|ocean)$/', '', $slug);
+    if (!empty($slug)) {
+      $variables['sds_resource_name'] = $slug;
+      $variables['sds_resource_label'] = $node->label();
     }
   }
 

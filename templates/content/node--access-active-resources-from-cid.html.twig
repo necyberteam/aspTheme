@@ -414,9 +414,9 @@
           {# Software CTA: SDS explorer — conditional on whether SDS has data for this resource #}
           {% if sds_has_software and sds_resource_name %}
             <div class="bg-dark-teal text-white p-4 mb-4">
-              <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
+              <h3 class="mt-0 text-lg font-bold text-white">EXPLORE SOFTWARE AVAILABLE ON {{ (sds_resource_label ?: node.label)|upper }}</h3>
               <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="text-white text-sm no-underline hover--underline hover--text-white">
-                EXPLORE IN SDS
+                EXPLORE SOFTWARE
               </a>
             </div>
           {% else %}
