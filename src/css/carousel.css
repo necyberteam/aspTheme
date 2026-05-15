@@ -1,0 +1,40 @@
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track {
+  flex: 1;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.carousel-item {
+  flex: 0 0 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  margin: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  flex-shrink: 0;
+  width: 2.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control-next span:before,
+.carousel-control-prev span:before {
+  font-size: 2rem;
+}

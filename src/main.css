@@ -331,6 +331,10 @@ form.node-match-engagement-form {
   }
 }
 
+.border-t-14 {
+  border-top-width: 14px;
+}
+
 .block-facets {
   h2 {
     @apply mb-2;
@@ -796,4 +800,73 @@ body.page-node-type-access-active-resources-from-cid {
 
 .webform-element-description {
   color: #232323;
+}
+.tools-research-studies {
+  .views-row {
+    @apply pt-12;
+  }
+  .views-row:first-child {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/tools-shapes.svg') no-repeat top right;
+    background-size: 350px;
+  }
+  .views-row:nth-child(3n+2) {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/tri-y.svg') no-repeat top right;
+    background-size: 50px;
+  }
+  .views-row:nth-child(3n+3) {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/quart-t.svg') no-repeat top right;
+    background-size: 50px;
+  }
+  .views-row:nth-child(3n+4) {
+    background: url('/themes/contrib/asp-theme/images/tools-researcher-stories/lines-o.svg') no-repeat top right;
+    background-size: 50px;
+  }
+
+  .project-summary {
+    @apply max-h-[400px] overflow-y-auto;
+  }
+
+  dl dt,
+  dl dd {
+    @apply inline;
+  }
+
+  dl dt:not(:first-child)::before {
+    content: '\A';
+    white-space: pre;
+  }
+
+  dl dt {
+    font-weight: bold;
+    margin-top: 0.;
+  }
+
+  dl dd {
+    padding-left: .25rem;
+  }
+  .clip-title button {
+    @apply hidden;
+  }
+
+  .clip-title:hover button {
+    @apply block;
+  }
+}
+
+.tcs-researchers-block__photo .image-style-thumbnail {
+  @apply rounded-full object-cover w-[60px] h-[60px];
+}
+.block-views-blocktool-case-study-slideshow-block-1 {
+  @apply bg-light-teal -mx-50% px-50%;
+}
+
+.block-views-blocktool-case-study-slideshow-block-1 .tcs-hero img {
+  @apply object-cover h-[110px] w-full;
+}
+.block-views-blocktool-case-study-slideshow-block-1 .carousel-item {
+  background: #fff;
+}
+
+article.node--type-tools-case-study {
+  @apply mb-5;
 }

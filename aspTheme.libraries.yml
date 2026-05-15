@@ -17,6 +17,14 @@ global-scripts:
     src/js/details.js: {}
     build/js/global.js: {}
 
+carousel:
+  version: 1.x
+  css:
+    theme:
+      src/css/carousel.css: {}
+  js:
+    src/js/carousel.js: {}
+
 node:
   version: 1.x
   js:
