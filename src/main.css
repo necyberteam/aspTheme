@@ -870,3 +870,9 @@ body.page-node-type-access-active-resources-from-cid {
 article.node--type-tools-case-study {
   @apply mb-5;
 }
+
+.tools-research-studies .view-content {
+  p {
+    @apply font-semibold mb-5;
+  }
+}
