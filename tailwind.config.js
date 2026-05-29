@@ -417,6 +417,7 @@ module.exports = {
     'pr-[10%]',
     'relative',
     'right-0',
+    'right-[15px]',
     'right-28',
     'rounded-full',
     'rounded-md',

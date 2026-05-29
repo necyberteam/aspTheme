@@ -875,4 +875,7 @@ article.node--type-tools-case-study {
   p {
     @apply font-semibold mb-5;
   }
+  .tcs-research-topic p {
+    @apply font-bold;
+  }
 }
