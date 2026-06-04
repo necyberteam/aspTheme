@@ -878,8 +878,9 @@ article.node--type-tools-case-study {
   .tcs-research-topic p {
     @apply font-bold;
   }
-  .tcs-researchers-block__institution {
-    font-size: 0.8rem;
-    line-height: 1.1;
-  }
+}
+
+.tcs-researchers-block__institution {
+  font-size: 0.8rem;
+  line-height: 1.1;
 }
