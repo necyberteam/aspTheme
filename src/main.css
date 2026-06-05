@@ -856,7 +856,7 @@ body.page-node-type-access-active-resources-from-cid {
 .tcs-researchers-block__photo .image-style-thumbnail {
   @apply rounded-full object-cover w-[60px] h-[60px];
 }
-.block-views-blocktool-case-study-slideshow-block-1 {
+.block-views-blocktool-case-study-slideshow-block-2 {
   @apply bg-light-teal -mx-50% px-50%;
 }
 

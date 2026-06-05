@@ -41,10 +41,29 @@
       timer = setInterval(function () { goTo(current + 1, true); }, interval);
     }
 
-    function resetAuto() {
+    function stopAuto() {
       clearInterval(timer);
+      timer = null;
+    }
+
+    function resetAuto() {
+      stopAuto();
       startAuto();
     }
+
+    // When returning to a hidden tab, transitionend may never have fired,
+    // leaving current pointing at the clone region. Snap back and restart.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopAuto();
+      } else {
+        inner.style.transition = 'none';
+        if (current >= total) current = current - total;
+        if (current < 0) current = current + total;
+        inner.style.transform = 'translateX(-' + (current * itemWidth) + '%)';
+        startAuto();
+      }
+    });
 
     el.querySelector('[data-slide="prev"]')?.addEventListener('click', function (e) {
       e.preventDefault();
