@@ -415,6 +415,7 @@ module.exports = {
     'py-10',
     'py-14',
     'pr-[10%]',
+    'pr-[10rem]',
     'relative',
     'right-0',
     'right-[15px]',
