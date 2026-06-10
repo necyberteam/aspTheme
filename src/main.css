@@ -856,7 +856,7 @@ body.page-node-type-access-active-resources-from-cid {
 .tcs-researchers-block__photo .image-style-thumbnail {
   @apply rounded-full object-cover w-[60px] h-[60px];
 }
-.block-views-blocktool-case-study-slideshow-block-1 {
+.block-views-blocktool-case-study-slideshow-block-2 {
   @apply bg-light-teal -mx-50% px-50%;
 }
 
@@ -873,6 +873,14 @@ article.node--type-tools-case-study {
 
 .tools-research-studies .view-content {
   p {
-    @apply font-semibold mb-5;
+    @apply mb-5;
   }
+  .tcs-research-topic p {
+    @apply font-bold;
+  }
+}
+
+.tcs-researchers-block__institution {
+  font-size: 0.8rem;
+  line-height: 1.1;
 }

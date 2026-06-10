@@ -85,6 +85,10 @@ module.exports = {
               'margin-top': '0px',
               'margin-bottom': '20px',
             },
+            li: {
+              fontSize: '18px',
+              'line-height': '30px',
+            },
             img: {
               margin: '0px',
             },
@@ -414,8 +418,11 @@ module.exports = {
     'py-5',
     'py-10',
     'py-14',
+    'pr-[10%]',
+    'pr-[10rem]',
     'relative',
     'right-0',
+    'right-[15px]',
     'right-28',
     'rounded-full',
     'rounded-md',
