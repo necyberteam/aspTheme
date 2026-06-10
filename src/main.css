@@ -873,7 +873,7 @@ article.node--type-tools-case-study {
 
 .tools-research-studies .view-content {
   p {
-    @apply font-semibold mb-5;
+    @apply mb-5;
   }
   .tcs-research-topic p {
     @apply font-bold;

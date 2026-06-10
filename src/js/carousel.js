@@ -1,12 +1,13 @@
 (function () {
   'use strict';
 
-  // Returns the responsive item count given a base (desktop) count.
-  // Carousels with a base of 5 scale proportionally; others use standard breakpoints.
+  // Returns the responsive item count given a base (desktop) count:
+  // 1 item on mobile (<=550px), 2 on tablet (<=900px), and the base count
+  // on larger screens, regardless of base.
   function responsiveCount(base) {
     var w = window.innerWidth;
     if (w <= 550) return 1;
-    if (w <= 900) return base === 5 ? 2 : 2;
+    if (w <= 900) return 2;
     return base;
   }
 
