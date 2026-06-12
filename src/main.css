@@ -498,6 +498,9 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
   tbody tr {
     border-bottom: 1px solid #232323;
   }
+  tbody tr:last-child {
+    border-bottom: none;
+  }
   th {
     @apply font-semibold;
     line-height: 1.2;
@@ -584,11 +587,9 @@ html:has(body.page-node-type-access-active-resources-from-cid) {
       }
       a {
         color: #232323 !important;
-        text-decoration: underline;
       }
       a:hover {
         color: #107180 !important;
-        text-decoration: none;
       }
     }
   }
