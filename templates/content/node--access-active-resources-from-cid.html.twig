@@ -107,8 +107,8 @@
           {% if support_links|length > 0 %}
             <ul class="list-none p-0 m-0 font-normal">
               {% for link in support_links %}
-                <li class="mb-2 pl-0">
-                  <a href="{{ link.uri|replace({'internal:': ''}) }}" class="text-white no-underline hover--underline hover--text-white font-normal">
+                <li class="mb-2 pl-0 leading-tight">
+                  <a href="{{ link.uri|replace({'internal:': ''}) }}" class="text-white no-underline hover--underline hover--text-white font-normal leading-tight">
                     {{ link.title ?: link.uri|replace({'internal:': '', 'https://': '', 'http://': ''}) }} <i class="bi bi-arrow-right"></i>
                   </a>
                 </li>
@@ -187,7 +187,7 @@
         <div class="bg-dark-teal text-white p-4 mb-4">
           <div class="mb-3">
             <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ node.label|upper }}</h3>
-            <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white">
+            <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white leading-tight">
               {{ account_setup.0.title ?: 'RP Account Setup' }} <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -409,23 +409,23 @@
             <div class="bg-dark-teal text-white p-4 mb-4">
               <h3 class="mt-0 text-lg font-bold text-white">SEE ALL SOFTWARE AVAILABLE ON {{ node.label|upper }}</h3>
               <ul class="list-none p-0 m-0 font-normal">
-                {% if software_list_url %}
-                  <li class="mb-2 pl-0">
-                    <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white">
-                      Explore in Access Software Documentation Service <i class="bi bi-arrow-right"></i>
-                    </a>
-                  </li>
-                {% endif %}
-
                 {% if sds_has_software and sds_resource_name %}
-                  <li class="mb-2 pl-0">
-                    <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="text-white text-sm no-underline hover--underline hover--text-white">
-                      See Provider Software Documentation <i class="bi bi-arrow-right"></i>
+                  <li class="mb-2 pl-0 leading-tight">
+                    <a href="https://sds.access-ci.org/?installed_on={{ sds_resource_name }}" class="text-white text-sm no-underline hover--underline hover--text-white leading-tight">
+                      Explore in Access Software Documentation Service <i class="bi bi-arrow-right"></i>
                     </a>
                   </li>
                 {% else %}
                   <li class="mb-2 pl-0">
                     <p class="text-sm text-dark-gray m-0">{{ node.label }} is not currently reporting available software to the <a href="https://sds.access-ci.org" class="text-md-teal no-underline hover--underline">Software Documentation Service</a>.</p>
+                  </li>
+                {% endif %}
+
+                {% if software_list_url %}
+                  <li class="mb-2 pl-0 leading-tight">
+                    <a href="{{ software_list_url.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white leading-tight">
+                      See Provider Software Documentation <i class="bi bi-arrow-right"></i>
+                    </a>
                   </li>
                 {% endif %}
               </ul>
