@@ -1,4 +1,4 @@
-(function () {
+;(function () {
   'use strict';
 
   // Returns the responsive item count given a base (desktop) count:
@@ -138,7 +138,15 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready(function () {
     var projectSlider = document.querySelector('#projectSlider');
     if (projectSlider) initCarousel(projectSlider, 3, 5000);
 
