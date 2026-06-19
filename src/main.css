@@ -910,3 +910,15 @@ article.node--type-tools-case-study {
     @apply mt-10;
   }
 }
+
+#node-access-active-resources-from-cid-edit-form:has([data-drupal-selector="edit-field-rp-account-required-value"]:checked) [for="edit-field-rp-account-setup-url-0-uri"]:after {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 0.3em;
+  content: "";
+  vertical-align: super;
+  background-image: url('/themes/contrib/asp-theme/images/icons/required.svg');
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+}
