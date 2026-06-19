@@ -885,3 +885,16 @@ article.node--type-tools-case-study {
   font-size: 0.8rem;
   line-height: 1.1;
 }
+
+#block-asptheme-accessdocumentation ul {
+  @apply list-none;
+}
+#block-asptheme-accessdocumentation > ul {
+  @apply m-0 p-0;
+}
+#block-asptheme-accessdocumentation ul > li {
+  @apply p-0;
+}
+#block-asptheme-accessdocumentation a.is-active {
+  @apply text-dark-teal;
+}

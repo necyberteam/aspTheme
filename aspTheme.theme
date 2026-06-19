@@ -406,3 +406,21 @@ function aspTheme_preprocess_node__resource_group(&$variables) {
 
   $variables['resources'] = $resources;
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ *
+ * The ACCESS documentation pages are basic page nodes exposed under the
+ * /documentation/* URL alias. Core builds page template suggestions from the
+ * internal system path (/node/NID), so an alias-based suggestion never fires
+ * on its own. Detect the alias prefix here and add a single suggestion so a
+ * page--access-documentation.html.twig override can enable the first sidebar
+ * (which holds the Access Documentation menu).
+ */
+function aspTheme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
+  if ($alias === '/documentation' || str_starts_with($alias, '/documentation/')) {
+    $suggestions[] = 'page__access_documentation';
+  }
+}
