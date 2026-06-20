@@ -898,3 +898,15 @@ article.node--type-tools-case-study {
 #block-asptheme-accessdocumentation a.is-active {
   @apply text-dark-teal;
 }
+
+.access-documentation {
+  main {
+    @apply pb-16;
+  }
+  ul.menu a {
+    @apply text-base;
+  }
+  h2.colored-square {
+    @apply mt-10;
+  }
+}
