@@ -157,6 +157,7 @@ module.exports = {
     'border-md-teal',
     'border-orange',
     'border-spacing-0',
+    'border-r-2',
     'border-t-0',
     'border-t-4',
     'border-t-8',
