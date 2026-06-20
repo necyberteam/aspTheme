@@ -30,6 +30,14 @@ function aspTheme_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'event-series';
   }
 
+  // Add a body class for the documentation section: '/documentation' and
+  // '/documentation/*'. Check the URL alias since the current path is the
+  // internal system path.
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
+  if ($alias === '/documentation' || strpos($alias, '/documentation/') === 0) {
+    $variables['attributes']['class'][] = 'access-documentation';
+  }
+
 }
 
 /**
