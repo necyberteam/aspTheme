@@ -86,6 +86,9 @@
 	{% if main_wrapper_classes is null %}
     {% set main_wrapper_classes = "layout-content" %}
 	{% endif %}
+	{% if documentation_page %}
+    {% set main_wrapper_classes = "layout-content container prose" %}
+	{% endif %}
 	<main role="main" class="{{ main_content_classes }}">
     {{ page.cta }}
 
