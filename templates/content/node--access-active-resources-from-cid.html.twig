@@ -268,9 +268,19 @@
                     <td class="py-2 pr-4 text-sm align-top">
                       {{ paragraph.field_rp_queue_purpose.value|default('') }}
                     </td>
-                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_cpus.value|default('') }}</td>
-                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_gpus.value|default('') }}</td>
-                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_ram.value|default('') }}</td>
+                    <td class="py-2 pr-4 align-top">
+                      {{ paragraph.field_rp_cpus.value|default('') }}
+                      {{ paragraph.field_rp_cpu_count.value|default('') }} CPUs
+                    </td>
+                    <td class="py-2 pr-4 align-top">
+                      {{ paragraph.field_rp_gpu_count.value|default('') }} cores
+                      {{ paragraph.field_rp_gpus.value|default('') }}
+                      {{ paragraph.field_rp_gpu_vram.value|default('') }}GB
+                    </td>
+                    <td class="py-2 pr-4 align-top">
+                      {{ paragraph.field_rp_ram.value|default('') }}
+                      {{ paragraph.field_rp_vram.value|default('') }}GB
+                    </td>
                     <td class="py-2 pr-4 text-right align-top">
                       {% if qmetrics and qmetrics.job_count is not null %}
                         {{ qmetrics.job_count|number_format(0) }}
@@ -494,7 +504,11 @@
                 <tr>
                   <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
-                  <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value|default('') }}</td>
+                  <td class="py-2 pr-4">
+                    {{ paragraph.field_rp_quota.value|default('') }}
+                    {{ paragraph.field_rp_quota_inode_amount.value|default('') }}GB
+                    {{ paragraph.field_rp_quota_size.value|default('') }} files
+                  </td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value|default('') }}</td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value|default('') }}</td>
                   <td class="py-2">{{ paragraph.field_rp_fs_notes.value|default('') }}</td>

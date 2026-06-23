@@ -911,6 +911,12 @@ article.node--type-tools-case-study {
   }
 }
 
+.paragraphs-subform .fieldset-legend,
+.paragraph-type-label {
+  @apply text-lg font-bold;
+}
+
+#node-access-active-resources-from-cid-form:has([data-drupal-selector="edit-field-rp-account-required-value"]:checked) [for="edit-field-rp-account-setup-url-0-uri"]:after,
 #node-access-active-resources-from-cid-edit-form:has([data-drupal-selector="edit-field-rp-account-required-value"]:checked) [for="edit-field-rp-account-setup-url-0-uri"]:after {
   display: inline-block;
   width: 6px;
