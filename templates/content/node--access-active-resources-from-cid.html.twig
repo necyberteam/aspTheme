@@ -609,9 +609,6 @@
             {% set placeholder = login.field_rp_ssh_user_placeholder.value|default('<your_username>') %}
             {% set docs_uri = login.field_rp_ssh_docs_url.0.uri|default('') %}
             {% set docs_title = login.field_rp_ssh_docs_url.0.title|default('') %}
-            {% if hostname is empty and login.field_rp_ssh_url.uri %}
-              {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
-            {% endif %}
             {% set ssh_entries = ssh_entries|merge([{
               'hostname': hostname,
               'placeholder': placeholder,
