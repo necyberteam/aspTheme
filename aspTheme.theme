@@ -428,7 +428,8 @@ function aspTheme_preprocess_node__resource_group(&$variables) {
 function aspTheme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   $path = \Drupal::service('path.current')->getPath();
   $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
-  if ($alias === '/documentation' || str_starts_with($alias, '/documentation/')) {
+  if (($alias === '/documentation' || str_starts_with($alias, '/documentation/'))
+    && !str_starts_with($alias, '/documentation/resources/')) {
     $suggestions[] = 'page__access_documentation';
   }
 }
