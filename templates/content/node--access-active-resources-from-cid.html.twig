@@ -134,40 +134,49 @@
       {% set rp_panel_state = user_rp_accounts_state ?: (logged_in ? 'no_rows_unknown' : 'anon') %}
 
       {% if user_rp_accounts is defined and user_rp_accounts|length > 0 %}
+        {# Don't flag the panel stale while pending — a background refresh would
+           rewrite it from JSON and clobber the "being set up" message. #}
         <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
              data-rp-nid="{{ node.id }}"
-             {% if rp_panel_state == 'rows_stale' %}data-stale="1"{% endif %}>
+             {% if rp_panel_state == 'rows_stale' and not (user_rp_sp_state starts with 'pending-') %}data-stale="1"{% endif %}>
           <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ node.label|upper }}</h3>
-          {% if user_rp_username %}
-            <p class="text-sm text-white mb-3">Username: <strong class="text-white">{{ user_rp_username }}</strong></p>
-          {% endif %}
+          {% if user_rp_sp_state starts with 'pending-' %}
+            {# The RP side has not finished provisioning the account yet
+               (sp_state pending-active / pending-inactive), so hold off on the
+               username and account details until it settles. #}
+            <p class="text-sm text-white mb-3">Your account is being set up on {{ node.label }}. Check back soon.</p>
+          {% else %}
+            {% if user_rp_username %}
+              <p class="text-sm text-white mb-3">Username: <strong class="text-white">{{ user_rp_username }}</strong></p>
+            {% endif %}
 
-          <div class="rp-account-grants">
-            {% for grant in user_rp_accounts %}
-              <div class="rp-grant mb-3 pb-3{% if not loop.last %} border-b border-md-teal{% endif %}">
-                <div class="text-sm font-semibold">{{ grant.grant_number }}</div>
-                {% if grant.grant_title %}
-                  <div class="text-xs text-light-gray mb-1" title="{{ grant.grant_title }}">
-                    {{ grant.grant_title|length > 50 ? grant.grant_title|slice(0, 50) ~ '…' : grant.grant_title }}
-                  </div>
-                {% endif %}
-                {% if grant.project_end %}
-                  <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
-                {% endif %}
-                <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
-                  {% if grant.project_balance is not null and grant.project_balance|trim != '' %}
-                    Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
-                  {% else %}
-                    <span class="rp-balance-loading">Loading balance…</span>
+            <div class="rp-account-grants">
+              {% for grant in user_rp_accounts %}
+                <div class="rp-grant mb-3 pb-3{% if not loop.last %} border-b border-md-teal{% endif %}">
+                  <div class="text-sm font-semibold">{{ grant.grant_number }}</div>
+                  {% if grant.grant_title %}
+                    <div class="text-xs text-light-gray mb-1" title="{{ grant.grant_title }}">
+                      {{ grant.grant_title|length > 50 ? grant.grant_title|slice(0, 50) ~ '…' : grant.grant_title }}
+                    </div>
                   {% endif %}
+                  {% if grant.project_end %}
+                    <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
+                  {% endif %}
+                  <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
+                    {% if grant.project_balance is not null and grant.project_balance|trim != '' %}
+                      Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
+                    {% else %}
+                      <span class="rp-balance-loading">Loading balance…</span>
+                    {% endif %}
+                  </div>
                 </div>
-              </div>
-            {% endfor %}
-          </div>
+              {% endfor %}
+            </div>
 
-          <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white">
-            Manage allocations →
-          </a>
+            <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white">
+              Manage allocations →
+            </a>
+          {% endif %}
         </div>
 
       {% elseif rp_panel_state in ['no_rows_unknown', 'rows_stale', 'error'] and logged_in %}
@@ -627,7 +636,7 @@
 
           <div class="border-2 border-dark-teal p-4">
             <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
-            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;">
+            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;" data-user-username="{{ user_rp_username|default('') }}">
               {% for entry in ssh_entries %}
                 <option value="{{ entry.hostname }}" data-placeholder="{{ entry.placeholder }}" data-docs-uri="{{ entry.docs_uri }}" data-docs-title="{{ entry.docs_title }}" {{ entry.recommended ? 'selected' : '' }}>
                   {{ entry.hostname }}{% if entry.recommended %} | RECOMMENDED{% endif %}
@@ -721,12 +730,13 @@
   if (!select || !hostnameEl) return;
 
   var fallback = select.getAttribute('data-placeholder-fallback') || '<your_username>';
+  var userUsername = select.getAttribute('data-user-username') || '';
 
   function apply() {
     var opt = select.options[select.selectedIndex];
     hostnameEl.textContent = opt.value;
     if (placeholderEl) {
-      placeholderEl.textContent = opt.getAttribute('data-placeholder') || fallback;
+      placeholderEl.textContent = userUsername || opt.getAttribute('data-placeholder') || fallback;
     }
     if (docsContainer && docsLink && docsText) {
       var docsUri = opt.getAttribute('data-docs-uri');

@@ -230,6 +230,11 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
   $variables['user_rp_accounts'] = [];
   $variables['user_rp_accounts_state'] = NULL;
   $variables['user_rp_username'] = NULL;
+  // The resource-provider's view of the account, separate from account_state.
+  // A pending- value (pending-active / pending-inactive) means the RP side has
+  // not yet provisioned the account, so the panel should hold off on showing
+  // the username and account details. See RpAccountService.
+  $variables['user_rp_sp_state'] = NULL;
 
   if ($current_user->isAuthenticated()
     && !empty($variables['node'])
@@ -247,6 +252,17 @@ function aspTheme_preprocess_node__access_active_resources_from_cid(&$variables)
       $usernames = array_unique(array_filter(array_column($result['rows'], 'rp_username')));
       if (count($usernames) === 1) {
         $variables['user_rp_username'] = reset($usernames);
+      }
+
+      // Treat the account as pending if ANY row's sp_state has not settled on
+      // the RP side; a pending- value means the account is not yet provisioned
+      // there even when account_state is active.
+      foreach ($result['rows'] as $row) {
+        $spState = $row['sp_state'] ?? NULL;
+        if (is_string($spState) && str_starts_with($spState, 'pending-')) {
+          $variables['user_rp_sp_state'] = $spState;
+          break;
+        }
       }
     }
     catch (\Throwable $e) {
