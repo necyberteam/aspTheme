@@ -32,6 +32,19 @@
 %}
 {{ attach_library('aspTheme/node') }}
 
+{# Format a GB integer as decimal TB when it divides evenly into 1000 GB,
+   otherwise keep GB. Storage capacity convention: 1 TB = 1000 GB. Drupal's
+   format_size() expects bytes and uses binary units, so it can't be used here. #}
+{% macro gb_size(gb) %}
+{# An empty integer field resolves to [] (FieldItemList::getValue) in Twig,
+   not null, so coerce any iterable down to its first scalar value first. #}
+{%- if gb is iterable -%}{%- set gb = gb|first -%}{%- endif -%}
+{%- if gb is not null and gb != '' -%}
+  {%- if gb % 1000 == 0 -%}{{ gb // 1000 }} TB{%- else -%}{{ gb }} GB{%- endif -%}
+{%- endif -%}
+{% endmacro %}
+{% import _self as fmt %}
+
 {# Extract field values for easier access in the template #}
 {% set rp_description = node.field_rp_description.value %}
 {% set mfa_required = node.field_rp_mfa_required.value %}
@@ -255,7 +268,7 @@
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Purpose</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">CPUs</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">GPUs</th>
-                  <th class="text-left py-2 pr-4 font-semibold align-bottom">RAM</th>
+                  <th class="text-left py-2 pr-4 font-semibold align-bottom">Node RAM</th>
                   <th class="text-right py-2 pr-4 font-semibold align-bottom">Jobs
                     <div class="font-normal text-xs text-dark-gray">30 days</div>
                   </th>
@@ -282,13 +295,16 @@
                       {{ paragraph.field_rp_cpu_count.value|default('') }} CPUs
                     </td>
                     <td class="py-2 pr-4 align-top">
-                      {{ paragraph.field_rp_gpu_count.value|default('') }} cores
-                      {{ paragraph.field_rp_gpus.value|default('') }}
-                      {{ paragraph.field_rp_gpu_vram.value|default('') }}GB
+                      {% set gpu_count = paragraph.field_rp_gpu_count.value %}
+                      {% set gpu_vram = paragraph.field_rp_gpu_vram.value %}
+                      {% if gpu_count and gpu_count > 0 %}
+                        {{ gpu_count }} {{ paragraph.field_rp_gpus.value|default('') }}{% if gpu_vram %} ({{ gpu_vram }} GB vRAM){% endif %}
+                      {% else %}
+                        <span class="text-dark-gray">&mdash;</span>
+                      {% endif %}
                     </td>
                     <td class="py-2 pr-4 align-top">
-                      {{ paragraph.field_rp_ram.value|default('') }}
-                      {{ paragraph.field_rp_vram.value|default('') }}GB
+                      {{ fmt.gb_size(paragraph.field_rp_vram.value) }}
                     </td>
                     <td class="py-2 pr-4 text-right align-top">
                       {% if qmetrics and qmetrics.job_count is not null %}
@@ -514,9 +530,8 @@
                   <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
                   <td class="py-2 pr-4">
-                    {{ paragraph.field_rp_quota.value|default('') }}
-                    {{ paragraph.field_rp_quota_inode_amount.value|default('') }}GB
-                    {{ paragraph.field_rp_quota_size.value|default('') }} files
+                    {% set quota_inode = paragraph.field_rp_quota_inode_amount.value %}
+                    {{ fmt.gb_size(paragraph.field_rp_quota_size.value) }}{% if quota_inode %}, {{ quota_inode|number_format }} files{% endif %}
                   </td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value|default('') }}</td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value|default('') }}</td>
