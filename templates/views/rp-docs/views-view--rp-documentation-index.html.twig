@@ -24,10 +24,10 @@
       {% if can_edit_resources or can_edit_resource_groups %}
         <div class="rp-admin-actions mb-4 flex flex-wrap gap-2 [&_.btn]--m-0">
           {% if can_edit_resources %}
-            <a href="/rp-resources/manage" class="btn btn-sm btn-outline-secondary">Manage Resources</a>
+            <a href="/rp-resources/manage" class="btn btn-sm btn-outline-secondary">{{ 'Manage Resources'|t }}</a>
           {% endif %}
           {% if can_edit_resource_groups %}
-            <a href="/rp-groups/manage" class="btn btn-sm btn-outline-secondary">Manage Resource Groups</a>
+            <a href="/rp-groups/manage" class="btn btn-sm btn-outline-secondary">{{ 'Manage Resource Groups'|t }}</a>
           {% endif %}
         </div>
       {% endif %}
@@ -51,8 +51,8 @@
       </div>
       <div class="rp-listing-sidebar md--order-2 order-1">
         <div class="bg-dark-teal text-white p-4 mb-4">
-          <h3 class="mt-0 uppercase font-semibold text-sm font-bold text-white">Find the best resource for your project</h3>
-          <a href="https://ara.access-ci.org/" class="text-sm text-white no-underline hover--text-white hover--underline ">Try the ACCESS Resource Advisor &nbsp;<i class="bi bi-arrow-right"></i></a>
+          <h3 class="mt-0 uppercase font-semibold text-sm font-bold text-white">{{ 'Find the best resource for your project'|t }}</h3>
+          <a href="https://ara.access-ci.org/" class="text-sm text-white no-underline hover--text-white hover--underline ">{{ 'Try the ACCESS Resource Advisor'|t }} &nbsp;<i class="bi bi-arrow-right"></i></a>
         </div>
       </div>
     </div>
