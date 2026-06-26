@@ -32,6 +32,19 @@
 %}
 {{ attach_library('aspTheme/node') }}
 
+{# Format a GB integer as decimal TB when it divides evenly into 1000 GB,
+   otherwise keep GB. Storage capacity convention: 1 TB = 1000 GB. Drupal's
+   format_size() expects bytes and uses binary units, so it can't be used here. #}
+{% macro gb_size(gb) %}
+{# An empty integer field resolves to [] (FieldItemList::getValue) in Twig,
+   not null, so coerce any iterable down to its first scalar value first. #}
+{%- if gb is iterable -%}{%- set gb = gb|first -%}{%- endif -%}
+{%- if gb is not null and gb != '' -%}
+  {%- if gb % 1000 == 0 -%}{{ gb // 1000 }} TB{%- else -%}{{ gb }} GB{%- endif -%}
+{%- endif -%}
+{% endmacro %}
+{% import _self as fmt %}
+
 {# Extract field values for easier access in the template #}
 {% set rp_description = node.field_rp_description.value %}
 {% set mfa_required = node.field_rp_mfa_required.value %}
@@ -134,40 +147,52 @@
       {% set rp_panel_state = user_rp_accounts_state ?: (logged_in ? 'no_rows_unknown' : 'anon') %}
 
       {% if user_rp_accounts is defined and user_rp_accounts|length > 0 %}
+        {# Don't flag the panel stale while the account is being set up — a
+           background refresh would rewrite it from JSON and clobber the
+           "being set up" message. #}
         <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
              data-rp-nid="{{ node.id }}"
-             {% if rp_panel_state == 'rows_stale' %}data-stale="1"{% endif %}>
+             {% if rp_panel_state == 'rows_stale' and user_rp_sp_state != 'pending-active' %}data-stale="1"{% endif %}>
           <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ node.label|upper }}</h3>
-          {% if user_rp_username %}
-            <p class="text-sm text-white mb-3">Username: <strong class="text-white">{{ user_rp_username }}</strong></p>
-          {% endif %}
+          {% if user_rp_sp_state == 'pending-active' %}
+            {# The RP side is still provisioning the account (sp_state
+               pending-active), so hold off on the username and account details
+               until it settles. (pending-inactive means the account is being
+               deactivated and has account_state inactive, so it never loads
+               here — it falls through to normal/no-panel handling.) #}
+            <p class="text-sm text-white mb-3">Your account is being set up on {{ node.label }}. Check back soon.</p>
+          {% else %}
+            {% if user_rp_username %}
+              <p class="text-sm text-white mb-3">Username: <strong class="text-white">{{ user_rp_username }}</strong></p>
+            {% endif %}
 
-          <div class="rp-account-grants">
-            {% for grant in user_rp_accounts %}
-              <div class="rp-grant mb-3 pb-3{% if not loop.last %} border-b border-md-teal{% endif %}">
-                <div class="text-sm font-semibold">{{ grant.grant_number }}</div>
-                {% if grant.grant_title %}
-                  <div class="text-xs text-light-gray mb-1" title="{{ grant.grant_title }}">
-                    {{ grant.grant_title|length > 50 ? grant.grant_title|slice(0, 50) ~ '…' : grant.grant_title }}
-                  </div>
-                {% endif %}
-                {% if grant.project_end %}
-                  <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
-                {% endif %}
-                <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
-                  {% if grant.project_balance is not null and grant.project_balance|trim != '' %}
-                    Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
-                  {% else %}
-                    <span class="rp-balance-loading">Loading balance…</span>
+            <div class="rp-account-grants">
+              {% for grant in user_rp_accounts %}
+                <div class="rp-grant mb-3 pb-3{% if not loop.last %} border-b border-md-teal{% endif %}">
+                  <div class="text-sm font-semibold">{{ grant.grant_number }}</div>
+                  {% if grant.grant_title %}
+                    <div class="text-xs text-light-gray mb-1" title="{{ grant.grant_title }}">
+                      {{ grant.grant_title|length > 50 ? grant.grant_title|slice(0, 50) ~ '…' : grant.grant_title }}
+                    </div>
                   {% endif %}
+                  {% if grant.project_end %}
+                    <div class="text-xs">Expires {{ grant.project_end|date('M j, Y') }}</div>
+                  {% endif %}
+                  <div class="text-xs rp-balance" data-grant="{{ grant.grant_number }}">
+                    {% if grant.project_balance is not null and grant.project_balance|trim != '' %}
+                      Balance: {{ grant.project_balance|number_format(0) }} {{ grant.billable_unit|default('') }}
+                    {% else %}
+                      <span class="rp-balance-loading">Loading balance…</span>
+                    {% endif %}
+                  </div>
                 </div>
-              </div>
-            {% endfor %}
-          </div>
+              {% endfor %}
+            </div>
 
-          <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white">
-            Manage allocations →
-          </a>
+            <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white">
+              Manage allocations →
+            </a>
+          {% endif %}
         </div>
 
       {% elseif rp_panel_state in ['no_rows_unknown', 'rows_stale', 'error'] and logged_in %}
@@ -246,7 +271,7 @@
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Purpose</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">CPUs</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">GPUs</th>
-                  <th class="text-left py-2 pr-4 font-semibold align-bottom">RAM</th>
+                  <th class="text-left py-2 pr-4 font-semibold align-bottom">Node RAM</th>
                   <th class="text-right py-2 pr-4 font-semibold align-bottom">Jobs
                     <div class="font-normal text-xs text-dark-gray">30 days</div>
                   </th>
@@ -268,9 +293,22 @@
                     <td class="py-2 pr-4 text-sm align-top">
                       {{ paragraph.field_rp_queue_purpose.value|default('') }}
                     </td>
-                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_cpus.value|default('') }}</td>
-                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_gpus.value|default('') }}</td>
-                    <td class="py-2 pr-4 align-top">{{ paragraph.field_rp_ram.value|default('') }}</td>
+                    <td class="py-2 pr-4 align-top">
+                      {{ paragraph.field_rp_cpus.value|default('') }}
+                      {{ paragraph.field_rp_cpu_count.value|default('') }} CPUs
+                    </td>
+                    <td class="py-2 pr-4 align-top">
+                      {% set gpu_count = paragraph.field_rp_gpu_count.value %}
+                      {% set gpu_vram = paragraph.field_rp_gpu_vram.value %}
+                      {% if gpu_count and gpu_count > 0 %}
+                        {{ gpu_count }} {{ paragraph.field_rp_gpus.value|default('') }}{% if gpu_vram %} ({{ gpu_vram }} GB vRAM){% endif %}
+                      {% else %}
+                        <span class="text-dark-gray">&mdash;</span>
+                      {% endif %}
+                    </td>
+                    <td class="py-2 pr-4 align-top">
+                      {{ fmt.gb_size(paragraph.field_rp_vram.value) }}
+                    </td>
                     <td class="py-2 pr-4 text-right align-top">
                       {% if qmetrics and qmetrics.job_count is not null %}
                         {{ qmetrics.job_count|number_format(0) }}
@@ -494,7 +532,10 @@
                 <tr>
                   <td class="py-2 pr-4 font-semibold">{{ paragraph.field_rp_directory.value|default('') }}</td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_fs_path.value|default('') }}</td>
-                  <td class="py-2 pr-4">{{ paragraph.field_rp_quota.value|default('') }}</td>
+                  <td class="py-2 pr-4">
+                    {% set quota_inode = paragraph.field_rp_quota_inode_amount.value %}
+                    {{ fmt.gb_size(paragraph.field_rp_quota_size.value) }}{% if quota_inode %}, {{ quota_inode|number_format }} files{% endif %}
+                  </td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_purge.value|default('') }}</td>
                   <td class="py-2 pr-4">{{ paragraph.field_rp_backup.value|default('') }}</td>
                   <td class="py-2">{{ paragraph.field_rp_fs_notes.value|default('') }}</td>
@@ -595,9 +636,6 @@
             {% set placeholder = login.field_rp_ssh_user_placeholder.value|default('<your_username>') %}
             {% set docs_uri = login.field_rp_ssh_docs_url.0.uri|default('') %}
             {% set docs_title = login.field_rp_ssh_docs_url.0.title|default('') %}
-            {% if hostname is empty and login.field_rp_ssh_url.uri %}
-              {% set hostname = login.field_rp_ssh_url.uri|replace({'https://': '', 'http://': ''}) %}
-            {% endif %}
             {% set ssh_entries = ssh_entries|merge([{
               'hostname': hostname,
               'placeholder': placeholder,
@@ -616,7 +654,12 @@
 
           <div class="border-2 border-dark-teal p-4">
             <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
-            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;">
+            {# Only surface the user's real RP username in the ssh command once
+               the account is provisioned. While sp_state is pending-active the
+               account panel above says "being set up", so don't imply a usable
+               login name here — fall back to the generic placeholder. #}
+            {% set ssh_username = user_rp_sp_state == 'pending-active' ? '' : user_rp_username|default('') %}
+            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;" data-user-username="{{ ssh_username }}">
               {% for entry in ssh_entries %}
                 <option value="{{ entry.hostname }}" data-placeholder="{{ entry.placeholder }}" data-docs-uri="{{ entry.docs_uri }}" data-docs-title="{{ entry.docs_title }}" {{ entry.recommended ? 'selected' : '' }}>
                   {{ entry.hostname }}{% if entry.recommended %} | RECOMMENDED{% endif %}
@@ -624,7 +667,7 @@
               {% endfor %}
             </select>
             <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
-              <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ user_rp_username|default(first_entry.placeholder) }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
+              <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ ssh_username ?: first_entry.placeholder }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
             </div>
             <div id="rp-ssh-docs" class="text-sm{% if not first_entry.docs_uri %} hidden{% endif %}">
               <a id="rp-ssh-docs-link" href="{{ first_entry.docs_uri }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
@@ -710,12 +753,13 @@
   if (!select || !hostnameEl) return;
 
   var fallback = select.getAttribute('data-placeholder-fallback') || '<your_username>';
+  var userUsername = select.getAttribute('data-user-username') || '';
 
   function apply() {
     var opt = select.options[select.selectedIndex];
     hostnameEl.textContent = opt.value;
     if (placeholderEl) {
-      placeholderEl.textContent = opt.getAttribute('data-placeholder') || fallback;
+      placeholderEl.textContent = userUsername || opt.getAttribute('data-placeholder') || fallback;
     }
     if (docsContainer && docsLink && docsText) {
       var docsUri = opt.getAttribute('data-docs-uri');
