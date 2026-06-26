@@ -147,16 +147,19 @@
       {% set rp_panel_state = user_rp_accounts_state ?: (logged_in ? 'no_rows_unknown' : 'anon') %}
 
       {% if user_rp_accounts is defined and user_rp_accounts|length > 0 %}
-        {# Don't flag the panel stale while pending — a background refresh would
-           rewrite it from JSON and clobber the "being set up" message. #}
+        {# Don't flag the panel stale while the account is being set up — a
+           background refresh would rewrite it from JSON and clobber the
+           "being set up" message. #}
         <div class="bg-dark-teal text-white p-4 mb-4 rp-account-panel"
              data-rp-nid="{{ node.id }}"
-             {% if rp_panel_state == 'rows_stale' and not (user_rp_sp_state starts with 'pending-') %}data-stale="1"{% endif %}>
+             {% if rp_panel_state == 'rows_stale' and user_rp_sp_state != 'pending-active' %}data-stale="1"{% endif %}>
           <h3 class="mt-0 text-lg font-bold text-white">YOUR ACCOUNT ON {{ node.label|upper }}</h3>
-          {% if user_rp_sp_state starts with 'pending-' %}
-            {# The RP side has not finished provisioning the account yet
-               (sp_state pending-active / pending-inactive), so hold off on the
-               username and account details until it settles. #}
+          {% if user_rp_sp_state == 'pending-active' %}
+            {# The RP side is still provisioning the account (sp_state
+               pending-active), so hold off on the username and account details
+               until it settles. (pending-inactive means the account is being
+               deactivated and has account_state inactive, so it never loads
+               here — it falls through to normal/no-panel handling.) #}
             <p class="text-sm text-white mb-3">Your account is being set up on {{ node.label }}. Check back soon.</p>
           {% else %}
             {% if user_rp_username %}
@@ -651,7 +654,12 @@
 
           <div class="border-2 border-dark-teal p-4">
             <h3 class="text-lg font-bold mt-0 mb-3">SSH Login</h3>
-            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;" data-user-username="{{ user_rp_username|default('') }}">
+            {# Only surface the user's real RP username in the ssh command once
+               the account is provisioned. While sp_state is pending-active the
+               account panel above says "being set up", so don't imply a usable
+               login name here — fall back to the generic placeholder. #}
+            {% set ssh_username = user_rp_sp_state == 'pending-active' ? '' : user_rp_username|default('') %}
+            <select id="rp-ssh-login-select" class="w-full border border-gray rounded-md p-2 mb-2" data-placeholder-fallback="&lt;your_username&gt;" data-user-username="{{ ssh_username }}">
               {% for entry in ssh_entries %}
                 <option value="{{ entry.hostname }}" data-placeholder="{{ entry.placeholder }}" data-docs-uri="{{ entry.docs_uri }}" data-docs-title="{{ entry.docs_title }}" {{ entry.recommended ? 'selected' : '' }}>
                   {{ entry.hostname }}{% if entry.recommended %} | RECOMMENDED{% endif %}
@@ -659,7 +667,7 @@
               {% endfor %}
             </select>
             <div class="overflow-x-auto bg-light-gray rounded-md mb-3">
-              <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ user_rp_username|default(first_entry.placeholder) }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
+              <code id="rp-ssh-command" class="not-prose block p-2 text-sm whitespace-nowrap">$ ssh <span id="rp-ssh-placeholder">{{ ssh_username ?: first_entry.placeholder }}</span>@<span id="rp-ssh-hostname">{{ first_entry.hostname }}</span></code>
             </div>
             <div id="rp-ssh-docs" class="text-sm{% if not first_entry.docs_uri %} hidden{% endif %}">
               <a id="rp-ssh-docs-link" href="{{ first_entry.docs_uri }}" class="flex items-center gap-1 text-md-teal no-underline hover--underline">
