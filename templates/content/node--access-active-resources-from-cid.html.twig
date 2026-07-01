@@ -206,15 +206,22 @@
           </div>
         </div>
 
-      {% elseif account_setup|length > 0 %}
-        {# rp_panel_state in ('no_rows_fresh', 'anon'): we know there's no
-           account, or user is anonymous. Show the existing CTA. #}
+      {% elseif rp_panel_state in ['no_rows_fresh', 'anon'] %}
+        {# We know there's no account, or the user is anonymous. Show the
+           account-setup CTA if the resource has one, else a generic
+           allocations CTA (matches the JS no-account fallback). #}
         <div class="bg-dark-teal text-white p-4 mb-4">
           <div class="mb-3">
             <h3 class="mt-0 text-lg font-bold text-white">GET AN ACCOUNT ON {{ node.label|upper }}</h3>
-            <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white leading-tight">
-              {{ account_setup.0.title ?: 'RP Account Setup' }} <i class="bi bi-arrow-right"></i>
-            </a>
+            {% if account_setup|length > 0 %}
+              <a href="{{ account_setup.0.uri|replace({'internal:': ''}) }}" class="text-white text-sm no-underline hover--underline hover--text-white leading-tight">
+                {{ account_setup.0.title ?: 'RP Account Setup' }} <i class="bi bi-arrow-right"></i>
+              </a>
+            {% else %}
+              <a href="https://allocations.access-ci.org/" class="text-white text-sm no-underline hover--underline hover--text-white leading-tight">
+                Request an account <i class="bi bi-arrow-right"></i>
+              </a>
+            {% endif %}
           </div>
         </div>
       {% endif %}
@@ -269,8 +276,9 @@
                 <tr>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Name</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Purpose</th>
-                  <th class="text-left py-2 pr-4 font-semibold align-bottom">CPUs</th>
-                  <th class="text-left py-2 pr-4 font-semibold align-bottom">GPUs</th>
+                  <th class="text-left py-2 pr-4 font-semibold align-bottom">Nodes</th>
+                  <th class="text-left py-2 pr-4 font-semibold align-bottom">CPU cores / node</th>
+                  <th class="text-left py-2 pr-4 font-semibold align-bottom">GPUs / node</th>
                   <th class="text-left py-2 pr-4 font-semibold align-bottom">Node RAM</th>
                   <th class="text-right py-2 pr-4 font-semibold align-bottom">Jobs
                     <div class="font-normal text-xs text-dark-gray">30 days</div>
@@ -294,8 +302,16 @@
                       {{ paragraph.field_rp_queue_purpose.value|default('') }}
                     </td>
                     <td class="py-2 pr-4 align-top">
+                      {% set node_count = paragraph.field_rp_node_count.value %}
+                      {% if node_count is not null and node_count != '' %}
+                        {{ node_count|number_format }}
+                      {% else %}
+                        <span class="text-dark-gray">&mdash;</span>
+                      {% endif %}
+                    </td>
+                    <td class="py-2 pr-4 align-top">
                       {{ paragraph.field_rp_cpus.value|default('') }}
-                      {{ paragraph.field_rp_cpu_count.value|default('') }} CPUs
+                      {{ paragraph.field_rp_cpu_count.value|default('') }} cores
                     </td>
                     <td class="py-2 pr-4 align-top">
                       {% set gpu_count = paragraph.field_rp_gpu_count.value %}
